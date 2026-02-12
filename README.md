@@ -1,348 +1,308 @@
-# 🐼🤖 PyAgent - The Pandas of AI Agents
+<p align="center">
+  <img src="https://img.shields.io/badge/PYAI-Intelligence%20Engine-blueviolet?style=for-the-badge&logo=python&logoColor=white" alt="PYAI"/>
+</p>
 
-**Build AI-powered applications in 3 lines or less.**
+<h1 align="center">🧠 PYAI</h1>
+<h3 align="center">Three-Dimensional Intelligence Engine</h3>
 
-PyAgent is a revolutionary Python library that brings pandas-like simplicity to AI agent development. No boilerplate. No configuration hell. Just results.
+<p align="center">
+  <strong>The Intelligence Engine for Software Factories</strong><br/>
+  <em>Build, Orchestrate, and Scale AI-Native Applications</em>
+</p>
 
-[![PyPI version](https://badge.fury.io/py/pyagent.svg)](https://badge.fury.io/py/pyagent)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <a href="#-the-three-dimensions">Three Dimensions</a> •
+  <a href="#-software-factories">Software Factories</a> •
+  <a href="#-the-ecosystem">Ecosystem</a> •
+  <a href="#-get-started">Get Started</a>
+</p>
 
-## ✨ Why PyAgent?
+---
 
-| Framework | Lines for RAG | Lines for Weather Agent | Lines for Research |
-|-----------|--------------|------------------------|-------------------|
-| LangChain | 15+ | 20+ | 25+ |
-| LlamaIndex | 10+ | 15+ | 20+ |
-| CrewAI | 30+ | 25+ | 35+ |
-| **PyAgent** | **2** | **1** | **1** |
+## 🎯 What is PYAI?
 
-### What makes it legendary:
+**PYAI is not just another AI library. It's an Intelligence Engine.**
 
-- **🚀 One-liner operations** for common AI tasks
-- **📦 Batteries included** - prebuilt agents ready to use
-- **🐼 Pandas-like API** - if you know pandas, you know pyagent
-- **⚙️ Zero configuration** - sensible defaults that just work
-- **🔧 Power when needed** - full access to low-level components
+While other frameworks help you *call* AI models, PYAI embeds intelligence *into* your software architecture. It's the foundation for building **Software Factories** — systems that don't just use AI, but think, adapt, and create.
 
-## 📦 Installation
+> *"What SAS did for statistics, what pandas did for data, PYAI does for intelligence."*
+
+---
+
+## 🔺 The Three Dimensions
+
+PYAI operates across **three dimensions of intelligence**, each building upon the last:
+
+```
+                    ┌─────────────────────────────────┐
+                    │     DIMENSION 3: CREATION       │
+                    │   Software Factory Intelligence  │
+                    │ ┌─────────────────────────────┐ │
+                    │ │ • Self-generating systems   │ │
+                    │ │ • Code synthesis engines    │ │
+                    │ │ • Autonomous development    │ │
+                    │ └─────────────────────────────┘ │
+                    └───────────────┬─────────────────┘
+                                    │
+                    ┌───────────────▼─────────────────┐
+                    │    DIMENSION 2: ORCHESTRATION   │
+                    │     Multi-Agent Intelligence     │
+                    │ ┌─────────────────────────────┐ │
+                    │ │ • Agent coordination        │ │
+                    │ │ • Workflow automation       │ │
+                    │ │ • Knowledge synthesis       │ │
+                    │ └─────────────────────────────┘ │
+                    └───────────────┬─────────────────┘
+                                    │
+                    ┌───────────────▼─────────────────┐
+                    │     DIMENSION 1: COGNITION      │
+                    │      Core AI Operations          │
+                    │ ┌─────────────────────────────┐ │
+                    │ │ • ask() • research()        │ │
+                    │ │ • summarize() • analyze()   │ │
+                    │ │ • extract() • generate()    │ │
+                    │ └─────────────────────────────┘ │
+                    └─────────────────────────────────┘
+```
+
+### Dimension 1️⃣ — Cognition
+The foundation. Single-purpose AI operations that **just work**.
+
+```python
+from pyagent import ask, summarize, extract
+
+# Instant intelligence
+answer = ask("Explain quantum entanglement")
+summary = summarize(long_document)
+entities = extract(text, fields=["names", "dates", "amounts"])
+```
+
+### Dimension 2️⃣ — Orchestration
+Coordinated intelligence. Multiple agents working in harmony.
+
+```python
+from pyagent import agent, workflow
+
+# Specialized agents
+researcher = agent(persona="researcher")
+analyst = agent(persona="analyst")
+writer = agent(persona="writer")
+
+# Orchestrated workflow
+report = workflow([
+    researcher >> "Find latest AI trends",
+    analyst >> "Analyze market impact",
+    writer >> "Write executive summary"
+])
+```
+
+### Dimension 3️⃣ — Creation
+Self-generating systems. **The Software Factory.**
+
+```python
+from pyagent import factory
+
+# The factory builds software
+factory.create("Build a REST API for user management")
+# → Generates models, routes, tests, documentation
+
+factory.extend("Add authentication with JWT")
+# → Intelligently extends existing codebase
+
+factory.refactor("Convert to async architecture")
+# → Transforms architecture while preserving logic
+```
+
+---
+
+## 🏭 Software Factories
+
+A **Software Factory** is a system that generates software, not just code snippets. PYAI provides the intelligence engine to build them.
+
+### Traditional Development vs Software Factory
+
+| Traditional | Software Factory |
+|-------------|------------------|
+| Write code manually | Describe what you need |
+| Debug line by line | Self-healing systems |
+| Copy-paste patterns | Intelligent pattern synthesis |
+| Manual testing | Auto-generated test suites |
+| Static architecture | Evolving, adaptive systems |
+
+### The Intelligence Stack
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                    YOUR APPLICATION                       │
+├──────────────────────────────────────────────────────────┤
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐     │
+│  │ PyAgent │  │ PyFlow  │  │PyVision │  │ PyVoice │     │
+│  │ Agents  │  │Workflow │  │ Vision  │  │  Audio  │     │
+│  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘     │
+│       │            │            │            │           │
+│  ┌────▼────────────▼────────────▼────────────▼────┐     │
+│  │              PYAI INTELLIGENCE ENGINE           │     │
+│  │  • Unified Memory  • Context Management         │     │
+│  │  • Model Routing   • Intelligent Caching        │     │
+│  └────────────────────────────────────────────────┘     │
+├──────────────────────────────────────────────────────────┤
+│         Azure OpenAI  |  OpenAI  |  Anthropic            │
+└──────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📦 The Ecosystem
+
+### 🐼 PyAgent — *Available Now*
+**The Pandas of AI Agents**
+
+Build AI-powered applications in 3 lines or less. The most accessible AI agent framework ever created.
+
+```python
+from pyagent import ask, agent, rag
+
+# One-liner AI
+answer = ask("What is the meaning of life?")
+
+# Expert agents
+coder = agent(persona="coder")
+solution = coder("Optimize this algorithm for O(log n)")
+
+# RAG in 2 lines
+knowledge = rag.index(["research/*.pdf"])
+insight = knowledge.ask("What are the key findings?")
+```
+
+[📚 PyAgent Documentation](./docs/QUICKSTART.md) | [🚀 API Reference](./docs/API_REFERENCE.md)
+
+---
+
+### 🔮 Coming Soon
+
+| Library | Purpose | Dimension |
+|---------|---------|-----------|
+| **PyFlow** | Visual AI workflow orchestration | 2 |
+| **PyVision** | Computer vision made simple | 1 |
+| **PyVoice** | Speech & audio intelligence | 1 |
+| **PyFactory** | Software generation engine | 3 |
+| **PyMind** | Autonomous reasoning systems | 3 |
+
+---
+
+## 🚀 Get Started
+
+### Installation
 
 ```bash
 pip install pyagent
 
-# With optional dependencies
-pip install pyagent[openai]      # For OpenAI models
-pip install pyagent[anthropic]   # For Anthropic models
-pip install pyagent[all]         # Everything
+# With Azure support
+pip install pyagent[azure]
 ```
 
-## 🚀 Quick Start
+### Configuration
 
-### Ask anything in one line
+```bash
+# OpenAI
+export OPENAI_API_KEY=sk-your-key
+
+# Azure OpenAI (with Azure AD - recommended)
+export AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com/
+export AZURE_OPENAI_DEPLOYMENT=gpt-4o-mini
+```
+
+### Hello, Intelligence
 
 ```python
 from pyagent import ask
 
-answer = ask("What is the capital of France?")
-# 'Paris'
-
-answer = ask("Explain quantum computing", detailed=True)
-# 'Quantum computing is a type of computation that harnesses...'
-
-answer = ask("List 5 Python tips", format="bullet")
-# '• Use list comprehensions...\n• Leverage f-strings...'
+# Your first intelligent operation
+answer = ask("What makes PYAI revolutionary?")
+print(answer)
+# → "PYAI is revolutionary because it embeds intelligence into 
+#    software architecture across three dimensions, enabling 
+#    the creation of self-generating software factories..."
 ```
-
-### RAG in 2 lines
-
-```python
-from pyagent import rag
-
-# Index and query
-docs = rag.index("./documents")
-answer = docs.ask("What is the main conclusion?")
-
-# Or even simpler - one line!
-answer = rag.ask("./research_paper.pdf", "What methodology was used?")
-```
-
-### Research any topic
-
-```python
-from pyagent import research
-
-result = research("AI trends 2024")
-print(result.summary)
-print(result.key_points)
-print(result.insights)
-```
-
-### Fetch real-time data
-
-```python
-from pyagent import fetch
-
-# Weather
-weather = fetch.weather("New York")
-print(f"{weather.temperature}°C, {weather.conditions}")
-
-# News
-news = fetch.news("artificial intelligence")
-for article in news:
-    print(article.title)
-
-# Stocks
-stock = fetch.stock("AAPL")
-print(f"${stock.price} ({stock.change_percent}%)")
-```
-
-### Generate content
-
-```python
-from pyagent import generate
-
-# Code
-code = generate("fibonacci function", type="code")
-
-# Email
-email = generate("welcome email for new users", type="email")
-
-# Article
-article = generate("blog post about AI", type="article")
-```
-
-### Create custom agents
-
-```python
-from pyagent import agent
-
-# Custom agent
-coder = agent("You are an expert Python developer")
-result = coder("Write a REST API for a todo app")
-
-# Prebuilt personas
-researcher = agent(persona="researcher")
-findings = researcher("Research the latest in quantum computing")
-
-# With memory (remembers conversation)
-assistant = agent("You are a helpful data analyst")
-assistant("Load the sales data")
-assistant("What are the top trends?")  # Remembers context
-```
-
-### Chat sessions
-
-```python
-from pyagent import chat
-
-session = chat(persona="teacher")
-session("Explain machine learning")
-session("What about deep learning?")  # Continues conversation
-session("Give me an example")          # Still has context
-```
-
-### Summarize anything
-
-```python
-from pyagent import summarize
-
-# From text
-summary = summarize("Long article text here...")
-
-# From file
-summary = summarize("./report.pdf")
-
-# From URL
-summary = summarize("https://example.com/article")
-
-# Options
-summary = summarize(text, length="short")
-summary = summarize(text, bullet_points=True)
-summary = summarize(text, style="executive")
-```
-
-### Extract structured data
-
-```python
-from pyagent import extract
-
-text = "John is 30 years old and lives in New York"
-
-# Extract specific fields
-data = extract(text, ["name", "age", "city"])
-# {"name": "John", "age": 30, "city": "New York"}
-
-# Natural language extraction
-emails = extract(document, "all email addresses")
-# ["john@email.com", "jane@company.com"]
-```
-
-### Translate
-
-```python
-from pyagent import translate
-
-spanish = translate("Hello, how are you?", to="spanish")
-# "¡Hola, ¿cómo estás?"
-
-japanese = translate("Welcome", to="japanese", formal=True)
-# "ようこそ"
-```
-
-### Analyze data
-
-```python
-from pyagent import analyze
-
-# Analyze any data
-insights = analyze.data(sales_data)
-print(insights.summary)
-print(insights.recommendations)
-
-# Sentiment analysis
-sentiment = analyze.sentiment("I love this product!")
-# {"sentiment": "positive", "confidence": 0.95}
-```
-
-### Code operations
-
-```python
-from pyagent import code
-
-# Write code
-python_code = code.write("function to parse JSON files")
-
-# Review code
-review = code.review(my_code)
-print(review.issues)
-print(review.suggestions)
-print(review.score)
-
-# Debug errors
-solution = code.debug("TypeError: cannot unpack non-iterable NoneType")
-
-# Explain code
-explanation = code.explain(complex_function)
-
-# Refactor
-improved = code.refactor(old_code, goal="readability")
-```
-
-## ⚙️ Configuration
-
-PyAgent works out of the box with environment variables:
-
-```bash
-export OPENAI_API_KEY=sk-...
-# or
-export ANTHROPIC_API_KEY=...
-# or 
-export AZURE_OPENAI_API_KEY=...
-export AZURE_OPENAI_ENDPOINT=https://...
-```
-
-Or configure programmatically:
-
-```python
-import pyagent
-
-pyagent.configure(
-    api_key="sk-...",
-    model="gpt-4o",
-    temperature=0.7
-)
-```
-
-## 🔧 Power User Mode
-
-When you need full control, access the complete low-level API:
-
-```python
-from pyagent import Agent, Blueprint, Workflow, Memory
-
-# Full control over agent
-agent = Agent(
-    instructions=Instruction("You are a specialized assistant"),
-    skills=[CustomSkill(), WebSkill()],
-    memory=VectorMemory(provider="chromadb")
-)
-
-# Complex workflows
-workflow = Workflow()
-workflow.add_step("research", ResearchAgent())
-workflow.add_step("analyze", AnalysisAgent())
-workflow.add_step("report", ReportAgent())
-result = workflow.run("Analyze market trends")
-```
-
-## 📊 Comparison with Other Frameworks
-
-### LangChain (RAG Example)
-
-```python
-# LangChain: 15+ lines
-from langchain.document_loaders import DirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import Chroma
-from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-
-loader = DirectoryLoader('./docs')
-documents = loader.load()
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000)
-texts = text_splitter.split_documents(documents)
-embeddings = OpenAIEmbeddings()
-vectorstore = Chroma.from_documents(texts, embeddings)
-qa = RetrievalQA.from_chain_type(llm=OpenAI(), retriever=vectorstore.as_retriever())
-result = qa.run("What is the conclusion?")
-```
-
-```python
-# PyAgent: 2 lines
-from pyagent import rag
-answer = rag.ask("./docs", "What is the conclusion?")
-```
-
-### CrewAI (Research Agent Example)
-
-```python
-# CrewAI: 25+ lines (plus YAML config files)
-from crewai import Agent, Task, Crew, Process
-
-researcher = Agent(
-    role="Senior Researcher",
-    goal="Research the topic thoroughly",
-    backstory="You are an expert researcher...",
-    verbose=True
-)
-task = Task(
-    description="Research AI trends",
-    expected_output="Comprehensive report",
-    agent=researcher
-)
-crew = Crew(
-    agents=[researcher],
-    tasks=[task],
-    process=Process.sequential
-)
-result = crew.kickoff()
-```
-
-```python
-# PyAgent: 1 line
-from pyagent import research
-result = research("AI trends")
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-**PyAgent** - *Because AI development should be as simple as `import pandas as pd`*
+## 🧬 Design Philosophy
+
+### 1. **Intelligence as Infrastructure**
+AI shouldn't be bolted on — it should be woven in. PYAI treats intelligence as a first-class architectural component.
+
+### 2. **Progressive Complexity**
+Start with one line. Scale to software factories. Same API, same patterns, infinite scale.
+
+```python
+# Level 1: One line
+answer = ask("Translate to French: Hello")
+
+# Level 2: Agent
+translator = agent(persona="translator", languages=["fr", "de", "es"])
+result = translator("Translate to all languages: Hello")
+
+# Level 3: Factory
+factory.create("Build a multi-language translation service with API")
+```
+
+### 3. **Zero Friction**
+No boilerplate. No ceremony. If it takes more than 3 lines for a common task, we failed.
+
+### 4. **Production Ready**
+Type hints. Error handling. Retry logic. Rate limiting. Caching. Built in, not bolted on.
+
+---
+
+## 🔥 Why PYAI?
+
+| Other Frameworks | PYAI |
+|-----------------|------|
+| 50 lines for RAG | 2 lines |
+| Agent = configuration hell | `agent(persona="coder")` |
+| Memory = complex setup | Built-in, automatic |
+| Workflows = YAML nightmares | Python functions |
+| "Hello World" = 30 minutes | "Hello World" = 30 seconds |
+
+---
+
+## 🌍 The Vision
+
+We're building the **operating system for intelligent software**.
+
+```
+2024: PyAgent launches → Simple AI operations
+2025: PyFlow launches  → Orchestrated intelligence  
+2026: PyFactory       → Software Factories emerge
+2027: PyMind          → Autonomous development
+2030: ???             → Software that writes itself
+```
+
+**This is not hype. This is the roadmap.**
+
+---
+
+## 👥 Community
+
+- 📖 [Documentation](./docs/)
+- 🐛 [Report Issues](https://github.com/gitpavleenbali/PYAI/issues)
+- 💡 [Feature Requests](https://github.com/gitpavleenbali/PYAI/discussions)
+- 🤝 [Contributing Guide](./docs/CONTRIBUTING.md)
+
+---
+
+## 📜 License
+
+MIT License — Build freely, build boldly.
+
+---
+
+<p align="center">
+  <strong>PYAI</strong><br/>
+  <em>Intelligence, Embedded.</em>
+</p>
+
+<p align="center">
+  <sub>Built with 🧠 by the PYAI team</sub>
+</p>
