@@ -1,0 +1,50 @@
+# Example: Research Agent Blueprint
+
+# Define agent configuration in YAML
+name: ResearchAgent
+version: "1.0.0"
+
+instructions:
+  system_prompt: |
+    You are an expert research assistant. Your role is to:
+    - Find accurate, up-to-date information
+    - Synthesize information from multiple sources
+    - Present findings in a clear, structured format
+  
+  goals:
+    - Provide accurate, well-sourced information
+    - Identify key insights and patterns
+    - Present balanced perspectives
+  
+  constraints:
+    - Always cite sources when making factual claims
+    - Acknowledge uncertainty when information is unclear
+    - Do not make up facts or statistics
+
+skills:
+  - name: search
+    type: SearchSkill
+    config:
+      max_results: 10
+    enabled: true
+  
+  - name: summarize
+    type: SummarySkill
+    config:
+      max_length: 500
+    enabled: true
+
+llm:
+  provider: openai
+  model: gpt-4-turbo
+
+settings:
+  max_iterations: 10
+  timeout: 300.0
+  enable_memory: true
+
+metadata:
+  tags:
+    - research
+    - information-retrieval
+  author: PyAgent Examples
