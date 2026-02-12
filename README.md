@@ -176,6 +176,131 @@ insight = knowledge.ask("What are the key findings?")
 
 [📚 PyAgent Documentation](./docs/QUICKSTART.md) | [🚀 API Reference](./docs/API_REFERENCE.md)
 
+#### Key Modules
+
+| Module | Description |
+|--------|-------------|
+| **easy/** | One-liner functions: `ask()`, `research()`, `summarize()`, `generate()`, `translate()`, `extract()`, `code()` |
+| **integrations/** | Connect to LangChain, Semantic Kernel, Azure AI Search, Pinecone, ChromaDB, FAISS, Qdrant |
+| **orchestrator/** | Workflow management, task scheduling, multi-agent patterns (supervisor, consensus, debate) |
+| **usecases/** | Pre-built templates: Customer Service, Sales, Development, Gaming, Telecom, Healthcare, Finance |
+| **core/** | Agent engine, memory management, LLM abstraction |
+| **skills/** | Extensible skill system for agent capabilities |
+
+#### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                          PyAgent                                 │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │                      easy/                                │  │
+│  │  ask() chat() research() summarize() generate() code()   │  │
+│  │  extract() analyze() translate() rag() handoff() mcp()   │  │
+│  └──────────────────────────────────────────────────────────┘  │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │ integrations │  │ orchestrator │  │   usecases   │         │
+│  │  LangChain   │  │   Workflow   │  │  Templates   │         │
+│  │Semantic Kern │  │  Scheduler   │  │  Telecom     │         │
+│  │ Vector DBs   │  │   Patterns   │  │  Finance     │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘         │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────────────┐   │
+│  │  core   │  │ skills  │  │blueprint│  │  instructions   │   │
+│  └─────────┘  └─────────┘  └─────────┘  └─────────────────┘   │
+└───────────────────────────┬─────────────────────────────────────┘
+                            │
+                            ▼
+         ┌─────────────────────────────────────┐
+         │    Azure OpenAI | OpenAI | Claude   │
+         └─────────────────────────────────────┘
+```
+
+---
+
+### 🔌 Integrations
+
+Connect PyAgent to your existing AI ecosystem:
+
+```python
+from pyagent.integrations import langchain, semantic_kernel, vector_db
+
+# Import LangChain tools
+search = langchain.import_tool("serpapi")
+
+# Create Semantic Kernel
+kernel = semantic_kernel.create_kernel(provider="azure", deployment="gpt-4o")
+
+# Connect to vector stores
+store = vector_db.connect("azure_ai_search", endpoint="...", index="docs")
+```
+
+| Integration | Features |
+|-------------|----------|
+| **LangChain** | Import tools, chains, retrievers; Export agents |
+| **Semantic Kernel** | Create kernels, import plugins, execute plans |
+| **Azure AI Search** | Enterprise search with hybrid retrieval |
+| **Pinecone** | Scalable cloud vector database |
+| **ChromaDB** | Open-source embedding database |
+| **FAISS** | Fast in-memory similarity search |
+| **Qdrant** | High-performance vector search |
+
+---
+
+### 🎭 Multi-Agent Patterns
+
+Enterprise-ready multi-agent orchestration:
+
+```python
+from pyagent.orchestrator import AgentPatterns
+from pyagent import agent
+
+# Supervisor pattern
+result = AgentPatterns.supervisor(
+    task="Write a research report",
+    agents=[researcher, writer, editor],
+    supervisor_instructions="Coordinate the team"
+)
+
+# Consensus pattern (voting)
+decision = AgentPatterns.consensus(
+    task="Should we approve this feature?",
+    agents=[security_expert, ux_expert, perf_expert],
+    threshold=0.66
+)
+
+# Debate pattern
+verdict = AgentPatterns.debate(
+    topic="AI open-source vs proprietary",
+    pro_agent=advocate,
+    con_agent=skeptic,
+    judge=arbiter
+)
+```
+
+---
+
+### 📦 Ready-to-Use Templates
+
+Pre-built agents for common scenarios:
+
+```python
+from pyagent.usecases import customer_service, development
+from pyagent.usecases.industry import telecom, healthcare, finance
+
+# Customer support
+support = customer_service.support_agent(company_name="Acme Inc")
+
+# Code review
+reviewer = development.code_reviewer(languages=["Python", "JavaScript"])
+
+# Industry-specific
+plan_advisor = telecom.plan_advisor(carrier_name="MobileNet")
+banking = finance.banking_assistant(bank_name="First Bank")
+scheduler = healthcare.appointment_scheduler(facility="City Hospital")
+```
+
 ---
 
 ### 🔮 Coming Soon
@@ -195,11 +320,42 @@ insight = knowledge.ask("What are the key findings?")
 ### Installation
 
 ```bash
+# Basic install
 pip install pyagent
 
-# With Azure support
+# With OpenAI support
+pip install pyagent[openai]
+
+# With Azure support (recommended for enterprise)
 pip install pyagent[azure]
+
+# With LangChain integration
+pip install pyagent[langchain]
+
+# With Semantic Kernel integration
+pip install pyagent[semantic-kernel]
+
+# With vector database support
+pip install pyagent[vector]
+
+# Full installation (all features)
+pip install pyagent[all]
 ```
+
+### Installation Extras
+
+| Extra | Includes |
+|-------|----------|
+| `openai` | OpenAI SDK |
+| `anthropic` | Anthropic Claude SDK |
+| `azure` | Azure Identity, AI Search, OpenAI |
+| `langchain` | LangChain integration |
+| `semantic-kernel` | Microsoft Semantic Kernel |
+| `vector` | ChromaDB, FAISS, Pinecone, Qdrant |
+| `web` | Web scraping (aiohttp, requests, beautifulsoup) |
+| `docs` | Document processing (PDF, DOCX) |
+| `all` | Everything above |
+| `dev` | Development tools (pytest, black, mypy) |
 
 ### Configuration
 

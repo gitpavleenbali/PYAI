@@ -1,0 +1,28 @@
+# Include essential files
+include LICENSE
+include README.md
+include pyproject.toml
+
+# Include type stubs
+include pyagent/py.typed
+include pyagent/__init__.pyi
+
+# Include all Python files
+recursive-include pyagent *.py
+
+# Include documentation
+recursive-include docs *.md
+
+# Include examples
+recursive-include examples *.py *.yaml *.yml
+
+# Include README files in all modules
+recursive-include pyagent README.md
+
+# Exclude cache and temporary files
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude *.so
+global-exclude .DS_Store
+global-exclude *.egg-info
+global-exclude .git*
