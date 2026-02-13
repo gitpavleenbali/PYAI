@@ -49,23 +49,36 @@ class TestAgentFactory:
         # Should have research-related instructions
         assert "research" in my_agent.instructions.lower() or my_agent.instructions != ""
     
+    def test_agent_has_messages(self):
+        """Test that agent has messages list."""
+        from pyagent.easy.agent_factory import agent
+        
+        my_agent = agent("Test")
+        assert hasattr(my_agent, 'messages')
+        assert isinstance(my_agent.messages, list)
+        # Should have at least system message
+        assert len(my_agent.messages) >= 1
+    
     def test_agent_has_history(self):
         """Test that agent has history property."""
         from pyagent.easy.agent_factory import agent
         
         my_agent = agent("Test")
         assert hasattr(my_agent, 'history')
+        # History excludes system message
         assert isinstance(my_agent.history, list)
     
-    def test_agent_reset_memory(self):
-        """Test agent reset method."""
+    def test_agent_clear_memory(self):
+        """Test agent clear method."""
         from pyagent.easy.agent_factory import agent
         
         my_agent = agent("Test", memory=True)
-        # Agent starts with system message internally
-        assert hasattr(my_agent, 'reset')
-        my_agent.reset()
-        # After reset, history (excluding system) should be empty
+        # Agent starts with system message
+        initial_count = len(my_agent.messages)
+        my_agent.clear()
+        # After clear, should still have system message
+        assert len(my_agent.messages) == initial_count
+        # History (excluding system) should be empty
         assert len(my_agent.history) == 0
 
 
@@ -192,6 +205,40 @@ class TestConfig:
         assert cfg.temperature == 0.5
         
         # Cleanup
+        reset_config()
+    
+    def test_config_object_exists(self):
+        """Test config object can be imported."""
+        from pyagent.easy.config import config
+        assert config is not None
+    
+    def test_config_set_model(self):
+        """Test config.set_model method."""
+        from pyagent.easy.config import config, get_config, reset_config
+        
+        reset_config()
+        config.set_model("gpt-4o")
+        assert get_config().model == "gpt-4o"
+        reset_config()
+    
+    def test_config_set_api_key(self):
+        """Test config.set_api_key method."""
+        from pyagent.easy.config import config, get_config, reset_config
+        
+        reset_config()
+        config.set_api_key("test-key-123")
+        assert get_config().api_key == "test-key-123"
+        reset_config()
+    
+    def test_config_enable_mock(self):
+        """Test config.enable_mock method."""
+        from pyagent.easy.config import config, is_mock_enabled, reset_config
+        
+        reset_config()
+        config.enable_mock(True)
+        assert is_mock_enabled() == True
+        config.enable_mock(False)
+        assert is_mock_enabled() == False
         reset_config()
 
 

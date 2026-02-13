@@ -152,6 +152,10 @@ class SimpleAgent:
         """Clear conversation history."""
         self._messages = [{"role": "system", "content": self.instructions}]
     
+    def clear(self) -> None:
+        """Clear conversation history. Alias for reset()."""
+        self.reset()
+    
     def run(self, task: str, **kwargs) -> str:
         """Alias for __call__, useful for explicit task running."""
         return self(task, **kwargs)
@@ -160,6 +164,11 @@ class SimpleAgent:
     def history(self) -> List[Dict[str, str]]:
         """Get conversation history (excluding system message)."""
         return [m for m in self._messages if m["role"] != "system"]
+    
+    @property
+    def messages(self) -> List[Dict[str, str]]:
+        """Get all messages including system message."""
+        return self._messages.copy()
     
     def __repr__(self) -> str:
         return f"Agent(name='{self.name}', messages={len(self._messages)})"

@@ -112,13 +112,32 @@ def _check_harmful(text: str) -> GuardrailResult:
 def _check_prompt_injection(text: str) -> GuardrailResult:
     """Check for common prompt injection attempts."""
     injection_patterns = [
-        r"ignore\s+(previous|all|above)\s+instructions",
-        r"disregard\s+(your|the)\s+(rules|instructions)",
-        r"you\s+are\s+now\s+(a|an)",
-        r"pretend\s+(to\s+be|you\s+are)",
+        # Instruction override attempts
+        r"ignore\s+.*\s*instructions",
+        r"ignore\s+(previous|all|above|prior|earlier)",
+        r"disregard\s+(your|the|all|previous)",
+        r"forget\s+(your|the|all|previous)\s+(rules|instructions|guidelines)",
+        
+        # Role play / identity manipulation
+        r"you\s+are\s+now\s+(a|an|the)",
+        r"pretend\s+(to\s+be|you\s+are|you're)",
+        r"act\s+as\s+(if|a|an)",
+        r"roleplay\s+as",
+        
+        # Known jailbreak techniques
         r"jailbreak",
         r"DAN\s*mode",
-        r"\[SYSTEM\]|\[INST\]",
+        r"do\s+anything\s+now",
+        
+        # System prompt manipulation
+        r"\[SYSTEM\]|\[INST\]|\[/INST\]",
+        r"<\|system\|>|<\|user\|>|<\|assistant\|>",
+        r"system\s*:\s*you\s+are",
+        
+        # Bypass attempts
+        r"bypass\s+(the|your|safety|content)",
+        r"override\s+(the|your|safety|restrictions)",
+        r"unlock\s+(your|full|hidden)",
     ]
     
     for pattern in injection_patterns:

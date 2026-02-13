@@ -83,6 +83,10 @@ class VectorStore(ABC):
         """Delete documents by ID."""
         pass
     
+    def add_documents(self, documents: List[Document]) -> List[str]:
+        """Add documents to the store. Alias for add()."""
+        return self.add(documents)
+    
     def add_texts(self, texts: List[str], metadatas: List[Dict] = None) -> List[str]:
         """Convenience method to add raw texts."""
         docs = []

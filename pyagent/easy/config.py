@@ -146,6 +146,107 @@ def reset_config() -> None:
     _config = PyAgentConfig()
 
 
+# =============================================================================
+# Convenience Methods for Common Operations
+# =============================================================================
+
+def set_model(model: str) -> None:
+    """Set the default model."""
+    configure(model=model)
+
+
+def set_api_key(api_key: str) -> None:
+    """Set the API key."""
+    configure(api_key=api_key)
+
+
+def use_azure(endpoint: str, deployment: str = None, api_version: str = "2024-02-15-preview") -> None:
+    """
+    Configure to use Azure OpenAI.
+    
+    Args:
+        endpoint: Azure OpenAI endpoint URL
+        deployment: Deployment name (also used as model)
+        api_version: API version to use
+    """
+    configure(
+        provider="azure",
+        azure_endpoint=endpoint,
+        model=deployment
+    )
+    _config.extra["azure_api_version"] = api_version
+
+
+def enable_mock(enabled: bool = True) -> None:
+    """
+    Enable or disable mock mode for testing.
+    
+    When mock mode is enabled, LLM calls return predefined responses
+    instead of making actual API calls.
+    """
+    _config.extra["mock_mode"] = enabled
+
+
+def is_mock_enabled() -> bool:
+    """Check if mock mode is enabled."""
+    return _config.extra.get("mock_mode", False)
+
+
+# =============================================================================
+# Config Object for Direct Access
+# =============================================================================
+
+class ConfigAccessor:
+    """
+    Config object that provides both attribute access and methods.
+    
+    Example:
+        >>> from pyagent.easy.config import config
+        >>> config.set_model("gpt-4o")
+        >>> config.use_azure("https://...")
+        >>> config.enable_mock(True)
+    """
+    
+    @property
+    def api_key(self):
+        return _config.api_key
+    
+    @property
+    def model(self):
+        return _config.model
+    
+    @property
+    def provider(self):
+        return _config.provider
+    
+    @property
+    def azure_endpoint(self):
+        return _config.azure_endpoint
+    
+    @property
+    def temperature(self):
+        return _config.temperature
+    
+    # Methods
+    set_model = staticmethod(set_model)
+    set_api_key = staticmethod(set_api_key)
+    use_azure = staticmethod(use_azure)
+    enable_mock = staticmethod(enable_mock)
+    is_mock_enabled = staticmethod(is_mock_enabled)
+    
+    def configure(self, **kwargs):
+        """Configure pyagent settings."""
+        configure(**kwargs)
+    
+    def reset(self):
+        """Reset to defaults."""
+        reset_config()
+
+
+# Global config accessor instance
+config = ConfigAccessor()
+
+
 def with_config(**kwargs):
     """
     Context manager for temporary configuration changes.
