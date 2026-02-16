@@ -20,10 +20,11 @@
 </p>
 
 <p align="center">
+  <a href="#-what-is-pyai">What is PYAI</a> •
   <a href="#-the-three-dimensions">Three Dimensions</a> •
-  <a href="#-why-pyai-your-one-stop-intelligence-solution">Why PYAI</a> •
+  <a href="#-why-pyai-one-stop-intelligence-solution">Why PYAI</a> •
   <a href="#-software-factories">Software Factories</a> •
-  <a href="#-complete-feature-guide">Features</a> •
+  <a href="#-complete-module-reference">Modules</a> •
   <a href="#-the-pyai-product-suite">Ecosystem</a>
 </p>
 
@@ -38,18 +39,19 @@ While other frameworks help you *call* AI models, PYAI embeds intelligence *into
 > *"The best code is the code you never had to write. The best software is the software that writes itself."*
 
 ```mermaid
-graph LR
-    subgraph "Traditional AI Libraries"
-        A[Your Code] -->|calls| B[AI API]
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart LR
+    subgraph Traditional["Traditional AI Libraries"]
+        A["Your Code"] -->|calls| B["AI API"]
         B -->|returns| A
     end
     
-    subgraph "PYAI Intelligence Engine"
-        C[Your Application] <-->|embedded| D[🧠 PYAI]
-        D <-->|orchestrates| E[Agents]
-        D <-->|manages| F[Memory]
-        D <-->|executes| G[Workflows]
-        D -->|connects| H[LLM Providers]
+    subgraph PYAI["PYAI Intelligence Engine"]
+        C["Application"] <-->|embedded| D["🧠 PYAI"]
+        D <-->|orchestrates| E["Agents"]
+        D <-->|manages| F["Memory"]
+        D <-->|executes| G["Workflows"]
+        D -->|connects| H["LLM Providers"]
     end
 ```
 
@@ -62,31 +64,38 @@ Built on **PyAgent**, our core SDK, PYAI provides **25+ modules** with **150+ cl
 PYAI operates across **three dimensions of intelligence**, each building upon the last:
 
 ```mermaid
-graph TB
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
     subgraph D3["🏭 DIMENSION 3: CREATION"]
-        C1[Self-generating Systems]
-        C2[Code Synthesis Engines]
-        C3[Autonomous Development]
+        direction LR
+        C1["Self-generating<br/>Systems"]
+        C2["Code Synthesis<br/>Engines"]
+        C3["Autonomous<br/>Development"]
     end
     
     subgraph D2["🔗 DIMENSION 2: ORCHESTRATION"]
-        O1[Agent Coordination]
-        O2[Workflow Automation]
-        O3[Knowledge Synthesis]
+        direction LR
+        O1["Agent<br/>Coordination"]
+        O2["Workflow<br/>Automation"]
+        O3["Knowledge<br/>Synthesis"]
     end
     
     subgraph D1["🧠 DIMENSION 1: COGNITION"]
-        K1["ask() • research()"]
-        K2["summarize() • analyze()"]
-        K3["extract() • generate()"]
+        direction LR
+        K1["ask • research"]
+        K2["summarize • analyze"]
+        K3["extract • generate"]
     end
     
-    D1 --> D2 --> D3
-    
-    style D3 fill:#9b59b6,color:#fff
-    style D2 fill:#3498db,color:#fff
-    style D1 fill:#2ecc71,color:#fff
+    D1 -->|"builds"| D2
+    D2 -->|"enables"| D3
 ```
+
+| Dimension | Purpose | Key Components |
+|-----------|---------|----------------|
+| **🧠 Cognition** | Single AI operations | `ask()`, `research()`, `summarize()`, `extract()` |
+| **🔗 Orchestration** | Multi-agent coordination | `Agent`, `Workflow`, `Handoff`, `Patterns` |
+| **🏭 Creation** | Self-generating systems | `code.write()`, `code.review()`, Software Factories |
 
 ### Dimension 1️⃣ — Cognition
 The foundation. Single-purpose AI operations that **just work**.
@@ -104,13 +113,15 @@ entities = extract(text, fields=["names", "dates", "amounts"])
 Coordinated intelligence. Multiple agents working in harmony.
 
 ```python
-from pyagent import Agent
+from pyagent import Agent, Runner
 from pyagent.blueprint import Workflow, Step
 
+# Create specialized agents
 researcher = Agent(name="Researcher", instructions="Find information.")
 analyst = Agent(name="Analyst", instructions="Analyze data deeply.")
 writer = Agent(name="Writer", instructions="Write compelling content.")
 
+# Build workflow
 workflow = (Workflow("ResearchPipeline")
     .add_step(Step("research", researcher))
     .add_step(Step("analyze", analyst))
@@ -124,34 +135,54 @@ Self-generating systems. **The Software Factory.**
 ```python
 from pyagent import code
 
+# Generate code from description
 api_code = code.write("REST API for user management with JWT auth")
+
+# Review and improve
 review = code.review(existing_code)
 improved = code.refactor(old_code, goal="async architecture")
+
+# Generate tests
+tests = code.test(my_function)
 ```
 
 ---
 
-## ✨ Why PYAI: Your One-Stop Intelligence Solution
+## ✨ Why PYAI: One-Stop Intelligence Solution
 
 ```mermaid
-mindmap
-  root((🧠 PYAI))
-    Simplicity
-      One-liners
-      Zero Config
-      3 Lines Max
-    Power
-      25+ Modules
-      Multi-Agent
-      Workflows
-    Enterprise
-      Azure AD
-      Sessions
-      Evaluation
-    Flexibility
-      Multi-Provider
-      Plugins
-      OpenAPI
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
+    subgraph PYAI["🧠 PYAI - One-Stop Solution"]
+        subgraph Cognition["Cognition"]
+            ASK["ask"]
+            RES["research"]
+            SUM["summarize"]
+            RAG["rag"]
+            GEN["generate"]
+        end
+        
+        subgraph Orchestration["Orchestration"]
+            AGT["Agents"]
+            WRK["Workflows"]
+            HND["Handoffs"]
+            PAT["Patterns"]
+        end
+        
+        subgraph Enterprise["Enterprise"]
+            AUTH["Azure AD"]
+            SESS["Sessions"]
+            EVAL["Evaluation"]
+            TRACE["Tracing"]
+        end
+        
+        subgraph Integrations["Integrations"]
+            VEC["Vector DBs"]
+            API["OpenAPI"]
+            PLG["Plugins"]
+            MCP["MCP/A2A"]
+        end
+    end
 ```
 
 ### The Problem with Current Frameworks
@@ -165,62 +196,15 @@ mindmap
 | Memory | External setup | Limited | Built-in |
 | Production | DIY | DIY | Included |
 
-### PYAI: One SDK, Everything You Need
-
-```mermaid
-graph TB
-    subgraph "🎯 One-Stop Solution"
-        direction TB
-        PYAI[🧠 PYAI SDK]
-        
-        subgraph "Cognition"
-            ASK[ask]
-            RES[research]
-            SUM[summarize]
-            GEN[generate]
-            RAG[rag]
-        end
-        
-        subgraph "Orchestration"
-            AGT[Agents]
-            WRK[Workflows]
-            HND[Handoffs]
-            PAT[Patterns]
-        end
-        
-        subgraph "Enterprise"
-            AUTH[Azure AD]
-            SESS[Sessions]
-            EVAL[Evaluation]
-            TRACE[Tracing]
-        end
-        
-        subgraph "Integrations"
-            VEC[Vector DBs]
-            API[OpenAPI]
-            PLG[Plugins]
-            MCP[MCP/A2A]
-        end
-    end
-    
-    PYAI --> Cognition
-    PYAI --> Orchestration
-    PYAI --> Enterprise
-    PYAI --> Integrations
-```
-
 ### Lines of Code Comparison
 
-```mermaid
-xychart-beta
-    title "Lines of Code Required"
-    x-axis [RAG, Agent, Research, Multi-Agent]
-    y-axis "Lines of Code" 0 --> 60
-    bar [15, 20, 25, 40] "LangChain"
-    bar [10, 15, 20, 30] "LlamaIndex"
-    bar [30, 25, 35, 50] "CrewAI"
-    bar [2, 5, 1, 10] "PYAI"
-```
+| Task | LangChain | LlamaIndex | CrewAI | **PYAI** |
+|------|-----------|------------|--------|----------|
+| Question Answering | 15 | 12 | N/A | **1** |
+| RAG System | 25 | 20 | N/A | **2** |
+| Agent with Tools | 30 | 25 | 30 | **5** |
+| Multi-Agent Pipeline | 50 | 40 | 60 | **10** |
+| Research Assistant | 45 | 35 | 50 | **1** |
 
 ---
 
@@ -229,23 +213,16 @@ xychart-beta
 A **Software Factory** is a system that generates software, not just code snippets.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
 flowchart LR
     subgraph Traditional["Traditional Development"]
-        T1[📝 Write Code] --> T2[🐛 Debug] --> T3[📋 Test] --> T4[📖 Document]
+        T1["📝 Write"] --> T2["🐛 Debug"] --> T3["📋 Test"] --> T4["📖 Document"]
     end
     
     subgraph Factory["Software Factory"]
-        F1[💬 Describe] --> F2[🏭 Generate] --> F3[✅ Validate] --> F4[🚀 Deploy]
+        F1["💬 Describe"] --> F2["🏭 Generate"] --> F3["✅ Validate"] --> F4["🚀 Deploy"]
     end
-    
-    Traditional -.->|"Hours/Days"| Done1[Done]
-    Factory -.->|"Seconds"| Done2[Done]
-    
-    style Factory fill:#2ecc71,color:#fff
-    style Traditional fill:#e74c3c,color:#fff
 ```
-
-### Traditional vs Software Factory
 
 | Aspect | Traditional | Software Factory |
 |--------|-------------|------------------|
@@ -255,215 +232,500 @@ flowchart LR
 | **Debugging** | Line by line | Self-healing |
 | **Time** | Hours/Days | Seconds/Minutes |
 
-### The Intelligence Stack
+---
+
+## 📚 Architecture Overview
 
 ```mermaid
-graph TB
-    subgraph App["YOUR APPLICATION"]
-        APP[🖥️ App Layer]
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
+    subgraph Application["YOUR APPLICATION"]
+        APP["🖥️ App Layer"]
     end
     
-    subgraph Products["PYAI Products"]
-        PA[🤖 PyAgent]
-        PF[🔄 PyFlow]
-        PV[👁️ PyVision]
-        PVO[🎤 PyVoice]
-    end
-    
-    subgraph Engine["PYAI INTELLIGENCE ENGINE"]
-        MEM[💾 Unified Memory]
-        CTX[📋 Context Management]
-        ROUTE[🔀 Model Routing]
-        CACHE[⚡ Intelligent Caching]
+    subgraph SDK["PYAI SDK - src/pyagent/"]
+        subgraph Easy["🚀 easy/"]
+            E1["ask • research • summarize"]
+            E2["rag • generate • translate"]
+            E3["fetch • analyze • code"]
+            E4["handoff • guardrails • trace"]
+        end
+        
+        subgraph Core["🧠 core/"]
+            C1["Agent"]
+            C2["LLMProvider"]
+            C3["Memory"]
+        end
+        
+        subgraph Runner["⚡ runner/"]
+            R1["Runner"]
+            R2["StreamingRunner"]
+        end
+        
+        subgraph Blueprint["🔗 blueprint/"]
+            B1["Workflow"]
+            B2["Patterns"]
+        end
+        
+        subgraph Skills["🛠️ skills/"]
+            S1["@tool decorator"]
+            S2["SkillRegistry"]
+        end
+        
+        subgraph Kernel["🔌 kernel/"]
+            K1["Kernel"]
+            K2["ServiceRegistry"]
+        end
     end
     
     subgraph Providers["LLM PROVIDERS"]
-        AZ[Azure OpenAI]
-        OAI[OpenAI]
-        ANT[Anthropic]
-        OLL[Ollama]
+        P1["Azure OpenAI"]
+        P2["OpenAI"]
+        P3["Anthropic"]
+        P4["Ollama"]
     end
     
-    App --> Products --> Engine --> Providers
-    
-    style Engine fill:#9b59b6,color:#fff
+    Application --> SDK
+    SDK --> Providers
 ```
 
 ---
 
-## 📚 Complete Feature Guide
+## 📦 Complete Module Reference
 
-### 🧩 PyAgent Module Architecture
+### File Structure
+
+```
+src/pyagent/
+├── easy/           # One-liner APIs (15+ functions)
+├── core/           # Agent, Memory, LLM providers
+├── runner/         # Execution engine
+├── blueprint/      # Workflows and patterns
+├── skills/         # Tools and skills system
+├── kernel/         # Service registry (SK pattern)
+├── sessions/       # SQLite/Redis persistence
+├── evaluation/     # Agent testing framework
+├── voice/          # Real-time voice
+├── multimodal/     # Image, audio, video
+├── vectordb/       # Vector database connectors
+├── openapi/        # OpenAPI tool generation
+├── plugins/        # Plugin architecture
+├── a2a/            # Agent-to-Agent protocol
+├── config/         # YAML configuration
+├── tokens/         # Token counting
+└── tools/          # Built-in tools
+```
+
+---
+
+## 🎯 One-Liner APIs (`easy/` module)
+
+The `easy/` module provides **15+ one-liner APIs** that handle complex AI tasks with zero setup.
 
 ```mermaid
-graph TB
-    subgraph pyagent["📦 src/pyagent"]
-        direction TB
-        
-        subgraph easy["🚀 easy/"]
-            E1[ask]
-            E2[research]
-            E3[summarize]
-            E4[rag]
-            E5[generate]
-            E6[translate]
-            E7[extract]
-            E8[fetch]
-            E9[analyze]
-            E10[code]
-            E11[chat]
-            E12[handoff]
-            E13[guardrails]
-            E14[trace]
-            E15[mcp]
-        end
-        
-        subgraph core["🧠 core/"]
-            C1[Agent]
-            C2[LLMProvider]
-            C3[Memory]
-            C4[AgentConfig]
-        end
-        
-        subgraph runner["⚡ runner/"]
-            R1[Runner]
-            R2[StreamingRunner]
-            R3[RunConfig]
-            R4[RunResult]
-        end
-        
-        subgraph blueprint["🔗 blueprint/"]
-            B1[Workflow]
-            B2[Step]
-            B3[Pipeline]
-            B4[Patterns]
-        end
-        
-        subgraph skills["🛠️ skills/"]
-            S1[tool decorator]
-            S2[SkillRegistry]
-            S3[Built-in Skills]
-        end
-        
-        subgraph kernel["🔌 kernel/"]
-            K1[Kernel]
-            K2[ServiceRegistry]
-            K3[FilterRegistry]
-        end
-        
-        subgraph enterprise["🏢 Enterprise"]
-            ENT1[sessions/]
-            ENT2[evaluation/]
-            ENT3[voice/]
-            ENT4[multimodal/]
-        end
-        
-        subgraph integrations["🔗 Integrations"]
-            I1[vectordb/]
-            I2[openapi/]
-            I3[plugins/]
-            I4[a2a/]
-        end
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
+    subgraph QA["Question Answering"]
+        ASK["ask()"]
+        RES["research()"]
     end
     
-    style easy fill:#2ecc71,color:#fff
-    style core fill:#3498db,color:#fff
-    style runner fill:#e74c3c,color:#fff
-    style blueprint fill:#9b59b6,color:#fff
-    style skills fill:#f39c12,color:#fff
-    style kernel fill:#1abc9c,color:#fff
+    subgraph Content["Content Processing"]
+        SUM["summarize()"]
+        TRANS["translate()"]
+        EXT["extract()"]
+        GEN["generate()"]
+    end
+    
+    subgraph Knowledge["Knowledge Management"]
+        RAGA["rag.index()"]
+        RAGQ["rag.ask()"]
+    end
+    
+    subgraph RealTime["Real-Time Data"]
+        FW["fetch.weather()"]
+        FN["fetch.news()"]
+        FS["fetch.stock()"]
+    end
+    
+    subgraph Code["Code Operations"]
+        CW["code.write()"]
+        CR["code.review()"]
+        CD["code.debug()"]
+        CT["code.test()"]
+    end
+    
+    subgraph Analysis["Analysis"]
+        AS["analyze.sentiment()"]
+        AE["analyze.entities()"]
+        AC["analyze.classify()"]
+    end
 ```
 
----
+### ask() — Universal Question Answering
 
-## 🎯 One-Liner APIs (easy/ module)
-
-### ask() - Universal Question Answering
+The foundation of PYAI. Ask any question, get an intelligent answer.
 
 ```python
 from pyagent import ask
 
+# Simple questions
 answer = ask("What is Python?")
+
+# Detailed responses
 answer = ask("Explain quantum computing", detailed=True)
-answer = ask("List 5 tips", format="bullet")
+
+# Formatted output
+answer = ask("List 5 programming tips", format="bullet")
+
+# With context
+answer = ask("What does this code do?", context=my_code)
+
+# Async version
+answer = await ask_async("What is AI?")
 ```
 
-### research() - Deep Topic Research
+### research() — Deep Topic Research
+
+Multi-step research with automatic source gathering and synthesis.
 
 ```python
 from pyagent import research
 
-result = research("AI trends in enterprise")
-print(result.summary)
-print(result.key_points)
-print(result.insights)
+# Basic research
+result = research("AI trends in enterprise software")
+
+# Access structured results
+print(result.summary)        # Executive summary
+print(result.key_points)     # Bullet points
+print(result.insights)       # Deep analysis
+print(result.sources)        # References
+
+# Research with specific focus
+result = research(
+    topic="Machine learning in healthcare",
+    depth="comprehensive",
+    max_sources=10
+)
 ```
 
-### summarize() / rag / generate / translate / extract
+### summarize() — Document Summarization
+
+Summarize any content: text, files, URLs.
 
 ```python
-from pyagent import summarize, rag, generate, translate, extract
+from pyagent import summarize
 
-# Summarize anything
+# Text summarization
+summary = summarize(long_document)
+
+# File summarization (PDF, Word, etc.)
 summary = summarize("./report.pdf")
 
-# RAG in 2 lines
-docs = rag.index("./documents")
-answer = docs.ask("What is the conclusion?")
+# URL summarization
+summary = summarize("https://example.com/article")
 
-# Generate content
-code = generate("fibonacci function", type="code")
-
-# Translate
-spanish = translate("Hello", to="spanish")
-
-# Extract structured data
-data = extract(text, ["name", "age", "city"])
+# Custom length
+summary = summarize(text, length="short")    # ~2 sentences
+summary = summarize(text, length="medium")   # ~1 paragraph
+summary = summarize(text, length="long")     # Detailed
 ```
 
-### fetch / analyze / code
+### rag — Retrieval-Augmented Generation
+
+Production-ready RAG in 2 lines.
 
 ```python
-from pyagent import fetch, analyze, code
+from pyagent import rag
 
-# Real-time data
+# Index documents
+knowledge = rag.index("./documents")
+
+# Query the knowledge base
+answer = knowledge.ask("What is the main conclusion?")
+
+# With source attribution
+result = knowledge.ask("What were the key findings?", return_sources=True)
+print(result.answer)
+print(result.sources)
+
+# Multiple document types
+rag.index(["./pdfs", "./markdown", "./code"])
+```
+
+### generate() — Content Generation
+
+Generate any type of content.
+
+```python
+from pyagent import generate
+
+# Code generation
+code = generate("fibonacci function", type="code")
+api = generate("REST API for user management", type="code", language="python")
+
+# Email generation
+email = generate("polite rejection email", type="email")
+
+# Article generation
+article = generate("Introduction to AI", type="article", length="1000 words")
+
+# Custom types
+plan = generate("project plan for mobile app", type="plan")
+```
+
+### translate() — Language Translation
+
+```python
+from pyagent import translate
+
+# Simple translation
+spanish = translate("Hello, how are you?", to="spanish")
+japanese = translate("Good morning", to="japanese")
+
+# Detect and translate
+result = translate(unknown_text, to="english")
+print(result.detected_language)  # "french"
+print(result.translated)         # English text
+
+# Preserve formatting
+translated_doc = translate(markdown_text, to="german", preserve_format=True)
+```
+
+### extract() — Structured Data Extraction
+
+Extract structured data from unstructured text.
+
+```python
+from pyagent import extract
+
+# Extract specific fields
+data = extract(email_text, fields=["sender", "date", "subject", "action_items"])
+
+# With types
+data = extract(invoice, fields={
+    "vendor": "string",
+    "amount": "float",
+    "date": "date",
+    "line_items": "list"
+})
+
+# Entity extraction
+entities = extract(article, fields=["people", "organizations", "locations"])
+```
+
+### fetch — Real-Time Data
+
+Access live data feeds.
+
+```python
+from pyagent import fetch
+
+# Weather data
 weather = fetch.weather("New York")
-news = fetch.news("AI")
+print(weather.temperature)
+print(weather.conditions)
+
+# News
+headlines = fetch.news("artificial intelligence")
+for article in headlines:
+    print(article.title, article.source)
+
+# Stock data
 stock = fetch.stock("AAPL")
+print(stock.price, stock.change)
 
-# Analysis
-sentiment = analyze.sentiment("I love this!")
+# Web content
+content = fetch.url("https://example.com")
+```
 
-# Code operations
-code.write("REST API for todos")
-code.review(my_code)
-code.debug("TypeError: ...")
+### analyze — Data Analysis
+
+```python
+from pyagent import analyze
+
+# Sentiment analysis
+result = analyze.sentiment("I love this product!")
+print(result.label)     # "positive"
+print(result.score)     # 0.95
+
+# Entity recognition
+entities = analyze.entities("Apple CEO Tim Cook announced...")
+# [{"text": "Apple", "type": "ORG"}, {"text": "Tim Cook", "type": "PERSON"}]
+
+# Classification
+category = analyze.classify(text, categories=["tech", "sports", "politics"])
+
+# Comparison
+comparison = analyze.compare(text1, text2)
+print(comparison.similarity)
+print(comparison.differences)
+```
+
+### code — Code Operations
+
+AI-powered code assistant.
+
+```python
+from pyagent import code
+
+# Write code
+implementation = code.write("binary search tree in Python")
+api = code.write("FastAPI CRUD endpoints for users", framework="fastapi")
+
+# Review code
+review = code.review(my_code)
+print(review.issues)
+print(review.suggestions)
+print(review.score)
+
+# Debug errors
+fix = code.debug("TypeError: 'NoneType' object is not subscriptable", context=my_code)
+print(fix.explanation)
+print(fix.solution)
+
+# Generate tests
+tests = code.test(my_function)
+print(tests.test_cases)
+
+# Refactor
+improved = code.refactor(legacy_code, goal="async/await pattern")
+
+# Explain code
+explanation = code.explain(complex_function)
+```
+
+### handoff() — Agent Delegation
+
+Transfer tasks between agents.
+
+```python
+from pyagent import handoff
+
+# Transfer to specialist
+result = handoff(
+    task="Complex legal analysis",
+    to_agent=legal_specialist,
+    context=case_details
+)
+
+# With routing
+result = handoff(
+    task=user_request,
+    routes={
+        "code": coder_agent,
+        "math": calculator_agent,
+        "writing": writer_agent
+    }
+)
+```
+
+### guardrails() — Safety Wrappers
+
+```python
+from pyagent.easy import guardrails
+
+# Wrap any function with safety
+safe_ask = guardrails.wrap(ask, block_pii=True, block_harmful=True)
+
+# Custom validators
+safe_generate = guardrails.wrap(generate, 
+    validators=[no_code_execution, family_friendly])
+
+# Rate limiting
+limited_ask = guardrails.wrap(ask, rate_limit="10/minute")
+```
+
+### trace() — Debugging & Observability
+
+```python
+from pyagent.easy import trace
+
+# Enable tracing
+trace.enable()
+
+# Run your code
+result = ask("What is AI?")
+research_result = research("Machine learning")
+
+# View traces
+trace.show()
+# Displays: tokens used, latency, model calls, cost
+
+# Export for analysis
+trace.export("traces.json")
 ```
 
 ---
 
-## 🤖 Agent Framework (core/ module)
+## 🤖 Agent Framework (`core/` module)
+
+The `core/` module provides the foundational building blocks for intelligent agents.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+classDiagram
+    class Agent {
+        +name: str
+        +instructions: str
+        +tools: List~Tool~
+        +memory: Memory
+        +model: str
+        +run(input) RunResult
+    }
+    
+    class AgentConfig {
+        +model: str
+        +temperature: float
+        +max_tokens: int
+        +tools: List
+    }
+    
+    class Memory {
+        +add(message)
+        +get_context()
+        +clear()
+    }
+    
+    class LLMProvider {
+        +generate(prompt) Response
+        +stream(prompt) AsyncIterator
+    }
+    
+    Agent --> AgentConfig
+    Agent --> Memory
+    Agent --> LLMProvider
+```
+
+### Agent Execution Flow
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
 sequenceDiagram
     participant User
     participant Runner
     participant Agent
+    participant Memory
     participant LLM
     participant Tools
     
-    User->>Runner: run_sync(agent, "Hello")
+    User->>Runner: run_sync(agent, "Query")
     Runner->>Agent: execute(input)
-    Agent->>LLM: generate(prompt)
+    Agent->>Memory: get_context()
+    Memory-->>Agent: conversation_history
+    Agent->>LLM: generate(prompt + context)
     LLM-->>Agent: response + tool_calls
     
     alt Has Tool Calls
-        Agent->>Tools: execute(tool_call)
-        Tools-->>Agent: result
-        Agent->>LLM: generate(with results)
+        loop For each tool call
+            Agent->>Tools: execute(tool_call)
+            Tools-->>Agent: result
+        end
+        Agent->>LLM: generate(with tool results)
         LLM-->>Agent: final response
     end
     
+    Agent->>Memory: add(input, response)
     Agent-->>Runner: RunResult
     Runner-->>User: result.final_output
 ```
@@ -474,90 +736,286 @@ sequenceDiagram
 from pyagent import Agent, Runner
 from pyagent.skills import tool
 
-@tool(description="Get weather for a city")
+# Define custom tools
+@tool(description="Get current weather for a city")
 async def get_weather(city: str) -> str:
+    """Fetch weather data for the specified city."""
     return f"Weather in {city}: Sunny, 72°F"
 
+@tool(description="Search the knowledge base")
+async def search_kb(query: str) -> str:
+    """Search internal knowledge base."""
+    return f"Found 3 results for '{query}'"
+
+# Create the agent
 agent = Agent(
     name="WeatherBot",
-    instructions="Help users with weather.",
-    tools=[get_weather]
+    instructions="""You are a helpful weather assistant.
+    Always provide accurate weather information.
+    If asked about other topics, politely redirect to weather.""",
+    tools=[get_weather, search_kb],
+    model="gpt-4o-mini"
 )
 
-result = Runner.run_sync(agent, "Weather in Tokyo?")
+# Run synchronously
+result = Runner.run_sync(agent, "What's the weather in Tokyo?")
+print(result.final_output)
+
+# Run asynchronously
+result = await Runner.run(agent, "Weather in Paris?")
+print(result.final_output)
+```
+
+### Agent Configuration
+
+```python
+from pyagent import Agent
+from pyagent.core import AgentConfig
+
+# Detailed configuration
+config = AgentConfig(
+    model="gpt-4o",
+    temperature=0.7,
+    max_tokens=1000,
+    top_p=0.9,
+    presence_penalty=0.1,
+    frequency_penalty=0.1
+)
+
+agent = Agent(
+    name="Analyst",
+    instructions="Analyze data thoroughly.",
+    config=config
+)
+```
+
+### Memory Management
+
+```python
+from pyagent import Agent
+from pyagent.core import ConversationMemory, SlidingWindowMemory
+
+# Conversation memory (keeps all messages)
+agent = Agent(
+    name="Assistant",
+    instructions="Help users.",
+    memory=ConversationMemory()
+)
+
+# Sliding window (keeps last N messages)
+agent = Agent(
+    name="Assistant",
+    instructions="Help users.",
+    memory=SlidingWindowMemory(window_size=10)
+)
+
+# Access memory
+agent.memory.add("user", "Hello")
+agent.memory.add("assistant", "Hi there!")
+context = agent.memory.get_context()
+```
+
+### Streaming Responses
+
+```python
+from pyagent import Agent, Runner
+
+agent = Agent(name="Assistant", instructions="Be helpful.")
+
+# Stream tokens as they arrive
+async for chunk in Runner.stream(agent, "Tell me a story"):
+    print(chunk, end="", flush=True)
 ```
 
 ---
 
-## 🔗 Multi-Agent Systems (blueprint/ module)
+## 🔗 Multi-Agent Systems (`blueprint/` module)
+
+The `blueprint/` module enables sophisticated multi-agent orchestration.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
 flowchart TB
-    subgraph Patterns["Orchestration Patterns"]
-        subgraph Chain["Chain Pattern"]
-            CA1[Agent 1] --> CA2[Agent 2] --> CA3[Agent 3]
-        end
-        
-        subgraph Router["Router Pattern"]
-            RR[Router] --> RA1[Code Agent]
-            RR --> RA2[Math Agent]
-            RR --> RA3[Writing Agent]
-        end
-        
-        subgraph MapReduce["MapReduce Pattern"]
-            MR1[Research 1] --> MRS[Synthesizer]
-            MR2[Research 2] --> MRS
-            MR3[Research 3] --> MRS
-        end
-        
-        subgraph Supervisor["Supervisor Pattern"]
-            SUP[Manager] --> SW1[Worker 1]
-            SUP --> SW2[Worker 2]
-            SUP --> SW3[Worker 3]
-        end
+    subgraph Patterns["Available Patterns"]
+        direction TB
+        P1["🔗 Chain<br/>Sequential Processing"]
+        P2["🔀 Router<br/>Dynamic Routing"]
+        P3["📊 MapReduce<br/>Parallel Processing"]
+        P4["👔 Supervisor<br/>Managed Workers"]
+        P5["🔄 Loop<br/>Iterative Refinement"]
     end
 ```
 
-### Workflows
+### Architecture Patterns
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart LR
+    subgraph Chain["Chain Pattern"]
+        CA1["📝 Draft"] --> CA2["✏️ Edit"] --> CA3["✅ Review"]
+    end
+    
+    subgraph Router["Router Pattern"]
+        RR["🔀 Router"] --> RA1["💻 Code"]
+        RR --> RA2["📐 Math"]
+        RR --> RA3["📝 Writing"]
+    end
+```
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
+    subgraph MapReduce["MapReduce Pattern"]
+        MR1["📄 Doc 1"] --> MAP1["Analyzer"]
+        MR2["📄 Doc 2"] --> MAP2["Analyzer"]
+        MR3["📄 Doc 3"] --> MAP3["Analyzer"]
+        MAP1 --> RED["Synthesizer"]
+        MAP2 --> RED
+        MAP3 --> RED
+    end
+    
+    subgraph Supervisor["Supervisor Pattern"]
+        SUP["👔 Manager"] --> SW1["Worker 1"]
+        SUP --> SW2["Worker 2"]
+        SUP --> SW3["Worker 3"]
+        SW1 -.-> SUP
+        SW2 -.-> SUP
+        SW3 -.-> SUP
+    end
+```
+
+### Workflow Definition
 
 ```python
-from pyagent.blueprint import Workflow, Step, ChainPattern, RouterPattern
+from pyagent import Agent
+from pyagent.blueprint import Workflow, Step
 
-# Sequential workflow
-workflow = (Workflow("Pipeline")
-    .add_step(Step("research", researcher))
-    .add_step(Step("write", writer))
-    .add_step(Step("edit", editor))
+# Create specialized agents
+researcher = Agent(
+    name="Researcher",
+    instructions="Research topics thoroughly. Return structured findings."
+)
+
+writer = Agent(
+    name="Writer",
+    instructions="Write engaging content based on research."
+)
+
+editor = Agent(
+    name="Editor",
+    instructions="Edit and polish content for clarity."
+)
+
+# Build sequential workflow
+workflow = (Workflow("ContentPipeline")
+    .add_step(Step("research", researcher, output_key="research"))
+    .add_step(Step("write", writer, input_key="research", output_key="draft"))
+    .add_step(Step("edit", editor, input_key="draft", output_key="final"))
     .build())
 
-# Router pattern
-router = RouterPattern()
-router.add_route("code", coder, keywords=["python", "code"])
-router.add_route("math", calculator, keywords=["calculate"])
+# Execute
+result = await workflow.run("Write about AI in healthcare")
+print(result.outputs["final"])
 ```
+
+### Chain Pattern
+
+```python
+from pyagent.blueprint import ChainPattern
+
+# Create a chain of agents
+chain = ChainPattern([
+    ("draft", drafter),
+    ("review", reviewer),
+    ("polish", editor)
+])
+
+# Output of each agent feeds into the next
+result = await chain.run("Create a product announcement")
+```
+
+### Router Pattern
+
+```python
+from pyagent.blueprint import RouterPattern
+
+# Create router with specialized agents
+router = RouterPattern()
+router.add_route("code", code_agent, keywords=["python", "javascript", "bug"])
+router.add_route("math", math_agent, keywords=["calculate", "equation", "number"])
+router.add_route("writing", writer_agent, keywords=["write", "essay", "email"])
+router.add_route("default", general_agent)
+
+# Router automatically selects the right agent
+result = await router.run("Fix this Python bug: ...")
+# -> Routes to code_agent
+
+result = await router.run("Calculate 234 * 567")
+# -> Routes to math_agent
+```
+
+### MapReduce Pattern
+
+```python
+from pyagent.blueprint import MapReducePattern
+
+# Analyze multiple documents in parallel
+analyzer = Agent(name="Analyzer", instructions="Analyze document content.")
+synthesizer = Agent(name="Synthesizer", instructions="Synthesize findings.")
+
+map_reduce = MapReducePattern(
+    mapper=analyzer,
+    reducer=synthesizer
+)
+
+documents = ["doc1.txt", "doc2.txt", "doc3.txt"]
+result = await map_reduce.run(documents)
+# Analyzes all docs in parallel, then synthesizes
+```
+
+### Supervisor Pattern
+
+```python
+from pyagent.blueprint import SupervisorPattern
+
+# Manager delegates to workers
+manager = Agent(
+    name="Manager",
+    instructions="Delegate tasks and synthesize results."
+)
+
+workers = [
+    Agent(name="Coder", instructions="Write code."),
+    Agent(name="Tester", instructions="Write tests."),
+    Agent(name="Documenter", instructions="Write docs.")
+]
+
+supervisor = SupervisorPattern(manager=manager, workers=workers)
+result = await supervisor.run("Build a calculator module")
 
 ---
 
-## 🔌 Kernel Registry (kernel/ module)
+## 🔌 Kernel Registry (`kernel/` module)
 
 Microsoft Semantic Kernel-style service management:
 
 ```mermaid
-graph TB
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
     subgraph Kernel["Kernel"]
-        SR[ServiceRegistry]
-        FR[FilterRegistry]
-        PR[PluginRegistry]
+        SR["ServiceRegistry"]
+        FR["FilterRegistry"]
+        PR["PluginRegistry"]
         
-        SR --> LLM1[GPT-4]
-        SR --> LLM2[Claude]
-        SR --> MEM[Redis Memory]
+        SR --> LLM1["GPT-4"]
+        SR --> LLM2["Claude"]
+        SR --> MEM["Redis Memory"]
         
-        PR --> P1[WeatherPlugin]
-        PR --> P2[SearchPlugin]
+        PR --> P1["WeatherPlugin"]
+        PR --> P2["SearchPlugin"]
         
-        FR --> F1[LoggingFilter]
-        FR --> F2[ValidationFilter]
+        FR --> F1["LoggingFilter"]
+        FR --> F2["ValidationFilter"]
     end
 ```
 
@@ -578,56 +1036,219 @@ result = await kernel.invoke("weather", "get_weather", city="NYC")
 
 ## 🏢 Enterprise Features
 
+PYAI is built for production. Every feature you need to deploy AI at scale.
+
 ```mermaid
-graph LR
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
     subgraph Enterprise["Enterprise Features"]
-        AUTH[🔐 Azure AD Auth]
-        SESS[💾 Sessions]
-        EVAL[📊 Evaluation]
-        TRACE[📍 Tracing]
-        GUARD[🛡️ Guardrails]
+        direction TB
+        AUTH["🔐 Azure AD<br/>Authentication"]
+        SESS["💾 Session<br/>Management"]
+        EVAL["📊 Testing &<br/>Evaluation"]
+        TRACE["📍 Tracing &<br/>Observability"]
+        GUARD["🛡️ Guardrails &<br/>Safety"]
+        MONITOR["📈 Monitoring &<br/>Analytics"]
     end
-    
-    AUTH --> |No API Keys| SECURE[Secure]
-    SESS --> |SQLite/Redis| PERSIST[Persistent]
-    EVAL --> |Test Cases| QUALITY[Quality]
-    TRACE --> |Observability| DEBUG[Debug]
-    GUARD --> |Safety| SAFE[Safe]
 ```
 
-### Azure AD Authentication
+### 🔐 Azure AD Authentication
+
+Seamless integration with Azure Active Directory. No API keys needed in production.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+sequenceDiagram
+    participant App
+    participant PYAI
+    participant AzureAD["Azure AD"]
+    participant AOAI["Azure OpenAI"]
+    
+    App->>PYAI: ask("question")
+    PYAI->>AzureAD: Get token (DefaultAzureCredential)
+    AzureAD-->>PYAI: Bearer token
+    PYAI->>AOAI: API call with token
+    AOAI-->>PYAI: Response
+    PYAI-->>App: Answer
+```
 
 ```python
 import os
+
+# Configure Azure OpenAI (no API key needed!)
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://your-resource.openai.azure.com/"
 os.environ["AZURE_OPENAI_DEPLOYMENT"] = "gpt-4o-mini"
 
 from pyagent import ask
-# Uses your az login / Managed Identity automatically
-answer = ask("Hello!")
+
+# Uses your az login credentials or Managed Identity automatically
+answer = ask("Hello from Azure!")
 ```
 
-### Sessions, Evaluation, Tracing
+**Supported Authentication Methods:**
+- `az login` (Developer workstations)
+- Managed Identity (Azure VMs, App Service, AKS)
+- Service Principal (CI/CD pipelines)
+- Workload Identity (Kubernetes)
+
+### 💾 Session Management
+
+Persistent conversation history with SQLite or Redis backends.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart LR
+    subgraph App["Application"]
+        U1["User A"]
+        U2["User B"]
+        U3["User C"]
+    end
+    
+    subgraph Sessions["SessionManager"]
+        SM["Session<br/>Manager"]
+    end
+    
+    subgraph Storage["Storage Backend"]
+        SQL["SQLite<br/>sessions.db"]
+        RED["Redis<br/>Cluster"]
+    end
+    
+    U1 --> SM
+    U2 --> SM
+    U3 --> SM
+    SM --> SQL
+    SM --> RED
+```
 
 ```python
-from pyagent.sessions import SessionManager, SQLiteSessionStore
-from pyagent.evaluation import Evaluator, EvalSet, TestCase
-from pyagent.easy import trace, guardrails
+from pyagent.sessions import SessionManager, SQLiteSessionStore, RedisSessionStore
 
-# Persistent sessions
+# SQLite for development
 manager = SessionManager(store=SQLiteSessionStore("sessions.db"))
 
-# Evaluation
-eval_set = EvalSet([TestCase(input="2+2?", expected="4")])
-results = await Evaluator(agent).run(eval_set)
+# Redis for production
+manager = SessionManager(store=RedisSessionStore(
+    host="redis.example.com",
+    port=6379,
+    password="secret"
+))
 
-# Tracing
+# Create and use sessions
+session = await manager.create(user_id="user123")
+session.add_message("user", "Hello")
+session.add_message("assistant", "Hi there!")
+
+# Resume later
+session = await manager.get(session_id="abc123")
+history = session.get_messages()
+
+# Session with agent
+from pyagent import Agent, Runner
+
+agent = Agent(name="Assistant", instructions="Be helpful.")
+result = await Runner.run(agent, "Hello", session=session)
+# Automatically maintains conversation history
+```
+
+### 📊 Evaluation Framework
+
+Test your agents systematically.
+
+```python
+from pyagent.evaluation import Evaluator, EvalSet, TestCase, metrics
+
+# Define test cases
+eval_set = EvalSet([
+    TestCase(
+        input="What is 2+2?",
+        expected="4",
+        tags=["math"]
+    ),
+    TestCase(
+        input="Capital of France?",
+        expected="Paris",
+        tags=["geography"]
+    ),
+    TestCase(
+        input="Write a haiku about coding",
+        expected_pattern=r".*\n.*\n.*",  # 3 lines
+        tags=["creative"]
+    )
+])
+
+# Run evaluation
+evaluator = Evaluator(agent)
+results = await evaluator.run(eval_set)
+
+# View results
+print(f"Pass rate: {results.pass_rate}%")
+print(f"Average latency: {results.avg_latency}ms")
+
+for result in results.failed:
+    print(f"Failed: {result.input}")
+    print(f"Expected: {result.expected}")
+    print(f"Got: {result.actual}")
+```
+
+### 📍 Tracing & Observability
+
+Full visibility into agent operations.
+
+```python
+from pyagent.easy import trace
+
+# Enable tracing
 trace.enable()
-ask("What is AI?")
-trace.show()
 
-# Guardrails
+# Run operations
+result = ask("Explain quantum computing")
+research_result = research("AI in healthcare")
+
+# View traces
+trace.show()
+# Output:
+# ┌─ ask("Explain quantum computing")
+# │  Model: gpt-4o-mini
+# │  Tokens: 45 in, 230 out
+# │  Latency: 1.2s
+# │  Cost: $0.0012
+# └─
+
+# Export for external tools
+trace.export("traces.json")
+trace.export_to_opentelemetry()
+```
+
+### 🛡️ Guardrails & Safety
+
+Built-in protection for production deployments.
+
+```python
+from pyagent.easy import guardrails
+
+# PII protection
 safe_ask = guardrails.wrap(ask, block_pii=True)
+# Blocks: SSNs, credit cards, phone numbers
+
+# Content filtering
+safe_generate = guardrails.wrap(generate, 
+    block_harmful=True,
+    block_adult=True
+)
+
+# Custom validators
+def no_financial_advice(response):
+    if "invest" in response.lower():
+        return False, "Cannot provide investment advice"
+    return True, None
+
+safe_ask = guardrails.wrap(ask, validators=[no_financial_advice])
+
+# Rate limiting
+limited_ask = guardrails.wrap(ask, rate_limit="100/hour")
+
+# Token limits
+bounded_ask = guardrails.wrap(ask, max_tokens=500)
 ```
 
 ---
@@ -635,38 +1256,28 @@ safe_ask = guardrails.wrap(ask, block_pii=True)
 ## 🔗 Integrations
 
 ```mermaid
-graph TB
-    PYAI[🧠 PYAI] --> VEC[Vector DBs]
-    PYAI --> FRAME[Frameworks]
-    PYAI --> PROTO[Protocols]
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart TB
+    PYAI["🧠 PYAI"] --> VEC["Vector DBs"]
+    PYAI --> FRAME["Frameworks"]
+    PYAI --> PROTO["Protocols"]
     
-    VEC --> CH[ChromaDB]
-    VEC --> PC[Pinecone]
-    VEC --> QD[Qdrant]
-    VEC --> AZ[Azure AI Search]
+    VEC --> CH["ChromaDB"]
+    VEC --> PC["Pinecone"]
+    VEC --> QD["Qdrant"]
+    VEC --> AZ["Azure AI Search"]
     
-    FRAME --> LC[LangChain]
-    FRAME --> SK[Semantic Kernel]
+    FRAME --> LC["LangChain"]
+    FRAME --> SK["Semantic Kernel"]
     
-    PROTO --> MCP[MCP Protocol]
-    PROTO --> A2A[A2A Protocol]
-    PROTO --> OAPI[OpenAPI]
+    PROTO --> MCP["MCP Protocol"]
+    PROTO --> A2A["A2A Protocol"]
+    PROTO --> OAPI["OpenAPI"]
 ```
 
 ---
 
 ## 📊 Feature Comparison
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'pie1': '#2ecc71', 'pie2': '#e74c3c', 'pie3': '#3498db', 'pie4': '#9b59b6'}}}%%
-pie showData
-    title "PYAI Feature Coverage"
-    "One-liner APIs" : 15
-    "Agent Framework" : 25
-    "Multi-Agent" : 20
-    "Enterprise" : 25
-    "Integrations" : 15
-```
 
 | Feature | PYAI | OpenAI Agents | Google ADK | Semantic Kernel | LangChain |
 |---------|:----:|:-------------:|:----------:|:---------------:|:---------:|
@@ -718,68 +1329,60 @@ export AZURE_OPENAI_DEPLOYMENT=gpt-4o-mini
 
 ---
 
-## 📁 Architecture
+## 💡 Design Philosophy
 
 ```mermaid
-graph TB
-    subgraph pyagent["src/pyagent/"]
-        E[🚀 easy/] --> C[🧠 core/]
-        C --> R[⚡ runner/]
-        C --> B[🔗 blueprint/]
-        C --> S[🛠️ skills/]
-        C --> K[🔌 kernel/]
-        
-        K --> SE[💾 sessions/]
-        K --> EV[📊 evaluation/]
-        K --> V[🎤 voice/]
-        K --> M[🖼️ multimodal/]
-        
-        S --> VD[🗄️ vectordb/]
-        S --> OA[📜 openapi/]
-        S --> PL[🔌 plugins/]
-        S --> A2[🔄 a2a/]
-        
-        C --> CF[⚙️ config/]
-        C --> TO[🧮 tokens/]
-        C --> MO[🤖 models/]
-        C --> IN[📝 instructions/]
-        C --> CE[💻 code_executor/]
-        C --> IT[🔗 integrations/]
-        C --> UC[🎯 usecases/]
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart LR
+    subgraph Philosophy["Design Principles"]
+        P1["🎯 Simplicity First"]
+        P2["🔋 Batteries Included"]
+        P3["📐 Progressive Complexity"]
+        P4["🧠 Intelligence as Infrastructure"]
+        P5["🔧 Composability"]
     end
 ```
 
+| Principle | Description |
+|-----------|-------------|
+| **Simplicity First** | One line should accomplish one task |
+| **Batteries Included** | Everything you need, out of the box |
+| **Progressive Complexity** | Start simple, scale up when needed |
+| **Intelligence as Infrastructure** | AI is foundation, not feature |
+| **Composability** | Small pieces combine into powerful systems |
+
 ---
 
-## 👥 Community
+## 👥 Community & Documentation
 
-- 📖 [Documentation](./docs/)
-- 🐛 [Report Issues](https://github.com/gitpavleenbali/PYAI/issues)
-- 💡 [Feature Requests](https://github.com/gitpavleenbali/PYAI/discussions)
-- 🤝 [Contributing Guide](./docs/CONTRIBUTING.md)
+- 📖 **[Wiki Documentation](https://github.com/gitpavleenbali/PYAI/wiki)** — Comprehensive guides
+- 🐛 **[Report Issues](https://github.com/gitpavleenbali/PYAI/issues)** — Bug reports
+- 💡 **[Feature Requests](https://github.com/gitpavleenbali/PYAI/discussions)** — Ideas
+- 🤝 **[Contributing Guide](./docs/CONTRIBUTING.md)** — Get involved
 
 ---
 
 ## 🔮 The PYAI Product Suite
 
 ```mermaid
-timeline
-    title PYAI Product Roadmap
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
+flowchart LR
+    subgraph Available["✅ Available Now"]
+        PA["🤖 PyAgent<br/>Core SDK"]
+    end
     
-    section Available Now
-        PyAgent : Core Intelligence SDK
-                : 25+ modules
-                : 150+ classes
-                : 671 tests
+    subgraph Soon["🔜 Coming Soon"]
+        PF["🔄 PyFlow<br/>Visual Workflows"]
+        PV["👁️ PyVision<br/>Computer Vision"]
+        PVO["🎤 PyVoice<br/>Speech & Audio"]
+    end
     
-    section Coming Soon
-        PyFlow : Visual Workflow Orchestration
-        PyVision : Computer Vision Made Simple
-        PyVoice : Speech & Audio Intelligence
+    subgraph Future["🔮 Future"]
+        PFAC["🏭 PyFactory<br/>Software Generation"]
+        PM["🧠 PyMind<br/>Autonomous Reasoning"]
+    end
     
-    section Future
-        PyFactory : Software Generation Engine
-        PyMind : Autonomous Reasoning Systems
+    Available --> Soon --> Future
 ```
 
 | Product | Purpose | Dimension | Status |
