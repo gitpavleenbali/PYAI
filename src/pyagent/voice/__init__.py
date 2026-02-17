@@ -9,10 +9,10 @@ Like OpenAI Realtime API.
 
 Example:
     from pyagent.voice import VoiceSession, AudioStream
-    
+
     # Create voice session
     session = VoiceSession(agent)
-    
+
     # Start streaming
     async with session.stream() as stream:
         async for audio in stream:
@@ -20,9 +20,9 @@ Example:
 """
 
 from .session import VoiceSession
-from .stream import AudioStream, AudioChunk
+from .stream import AudioChunk, AudioStream
+from .synthesis import SynthesisResult, Synthesizer
 from .transcription import Transcriber, TranscriptionResult
-from .synthesis import Synthesizer, SynthesisResult
 
 __all__ = [
     "VoiceSession",

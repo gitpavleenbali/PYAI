@@ -31,17 +31,14 @@ nav:
   - Home: index.md
   - Getting Started:
     - Quick Start: QUICKSTART.md
-    - Installation: installation.md
     - Azure Setup: AZURE_SETUP.md
-  - User Guide:
-    - Agents: agents.md
-    - Tools: tools.md
-    - Multi-Agent: multi-agent.md
-    - Model Providers: providers.md
-  - API Reference: API_REFERENCE.md
-  - Examples: examples.md
-  - Contributing: CONTRIBUTING.md
-  - Changelog: CHANGELOG.md
+  - Reference:
+    - API Reference: API_REFERENCE.md
+    - Architecture: ARCHITECTURE.md
+  - Development:
+    - Contributing: CONTRIBUTING.md
+    - Changelog: CHANGELOG.md
+    - Distribution: DISTRIBUTION.md
 
 markdown_extensions:
   - pymdownx.highlight:

@@ -7,6 +7,7 @@ Development UI - Web Interface
 Provides a browser-based interface for testing and debugging agents.
 """
 
+import html
 import json
 import threading
 import webbrowser
@@ -14,8 +15,6 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from typing import Any, Callable, Dict, List, Optional
-from urllib.parse import urlparse, parse_qs
-import html
 
 
 @dataclass
@@ -29,23 +28,23 @@ class ChatMessage:
 
 class DevUI:
     """Development UI for testing agents.
-    
+
     Provides a web-based chat interface with:
     - Real-time conversation
     - Message history
     - Tool call visualization
     - Token usage tracking
     - Configuration panel
-    
+
     Example:
         from pyagent import Agent
         from pyagent.devui import DevUI
-        
+
         agent = Agent(model="gpt-4")
         ui = DevUI(agent)
         ui.launch()  # Opens http://localhost:7860
     """
-    
+
     def __init__(
         self,
         agent: Optional[Any] = None,
@@ -54,7 +53,7 @@ class DevUI:
         description: str = "Test and debug your agent",
     ):
         """Initialize Dev UI.
-        
+
         Args:
             agent: PyAgent Agent instance
             handler: Custom message handler
@@ -65,23 +64,23 @@ class DevUI:
         self.handler = handler
         self.title = title
         self.description = description
-        
+
         self._messages: List[ChatMessage] = []
         self._server: Optional[HTTPServer] = None
         self._thread: Optional[threading.Thread] = None
-    
+
     def _handle_message(self, content: str) -> str:
         """Handle an incoming message.
-        
+
         Args:
             content: User message
-            
+
         Returns:
             Agent response
         """
         # Add user message
         self._messages.append(ChatMessage(role="user", content=content))
-        
+
         try:
             if self.handler:
                 response = self.handler(content)
@@ -97,12 +96,12 @@ class DevUI:
                 response = "No agent or handler configured."
         except Exception as e:
             response = f"Error: {str(e)}"
-        
+
         # Add assistant message
         self._messages.append(ChatMessage(role="assistant", content=response))
-        
+
         return response
-    
+
     def _generate_html(self) -> str:
         """Generate the HTML interface."""
         messages_html = ""
@@ -115,7 +114,7 @@ class DevUI:
                 <div class="content">{content_escaped}</div>
             </div>
             '''
-        
+
         return f'''
 <!DOCTYPE html>
 <html lang="en">
@@ -234,59 +233,59 @@ class DevUI:
         <h1>{html.escape(self.title)}</h1>
         <p class="description">{html.escape(self.description)}</p>
     </header>
-    
+
     <div class="chat-container" id="chat">
         {messages_html if messages_html else '<div class="empty-state">Send a message to start chatting</div>'}
     </div>
-    
+
     <div class="input-container">
         <input type="text" id="input" placeholder="Type your message..." autofocus>
         <button onclick="sendMessage()" id="sendBtn">Send</button>
     </div>
-    
+
     <div class="loading" id="loading">Thinking...</div>
-    
+
     <script>
         const input = document.getElementById('input');
         const chat = document.getElementById('chat');
         const sendBtn = document.getElementById('sendBtn');
         const loading = document.getElementById('loading');
-        
+
         input.addEventListener('keypress', function(e) {{
             if (e.key === 'Enter') {{
                 sendMessage();
             }}
         }});
-        
+
         async function sendMessage() {{
             const message = input.value.trim();
             if (!message) return;
-            
+
             input.value = '';
             sendBtn.disabled = true;
             loading.style.display = 'block';
-            
+
             // Add user message immediately
             addMessage('user', message);
-            
+
             try {{
                 const response = await fetch('/chat', {{
                     method: 'POST',
                     headers: {{'Content-Type': 'application/json'}},
                     body: JSON.stringify({{message: message}})
                 }});
-                
+
                 const data = await response.json();
                 addMessage('assistant', data.response);
             }} catch (error) {{
                 addMessage('assistant', 'Error: ' + error.message);
             }}
-            
+
             sendBtn.disabled = false;
             loading.style.display = 'none';
             input.focus();
         }}
-        
+
         function addMessage(role, content) {{
             const div = document.createElement('div');
             div.className = 'message ' + role;
@@ -294,15 +293,15 @@ class DevUI:
                 <div class="role">${{role.charAt(0).toUpperCase() + role.slice(1)}}</div>
                 <div class="content">${{escapeHtml(content).replace(/\\n/g, '<br>')}}</div>
             `;
-            
+
             // Remove empty state if present
             const empty = chat.querySelector('.empty-state');
             if (empty) empty.remove();
-            
+
             chat.appendChild(div);
             chat.scrollTop = chat.scrollHeight;
         }}
-        
+
         function escapeHtml(text) {{
             const div = document.createElement('div');
             div.textContent = text;
@@ -312,15 +311,15 @@ class DevUI:
 </body>
 </html>
 '''
-    
+
     def _create_handler(self) -> type:
         """Create request handler class."""
         ui = self
-        
+
         class DevUIHandler(SimpleHTTPRequestHandler):
             def log_message(self, format, *args):
                 pass  # Suppress logging
-            
+
             def do_GET(self):
                 if self.path == "/" or self.path == "/index.html":
                     html_content = ui._generate_html()
@@ -331,17 +330,17 @@ class DevUI:
                 else:
                     self.send_response(404)
                     self.end_headers()
-            
+
             def do_POST(self):
                 if self.path == "/chat":
                     content_length = int(self.headers.get("Content-Length", 0))
                     body = self.rfile.read(content_length)
-                    
+
                     try:
                         data = json.loads(body)
                         message = data.get("message", "")
                         response = ui._handle_message(message)
-                        
+
                         self.send_response(200)
                         self.send_header("Content-Type", "application/json")
                         self.end_headers()
@@ -358,9 +357,9 @@ class DevUI:
                 else:
                     self.send_response(404)
                     self.end_headers()
-        
+
         return DevUIHandler
-    
+
     def launch(
         self,
         host: str = "127.0.0.1",
@@ -369,7 +368,7 @@ class DevUI:
         block: bool = True,
     ):
         """Launch the development UI.
-        
+
         Args:
             host: Host to bind to
             port: Port to listen on
@@ -378,13 +377,13 @@ class DevUI:
         """
         handler = self._create_handler()
         self._server = HTTPServer((host, port), handler)
-        
+
         url = f"http://{host}:{port}"
         print(f"🚀 PyAgent Dev UI running at {url}")
-        
+
         if open_browser:
             webbrowser.open(url)
-        
+
         if block:
             try:
                 self._server.serve_forever()
@@ -395,12 +394,12 @@ class DevUI:
             self._thread = threading.Thread(target=self._server.serve_forever)
             self._thread.daemon = True
             self._thread.start()
-    
+
     def stop(self):
         """Stop the UI server."""
         if self._server:
             self._server.shutdown()
-    
+
     def clear_history(self):
         """Clear chat history."""
         self._messages.clear()
@@ -414,18 +413,18 @@ def launch_ui(
     **kwargs
 ):
     """Launch development UI quickly.
-    
+
     Args:
         agent: PyAgent Agent instance
         handler: Custom message handler
         title: UI title
         port: Port number
         **kwargs: Additional DevUI arguments
-        
+
     Example:
         from pyagent import Agent
         from pyagent.devui import launch_ui
-        
+
         agent = Agent(model="gpt-4")
         launch_ui(agent)
     """

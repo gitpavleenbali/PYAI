@@ -7,12 +7,11 @@ Examples:
     >>> from pyagent import generate
     >>> generate("A professional bio for a software engineer")
     'John is a passionate software engineer...'
-    
+
     >>> generate("Python function to calculate factorial", type="code")
     'def factorial(n):\\n    ...'
 """
 
-from typing import Optional, Union, Any
 from pyagent.easy.llm_interface import get_llm
 
 
@@ -31,7 +30,7 @@ def generate(
 ) -> str:
     """
     Generate any type of content.
-    
+
     Args:
         what: Description of what to generate
         type: Content type - "text", "code", "email", "article", "docs", "story"
@@ -43,23 +42,23 @@ def generate(
         model: Override default model
         creative: Enable more creative output
         **kwargs: Additional parameters
-        
+
     Returns:
         str: The generated content
-    
+
     Examples:
         >>> generate("Welcome email for new users", type="email")
         'Subject: Welcome to Our Platform!...'
-        
+
         >>> generate("REST API for todo app", type="code", language="python")
         'from flask import Flask...'
-        
+
         >>> generate("Blog post about AI trends", type="article", length="long")
         '# The Future of AI...'
     """
     llm_kwargs = {"model": model} if model else {}
     llm = get_llm(**llm_kwargs)
-    
+
     # Build system prompt based on type
     type_systems = {
         "text": "You are a skilled writer. Generate clear, engaging text.",
@@ -71,9 +70,9 @@ def generate(
         "marketing": "You are a marketing copywriter. Create compelling, persuasive content.",
         "social": "You are a social media content creator. Create engaging, shareable content.",
     }
-    
+
     system_parts = [type_systems.get(type, type_systems["text"])]
-    
+
     # Add tone
     if tone:
         tone_prompts = {
@@ -86,7 +85,7 @@ def generate(
         }
         if tone in tone_prompts:
             system_parts.append(tone_prompts[tone])
-    
+
     # Add length guidance
     length_prompts = {
         "short": "Keep it brief and concise.",
@@ -94,18 +93,18 @@ def generate(
         "long": "Be comprehensive and detailed.",
     }
     system_parts.append(length_prompts.get(length, length_prompts["medium"]))
-    
+
     if style:
         system_parts.append(f"Write in {style} style.")
-    
+
     system = " ".join(system_parts)
-    
+
     # Build prompt
     prompt = f"Generate: {what}"
-    
+
     if context:
         prompt = f"Context: {context}\n\n{prompt}"
-    
+
     # Temperature based on type
     temperature = kwargs.pop("temperature", None)
     if temperature is None:
@@ -115,9 +114,9 @@ def generate(
             temperature = 0.2
         else:
             temperature = 0.7
-    
+
     response = llm.complete(prompt, system=system, temperature=temperature, **kwargs)
-    
+
     # Clean up code output
     if type == "code":
         content = response.content
@@ -134,7 +133,7 @@ def generate(
             if code_lines:
                 return "\n".join(code_lines)
         return content
-    
+
     return response.content
 
 

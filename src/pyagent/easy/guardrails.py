@@ -6,22 +6,22 @@ and content safety checks. Inspired by OpenAI Agents' guardrails but simpler.
 
 Examples:
     >>> from pyagent import guardrails, ask
-    
+
     # Simple content filter
     >>> safe_ask = guardrails.wrap(ask, block_pii=True)
     >>> safe_ask("What is the capital of France?")  # Works
     >>> safe_ask("My SSN is 123-45-6789")  # Blocked
-    
+
     # Custom validators
     >>> @guardrails.input_validator
     ... def no_sql(text: str) -> bool:
     ...     return "SELECT" not in text.upper()
-    
+
     # Output filters
-    >>> @guardrails.output_filter 
+    >>> @guardrails.output_filter
     ... def redact_emails(text: str) -> str:
     ...     return re.sub(r'\\S+@\\S+', '[REDACTED]', text)
-    
+
     # Combine guardrails
     >>> protected = guardrails.protect(
     ...     ask,
@@ -30,21 +30,21 @@ Examples:
     ... )
 """
 
-from typing import Callable, List, Any, Optional, Union, Pattern
-from dataclasses import dataclass, field
-from functools import wraps
 import re
+from dataclasses import dataclass
+from functools import wraps
+from typing import Callable, List
 
 
 @dataclass
 class GuardrailResult:
     """Result of a guardrail check."""
-    
+
     passed: bool
     message: str = ""
     blocked_content: str = None
     rule_name: str = None
-    
+
     def __bool__(self) -> bool:
         return self.passed
 
@@ -52,11 +52,11 @@ class GuardrailResult:
 @dataclass
 class GuardrailViolation(Exception):
     """Raised when a guardrail is violated."""
-    
+
     rule: str
     message: str
     content: str = None
-    
+
     def __str__(self) -> str:
         return f"Guardrail '{self.rule}' violated: {self.message}"
 
@@ -74,7 +74,7 @@ def _check_pii(text: str) -> GuardrailResult:
         "phone": r"\b\d{3}[-.]?\d{3}[-.]?\d{4}\b",
         "ip_address": r"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b",
     }
-    
+
     for pii_type, pattern in patterns.items():
         if re.search(pattern, text, re.IGNORECASE):
             return GuardrailResult(
@@ -83,7 +83,7 @@ def _check_pii(text: str) -> GuardrailResult:
                 blocked_content=text,
                 rule_name="no_pii"
             )
-    
+
     return GuardrailResult(passed=True, rule_name="no_pii")
 
 
@@ -95,7 +95,7 @@ def _check_harmful(text: str) -> GuardrailResult:
         r"(sql|xss|injection)\s*attack",
         r"\b(weapon|bomb|explosive)\b.*\b(make|build|create)\b",
     ]
-    
+
     text_lower = text.lower()
     for pattern in harmful_patterns:
         if re.search(pattern, text_lower, re.IGNORECASE):
@@ -105,7 +105,7 @@ def _check_harmful(text: str) -> GuardrailResult:
                 blocked_content=text,
                 rule_name="no_harmful"
             )
-    
+
     return GuardrailResult(passed=True, rule_name="no_harmful")
 
 
@@ -117,29 +117,29 @@ def _check_prompt_injection(text: str) -> GuardrailResult:
         r"ignore\s+(previous|all|above|prior|earlier)",
         r"disregard\s+(your|the|all|previous)",
         r"forget\s+(your|the|all|previous)\s+(rules|instructions|guidelines)",
-        
+
         # Role play / identity manipulation
         r"you\s+are\s+now\s+(a|an|the)",
         r"pretend\s+(to\s+be|you\s+are|you're)",
         r"act\s+as\s+(if|a|an)",
         r"roleplay\s+as",
-        
+
         # Known jailbreak techniques
         r"jailbreak",
         r"DAN\s*mode",
         r"do\s+anything\s+now",
-        
+
         # System prompt manipulation
         r"\[SYSTEM\]|\[INST\]|\[/INST\]",
         r"<\|system\|>|<\|user\|>|<\|assistant\|>",
         r"system\s*:\s*you\s+are",
-        
+
         # Bypass attempts
         r"bypass\s+(the|your|safety|content)",
         r"override\s+(the|your|safety|restrictions)",
         r"unlock\s+(your|full|hidden)",
     ]
-    
+
     for pattern in injection_patterns:
         if re.search(pattern, text, re.IGNORECASE):
             return GuardrailResult(
@@ -148,7 +148,7 @@ def _check_prompt_injection(text: str) -> GuardrailResult:
                 blocked_content=text,
                 rule_name="no_injection"
             )
-    
+
     return GuardrailResult(passed=True, rule_name="no_injection")
 
 
@@ -177,11 +177,11 @@ def _redact_pii(text: str) -> str:
         (r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", "[EMAIL]"),
         (r"\b\d{3}[-.]?\d{3}[-.]?\d{4}\b", "[PHONE]"),
     ]
-    
+
     result = text
     for pattern, replacement in replacements:
         result = re.sub(pattern, replacement, result, flags=re.IGNORECASE)
-    
+
     return result
 
 
@@ -201,10 +201,10 @@ def _limit_length(max_length: int) -> Callable:
 def input_validator(func: Callable[[str], bool]) -> Callable[[str], GuardrailResult]:
     """
     Decorator to create an input validator from a simple function.
-    
+
     Args:
         func: Function that returns True if input is valid
-        
+
     Examples:
         >>> @guardrails.input_validator
         ... def no_sql(text: str) -> bool:
@@ -225,17 +225,17 @@ def input_validator(func: Callable[[str], bool]) -> Callable[[str], GuardrailRes
                 message=f"Validation error: {e}",
                 rule_name=func.__name__
             )
-    
+
     return validator
 
 
 def output_filter(func: Callable[[str], str]) -> Callable[[str], str]:
     """
     Decorator to create an output filter.
-    
+
     Args:
         func: Function that transforms output text
-        
+
     Examples:
         >>> @guardrails.output_filter
         ... def uppercase(text: str) -> str:
@@ -244,7 +244,7 @@ def output_filter(func: Callable[[str], str]) -> Callable[[str], str]:
     @wraps(func)
     def filter_fn(text: str) -> str:
         return func(text)
-    
+
     filter_fn._is_output_filter = True
     return filter_fn
 
@@ -265,7 +265,7 @@ def validate(
 ) -> GuardrailResult:
     """
     Validate input text against guardrails.
-    
+
     Args:
         text: Text to validate
         validators: Custom validator functions
@@ -274,17 +274,17 @@ def validate(
         block_injection: Block prompt injection attempts
         max_length: Maximum allowed length
         raise_on_fail: Raise exception on validation failure
-        
+
     Returns:
         GuardrailResult with validation status
-        
+
     Examples:
         >>> result = guardrails.validate("Hello world", block_pii=True)
         >>> if result.passed:
         ...     print("Input is safe")
     """
     all_validators = list(validators or [])
-    
+
     if block_pii:
         all_validators.append(_check_pii)
     if block_harmful:
@@ -293,7 +293,7 @@ def validate(
         all_validators.append(_check_prompt_injection)
     if max_length:
         all_validators.append(_check_length(max_length))
-    
+
     for validator in all_validators:
         result = validator(text)
         if not result.passed:
@@ -304,7 +304,7 @@ def validate(
                     content=result.blocked_content
                 )
             return result
-    
+
     return GuardrailResult(passed=True)
 
 
@@ -317,32 +317,32 @@ def filter_output(
 ) -> str:
     """
     Filter output text.
-    
+
     Args:
         text: Text to filter
         filters: Custom filter functions
         redact_pii: Redact PII from output
         max_length: Maximum output length
-        
+
     Returns:
         Filtered text
-        
+
     Examples:
         >>> text = "Contact john@email.com for help"
         >>> clean = guardrails.filter_output(text, redact_pii=True)
         >>> print(clean)  # "Contact [EMAIL] for help"
     """
     all_filters = list(filters or [])
-    
+
     if redact_pii:
         all_filters.append(_redact_pii)
     if max_length:
         all_filters.append(_limit_length(max_length))
-    
+
     result = text
     for f in all_filters:
         result = f(result)
-    
+
     return result
 
 
@@ -360,7 +360,7 @@ def wrap(
 ) -> Callable:
     """
     Wrap a function with guardrails.
-    
+
     Args:
         func: Function to wrap (e.g., ask, agent)
         validators: Input validators
@@ -371,10 +371,10 @@ def wrap(
         redact_pii: Redact PII from output
         max_input_length: Maximum input length
         max_output_length: Maximum output length
-        
+
     Returns:
         Wrapped function with guardrails
-        
+
     Examples:
         >>> safe_ask = guardrails.wrap(ask, block_pii=True, redact_pii=True)
         >>> answer = safe_ask("What is Python?")  # Protected
@@ -392,10 +392,10 @@ def wrap(
                 block_injection=block_injection,
                 max_length=max_input_length
             )
-        
+
         # Call function
         result = func(*args, **kwargs)
-        
+
         # Filter output
         if isinstance(result, str):
             result = filter_output(
@@ -404,9 +404,9 @@ def wrap(
                 redact_pii=redact_pii,
                 max_length=max_output_length
             )
-        
+
         return result
-    
+
     return wrapped
 
 
@@ -419,7 +419,7 @@ def protect(
 ) -> Callable:
     """
     Alias for wrap() with a more intuitive name.
-    
+
     Examples:
         >>> protected_ask = guardrails.protect(ask, block_pii=True)
     """
@@ -432,7 +432,7 @@ def protect(
 
 # Export validators as module-level functions
 no_pii = _check_pii
-no_harmful = _check_harmful  
+no_harmful = _check_harmful
 no_injection = _check_prompt_injection
 max_length = _check_length
 
@@ -443,27 +443,27 @@ limit_length = _limit_length
 
 class GuardrailsModule:
     """Guardrails module with all functions attached."""
-    
+
     # Functions
     validate = staticmethod(validate)
     filter_output = staticmethod(filter_output)
     wrap = staticmethod(wrap)
     protect = staticmethod(protect)
-    
+
     # Decorators
     input_validator = staticmethod(input_validator)
     output_filter = staticmethod(output_filter)
-    
+
     # Built-in validators
     no_pii = staticmethod(no_pii)
     no_harmful = staticmethod(no_harmful)
     no_injection = staticmethod(no_injection)
     max_length = staticmethod(max_length)
-    
+
     # Built-in filters
     redact_pii = staticmethod(redact_pii)
     limit_length = staticmethod(limit_length)
-    
+
     # Classes
     Result = GuardrailResult
     Violation = GuardrailViolation

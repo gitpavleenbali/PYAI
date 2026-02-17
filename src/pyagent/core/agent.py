@@ -2,19 +2,18 @@
 Agent - The central orchestrator for AI agent behavior
 """
 
-from typing import Any, Dict, List, Optional, Union
 from dataclasses import dataclass, field
-import asyncio
+from typing import Any, Dict, List, Optional
 
 from pyagent.core.base import BaseComponent, Executable
-from pyagent.core.memory import Memory, ConversationMemory
 from pyagent.core.llm import LLMProvider
+from pyagent.core.memory import ConversationMemory, Memory
 
 
 @dataclass
 class AgentConfig:
     """Configuration for an Agent instance"""
-    
+
     max_iterations: int = 10
     timeout_seconds: float = 300.0
     verbose: bool = False
@@ -27,7 +26,7 @@ class AgentConfig:
 @dataclass
 class AgentResponse:
     """Response from an agent execution"""
-    
+
     content: str
     success: bool
     metadata: Dict[str, Any] = field(default_factory=dict)
@@ -39,13 +38,13 @@ class AgentResponse:
 class Agent(BaseComponent, Executable):
     """
     Agent - The core class for building AI agents.
-    
+
     An Agent combines:
     - Instructions: Define behavior and persona
     - Skills: Capabilities the agent can use
     - Memory: Context and conversation history
     - LLM: The language model powering reasoning
-    
+
     Example:
         >>> agent = Agent(
         ...     name="ResearchAgent",
@@ -54,7 +53,7 @@ class Agent(BaseComponent, Executable):
         ... )
         >>> response = await agent.run("Find recent papers on transformers")
     """
-    
+
     def __init__(
         self,
         name: str = "Agent",
@@ -66,41 +65,41 @@ class Agent(BaseComponent, Executable):
         **kwargs
     ):
         super().__init__(name=name, **kwargs)
-        
+
         self.instructions = instructions
         self.skills = skills or []
         self.llm = llm
         self.memory = memory or ConversationMemory()
         self.config = config or AgentConfig()
-        
+
         # Internal state
         self._is_running = False
         self._current_iteration = 0
         self._skill_registry: Dict[str, "Skill"] = {}
-        
+
         # Register skills
         for skill in self.skills:
             self.register_skill(skill)
-    
+
     def register_skill(self, skill: "Skill") -> None:
         """Register a skill with the agent"""
         self._skill_registry[skill.name] = skill
         skill.bind_to_agent(self)
-    
+
     def unregister_skill(self, skill_name: str) -> None:
         """Remove a skill from the agent"""
         if skill_name in self._skill_registry:
             del self._skill_registry[skill_name]
-    
+
     def get_skill(self, name: str) -> Optional["Skill"]:
         """Get a registered skill by name"""
         return self._skill_registry.get(name)
-    
+
     @property
     def available_skills(self) -> List[str]:
         """List of available skill names"""
         return list(self._skill_registry.keys())
-    
+
     def validate(self) -> bool:
         """Validate agent configuration"""
         if not self.instructions:
@@ -108,17 +107,17 @@ class Agent(BaseComponent, Executable):
         if self.llm is None:
             return False
         return True
-    
+
     async def validate_input(self, message: str, **kwargs) -> bool:
         """Validate input before processing"""
         if not message or not isinstance(message, str):
             return False
         return True
-    
+
     async def execute(self, message: str, **kwargs) -> AgentResponse:
         """Execute the agent with a message"""
         return await self.run(message, **kwargs)
-    
+
     async def run(
         self,
         message: str,
@@ -127,12 +126,12 @@ class Agent(BaseComponent, Executable):
     ) -> AgentResponse:
         """
         Run the agent with a user message.
-        
+
         Args:
             message: The user's input message
             context: Additional context for this run
             **kwargs: Additional arguments
-            
+
         Returns:
             AgentResponse with the result
         """
@@ -141,36 +140,36 @@ class Agent(BaseComponent, Executable):
                 content="Invalid input provided",
                 success=False,
             )
-        
+
         self._is_running = True
         self._current_iteration = 0
-        
+
         try:
             # Add message to memory
             if self.config.enable_memory:
                 self.memory.add_message("user", message)
-            
+
             # Build the prompt with instructions
             system_prompt = self._build_system_prompt()
-            
+
             # Main agent loop
             while self._current_iteration < self.config.max_iterations:
                 self._current_iteration += 1
-                
+
                 # Get LLM response
                 response = await self._get_llm_response(
                     system_prompt=system_prompt,
                     messages=self.memory.get_messages(),
                     context=context,
                 )
-                
+
                 # Check if any skills should be invoked
                 skill_calls = self._parse_skill_calls(response)
-                
+
                 if skill_calls:
                     # Execute skills
                     skill_results = await self._execute_skills(skill_calls)
-                    
+
                     # Add skill results to context
                     if self.config.enable_memory:
                         for result in skill_results:
@@ -179,29 +178,29 @@ class Agent(BaseComponent, Executable):
                     # No skill calls, we have a final answer
                     if self.config.enable_memory:
                         self.memory.add_message("assistant", response)
-                    
+
                     return AgentResponse(
                         content=response,
                         success=True,
                         iterations=self._current_iteration,
                     )
-            
+
             # Max iterations reached
             return AgentResponse(
                 content="Maximum iterations reached",
                 success=False,
                 iterations=self._current_iteration,
             )
-            
+
         finally:
             self._is_running = False
-    
+
     def _build_system_prompt(self) -> str:
         """Build the system prompt from instructions"""
         if self.instructions is None:
             return "You are a helpful AI assistant."
         return self.instructions.render()
-    
+
     async def _get_llm_response(
         self,
         system_prompt: str,
@@ -211,13 +210,13 @@ class Agent(BaseComponent, Executable):
         """Get response from the LLM"""
         if self.llm is None:
             raise ValueError("No LLM provider configured")
-        
+
         return await self.llm.complete(
             system_prompt=system_prompt,
             messages=messages,
             context=context,
         )
-    
+
     def _parse_skill_calls(self, response: str) -> List[Dict[str, Any]]:
         """Parse skill/tool calls from LLM response"""
         # This is a simplified parser - real implementation would be more robust
@@ -225,7 +224,7 @@ class Agent(BaseComponent, Executable):
         # Parse based on the response format
         # Example: <skill name="search">query</skill>
         return skill_calls
-    
+
     async def _execute_skills(
         self,
         skill_calls: List[Dict[str, Any]]
@@ -239,7 +238,7 @@ class Agent(BaseComponent, Executable):
                 result = await skill.execute(**call.get("params", {}))
                 results.append(result)
         return results
-    
+
     def __repr__(self) -> str:
         return (
             f"Agent(name='{self.name}', "

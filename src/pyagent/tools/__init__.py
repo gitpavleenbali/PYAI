@@ -7,19 +7,19 @@ Tools Module
 Tool discovery, management, and utilities.
 """
 
-from .discovery import (
-    discover_tools,
-    load_tools_from_directory,
-    ToolDiscovery,
-)
-from .watcher import (
-    ToolWatcher,
-    watch_tools,
-)
 from .base import (
     Tool,
     ToolResult,
     tool,
+)
+from .discovery import (
+    ToolDiscovery,
+    discover_tools,
+    load_tools_from_directory,
+)
+from .watcher import (
+    ToolWatcher,
+    watch_tools,
 )
 
 __all__ = [

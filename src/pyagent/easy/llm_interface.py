@@ -5,11 +5,10 @@ This module provides a simple, unified interface to any LLM provider.
 Automatically handles provider selection based on configuration.
 """
 
-import os
 import json
 import time
-from typing import Optional, List, Dict, Any, Union
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
 from pyagent.easy.config import get_config
 
@@ -17,7 +16,7 @@ from pyagent.easy.config import get_config
 def _log_llm_call(model: str, messages: List[Dict], response_content: str, duration_ms: float, usage: Dict):
     """Log an LLM call to the tracer if enabled."""
     try:
-        from pyagent.easy.trace import _tracer, TraceEvent
+        from pyagent.easy.trace import TraceEvent, _tracer
         if _tracer.enabled:
             event = TraceEvent(
                 type="llm_call",
@@ -48,17 +47,17 @@ class Message:
     content: str
 
 
-@dataclass  
+@dataclass
 class LLMResponse:
     """Response from an LLM."""
     content: str
     model: str
     usage: Dict[str, int]
     raw: Any = None
-    
+
     def __str__(self):
         return self.content
-    
+
     def __repr__(self):
         return f"LLMResponse(content='{self.content[:50]}...')"
 
@@ -66,14 +65,14 @@ class LLMResponse:
 class LLMInterface:
     """
     Unified interface for LLM providers.
-    
+
     Supports:
         - OpenAI (GPT-4, GPT-4o, GPT-3.5, etc.)
         - Anthropic (Claude 3.5, Claude 3, etc.)
         - Azure OpenAI
         - Local models via Ollama
     """
-    
+
     def __init__(
         self,
         model: str = None,
@@ -86,14 +85,14 @@ class LLMInterface:
         self.provider = provider or config.provider
         self.api_key = api_key or config.get_api_key()
         self.kwargs = kwargs
-        
+
         self._client = None
-        
+
     def _get_client(self):
         """Lazy initialization of the appropriate client."""
         if self._client is not None:
             return self._client
-            
+
         if self.provider == "openai":
             try:
                 from openai import OpenAI
@@ -102,7 +101,7 @@ class LLMInterface:
                 raise ImportError(
                     "OpenAI package not installed. Install with: pip install openai"
                 )
-                
+
         elif self.provider == "anthropic":
             try:
                 from anthropic import Anthropic
@@ -111,12 +110,12 @@ class LLMInterface:
                 raise ImportError(
                     "Anthropic package not installed. Install with: pip install anthropic"
                 )
-                
+
         elif self.provider == "azure":
             try:
                 from openai import AzureOpenAI
                 config = get_config()
-                
+
                 # Try Azure AD authentication first if no API key
                 if not self.api_key:
                     try:
@@ -145,12 +144,12 @@ class LLMInterface:
                 raise ImportError(
                     "OpenAI package not installed. Install with: pip install openai"
                 )
-                
+
         else:
             raise ValueError(f"Unknown provider: {self.provider}")
-            
+
         return self._client
-    
+
     def complete(
         self,
         prompt: str,
@@ -161,28 +160,28 @@ class LLMInterface:
     ) -> LLMResponse:
         """
         Generate a completion for the given prompt.
-        
+
         Args:
             prompt: The user prompt
             system: Optional system message
             temperature: Override default temperature
             max_tokens: Override default max tokens
             **kwargs: Additional provider-specific arguments
-            
+
         Returns:
             LLMResponse with the generated content
         """
         config = get_config()
         temperature = temperature if temperature is not None else config.temperature
         max_tokens = max_tokens or config.max_tokens
-        
+
         messages = []
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
-        
+
         return self.chat(messages, temperature=temperature, max_tokens=max_tokens, **kwargs)
-    
+
     def chat(
         self,
         messages: List[Dict[str, str]],
@@ -192,22 +191,22 @@ class LLMInterface:
     ) -> LLMResponse:
         """
         Generate a response for a chat conversation.
-        
+
         Args:
             messages: List of message dicts with 'role' and 'content'
             temperature: Override default temperature
             max_tokens: Override default max tokens
-            
+
         Returns:
             LLMResponse with the generated content
         """
         config = get_config()
         temperature = temperature if temperature is not None else config.temperature
         max_tokens = max_tokens or config.max_tokens
-        
+
         client = self._get_client()
         start_time = time.time()
-        
+
         if self.provider in ("openai", "azure"):
             response = client.chat.completions.create(
                 model=self.model,
@@ -223,28 +222,28 @@ class LLMInterface:
                 "total_tokens": response.usage.total_tokens
             }
             content = response.choices[0].message.content
-            
+
             # Log to tracer if enabled
             _log_llm_call(response.model, messages, content, duration_ms, usage)
-            
+
             return LLMResponse(
                 content=content,
                 model=response.model,
                 usage=usage,
                 raw=response
             )
-            
+
         elif self.provider == "anthropic":
             # Convert messages format for Anthropic
             system_msg = None
             anthropic_messages = []
-            
+
             for msg in messages:
                 if msg["role"] == "system":
                     system_msg = msg["content"]
                 else:
                     anthropic_messages.append(msg)
-            
+
             response = client.messages.create(
                 model=self.model,
                 messages=anthropic_messages,
@@ -259,17 +258,17 @@ class LLMInterface:
                 "total_tokens": response.usage.input_tokens + response.usage.output_tokens
             }
             content = response.content[0].text
-            
+
             # Log to tracer if enabled
             _log_llm_call(response.model, messages, content, duration_ms, usage)
-            
+
             return LLMResponse(
                 content=content,
                 model=response.model,
                 usage=usage,
                 raw=response
             )
-    
+
     def json(
         self,
         prompt: str,
@@ -279,20 +278,20 @@ class LLMInterface:
     ) -> Dict[str, Any]:
         """
         Generate a JSON response.
-        
+
         Args:
             prompt: The user prompt
             schema: Optional JSON schema for structured output
             system: Optional system message
-            
+
         Returns:
             Parsed JSON dict
         """
         json_system = (system or "") + "\n\nRespond with valid JSON only. No markdown, no explanation."
-        
+
         if schema:
             json_system += f"\n\nFollow this schema:\n{json.dumps(schema, indent=2)}"
-        
+
         if self.provider in ("openai", "azure"):
             response = self.complete(
                 prompt,
@@ -302,7 +301,7 @@ class LLMInterface:
             )
         else:
             response = self.complete(prompt, system=json_system, **kwargs)
-        
+
         try:
             return json.loads(response.content)
         except json.JSONDecodeError:
@@ -322,14 +321,14 @@ _default_llm: Optional[LLMInterface] = None
 def get_llm(**kwargs) -> LLMInterface:
     """Get the default LLM instance, creating it if necessary."""
     global _default_llm
-    
+
     if kwargs:
         # Return a new instance with custom settings
         return LLMInterface(**kwargs)
-    
+
     if _default_llm is None:
         _default_llm = LLMInterface()
-    
+
     return _default_llm
 
 

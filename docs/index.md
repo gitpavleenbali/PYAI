@@ -51,4 +51,4 @@ pip install pyagent[azure]
 - [Quick Start Guide](QUICKSTART.md)
 - [Azure Setup](AZURE_SETUP.md)
 - [API Reference](API_REFERENCE.md)
-- [Examples](examples.md)
+- [Contributing](CONTRIBUTING.md)

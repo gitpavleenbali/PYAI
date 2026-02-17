@@ -10,17 +10,17 @@ Like Anthropic Workbench and OpenAI Playground.
 Example:
     from pyagent import Agent
     from pyagent.devui import DevUI
-    
+
     agent = Agent(model="gpt-4")
-    
+
     # Launch web UI
     ui = DevUI(agent)
     ui.launch()  # Opens browser at http://localhost:7860
 """
 
-from .ui import DevUI, launch_ui
 from .dashboard import AgentDashboard
 from .debugger import AgentDebugger
+from .ui import DevUI, launch_ui
 
 __all__ = [
     "DevUI",

@@ -4,8 +4,8 @@ Core module - Foundation classes for PyAgent
 
 from pyagent.core.agent import Agent
 from pyagent.core.base import BaseComponent
-from pyagent.core.memory import Memory, ConversationMemory
-from pyagent.core.llm import LLMProvider, LLMConfig, OpenAIProvider, AzureOpenAIProvider
+from pyagent.core.llm import AzureOpenAIProvider, LLMConfig, LLMProvider, OpenAIProvider
+from pyagent.core.memory import ConversationMemory, Memory
 
 __all__ = [
     "Agent",

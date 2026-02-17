@@ -8,7 +8,6 @@ Unified interface for 100+ LLM providers via LiteLLM.
 Supports OpenAI, Anthropic, Cohere, Replicate, HuggingFace, and more.
 """
 
-import os
 from typing import Any, AsyncIterator, Dict, List, Optional
 
 from .base import (
@@ -24,9 +23,9 @@ from .base import (
 
 class LiteLLMModel(BaseModel):
     """LiteLLM unified model provider.
-    
+
     Access 100+ LLM providers through a single interface.
-    
+
     Supported providers include:
     - OpenAI, Azure OpenAI
     - Anthropic Claude
@@ -38,7 +37,7 @@ class LiteLLMModel(BaseModel):
     - Ollama
     - vLLM
     - And many more...
-    
+
     Example:
         # Use any provider with LiteLLM model format
         model = LiteLLMModel(model_id="gpt-4o")
@@ -46,7 +45,7 @@ class LiteLLMModel(BaseModel):
         model = LiteLLMModel(model_id="bedrock/anthropic.claude-v2")
         model = LiteLLMModel(model_id="ollama/llama3.2")
     """
-    
+
     def __init__(
         self,
         model_id: str = "gpt-4o-mini",
@@ -56,7 +55,7 @@ class LiteLLMModel(BaseModel):
         **kwargs
     ):
         """Initialize LiteLLM model.
-        
+
         Args:
             model_id: LiteLLM model identifier (e.g., "gpt-4o", "claude-3-sonnet")
             api_key: API key (auto-detected from environment if not provided)
@@ -67,15 +66,15 @@ class LiteLLMModel(BaseModel):
         config = config or ModelConfig(model_id=model_id)
         config.model_id = model_id
         super().__init__(config, **kwargs)
-        
+
         self.api_key = api_key
         self.api_base = api_base
         self.litellm_kwargs = kwargs
-    
+
     @property
     def provider(self) -> str:
         return "litellm"
-    
+
     @property
     def capabilities(self) -> List[ModelCapability]:
         # LiteLLM supports most capabilities depending on the underlying model
@@ -86,7 +85,7 @@ class LiteLLMModel(BaseModel):
             ModelCapability.VISION,
             ModelCapability.JSON_MODE,
         ]
-    
+
     def _get_litellm(self):
         """Import and return litellm module."""
         try:
@@ -96,16 +95,16 @@ class LiteLLMModel(BaseModel):
             raise ImportError(
                 "litellm package required. Install with: pip install litellm"
             )
-    
+
     def _prepare_messages(self, messages: List[Message]) -> List[Dict[str, Any]]:
         """Convert messages to LiteLLM format."""
         return [msg.to_dict() for msg in messages]
-    
+
     def _parse_response(self, response: Any) -> ModelResponse:
         """Parse LiteLLM response."""
         choice = response.choices[0]
         message = choice.message
-        
+
         tool_calls = None
         if hasattr(message, "tool_calls") and message.tool_calls:
             tool_calls = [
@@ -116,7 +115,7 @@ class LiteLLMModel(BaseModel):
                 )
                 for tc in message.tool_calls
             ]
-        
+
         usage = None
         if response.usage:
             usage = Usage(
@@ -124,7 +123,7 @@ class LiteLLMModel(BaseModel):
                 completion_tokens=response.usage.completion_tokens,
                 total_tokens=response.usage.total_tokens,
             )
-        
+
         return ModelResponse(
             content=message.content or "",
             role=message.role,
@@ -134,7 +133,7 @@ class LiteLLMModel(BaseModel):
             finish_reason=choice.finish_reason,
             raw_response=response,
         )
-    
+
     def generate(
         self,
         messages: List[Message],
@@ -142,29 +141,29 @@ class LiteLLMModel(BaseModel):
         **kwargs
     ) -> ModelResponse:
         litellm = self._get_litellm()
-        
+
         params = {
             "model": self.model_id,
             "messages": self._prepare_messages(messages),
             "temperature": kwargs.get("temperature", self.config.temperature),
             **self.litellm_kwargs,
         }
-        
+
         if self.config.max_tokens:
             params["max_tokens"] = self.config.max_tokens
-        
+
         if self.api_key:
             params["api_key"] = self.api_key
-        
+
         if self.api_base:
             params["api_base"] = self.api_base
-        
+
         if tools:
             params["tools"] = tools
-        
+
         response = litellm.completion(**params)
         return self._parse_response(response)
-    
+
     async def generate_async(
         self,
         messages: List[Message],
@@ -172,32 +171,32 @@ class LiteLLMModel(BaseModel):
         **kwargs
     ) -> ModelResponse:
         litellm = self._get_litellm()
-        
+
         params = {
             "model": self.model_id,
             "messages": self._prepare_messages(messages),
             "temperature": kwargs.get("temperature", self.config.temperature),
             **self.litellm_kwargs,
         }
-        
+
         if self.config.max_tokens:
             params["max_tokens"] = self.config.max_tokens
-        
+
         if self.api_key:
             params["api_key"] = self.api_key
-        
+
         if self.api_base:
             params["api_base"] = self.api_base
-        
+
         if tools:
             params["tools"] = tools
-        
+
         response = await litellm.acompletion(**params)
         return self._parse_response(response)
-    
+
     def stream(self, messages: List[Message], tools: Optional[List[Dict]] = None, **kwargs):
         litellm = self._get_litellm()
-        
+
         params = {
             "model": self.model_id,
             "messages": self._prepare_messages(messages),
@@ -205,22 +204,22 @@ class LiteLLMModel(BaseModel):
             "stream": True,
             **self.litellm_kwargs,
         }
-        
+
         if self.api_key:
             params["api_key"] = self.api_key
-        
+
         if self.api_base:
             params["api_base"] = self.api_base
-        
+
         response = litellm.completion(**params)
-        
+
         for chunk in response:
             if chunk.choices and chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
-    
+
     async def stream_async(self, messages: List[Message], tools: Optional[List[Dict]] = None, **kwargs) -> AsyncIterator[str]:
         litellm = self._get_litellm()
-        
+
         params = {
             "model": self.model_id,
             "messages": self._prepare_messages(messages),
@@ -228,19 +227,19 @@ class LiteLLMModel(BaseModel):
             "stream": True,
             **self.litellm_kwargs,
         }
-        
+
         if self.api_key:
             params["api_key"] = self.api_key
-        
+
         if self.api_base:
             params["api_base"] = self.api_base
-        
+
         response = await litellm.acompletion(**params)
-        
+
         async for chunk in response:
             if chunk.choices and chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
-    
+
     @staticmethod
     def list_providers() -> List[str]:
         """List supported LiteLLM providers."""
@@ -270,11 +269,11 @@ class LiteLLMModel(BaseModel):
             "voyage",
             "databricks",
         ]
-    
+
     @staticmethod
     def model_cost(model_id: str) -> Dict[str, float]:
         """Get cost information for a model.
-        
+
         Returns:
             Dict with 'input_cost_per_token' and 'output_cost_per_token'
         """

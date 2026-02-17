@@ -16,17 +16,17 @@ Supported Integrations:
 
 Usage:
     >>> from pyagent.integrations import langchain, semantic_kernel, vector_db
-    
+
     # Use LangChain tools in PyAgent
     >>> tool = langchain.import_tool("serpapi")
     >>> agent = pyagent.agent("researcher", tools=[tool])
-    
+
     # Connect to vector database
     >>> store = vector_db.connect("pinecone", index="my-index")
     >>> rag = pyagent.rag.with_store(store)
 """
 
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List, Optional
 
 # Import submodules for easy access
 from pyagent.integrations import langchain_adapter as langchain
@@ -35,6 +35,6 @@ from pyagent.integrations import vector_db
 
 __all__ = [
     "langchain",
-    "semantic_kernel", 
+    "semantic_kernel",
     "vector_db",
 ]

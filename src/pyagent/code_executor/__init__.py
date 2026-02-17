@@ -16,11 +16,11 @@ Features:
 
 Example:
     from pyagent.code_executor import execute_python, CodeExecutor
-    
+
     # Simple execution
     result = execute_python("print('Hello')")
     print(result.output)  # "Hello"
-    
+
     # With executor
     executor = CodeExecutor(timeout=10)
     result = executor.execute("x = 2 + 2\\nprint(x)")
@@ -34,11 +34,11 @@ def __getattr__(name):
         "execute_python", "execute_shell",
         "PythonExecutor", "DockerExecutor", "SafeExecutor"
     }
-    
+
     if name in _exports:
         from . import executor
         return getattr(executor, name)
-    
+
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 

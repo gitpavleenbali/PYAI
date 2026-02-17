@@ -16,9 +16,7 @@ Each industry module provides specialized agents with domain knowledge,
 compliance awareness, and industry best practices built-in.
 """
 
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass
-
+from typing import Any, Dict, List
 
 # =============================================================================
 # TELECOMMUNICATIONS
@@ -27,7 +25,7 @@ from dataclasses import dataclass
 class TelecomAgents:
     """
     Telecommunications industry agents.
-    
+
     Agents for mobile carriers, ISPs, and telecom providers:
     - plan_advisor: Help customers choose plans
     - network_support: Troubleshoot connectivity
@@ -35,7 +33,7 @@ class TelecomAgents:
     - retention_agent: Customer retention
     - activation_agent: New service activation
     """
-    
+
     @staticmethod
     def plan_advisor(
         *,
@@ -44,18 +42,18 @@ class TelecomAgents:
     ):
         """Create a plan advisory agent."""
         from pyagent import agent
-        
+
         default_plans = plans or [
             {"name": "Basic", "data": "5GB", "price": "$35", "features": ["Unlimited calls", "Unlimited texts"]},
             {"name": "Standard", "data": "15GB", "price": "$55", "features": ["Unlimited calls", "Unlimited texts", "5G access"]},
             {"name": "Premium", "data": "Unlimited", "price": "$85", "features": ["Unlimited everything", "5G", "Hotspot", "International"]}
         ]
-        
+
         plans_str = "\n".join([
             f"- {p['name']}: {p['data']} data, {p['price']}/month - {', '.join(p['features'])}"
             for p in default_plans
         ])
-        
+
         instructions = f"""You are a plan advisor for {carrier_name}.
 
 AVAILABLE PLANS:
@@ -80,12 +78,12 @@ UPSELLING:
 - Paperless: $3/month discount"""
 
         return agent(instructions, name="PlanAdvisor", memory=True)
-    
+
     @staticmethod
     def network_support():
         """Create a network troubleshooting agent."""
         from pyagent import agent
-        
+
         instructions = """You are a network technical support specialist.
 
 COMMON ISSUES:
@@ -116,7 +114,7 @@ ALWAYS:
 - Offer callback if issue persists"""
 
         return agent(instructions, name="NetworkSupport", memory=True)
-    
+
     @staticmethod
     def retention_agent(
         *,
@@ -125,7 +123,7 @@ ALWAYS:
     ):
         """Create a customer retention agent."""
         from pyagent import agent
-        
+
         instructions = f"""You are a customer retention specialist.
 
 GOAL: Save customers who want to cancel service.
@@ -163,17 +161,17 @@ NEVER:
 class HealthcareAgents:
     """
     Healthcare industry agents.
-    
+
     IMPORTANT: These agents provide general information only
     and should NOT be used for medical diagnosis or treatment.
-    
+
     Agents:
     - appointment_scheduler: Schedule medical appointments
     - symptom_checker: General symptom information
     - insurance_helper: Insurance and billing questions
     - medication_info: General medication information
     """
-    
+
     @staticmethod
     def appointment_scheduler(
         *,
@@ -182,9 +180,9 @@ class HealthcareAgents:
     ):
         """Create a medical appointment scheduling agent."""
         from pyagent import agent
-        
+
         depts = departments or ["Primary Care", "Cardiology", "Dermatology", "Orthopedics", "Mental Health"]
-        
+
         instructions = f"""You are an appointment scheduler for {facility_name}.
 
 DEPARTMENTS: {', '.join(depts)}
@@ -217,12 +215,12 @@ IMPORTANT:
 - Remind about cancellation policy (24 hours notice)"""
 
         return agent(instructions, name="ApptScheduler", memory=True)
-    
+
     @staticmethod
     def insurance_helper():
         """Create a healthcare insurance assistance agent."""
         from pyagent import agent
-        
+
         instructions = """You are a healthcare insurance assistance specialist.
 
 CAPABILITIES:
@@ -251,12 +249,12 @@ LIMITATIONS:
 - For specific coverage questions, direct to member services"""
 
         return agent(instructions, name="InsuranceHelper")
-    
+
     @staticmethod
     def symptom_info():
         """Create a symptom information agent."""
         from pyagent import agent
-        
+
         instructions = """You are a health information assistant.
 
 IMPORTANT DISCLAIMERS:
@@ -294,14 +292,14 @@ FOR ALL OTHER SYMPTOMS:
 class FinancialAgents:
     """
     Financial services industry agents.
-    
+
     Agents for banks, investment firms, and fintech:
     - banking_assistant: General banking help
     - fraud_alert: Fraud detection and response
     - loan_advisor: Loan information
     - investment_info: Investment information
     """
-    
+
     @staticmethod
     def banking_assistant(
         *,
@@ -310,9 +308,9 @@ class FinancialAgents:
     ):
         """Create a banking assistant agent."""
         from pyagent import agent
-        
+
         prods = products or ["Checking", "Savings", "CD", "Money Market", "Credit Cards"]
-        
+
         instructions = f"""You are a banking assistant for {bank_name}.
 
 PRODUCTS: {', '.join(prods)}
@@ -343,12 +341,12 @@ COMPLIANCE:
 - Maintain customer privacy"""
 
         return agent(instructions, name="BankingAssistant")
-    
+
     @staticmethod
     def fraud_alert():
         """Create a fraud detection agent."""
         from pyagent import agent
-        
+
         instructions = """You are a fraud prevention specialist.
 
 YOUR ROLE:
@@ -381,12 +379,12 @@ SECURITY TIPS:
 IMPORTANT: Direct customers to call fraud hotline for urgent cases."""
 
         return agent(instructions, name="FraudAlert", memory=True)
-    
+
     @staticmethod
     def loan_advisor():
         """Create a loan information agent."""
         from pyagent import agent
-        
+
         instructions = """You are a loan information specialist.
 
 LOAN TYPES:
@@ -426,14 +424,14 @@ Direct to loan officer for specific applications."""
 class EcommerceAgents:
     """
     E-commerce and retail agents.
-    
+
     Agents:
     - shopping_assistant: Product discovery and recommendations
     - order_tracker: Order status and shipping
     - returns_agent: Handle returns and exchanges
     - product_expert: Detailed product information
     """
-    
+
     @staticmethod
     def shopping_assistant(
         *,
@@ -442,9 +440,9 @@ class EcommerceAgents:
     ):
         """Create a shopping assistant agent."""
         from pyagent import agent
-        
+
         cats = categories or ["Electronics", "Clothing", "Home & Garden", "Sports", "Beauty"]
-        
+
         instructions = f"""You are a shopping assistant for {store_name}.
 
 PRODUCT CATEGORIES: {', '.join(cats)}
@@ -476,12 +474,12 @@ ALWAYS:
 - Offer to help with checkout"""
 
         return agent(instructions, name="ShoppingAssistant", memory=True)
-    
+
     @staticmethod
     def order_tracker():
         """Create an order tracking agent."""
         from pyagent import agent
-        
+
         instructions = """You are an order tracking specialist.
 
 INFORMATION PROVIDED:
@@ -510,7 +508,7 @@ ALWAYS:
 - Document all issues"""
 
         return agent(instructions, name="OrderTracker", memory=True)
-    
+
     @staticmethod
     def returns_agent(
         *,
@@ -519,7 +517,7 @@ ALWAYS:
     ):
         """Create a returns and exchanges agent."""
         from pyagent import agent
-        
+
         instructions = f"""You are a returns and exchanges specialist.
 
 RETURN POLICY:
@@ -557,14 +555,14 @@ For exchanges, process as return + new order."""
 class EducationAgents:
     """
     Education industry agents.
-    
+
     Agents:
     - tutor: Personalized tutoring
     - admissions: Admissions assistance
     - course_advisor: Course recommendations
     - study_buddy: Study assistance
     """
-    
+
     @staticmethod
     def tutor(
         *,
@@ -574,7 +572,7 @@ class EducationAgents:
     ):
         """Create a tutoring agent."""
         from pyagent import agent
-        
+
         instructions = f"""You are a {subject} tutor for {level} level.
 
 TEACHING STYLE: {teaching_style}
@@ -606,7 +604,7 @@ NEVER:
 - Use overly technical language"""
 
         return agent(instructions, name=f"{subject}Tutor", memory=True)
-    
+
     @staticmethod
     def course_advisor(
         *,
@@ -615,9 +613,9 @@ NEVER:
     ):
         """Create a course advisory agent."""
         from pyagent import agent
-        
+
         progs = programs or ["Computer Science", "Business", "Engineering", "Arts", "Sciences"]
-        
+
         instructions = f"""You are an academic advisor for {institution}.
 
 PROGRAMS: {', '.join(progs)}

@@ -9,8 +9,8 @@ Provides the abstract base class and common types for all LLM providers.
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Any, AsyncIterator, Dict, List, Literal, Optional, Union
 from enum import Enum
+from typing import Any, AsyncIterator, Dict, List, Literal, Optional, Union
 
 
 class ModelCapability(Enum):
@@ -28,7 +28,7 @@ class ModelCapability(Enum):
 @dataclass
 class ModelConfig:
     """Configuration for a model instance.
-    
+
     Attributes:
         model_id: The model identifier (e.g., "gpt-4o", "llama3.2")
         temperature: Sampling temperature (0.0 to 2.0)
@@ -56,7 +56,7 @@ class ModelConfig:
 @dataclass
 class Message:
     """A conversation message.
-    
+
     Attributes:
         role: The role (system, user, assistant, tool)
         content: The message content
@@ -69,7 +69,7 @@ class Message:
     name: Optional[str] = None
     tool_calls: Optional[List[Dict[str, Any]]] = None
     tool_call_id: Optional[str] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary format."""
         result = {"role": self.role, "content": self.content}
@@ -85,7 +85,7 @@ class Message:
 @dataclass
 class ToolCall:
     """A tool/function call from the model.
-    
+
     Attributes:
         id: Unique identifier for the tool call
         name: Name of the tool/function
@@ -94,7 +94,7 @@ class ToolCall:
     id: str
     name: str
     arguments: Union[str, Dict[str, Any]]
-    
+
     def get_arguments(self) -> Dict[str, Any]:
         """Get arguments as a dictionary."""
         if isinstance(self.arguments, str):
@@ -103,10 +103,10 @@ class ToolCall:
         return self.arguments
 
 
-@dataclass 
+@dataclass
 class Usage:
     """Token usage information.
-    
+
     Attributes:
         prompt_tokens: Tokens in the prompt
         completion_tokens: Tokens in the completion
@@ -122,7 +122,7 @@ class Usage:
 @dataclass
 class ModelResponse:
     """Response from a model invocation.
-    
+
     Attributes:
         content: The text content of the response
         role: The role (usually "assistant")
@@ -139,7 +139,7 @@ class ModelResponse:
     model: Optional[str] = None
     finish_reason: Optional[str] = None
     raw_response: Optional[Any] = None
-    
+
     @property
     def has_tool_calls(self) -> bool:
         """Check if response contains tool calls."""
@@ -148,23 +148,23 @@ class ModelResponse:
 
 class BaseModel(ABC):
     """Abstract base class for all LLM providers.
-    
+
     Subclasses must implement:
     - generate(): Synchronous text generation
     - generate_async(): Asynchronous text generation
     - stream(): Streaming text generation
     - stream_async(): Async streaming text generation
-    
+
     Example:
         class MyModel(BaseModel):
             def generate(self, messages, **kwargs):
                 # Implementation
                 pass
     """
-    
+
     def __init__(self, config: Optional[ModelConfig] = None, **kwargs):
         """Initialize the model.
-        
+
         Args:
             config: Model configuration
             **kwargs: Additional configuration overrides
@@ -176,27 +176,27 @@ class BaseModel(ABC):
                 setattr(self.config, key, value)
             else:
                 self.config.extra[key] = value
-    
+
     @property
     def model_id(self) -> str:
         """Get the model identifier."""
         return self.config.model_id
-    
+
     @property
     @abstractmethod
     def provider(self) -> str:
         """Get the provider name (e.g., 'azure', 'openai', 'ollama')."""
         pass
-    
+
     @property
     def capabilities(self) -> List[ModelCapability]:
         """Get the capabilities this model supports."""
         return [ModelCapability.CHAT, ModelCapability.STREAMING]
-    
+
     def supports(self, capability: ModelCapability) -> bool:
         """Check if this model supports a capability."""
         return capability in self.capabilities
-    
+
     @abstractmethod
     def generate(
         self,
@@ -205,17 +205,17 @@ class BaseModel(ABC):
         **kwargs
     ) -> ModelResponse:
         """Generate a response synchronously.
-        
+
         Args:
             messages: List of conversation messages
             tools: Optional list of tool definitions
             **kwargs: Additional parameters
-            
+
         Returns:
             ModelResponse with the generated content
         """
         pass
-    
+
     @abstractmethod
     async def generate_async(
         self,
@@ -224,17 +224,17 @@ class BaseModel(ABC):
         **kwargs
     ) -> ModelResponse:
         """Generate a response asynchronously.
-        
+
         Args:
             messages: List of conversation messages
             tools: Optional list of tool definitions
             **kwargs: Additional parameters
-            
+
         Returns:
             ModelResponse with the generated content
         """
         pass
-    
+
     def stream(
         self,
         messages: List[Message],
@@ -242,19 +242,19 @@ class BaseModel(ABC):
         **kwargs
     ) -> Any:
         """Stream a response synchronously.
-        
+
         Args:
             messages: List of conversation messages
             tools: Optional list of tool definitions
             **kwargs: Additional parameters
-            
+
         Yields:
             Chunks of the response
         """
         # Default implementation: just yield the full response
         response = self.generate(messages, tools, **kwargs)
         yield response
-    
+
     async def stream_async(
         self,
         messages: List[Message],
@@ -262,30 +262,30 @@ class BaseModel(ABC):
         **kwargs
     ) -> AsyncIterator[Any]:
         """Stream a response asynchronously.
-        
+
         Args:
             messages: List of conversation messages
             tools: Optional list of tool definitions
             **kwargs: Additional parameters
-            
+
         Yields:
             Chunks of the response
         """
         # Default implementation: just yield the full response
         response = await self.generate_async(messages, tools, **kwargs)
         yield response
-    
+
     def count_tokens(self, text: str) -> int:
         """Count tokens in text (approximate).
-        
+
         Args:
             text: The text to count tokens for
-            
+
         Returns:
             Approximate token count
         """
         # Simple approximation: ~4 chars per token for English
         return len(text) // 4
-    
+
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}(model_id='{self.model_id}')"

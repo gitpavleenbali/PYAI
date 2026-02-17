@@ -8,41 +8,42 @@ Examples:
     >>> result = research("quantum computing breakthroughs 2024")
     >>> print(result.summary)
     >>> print(result.sources)
-    
+
     >>> # Quick research
     >>> summary = research("benefits of meditation", quick=True)
-    
+
     >>> # Get structured insights
     >>> insights = research("AI trends", as_insights=True)
 """
 
-from typing import Optional, List, Dict, Any, Union
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Union
+
 from pyagent.easy.llm_interface import get_llm
 
 
 @dataclass
 class ResearchResult:
     """Result of a research operation."""
-    
+
     query: str
     summary: str
     key_points: List[str] = field(default_factory=list)
     insights: List[str] = field(default_factory=list)
     sources: List[Dict[str, str]] = field(default_factory=list)
     confidence: float = 0.8
-    
+
     def __str__(self) -> str:
         return self.summary
-    
+
     def __repr__(self) -> str:
         return f"ResearchResult(query='{self.query[:30]}...', points={len(self.key_points)})"
-    
+
     @property
     def bullets(self) -> str:
         """Get key points as bullet list."""
         return "\n".join(f"• {point}" for point in self.key_points)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -69,7 +70,7 @@ def research(
 ) -> Union[ResearchResult, str, List[str]]:
     """
     Research any topic comprehensively.
-    
+
     Args:
         topic: The topic to research
         depth: Research depth ("quick", "standard", "deep")
@@ -80,38 +81,38 @@ def research(
         as_insights: Return list of insights only
         model: Override default model
         **kwargs: Additional parameters
-        
+
     Returns:
         ResearchResult: Comprehensive research result (default)
         str: Just the summary (if quick=True)
         List[str]: List of insights (if as_insights=True)
-    
+
     Examples:
         >>> result = research("machine learning in healthcare")
         >>> print(result.summary)
         >>> print(result.key_points)
-        
+
         >>> quick_answer = research("what causes aurora borealis", quick=True)
-        
+
         >>> insights = research("future of remote work", as_insights=True)
     """
     if quick:
         depth = "quick"
-    
+
     # Get LLM
     llm_kwargs = {"model": model} if model else {}
     llm = get_llm(**llm_kwargs)
-    
+
     # Build research prompt based on depth
     if depth == "quick":
         system = "You are a research assistant. Provide concise, accurate summaries."
         prompt = f"Briefly summarize the key facts about: {topic}"
-        
+
         if focus:
             prompt += f"\nFocus on: {focus}"
-            
+
         response = llm.complete(prompt, system=system, temperature=0.3)
-        
+
         if quick:
             return response.content
     else:
@@ -120,7 +121,7 @@ def research(
             "standard": "Provide comprehensive research with key points and insights.",
             "deep": "Provide exhaustive research with detailed analysis, multiple perspectives, and critical evaluation."
         }
-        
+
         system = f"""You are an expert research analyst. {depth_instructions.get(depth, depth_instructions['standard'])}
 
 Your research should be:
@@ -138,10 +139,10 @@ Provide:
 """
         if focus:
             prompt += f"\nPay special attention to: {focus}"
-            
+
         if include_sources:
             prompt += "\n4. Note that these are synthesized insights from general knowledge."
-        
+
         # Use JSON for structured output
         response = llm.json(
             prompt,
@@ -153,7 +154,7 @@ Provide:
             },
             temperature=0.4
         )
-    
+
     # Build result
     if isinstance(response, dict):
         result = ResearchResult(
@@ -170,10 +171,10 @@ Provide:
             key_points=[],
             insights=[]
         )
-    
+
     if as_insights:
         return result.insights
-    
+
     return result
 
 

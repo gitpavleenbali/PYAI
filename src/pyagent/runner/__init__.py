@@ -8,13 +8,13 @@ Structured execution pattern for AI agents.
 Similar to OpenAI Agents SDK's Runner pattern.
 """
 
-from .executor import Runner, RunConfig, RunResult, RunContext
-from .streaming import StreamingRunner, StreamEvent
+from .executor import RunConfig, RunContext, Runner, RunResult
+from .streaming import StreamEvent, StreamingRunner
 
 __all__ = [
     "Runner",
     "RunConfig",
-    "RunResult", 
+    "RunResult",
     "RunContext",
     "StreamingRunner",
     "StreamEvent",

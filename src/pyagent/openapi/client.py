@@ -8,8 +8,8 @@ HTTP client for calling OpenAPI endpoints.
 """
 
 import json
-from typing import Any, Dict, Optional, Union
-from urllib.parse import urljoin, urlencode
+from typing import Any, Dict, Optional
+from urllib.parse import urljoin
 
 try:
     import requests
@@ -26,18 +26,18 @@ except ImportError:
 
 class OpenAPIClient:
     """HTTP client for OpenAPI endpoints.
-    
+
     Handles authentication, request formatting, and response parsing.
-    
+
     Example:
         client = OpenAPIClient(
             base_url="https://api.example.com",
             headers={"Authorization": "Bearer token123"}
         )
-        
+
         result = client.call("GET", "/users", params={"limit": 10})
     """
-    
+
     def __init__(
         self,
         base_url: str,
@@ -46,7 +46,7 @@ class OpenAPIClient:
         timeout: float = 30.0
     ):
         """Initialize API client.
-        
+
         Args:
             base_url: Base URL for all requests
             headers: Default headers to include
@@ -57,13 +57,13 @@ class OpenAPIClient:
         self.headers = headers or {}
         self.auth = auth
         self.timeout = timeout
-        
+
         # Set default content type
         if "Content-Type" not in self.headers:
             self.headers["Content-Type"] = "application/json"
         if "Accept" not in self.headers:
             self.headers["Accept"] = "application/json"
-    
+
     def call(
         self,
         method: str,
@@ -74,7 +74,7 @@ class OpenAPIClient:
         path_params: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """Make a synchronous API call.
-        
+
         Args:
             method: HTTP method (GET, POST, etc.)
             path: API path (e.g., "/users/{id}")
@@ -82,7 +82,7 @@ class OpenAPIClient:
             body: Request body (for POST, PUT, PATCH)
             headers: Additional headers
             path_params: Path parameters to substitute
-            
+
         Returns:
             Response data as dictionary
         """
@@ -90,13 +90,13 @@ class OpenAPIClient:
             raise ImportError(
                 "requests library required. Install with: pip install requests"
             )
-        
+
         # Build URL
         url = self._build_url(path, path_params)
-        
+
         # Merge headers
         request_headers = {**self.headers, **(headers or {})}
-        
+
         # Make request
         response = requests.request(
             method=method.upper(),
@@ -107,10 +107,10 @@ class OpenAPIClient:
             auth=self.auth,
             timeout=self.timeout
         )
-        
+
         # Parse response
         return self._parse_response(response)
-    
+
     async def call_async(
         self,
         method: str,
@@ -121,7 +121,7 @@ class OpenAPIClient:
         path_params: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """Make an async API call.
-        
+
         Args:
             method: HTTP method
             path: API path
@@ -129,7 +129,7 @@ class OpenAPIClient:
             body: Request body
             headers: Additional headers
             path_params: Path parameters
-            
+
         Returns:
             Response data
         """
@@ -137,10 +137,10 @@ class OpenAPIClient:
             raise ImportError(
                 "aiohttp library required. Install with: pip install aiohttp"
             )
-        
+
         url = self._build_url(path, path_params)
         request_headers = {**self.headers, **(headers or {})}
-        
+
         async with aiohttp.ClientSession() as session:
             async with session.request(
                 method=method.upper(),
@@ -151,7 +151,7 @@ class OpenAPIClient:
                 timeout=aiohttp.ClientTimeout(total=self.timeout)
             ) as response:
                 return await self._parse_async_response(response)
-    
+
     def _build_url(
         self,
         path: str,
@@ -162,48 +162,48 @@ class OpenAPIClient:
         if path_params:
             for key, value in path_params.items():
                 path = path.replace(f"{{{key}}}", str(value))
-        
+
         # Join with base URL
         return urljoin(self.base_url + "/", path.lstrip("/"))
-    
+
     def _parse_response(self, response) -> Dict[str, Any]:
         """Parse sync response."""
         result = {
             "status_code": response.status_code,
             "headers": dict(response.headers),
         }
-        
+
         try:
             result["data"] = response.json()
         except json.JSONDecodeError:
             result["data"] = response.text
-        
+
         if not response.ok:
             result["error"] = f"HTTP {response.status_code}: {response.reason}"
-        
+
         return result
-    
+
     async def _parse_async_response(self, response) -> Dict[str, Any]:
         """Parse async response."""
         result = {
             "status_code": response.status,
             "headers": dict(response.headers),
         }
-        
+
         try:
             result["data"] = await response.json()
         except (json.JSONDecodeError, aiohttp.ContentTypeError):
             result["data"] = await response.text()
-        
+
         if not response.ok:
             result["error"] = f"HTTP {response.status}"
-        
+
         return result
-    
+
     def set_bearer_token(self, token: str) -> None:
         """Set Bearer token authentication."""
         self.headers["Authorization"] = f"Bearer {token}"
-    
+
     def set_api_key(self, key: str, header_name: str = "X-API-Key") -> None:
         """Set API key authentication."""
         self.headers[header_name] = key

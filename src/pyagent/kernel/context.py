@@ -8,16 +8,16 @@ Execution context for kernel operations.
 Tracks state, variables, and invocation chains.
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
-from datetime import datetime
 import uuid
+from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
 class InvocationContext:
     """Context for a single function invocation.
-    
+
     Attributes:
         invocation_id: Unique ID for this invocation
         function_name: Name of the function
@@ -38,7 +38,7 @@ class InvocationContext:
     result: Any = None
     error: Optional[Exception] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     @property
     def duration_ms(self) -> Optional[float]:
         """Get invocation duration in milliseconds."""
@@ -46,23 +46,23 @@ class InvocationContext:
             delta = self.end_time - self.start_time
             return delta.total_seconds() * 1000
         return None
-    
+
     @property
     def success(self) -> bool:
         """Check if invocation succeeded."""
         return self.error is None
-    
+
     def start(self) -> "InvocationContext":
         """Mark invocation as started."""
         self.start_time = datetime.now()
         return self
-    
+
     def complete(self, result: Any = None) -> "InvocationContext":
         """Mark invocation as complete with result."""
         self.end_time = datetime.now()
         self.result = result
         return self
-    
+
     def fail(self, error: Exception) -> "InvocationContext":
         """Mark invocation as failed with error."""
         self.end_time = datetime.now()
@@ -73,17 +73,17 @@ class InvocationContext:
 @dataclass
 class KernelContext:
     """Context for kernel execution.
-    
+
     Maintains state across a kernel execution session including:
     - Variables (key-value pairs)
     - Invocation history
     - Parent context (for nested executions)
-    
+
     Example:
         ctx = KernelContext()
         ctx.variables["user_input"] = "Hello"
         ctx.variables["city"] = "NYC"
-        
+
         # Track invocation
         inv = ctx.create_invocation("weather", "get_forecast")
         inv.start()
@@ -96,7 +96,7 @@ class KernelContext:
     parent: Optional["KernelContext"] = None
     created_at: datetime = field(default_factory=datetime.now)
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def create_invocation(
         self,
         plugin_name: str,
@@ -104,12 +104,12 @@ class KernelContext:
         arguments: Optional[Dict[str, Any]] = None
     ) -> InvocationContext:
         """Create and track a new invocation.
-        
+
         Args:
             plugin_name: Name of the plugin
             function_name: Name of the function
             arguments: Function arguments
-            
+
         Returns:
             New invocation context
         """
@@ -120,16 +120,16 @@ class KernelContext:
         )
         self.invocations.append(inv)
         return inv
-    
+
     def get_variable(self, name: str, default: Any = None) -> Any:
         """Get a variable value.
-        
+
         Checks this context first, then parent contexts.
-        
+
         Args:
             name: Variable name
             default: Default if not found
-            
+
         Returns:
             Variable value or default
         """
@@ -138,53 +138,53 @@ class KernelContext:
         if self.parent:
             return self.parent.get_variable(name, default)
         return default
-    
+
     def set_variable(self, name: str, value: Any) -> None:
         """Set a variable value.
-        
+
         Args:
             name: Variable name
             value: Variable value
         """
         self.variables[name] = value
-    
+
     def create_child(self) -> "KernelContext":
         """Create a child context.
-        
+
         Child contexts inherit variables from parent but can
         override them without affecting the parent.
-        
+
         Returns:
             New child context
         """
         return KernelContext(parent=self)
-    
+
     @property
     def total_invocations(self) -> int:
         """Get total number of invocations."""
         return len(self.invocations)
-    
+
     @property
     def total_duration_ms(self) -> float:
         """Get total duration of all invocations."""
         return sum(
-            inv.duration_ms or 0 
+            inv.duration_ms or 0
             for inv in self.invocations
         )
-    
+
     @property
     def failed_invocations(self) -> List[InvocationContext]:
         """Get all failed invocations."""
         return [inv for inv in self.invocations if not inv.success]
-    
+
     def clear_invocations(self) -> None:
         """Clear invocation history."""
         self.invocations.clear()
-    
+
     def clear_variables(self) -> None:
         """Clear all variables."""
         self.variables.clear()
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert context to dictionary for serialization."""
         return {

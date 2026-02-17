@@ -43,7 +43,7 @@ class OpenAPIOperation:
     request_body: Optional[Dict[str, Any]] = None
     responses: Dict[str, Any] = field(default_factory=dict)
     tags: List[str] = field(default_factory=list)
-    
+
     @property
     def function_name(self) -> str:
         """Get a valid Python function name."""
@@ -57,7 +57,7 @@ class OpenAPIOperation:
 @dataclass
 class OpenAPISpec:
     """Parsed OpenAPI specification.
-    
+
     Attributes:
         title: API title
         version: API version
@@ -73,14 +73,14 @@ class OpenAPISpec:
     operations: List[OpenAPIOperation] = field(default_factory=list)
     security: Dict[str, Any] = field(default_factory=dict)
     servers: List[Dict[str, Any]] = field(default_factory=list)
-    
+
     def get_operation(self, operation_id: str) -> Optional[OpenAPIOperation]:
         """Get operation by ID."""
         for op in self.operations:
             if op.operation_id == operation_id:
                 return op
         return None
-    
+
     def list_operations(self) -> List[str]:
         """List all operation IDs."""
         return [op.operation_id for op in self.operations]
@@ -91,16 +91,16 @@ def parse_openapi(
     base_url: Optional[str] = None
 ) -> OpenAPISpec:
     """Parse an OpenAPI specification.
-    
+
     Supports OpenAPI 3.0+ and Swagger 2.0.
-    
+
     Args:
         source: Path to spec file, URL, or dict
         base_url: Override base URL
-        
+
     Returns:
         Parsed OpenAPISpec
-        
+
     Example:
         spec = parse_openapi("api_spec.yaml")
         for op in spec.operations:
@@ -130,13 +130,13 @@ def parse_openapi(
                     raise ValueError(f"Could not parse: {source}")
     else:
         raise TypeError(f"Invalid source type: {type(source)}")
-    
+
     # Parse info
     info = spec_dict.get("info", {})
     title = info.get("title", "Untitled API")
     version = info.get("version", "1.0.0")
     description = info.get("description", "")
-    
+
     # Determine base URL
     if base_url:
         resolved_base_url = base_url
@@ -152,18 +152,18 @@ def parse_openapi(
         resolved_base_url = f"{scheme}://{host}{base_path}"
     else:
         resolved_base_url = ""
-    
+
     # Parse operations
     operations = []
     paths = spec_dict.get("paths", {})
-    
+
     for path, path_item in paths.items():
         for method in ["get", "post", "put", "patch", "delete", "options", "head"]:
             if method not in path_item:
                 continue
-            
+
             op_dict = path_item[method]
-            
+
             # Parse parameters
             params = []
             for param in op_dict.get("parameters", []) + path_item.get("parameters", []):
@@ -177,7 +177,7 @@ def parse_openapi(
                     default=param_schema.get("default", param.get("default")),
                     enum=param_schema.get("enum", param.get("enum")),
                 ))
-            
+
             # Create operation
             operation = OpenAPIOperation(
                 operation_id=op_dict.get("operationId", f"{method}_{path}"),
@@ -191,7 +191,7 @@ def parse_openapi(
                 tags=op_dict.get("tags", []),
             )
             operations.append(operation)
-    
+
     return OpenAPISpec(
         title=title,
         version=version,

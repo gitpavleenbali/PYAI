@@ -7,12 +7,12 @@ Base Evaluation Classes
 Core abstractions for agent evaluation.
 """
 
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Union
-from datetime import datetime
-from enum import Enum
 import json
 import uuid
+from dataclasses import dataclass, field
+from datetime import datetime
+from enum import Enum
+from typing import Any, Dict, List, Optional
 
 
 class EvalStatus(Enum):
@@ -26,7 +26,7 @@ class EvalStatus(Enum):
 @dataclass
 class TestCase:
     """A single test case for agent evaluation.
-    
+
     Attributes:
         id: Unique test case identifier
         input: Input prompt/message for the agent
@@ -47,10 +47,10 @@ class TestCase:
     context: Optional[Dict[str, Any]] = None
     tags: List[str] = field(default_factory=list)
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     # Multi-turn conversation support
     conversation: Optional[List[Dict[str, str]]] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -65,7 +65,7 @@ class TestCase:
             "metadata": self.metadata,
             "conversation": self.conversation,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TestCase":
         """Create from dictionary."""
@@ -86,7 +86,7 @@ class TestCase:
 @dataclass
 class EvalResult:
     """Result of evaluating a single test case.
-    
+
     Attributes:
         test_case: The test case that was evaluated
         status: Pass/fail/error status
@@ -107,12 +107,12 @@ class EvalResult:
     tokens_used: int = 0
     error: Optional[str] = None
     timestamp: datetime = field(default_factory=datetime.utcnow)
-    
+
     @property
     def passed(self) -> bool:
         """Check if test passed."""
         return self.status == EvalStatus.PASSED
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -131,7 +131,7 @@ class EvalResult:
 @dataclass
 class EvalMetrics:
     """Aggregated metrics from an evaluation run.
-    
+
     Attributes:
         total: Total number of test cases
         passed: Number of passed tests
@@ -155,12 +155,12 @@ class EvalMetrics:
     total_tokens: int = 0
     results: List[EvalResult] = field(default_factory=list)
     duration_seconds: float = 0.0
-    
+
     def add_result(self, result: EvalResult) -> None:
         """Add a result and update metrics."""
         self.results.append(result)
         self.total += 1
-        
+
         if result.status == EvalStatus.PASSED:
             self.passed += 1
         elif result.status == EvalStatus.FAILED:
@@ -169,19 +169,19 @@ class EvalMetrics:
             self.errors += 1
         else:
             self.skipped += 1
-        
+
         self.total_tokens += result.tokens_used
-        
+
         # Recalculate averages
         self._recalculate()
-    
+
     def _recalculate(self) -> None:
         """Recalculate aggregate metrics."""
         if self.total > 0:
             self.accuracy = self.passed / self.total
             self.avg_score = sum(r.score for r in self.results) / self.total
             self.avg_latency_ms = sum(r.latency_ms for r in self.results) / self.total
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -197,7 +197,7 @@ class EvalMetrics:
             "duration_seconds": self.duration_seconds,
             "results": [r.to_dict() for r in self.results],
         }
-    
+
     def summary(self) -> str:
         """Generate a summary string."""
         return (
@@ -216,23 +216,23 @@ class EvalMetrics:
 
 class EvalSet:
     """A collection of test cases for evaluation.
-    
+
     Like Google ADK's .evalset.json format.
-    
+
     Example:
         # Create from list
         eval_set = EvalSet([
             TestCase(input="What is 2+2?", expected="4"),
             TestCase(input="Hello", expected_contains=["hi", "hello"]),
         ])
-        
+
         # Load from file
         eval_set = EvalSet.from_file("tests.evalset.json")
-        
+
         # Filter by tag
         math_tests = eval_set.filter(tags=["math"])
     """
-    
+
     def __init__(
         self,
         test_cases: Optional[List[TestCase]] = None,
@@ -240,7 +240,7 @@ class EvalSet:
         description: str = "",
     ):
         """Initialize evaluation set.
-        
+
         Args:
             test_cases: List of test cases
             name: Name of the eval set
@@ -249,34 +249,34 @@ class EvalSet:
         self.test_cases = test_cases or []
         self.name = name
         self.description = description
-    
+
     def add(self, test_case: TestCase) -> None:
         """Add a test case."""
         self.test_cases.append(test_case)
-    
+
     def filter(
         self,
         tags: Optional[List[str]] = None,
         ids: Optional[List[str]] = None
     ) -> "EvalSet":
         """Filter test cases.
-        
+
         Args:
             tags: Only include cases with these tags
             ids: Only include cases with these IDs
-            
+
         Returns:
             New EvalSet with filtered cases
         """
         filtered = self.test_cases
-        
+
         if tags:
             filtered = [tc for tc in filtered if any(t in tc.tags for t in tags)]
         if ids:
             filtered = [tc for tc in filtered if tc.id in ids]
-        
+
         return EvalSet(filtered, name=f"{self.name}_filtered")
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -284,7 +284,7 @@ class EvalSet:
             "description": self.description,
             "test_cases": [tc.to_dict() for tc in self.test_cases],
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "EvalSet":
         """Create from dictionary."""
@@ -294,37 +294,37 @@ class EvalSet:
             name=data.get("name", "default"),
             description=data.get("description", ""),
         )
-    
+
     def to_json(self, indent: int = 2) -> str:
         """Convert to JSON string."""
         return json.dumps(self.to_dict(), indent=indent)
-    
+
     @classmethod
     def from_json(cls, json_str: str) -> "EvalSet":
         """Create from JSON string."""
         return cls.from_dict(json.loads(json_str))
-    
+
     def save(self, filepath: str) -> None:
         """Save to file.
-        
+
         Args:
             filepath: Path to save (typically .evalset.json)
         """
         with open(filepath, "w") as f:
             f.write(self.to_json())
-    
+
     @classmethod
     def from_file(cls, filepath: str) -> "EvalSet":
         """Load from file.
-        
+
         Args:
             filepath: Path to .evalset.json file
         """
         with open(filepath, "r") as f:
             return cls.from_json(f.read())
-    
+
     def __len__(self) -> int:
         return len(self.test_cases)
-    
+
     def __iter__(self):
         return iter(self.test_cases)

@@ -13,7 +13,7 @@ Inspired by Google ADK's evaluation/ module, this provides:
 
 Example:
     from pyagent.evaluation import EvalSet, TestCase, evaluate_agent
-    
+
     # Define test cases
     eval_set = EvalSet([
         TestCase(
@@ -25,11 +25,11 @@ Example:
             expected_contains=["key point", "summary"],
         ),
     ])
-    
+
     # Evaluate an agent
     results = evaluate_agent(agent, eval_set)
     print(results.summary())
-    
+
     # Compare multiple agents
     from pyagent.evaluation import compare_agents
     comparison = compare_agents(
@@ -55,7 +55,7 @@ def __getattr__(name):
         "exact_match", "contains", "not_contains", "regex", "json_schema",
         "length", "semantic", "llm_judge", "custom", "composite"
     }
-    
+
     if name in _base_exports:
         from . import base
         return getattr(base, name)
@@ -65,7 +65,7 @@ def __getattr__(name):
     elif name in _criteria_exports:
         from . import criteria
         return getattr(criteria, name)
-    
+
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 

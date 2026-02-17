@@ -7,11 +7,11 @@ A2A Protocol Definitions
 Based on Google's Agent-to-Agent protocol specification.
 """
 
+import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional
-import uuid
 
 
 class TaskStatus(Enum):
@@ -26,9 +26,9 @@ class TaskStatus(Enum):
 @dataclass
 class AgentCard:
     """Agent capability advertisement.
-    
+
     Describes what an agent can do and how to interact with it.
-    
+
     Attributes:
         name: Human-readable agent name
         description: Agent description
@@ -49,7 +49,7 @@ class AgentCard:
     input_modes: List[str] = field(default_factory=lambda: ["text"])
     output_modes: List[str] = field(default_factory=lambda: ["text"])
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -64,7 +64,7 @@ class AgentCard:
             "output_modes": self.output_modes,
             "metadata": self.metadata,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "AgentCard":
         """Create from dictionary."""
@@ -85,7 +85,7 @@ class AgentCard:
 @dataclass
 class A2AMessage:
     """A message in the A2A protocol.
-    
+
     Attributes:
         id: Unique message ID
         role: Message role (user, agent)
@@ -100,7 +100,7 @@ class A2AMessage:
     content_type: str = "text/plain"
     timestamp: datetime = field(default_factory=datetime.utcnow)
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -111,7 +111,7 @@ class A2AMessage:
             "timestamp": self.timestamp.isoformat(),
             "metadata": self.metadata,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "A2AMessage":
         """Create from dictionary."""
@@ -120,7 +120,7 @@ class A2AMessage:
             timestamp = datetime.fromisoformat(timestamp)
         elif timestamp is None:
             timestamp = datetime.utcnow()
-        
+
         return cls(
             id=data.get("id", str(uuid.uuid4())),
             role=data.get("role", "user"),
@@ -134,9 +134,9 @@ class A2AMessage:
 @dataclass
 class A2ATask:
     """An A2A task request.
-    
+
     Represents a task delegated to a remote agent.
-    
+
     Attributes:
         id: Unique task ID
         messages: Input messages
@@ -150,7 +150,7 @@ class A2ATask:
     context: Dict[str, Any] = field(default_factory=dict)
     metadata: Dict[str, Any] = field(default_factory=dict)
     created_at: datetime = field(default_factory=datetime.utcnow)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -161,7 +161,7 @@ class A2ATask:
             "metadata": self.metadata,
             "created_at": self.created_at.isoformat(),
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "A2ATask":
         """Create from dictionary."""
@@ -169,13 +169,13 @@ class A2ATask:
             A2AMessage.from_dict(m)
             for m in data.get("messages", [])
         ]
-        
+
         created_at = data.get("created_at")
         if isinstance(created_at, str):
             created_at = datetime.fromisoformat(created_at)
         elif created_at is None:
             created_at = datetime.utcnow()
-        
+
         return cls(
             id=data.get("id", str(uuid.uuid4())),
             messages=messages,
@@ -184,7 +184,7 @@ class A2ATask:
             metadata=data.get("metadata", {}),
             created_at=created_at,
         )
-    
+
     @classmethod
     def from_text(cls, text: str, **kwargs) -> "A2ATask":
         """Create a simple task from text."""
@@ -197,7 +197,7 @@ class A2ATask:
 @dataclass
 class A2AResponse:
     """Response from an A2A task.
-    
+
     Attributes:
         task_id: ID of the task this responds to
         status: Task status
@@ -213,7 +213,7 @@ class A2AResponse:
     error: Optional[str] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
     completed_at: datetime = field(default_factory=datetime.utcnow)
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -225,7 +225,7 @@ class A2AResponse:
             "metadata": self.metadata,
             "completed_at": self.completed_at.isoformat(),
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "A2AResponse":
         """Create from dictionary."""
@@ -233,17 +233,17 @@ class A2AResponse:
             A2AMessage.from_dict(m)
             for m in data.get("messages", [])
         ]
-        
+
         status = data.get("status", "completed")
         if isinstance(status, str):
             status = TaskStatus(status)
-        
+
         completed_at = data.get("completed_at")
         if isinstance(completed_at, str):
             completed_at = datetime.fromisoformat(completed_at)
         elif completed_at is None:
             completed_at = datetime.utcnow()
-        
+
         return cls(
             task_id=data.get("task_id", ""),
             status=status,
@@ -253,7 +253,7 @@ class A2AResponse:
             metadata=data.get("metadata", {}),
             completed_at=completed_at,
         )
-    
+
     @classmethod
     def success(
         cls,
@@ -270,7 +270,7 @@ class A2AResponse:
             result=result,
             **kwargs,
         )
-    
+
     @classmethod
     def failure(cls, task_id: str, error: str, **kwargs) -> "A2AResponse":
         """Create a failure response."""
@@ -280,12 +280,12 @@ class A2AResponse:
             error=error,
             **kwargs,
         )
-    
+
     @property
     def is_success(self) -> bool:
         """Check if task succeeded."""
         return self.status == TaskStatus.COMPLETED
-    
+
     @property
     def content(self) -> str:
         """Get response content."""

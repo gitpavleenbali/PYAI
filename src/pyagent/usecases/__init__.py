@@ -15,41 +15,40 @@ Categories:
 
 Usage:
     >>> from pyagent.usecases import customer_service, sales
-    
+
     # Get a pre-configured support agent
     >>> support = customer_service.support_agent()
     >>> response = support("Customer can't login to their account")
-    
+
     # Create a full support workflow
     >>> workflow = customer_service.create_support_workflow()
     >>> result = workflow.run(ticket)
 """
 
-from typing import Dict, Any, List, Optional, Callable
-from dataclasses import dataclass, field
 import json
-
+from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List, Optional
 
 # =============================================================================
 # Base Use Case Structure
 # =============================================================================
 
-@dataclass  
+@dataclass
 class UseCase:
     """Base class for use case templates."""
-    
+
     name: str
     description: str
     agents: Dict[str, Any] = field(default_factory=dict)
     workflows: Dict[str, Any] = field(default_factory=dict)
     config: Dict[str, Any] = field(default_factory=dict)
-    
+
     def get_agent(self, role: str):
         """Get a pre-configured agent by role."""
         if role not in self.agents:
             raise ValueError(f"Unknown agent role: {role}")
         return self.agents[role]()
-    
+
     def list_agents(self) -> List[str]:
         """List available agent roles."""
         return list(self.agents.keys())
@@ -62,19 +61,19 @@ class UseCase:
 class CustomerServiceUseCase:
     """
     Customer service and support agents.
-    
+
     Agents:
     - support_agent: General customer support
     - technical_agent: Technical troubleshooting
     - billing_agent: Billing and payments
     - escalation_agent: Handle escalations
     - faq_agent: Common questions
-    
+
     Workflows:
     - support_workflow: Full ticket handling
     - escalation_workflow: Multi-tier support
     """
-    
+
     @staticmethod
     def support_agent(
         *,
@@ -84,7 +83,7 @@ class CustomerServiceUseCase:
     ):
         """Create a customer support agent."""
         from pyagent import agent
-        
+
         instructions = f"""You are a customer support representative for {company_name}.
 
 TONE: {tone}
@@ -109,7 +108,7 @@ ESCALATION TRIGGERS:
 - Technical issues beyond scope"""
 
         return agent(instructions, name="SupportAgent", memory=True)
-    
+
     @staticmethod
     def technical_agent(
         *,
@@ -118,9 +117,9 @@ ESCALATION TRIGGERS:
     ):
         """Create a technical support agent."""
         from pyagent import agent
-        
+
         products_str = ", ".join(products) if products else "our products"
-        
+
         instructions = f"""You are a technical support specialist.
 
 EXPERTISE: {expertise_level} level technical support for {products_str}
@@ -146,12 +145,12 @@ ALWAYS:
 - Offer to escalate if beyond scope"""
 
         return agent(instructions, name="TechSupport", memory=True)
-    
+
     @staticmethod
     def billing_agent():
         """Create a billing support agent."""
         from pyagent import agent
-        
+
         instructions = """You are a billing support specialist.
 
 CAPABILITIES:
@@ -173,43 +172,43 @@ POLICIES:
 - Refunds over 60 days: Manager approval needed"""
 
         return agent(instructions, name="BillingAgent", memory=True)
-    
+
     @staticmethod
     def create_support_workflow(*, tiers: int = 2):
         """Create a multi-tier support workflow."""
-        from pyagent.orchestrator import Orchestrator, Workflow, Task, ExecutionPattern
         from pyagent import handoff
-        
+        from pyagent.orchestrator import ExecutionPattern, Orchestrator, Task, Workflow
+
         # Create agents
         tier1 = CustomerServiceUseCase.support_agent()
         tier2 = CustomerServiceUseCase.technical_agent()
-        
+
         def handle_ticket(ticket: str) -> Dict[str, Any]:
             # Tier 1 attempts resolution
             t1_response = tier1(ticket)
-            
+
             # Check if escalation needed
-            needs_escalation = any(word in t1_response.lower() for word in 
+            needs_escalation = any(word in t1_response.lower() for word in
                                    ["escalate", "cannot help", "beyond my scope"])
-            
+
             if needs_escalation and tiers > 1:
                 # Handoff to tier 2
                 result = handoff(tier1, tier2, ticket, reason="Technical escalation")
                 return {"resolution": result.final_output, "tier": 2}
-            
+
             return {"resolution": t1_response, "tier": 1}
-        
+
         return handle_ticket
 
 
 # =============================================================================
-# SALES & MARKETING USE CASES  
+# SALES & MARKETING USE CASES
 # =============================================================================
 
 class SalesMarketingUseCase:
     """
     Sales and marketing automation agents.
-    
+
     Agents:
     - lead_qualifier: Qualify inbound leads
     - sales_assistant: Support sales reps
@@ -217,7 +216,7 @@ class SalesMarketingUseCase:
     - campaign_manager: Campaign optimization
     - competitor_analyst: Competitive intelligence
     """
-    
+
     @staticmethod
     def lead_qualifier(
         *,
@@ -226,16 +225,16 @@ class SalesMarketingUseCase:
     ):
         """Create a lead qualification agent."""
         from pyagent import agent
-        
+
         criteria = qualification_criteria or {
             "budget": "Has budget allocated",
-            "authority": "Is decision maker or influencer", 
+            "authority": "Is decision maker or influencer",
             "need": "Has clear use case",
             "timeline": "Looking to buy within 6 months"
         }
-        
+
         criteria_str = "\n".join(f"- {k}: {v}" for k, v in criteria.items())
-        
+
         instructions = f"""You are a lead qualification specialist using the {scoring_model} framework.
 
 QUALIFICATION CRITERIA:
@@ -257,7 +256,7 @@ Return a JSON object with:
 - next_steps: recommended actions"""
 
         return agent(instructions, name="LeadQualifier")
-    
+
     @staticmethod
     def content_writer(
         *,
@@ -266,9 +265,9 @@ Return a JSON object with:
     ):
         """Create a marketing content writer agent."""
         from pyagent import agent
-        
+
         types = content_types or ["blog posts", "social media", "email", "landing pages"]
-        
+
         instructions = f"""You are a marketing content writer.
 
 BRAND VOICE: {brand_voice}
@@ -294,12 +293,12 @@ ALWAYS:
 - Proofread for errors"""
 
         return agent(instructions, name="ContentWriter")
-    
+
     @staticmethod
     def sales_assistant():
         """Create a sales assistant agent."""
         from pyagent import agent
-        
+
         instructions = """You are an AI sales assistant helping sales representatives.
 
 CAPABILITIES:
@@ -332,14 +331,14 @@ OBJECTION HANDLING:
 class OperationsUseCase:
     """
     Business operations automation agents.
-    
+
     Agents:
     - order_agent: Order processing
     - inventory_agent: Inventory management
     - logistics_agent: Shipping and fulfillment
     - scheduling_agent: Appointment scheduling
     """
-    
+
     @staticmethod
     def order_agent(
         *,
@@ -347,7 +346,7 @@ class OperationsUseCase:
     ):
         """Create an order processing agent."""
         from pyagent import agent
-        
+
         instructions = """You are an order processing specialist.
 
 CAPABILITIES:
@@ -372,12 +371,12 @@ RULES:
 - Free shipping on orders over $50"""
 
         return agent(instructions, name="OrderAgent", memory=True)
-    
+
     @staticmethod
     def inventory_agent():
         """Create an inventory management agent."""
         from pyagent import agent
-        
+
         instructions = """You are an inventory management specialist.
 
 CAPABILITIES:
@@ -400,12 +399,12 @@ METRICS TO TRACK:
 - Carrying costs"""
 
         return agent(instructions, name="InventoryAgent")
-    
+
     @staticmethod
     def scheduling_agent():
         """Create an appointment scheduling agent."""
         from pyagent import agent
-        
+
         instructions = """You are an appointment scheduling assistant.
 
 CAPABILITIES:
@@ -442,14 +441,14 @@ ALWAYS:
 class DevelopmentUseCase:
     """
     Software development assistance agents.
-    
+
     Agents:
     - code_reviewer: Review code quality
     - debugger: Debug and fix issues
     - documenter: Write documentation
     - architect: System design advice
     """
-    
+
     @staticmethod
     def code_reviewer(
         *,
@@ -458,9 +457,9 @@ class DevelopmentUseCase:
     ):
         """Create a code review agent."""
         from pyagent import agent
-        
+
         langs = ", ".join(languages) if languages else "Python, JavaScript, TypeScript"
-        
+
         instructions = f"""You are an expert code reviewer.
 
 LANGUAGES: {langs}
@@ -487,12 +486,12 @@ ALSO PROVIDE:
 - Top 3 improvements needed"""
 
         return agent(instructions, name="CodeReviewer")
-    
-    @staticmethod  
+
+    @staticmethod
     def debugger():
         """Create a debugging agent."""
         from pyagent import agent
-        
+
         instructions = """You are an expert debugger and troubleshooter.
 
 DEBUGGING PROCESS:
@@ -517,12 +516,12 @@ ALWAYS:
 - Provide preventive advice"""
 
         return agent(instructions, name="Debugger")
-    
+
     @staticmethod
     def documenter():
         """Create a documentation writer agent."""
         from pyagent import agent
-        
+
         instructions = """You are a technical documentation specialist.
 
 DOCUMENTATION TYPES:
@@ -556,14 +555,14 @@ FORMAT:
 class GamingEntertainmentUseCase:
     """
     Gaming and entertainment agents.
-    
+
     Agents:
     - npc_agent: Non-player character dialog
     - game_master: RPG game master
     - story_writer: Interactive story generation
     - trivia_host: Trivia game host
     """
-    
+
     @staticmethod
     def npc_agent(
         *,
@@ -574,13 +573,13 @@ class GamingEntertainmentUseCase:
     ):
         """Create an NPC agent for games."""
         from pyagent import agent
-        
+
         knowledge_str = "\n".join(f"- {k}" for k in (knowledge or [
             "Knows local history and legends",
             "Can give quests about ancient artifacts",
             "Warns about dangers in the forest"
         ]))
-        
+
         instructions = f"""You are {character_name}, an NPC in a fantasy game.
 
 PERSONALITY: {personality}
@@ -604,7 +603,7 @@ DIALOG STYLE:
 - Respond to player tone appropriately"""
 
         return agent(instructions, name=character_name, memory=True)
-    
+
     @staticmethod
     def game_master(
         *,
@@ -614,7 +613,7 @@ DIALOG STYLE:
     ):
         """Create a game master agent for RPGs."""
         from pyagent import agent
-        
+
         instructions = f"""You are a Game Master for a tabletop RPG.
 
 SETTING: {setting}
@@ -646,16 +645,16 @@ DICE ROLLS:
 - Describe success/failure narratively"""
 
         return agent(instructions, name="GameMaster", memory=True)
-    
+
     @staticmethod
     def story_writer(
         *,
         genre: str = "fantasy",
-        audience: str = "young adult" 
+        audience: str = "young adult"
     ):
         """Create an interactive story writer agent."""
         from pyagent import agent
-        
+
         instructions = f"""You are an interactive fiction author.
 
 GENRE: {genre}

@@ -15,38 +15,35 @@ Features:
 
 Example:
     from pyagent.a2a import A2AServer, A2AClient, AgentCard
-    
+
     # Server: Expose agent
     server = A2AServer(agent, port=8080)
     server.start()
-    
+
     # Client: Connect to remote agent
     client = A2AClient("http://remote-agent:8080")
     result = await client.send("Research topic X")
 """
 
-from .protocol import (
-    AgentCard,
-    A2AMessage,
-    A2ATask,
-    A2AResponse,
-    TaskStatus,
-)
-
-from .server import (
-    A2AServer,
-    A2AEndpoint,
-)
-
 from .client import (
     A2AClient,
     RemoteAgent,
 )
-
+from .protocol import (
+    A2AMessage,
+    A2AResponse,
+    A2ATask,
+    AgentCard,
+    TaskStatus,
+)
 from .registry import (
     AgentRegistry,
-    register_agent,
     discover_agents,
+    register_agent,
+)
+from .server import (
+    A2AEndpoint,
+    A2AServer,
 )
 
 __all__ = [

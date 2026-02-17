@@ -28,14 +28,14 @@ class AudioFormat(Enum):
 @dataclass
 class Audio:
     """Audio data for multimodal input/output.
-    
+
     Example:
         # From file
         audio = Audio.from_file("recording.mp3")
-        
+
         # From base64
         audio = Audio.from_base64(data, AudioFormat.WAV)
-        
+
         # Get bytes
         raw_data = audio.get_bytes()
     """
@@ -45,7 +45,7 @@ class Audio:
     channels: int = 1
     duration_seconds: Optional[float] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     @classmethod
     def from_file(
         cls,
@@ -54,20 +54,20 @@ class Audio:
         **metadata
     ) -> "Audio":
         """Create audio from file.
-        
+
         Args:
             path: Path to audio file
             format: Audio format (auto-detected if not provided)
             **metadata: Additional metadata
-            
+
         Returns:
             Audio instance
         """
         path = Path(path)
-        
+
         if not path.exists():
             raise FileNotFoundError(f"Audio file not found: {path}")
-        
+
         # Auto-detect format
         if format is None:
             suffix = path.suffix.lower().lstrip(".")
@@ -75,17 +75,17 @@ class Audio:
                 format = AudioFormat(suffix)
             except ValueError:
                 format = AudioFormat.WAV
-        
+
         # Read and encode
         with open(path, "rb") as f:
             data = base64.b64encode(f.read()).decode("utf-8")
-        
+
         return cls(
             data=data,
             format=format,
             metadata={"original_path": str(path), **metadata},
         )
-    
+
     @classmethod
     def from_base64(
         cls,
@@ -96,14 +96,14 @@ class Audio:
         **metadata
     ) -> "Audio":
         """Create audio from base64 data.
-        
+
         Args:
             data: Base64 encoded audio data
             format: Audio format
             sample_rate: Sample rate in Hz
             channels: Number of audio channels
             **metadata: Additional metadata
-            
+
         Returns:
             Audio instance
         """
@@ -114,7 +114,7 @@ class Audio:
             channels=channels,
             metadata=metadata,
         )
-    
+
     @classmethod
     def from_bytes(
         cls,
@@ -125,14 +125,14 @@ class Audio:
         **metadata
     ) -> "Audio":
         """Create audio from raw bytes.
-        
+
         Args:
             data: Raw audio bytes
             format: Audio format
             sample_rate: Sample rate in Hz
             channels: Number of channels
             **metadata: Additional metadata
-            
+
         Returns:
             Audio instance
         """
@@ -144,21 +144,21 @@ class Audio:
             channels=channels,
             **metadata,
         )
-    
+
     def get_bytes(self) -> bytes:
         """Get raw audio bytes."""
         return base64.b64decode(self.data)
-    
+
     def save(self, path: Union[str, Path]) -> None:
         """Save audio to file.
-        
+
         Args:
             path: Output file path
         """
         path = Path(path)
         with open(path, "wb") as f:
             f.write(self.get_bytes())
-    
+
     @property
     def media_type(self) -> str:
         """Get MIME type for the audio."""
@@ -172,7 +172,7 @@ class Audio:
             AudioFormat.PCM: "audio/pcm",
         }
         return format_to_mime.get(self.format, "audio/wav")
-    
+
     def to_openai_format(self) -> Dict[str, Any]:
         """Convert to OpenAI API format for audio input."""
         return {
@@ -182,7 +182,7 @@ class Audio:
                 "format": self.format.value,
             }
         }
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization."""
         return {
@@ -193,14 +193,14 @@ class Audio:
             "duration_seconds": self.duration_seconds,
             "metadata": self.metadata,
         }
-    
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Audio":
         """Create from dictionary."""
         format_val = data.get("format", "wav")
         if isinstance(format_val, str):
             format_val = AudioFormat(format_val)
-        
+
         return cls(
             data=data["data"],
             format=format_val,
@@ -217,16 +217,16 @@ def load_audio(
     **metadata
 ) -> Audio:
     """Load audio from various sources.
-    
+
     Args:
         source: File path or bytes
         format: Audio format (auto-detected for files)
         **metadata: Additional metadata
-        
+
     Returns:
         Audio instance
     """
     if isinstance(source, bytes):
         return Audio.from_bytes(source, format=format or AudioFormat.WAV, **metadata)
-    
+
     return Audio.from_file(source, format=format, **metadata)

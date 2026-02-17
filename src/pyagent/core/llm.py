@@ -3,9 +3,9 @@ LLM - Language Model Provider interfaces and implementations
 """
 
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional, Union
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 
 class ModelProvider(Enum):
@@ -20,13 +20,13 @@ class ModelProvider(Enum):
 @dataclass
 class LLMConfig:
     """Configuration for LLM providers"""
-    
+
     provider: ModelProvider = ModelProvider.OPENAI
     model: str = "gpt-4"
     api_key: Optional[str] = None
     api_base: Optional[str] = None
     api_version: Optional[str] = None
-    
+
     # Generation parameters
     temperature: float = 0.7
     max_tokens: int = 2000
@@ -34,7 +34,7 @@ class LLMConfig:
     frequency_penalty: float = 0.0
     presence_penalty: float = 0.0
     stop_sequences: List[str] = field(default_factory=list)
-    
+
     # Retry configuration
     max_retries: int = 3
     retry_delay: float = 1.0
@@ -44,7 +44,7 @@ class LLMConfig:
 @dataclass
 class LLMResponse:
     """Response from an LLM call"""
-    
+
     content: str
     finish_reason: str = "stop"
     tokens_used: int = 0
@@ -57,14 +57,14 @@ class LLMResponse:
 class LLMProvider(ABC):
     """
     Abstract base class for LLM providers.
-    
+
     Implement this interface to add support for different
     language model providers (OpenAI, Anthropic, local models, etc.)
     """
-    
+
     def __init__(self, config: Optional[LLMConfig] = None):
         self.config = config or LLMConfig()
-    
+
     @abstractmethod
     async def complete(
         self,
@@ -74,17 +74,17 @@ class LLMProvider(ABC):
     ) -> str:
         """
         Generate a completion from the model.
-        
+
         Args:
             system_prompt: The system instruction
             messages: List of conversation messages
             **kwargs: Additional provider-specific arguments
-            
+
         Returns:
             Generated text response
         """
         pass
-    
+
     @abstractmethod
     async def complete_with_tools(
         self,
@@ -95,18 +95,18 @@ class LLMProvider(ABC):
     ) -> LLMResponse:
         """
         Generate completion with tool/function calling support.
-        
+
         Args:
             system_prompt: The system instruction
             messages: List of conversation messages
             tools: List of tool definitions
             **kwargs: Additional arguments
-            
+
         Returns:
             LLMResponse with content and tool calls
         """
         pass
-    
+
     @abstractmethod
     async def stream(
         self,
@@ -116,11 +116,11 @@ class LLMProvider(ABC):
     ):
         """
         Stream responses from the model.
-        
+
         Yields chunks of the response as they're generated.
         """
         pass
-    
+
     def validate_config(self) -> bool:
         """Validate provider configuration"""
         if not self.config.model:
@@ -131,7 +131,7 @@ class LLMProvider(ABC):
 class OpenAIProvider(LLMProvider):
     """
     OpenAI API provider implementation.
-    
+
     Example:
         >>> provider = OpenAIProvider(LLMConfig(
         ...     api_key="sk-...",
@@ -142,11 +142,11 @@ class OpenAIProvider(LLMProvider):
         ...     messages=[{"role": "user", "content": "Hello"}]
         ... )
     """
-    
+
     def __init__(self, config: Optional[LLMConfig] = None):
         super().__init__(config)
         self._client = None
-    
+
     async def _get_client(self):
         """Lazy initialization of OpenAI client"""
         if self._client is None:
@@ -160,7 +160,7 @@ class OpenAIProvider(LLMProvider):
             except ImportError:
                 raise ImportError("openai package required. Install with: pip install openai")
         return self._client
-    
+
     async def complete(
         self,
         system_prompt: str,
@@ -168,11 +168,11 @@ class OpenAIProvider(LLMProvider):
         **kwargs
     ) -> str:
         client = await self._get_client()
-        
+
         # Prepare messages with system prompt
         full_messages = [{"role": "system", "content": system_prompt}]
         full_messages.extend(messages)
-        
+
         response = await client.chat.completions.create(
             model=self.config.model,
             messages=full_messages,
@@ -180,9 +180,9 @@ class OpenAIProvider(LLMProvider):
             max_tokens=kwargs.get("max_tokens", self.config.max_tokens),
             top_p=kwargs.get("top_p", self.config.top_p),
         )
-        
+
         return response.choices[0].message.content
-    
+
     async def complete_with_tools(
         self,
         system_prompt: str,
@@ -191,10 +191,10 @@ class OpenAIProvider(LLMProvider):
         **kwargs
     ) -> LLMResponse:
         client = await self._get_client()
-        
+
         full_messages = [{"role": "system", "content": system_prompt}]
         full_messages.extend(messages)
-        
+
         response = await client.chat.completions.create(
             model=self.config.model,
             messages=full_messages,
@@ -203,7 +203,7 @@ class OpenAIProvider(LLMProvider):
             temperature=kwargs.get("temperature", self.config.temperature),
             max_tokens=kwargs.get("max_tokens", self.config.max_tokens),
         )
-        
+
         choice = response.choices[0]
         return LLMResponse(
             content=choice.message.content or "",
@@ -214,7 +214,7 @@ class OpenAIProvider(LLMProvider):
             model=response.model,
             metadata={"tool_calls": choice.message.tool_calls},
         )
-    
+
     async def stream(
         self,
         system_prompt: str,
@@ -222,10 +222,10 @@ class OpenAIProvider(LLMProvider):
         **kwargs
     ):
         client = await self._get_client()
-        
+
         full_messages = [{"role": "system", "content": system_prompt}]
         full_messages.extend(messages)
-        
+
         stream = await client.chat.completions.create(
             model=self.config.model,
             messages=full_messages,
@@ -233,7 +233,7 @@ class OpenAIProvider(LLMProvider):
             max_tokens=kwargs.get("max_tokens", self.config.max_tokens),
             stream=True,
         )
-        
+
         async for chunk in stream:
             if chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
@@ -242,20 +242,20 @@ class OpenAIProvider(LLMProvider):
 class AzureOpenAIProvider(LLMProvider):
     """
     Azure OpenAI Service provider implementation.
-    
+
     Supports both API Key and Azure AD (DefaultAzureCredential) authentication.
     If api_key is not provided, will use DefaultAzureCredential.
     """
-    
+
     def __init__(self, config: Optional[LLMConfig] = None):
         super().__init__(config)
         self._client = None
-    
+
     async def _get_client(self):
         if self._client is None:
             try:
                 from openai import AsyncAzureOpenAI
-                
+
                 # Check if we should use Azure AD auth
                 if not self.config.api_key:
                     try:
@@ -286,7 +286,7 @@ class AzureOpenAIProvider(LLMProvider):
             except ImportError:
                 raise ImportError("openai package required. Install with: pip install openai")
         return self._client
-    
+
     async def complete(
         self,
         system_prompt: str,
@@ -294,19 +294,19 @@ class AzureOpenAIProvider(LLMProvider):
         **kwargs
     ) -> str:
         client = await self._get_client()
-        
+
         full_messages = [{"role": "system", "content": system_prompt}]
         full_messages.extend(messages)
-        
+
         response = await client.chat.completions.create(
             model=self.config.model,  # deployment name in Azure
             messages=full_messages,
             temperature=kwargs.get("temperature", self.config.temperature),
             max_tokens=kwargs.get("max_tokens", self.config.max_tokens),
         )
-        
+
         return response.choices[0].message.content
-    
+
     async def complete_with_tools(
         self,
         system_prompt: str,
@@ -316,24 +316,24 @@ class AzureOpenAIProvider(LLMProvider):
     ) -> LLMResponse:
         # Similar to OpenAI implementation
         client = await self._get_client()
-        
+
         full_messages = [{"role": "system", "content": system_prompt}]
         full_messages.extend(messages)
-        
+
         response = await client.chat.completions.create(
             model=self.config.model,
             messages=full_messages,
             tools=tools,
             tool_choice=kwargs.get("tool_choice", "auto"),
         )
-        
+
         choice = response.choices[0]
         return LLMResponse(
             content=choice.message.content or "",
             finish_reason=choice.finish_reason,
             model=response.model,
         )
-    
+
     async def stream(
         self,
         system_prompt: str,
@@ -341,16 +341,16 @@ class AzureOpenAIProvider(LLMProvider):
         **kwargs
     ):
         client = await self._get_client()
-        
+
         full_messages = [{"role": "system", "content": system_prompt}]
         full_messages.extend(messages)
-        
+
         stream = await client.chat.completions.create(
             model=self.config.model,
             messages=full_messages,
             stream=True,
         )
-        
+
         async for chunk in stream:
             if chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
@@ -358,11 +358,11 @@ class AzureOpenAIProvider(LLMProvider):
 
 class AnthropicProvider(LLMProvider):
     """Anthropic Claude provider implementation"""
-    
+
     def __init__(self, config: Optional[LLMConfig] = None):
         super().__init__(config)
         self._client = None
-    
+
     async def _get_client(self):
         if self._client is None:
             try:
@@ -373,7 +373,7 @@ class AnthropicProvider(LLMProvider):
             except ImportError:
                 raise ImportError("anthropic package required. Install with: pip install anthropic")
         return self._client
-    
+
     async def complete(
         self,
         system_prompt: str,
@@ -381,7 +381,7 @@ class AnthropicProvider(LLMProvider):
         **kwargs
     ) -> str:
         client = await self._get_client()
-        
+
         response = await client.messages.create(
             model=self.config.model,
             system=system_prompt,
@@ -389,9 +389,9 @@ class AnthropicProvider(LLMProvider):
             max_tokens=kwargs.get("max_tokens", self.config.max_tokens),
             temperature=kwargs.get("temperature", self.config.temperature),
         )
-        
+
         return response.content[0].text
-    
+
     async def complete_with_tools(
         self,
         system_prompt: str,
@@ -400,7 +400,7 @@ class AnthropicProvider(LLMProvider):
         **kwargs
     ) -> LLMResponse:
         client = await self._get_client()
-        
+
         response = await client.messages.create(
             model=self.config.model,
             system=system_prompt,
@@ -408,7 +408,7 @@ class AnthropicProvider(LLMProvider):
             tools=tools,
             max_tokens=kwargs.get("max_tokens", self.config.max_tokens),
         )
-        
+
         content = ""
         tool_calls = []
         for block in response.content:
@@ -416,13 +416,13 @@ class AnthropicProvider(LLMProvider):
                 content = block.text
             elif block.type == "tool_use":
                 tool_calls.append(block)
-        
+
         return LLMResponse(
             content=content,
             finish_reason=response.stop_reason,
             metadata={"tool_calls": tool_calls},
         )
-    
+
     async def stream(
         self,
         system_prompt: str,
@@ -430,7 +430,7 @@ class AnthropicProvider(LLMProvider):
         **kwargs
     ):
         client = await self._get_client()
-        
+
         async with client.messages.stream(
             model=self.config.model,
             system=system_prompt,

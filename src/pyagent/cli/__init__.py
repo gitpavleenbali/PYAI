@@ -17,7 +17,7 @@ Usage:
     pyagent run examples/basic_agent.py
     pyagent eval tests/math_tests.evalset.json --agent my_agent.py
     pyagent serve --port 8000
-    
+
     # Or use as module
     python -m pyagent run agent.yaml
 

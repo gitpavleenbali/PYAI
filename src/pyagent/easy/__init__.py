@@ -21,7 +21,7 @@ def __getattr__(name):
     """Lazy import for submodules."""
     if name in _cache:
         return _cache[name]
-    
+
     if name == "ask":
         from pyagent.easy.ask import ask as _ask
         _cache[name] = _ask
@@ -84,22 +84,22 @@ def __getattr__(name):
 __all__ = [
     # Functions
     "ask",
-    "research", 
+    "research",
     "summarize",
     "extract",
     "generate",
     "translate",
     "chat",
-    
+
     # Modules
     "rag",
     "fetch",
-    "analyze", 
+    "analyze",
     "code",
-    
+
     # Factory
     "agent",
-    
+
     # Config
     "configure",
     "get_config",

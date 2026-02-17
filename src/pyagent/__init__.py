@@ -14,16 +14,16 @@ QUICK START:
     # Research anything in one line
     >>> from pyagent import research
     >>> papers = research("quantum computing breakthroughs 2024")
-    
+
     # RAG in two lines
     >>> from pyagent import rag
     >>> answer = rag.ask("./documents", "What is the main conclusion?")
-    
+
     # Fetch real-time data instantly
     >>> from pyagent import fetch
     >>> weather = fetch.weather("New York")
     >>> news = fetch.news("AI startups")
-    
+
     # Create custom agents effortlessly
     >>> from pyagent import agent
     >>> my_agent = agent("You are a data analyst", model="gpt-4")
@@ -47,7 +47,7 @@ def __getattr__(name):
     """Lazy import for all modules to avoid circular dependencies."""
     if name in _cache:
         return _cache[name]
-    
+
     # One-liner functions
     if name == "ask":
         from pyagent.easy.ask import ask as _ask
@@ -81,7 +81,7 @@ def __getattr__(name):
         from pyagent.easy.agent_factory import agent as _agent
         _cache[name] = _agent
         return _agent
-    
+
     # Modules (use importlib to avoid recursion)
     elif name == "rag":
         _mod = importlib.import_module("pyagent.easy.rag")
@@ -99,7 +99,7 @@ def __getattr__(name):
         _mod = importlib.import_module("pyagent.easy.code")
         _cache[name] = _mod
         return _mod
-    
+
     # NEW: Advanced features (competitive with OpenAI Agents, Strands)
     elif name == "handoff":
         from pyagent.easy.handoff import handoff as _handoff
@@ -117,7 +117,7 @@ def __getattr__(name):
         from pyagent.easy.trace import trace as _trace
         _cache[name] = _trace
         return _trace
-    
+
     # Core components
     elif name == "Agent":
         from pyagent.core.agent import Agent as _Agent
@@ -147,7 +147,7 @@ def __getattr__(name):
         from pyagent.core.llm import AnthropicProvider as _Anthropic
         _cache[name] = _Anthropic
         return _Anthropic
-    
+
     # Instructions
     elif name == "Instruction":
         from pyagent.instructions import Instruction as _Inst
@@ -169,7 +169,7 @@ def __getattr__(name):
         from pyagent.instructions import Guidelines as _Guide
         _cache[name] = _Guide
         return _Guide
-    
+
     # Skills
     elif name == "Skill":
         from pyagent.skills import Skill as _Skill
@@ -187,7 +187,7 @@ def __getattr__(name):
         from pyagent.skills import SkillRegistry as _SR
         _cache[name] = _SR
         return _SR
-    
+
     # Blueprint
     elif name == "Blueprint":
         from pyagent.blueprint import Blueprint as _BP
@@ -205,7 +205,7 @@ def __getattr__(name):
         from pyagent.blueprint import Orchestrator as _Orch
         _cache[name] = _Orch
         return _Orch
-    
+
     # =========================================================================
     # NEW: Multi-provider models (inspired by Google ADK)
     # =========================================================================
@@ -217,7 +217,7 @@ def __getattr__(name):
         from pyagent.models import get_model as _get_model
         _cache[name] = _get_model
         return _get_model
-    
+
     # =========================================================================
     # NEW: Session management (inspired by Google ADK / OpenAI Agents)
     # =========================================================================
@@ -233,7 +233,7 @@ def __getattr__(name):
         from pyagent.sessions import SessionManager as _SM
         _cache[name] = _SM
         return _SM
-    
+
     # =========================================================================
     # NEW: Evaluation (similar to Google ADK eval)
     # =========================================================================
@@ -253,7 +253,7 @@ def __getattr__(name):
         from pyagent.evaluation import TestCase as _TestCase
         _cache[name] = _TestCase
         return _TestCase
-    
+
     # =========================================================================
     # NEW: CLI (similar to Google ADK CLI)
     # =========================================================================
@@ -261,7 +261,7 @@ def __getattr__(name):
         _mod = importlib.import_module("pyagent.cli")
         _cache[name] = _mod
         return _mod
-    
+
     # =========================================================================
     # NEW: Code executor (similar to Google ADK code_executors)
     # =========================================================================
@@ -273,7 +273,7 @@ def __getattr__(name):
         from pyagent.code_executor import execute_python as _exec
         _cache[name] = _exec
         return _exec
-    
+
     # =========================================================================
     # NEW: Runner pattern (similar to OpenAI Agents SDK)
     # =========================================================================
@@ -293,7 +293,7 @@ def __getattr__(name):
         from pyagent.runner import RunResult as _RunResult
         _cache[name] = _RunResult
         return _RunResult
-    
+
     # =========================================================================
     # NEW: Agent config (similar to Google ADK agent.yaml)
     # =========================================================================
@@ -313,7 +313,7 @@ def __getattr__(name):
         from pyagent.config import AgentBuilder as _AB
         _cache[name] = _AB
         return _AB
-    
+
     # =========================================================================
     # NEW: Plugins (similar to MS Semantic Kernel)
     # =========================================================================
@@ -329,7 +329,7 @@ def __getattr__(name):
         from pyagent.plugins import PluginRegistry as _PR
         _cache[name] = _PR
         return _PR
-    
+
     # =========================================================================
     # NEW: Kernel (similar to MS Semantic Kernel)
     # =========================================================================
@@ -349,7 +349,7 @@ def __getattr__(name):
         from pyagent.kernel import ServiceRegistry as _SR
         _cache[name] = _SR
         return _SR
-    
+
     # =========================================================================
     # NEW: OpenAPI tools (similar to Google ADK)
     # =========================================================================
@@ -365,7 +365,7 @@ def __getattr__(name):
         from pyagent.openapi import create_tools_from_openapi as _ctfo
         _cache[name] = _ctfo
         return _ctfo
-    
+
     # =========================================================================
     # NEW: Token counting (like Anthropic)
     # =========================================================================
@@ -389,7 +389,7 @@ def __getattr__(name):
         from pyagent.tokens.cost import CostTracker as _CT
         _cache[name] = _CT
         return _CT
-    
+
     # =========================================================================
     # NEW: Error types
     # =========================================================================
@@ -401,7 +401,7 @@ def __getattr__(name):
         from pyagent.errors import PyAgentError as _PAE
         _cache[name] = _PAE
         return _PAE
-    
+
     # =========================================================================
     # NEW: Tool Auto-Discovery (like Strands Agents)
     # =========================================================================
@@ -425,7 +425,7 @@ def __getattr__(name):
         from pyagent.tools import ToolWatcher as _TW
         _cache[name] = _TW
         return _TW
-    
+
     # =========================================================================
     # NEW: Context Caching (like Google ADK)
     # =========================================================================
@@ -437,7 +437,7 @@ def __getattr__(name):
         from pyagent.core.cache import cache_context as _cc
         _cache[name] = _cc
         return _cc
-    
+
     # =========================================================================
     # NEW: Multimodal (images, audio, video)
     # =========================================================================
@@ -461,7 +461,7 @@ def __getattr__(name):
         from pyagent.multimodal import MultimodalContent as _MC
         _cache[name] = _MC
         return _MC
-    
+
     # =========================================================================
     # NEW: Vector Database Connectors
     # =========================================================================
@@ -485,7 +485,7 @@ def __getattr__(name):
         from pyagent.vectordb import MemoryVectorStore as _MVS
         _cache[name] = _MVS
         return _MVS
-    
+
     # =========================================================================
     # NEW: A2A Protocol (Agent-to-Agent)
     # =========================================================================
@@ -509,7 +509,7 @@ def __getattr__(name):
         from pyagent.a2a import AgentCard as _AC2
         _cache[name] = _AC2
         return _AC2
-    
+
     # =========================================================================
     # NEW: Development UI
     # =========================================================================
@@ -533,7 +533,7 @@ def __getattr__(name):
         from pyagent.devui import AgentDebugger as _ADbg
         _cache[name] = _ADbg
         return _ADbg
-    
+
     # =========================================================================
     # NEW: Voice Streaming
     # =========================================================================
@@ -557,7 +557,7 @@ def __getattr__(name):
         from pyagent.voice import Synthesizer as _Synth
         _cache[name] = _Synth
         return _Synth
-    
+
     raise AttributeError(f"module 'pyagent' has no attribute '{name}'")
 
 
@@ -565,7 +565,7 @@ __all__ = [
     # =========================================================================
     # HIGH-LEVEL API (Use these for 90% of tasks)
     # =========================================================================
-    
+
     # One-liner functions
     "ask",           # Ask anything, get intelligent answers
     "research",      # Deep research on any topic
@@ -574,35 +574,35 @@ __all__ = [
     "generate",      # Generate content (text, code, etc.)
     "translate",     # Translate between languages
     "chat",          # Interactive chat session
-    
+
     # Prebuilt modules
     "rag",           # RAG operations (index, ask, search)
     "fetch",         # Data fetching (weather, news, stocks, etc.)
     "analyze",       # Data analysis (describe, insights, visualize)
     "code",          # Code operations (write, review, debug, explain)
-    
+
     # Quick agent factory
     "agent",         # Create custom agents in one line
-    
+
     # Advanced features (competitive with OpenAI Agents, Strands)
     "handoff",       # Multi-agent handoffs and team routing
     "mcp",           # Model Context Protocol server support
     "guardrails",    # Input/output validation and safety
     "trace",         # Tracing and observability
-    
+
     # =========================================================================
     # NEW: Multi-provider models (inspired by Google ADK)
     # =========================================================================
     "models",        # Multi-provider model module
     "get_model",     # Get model by name (auto-detects provider)
-    
+
     # =========================================================================
     # NEW: Session management
     # =========================================================================
     "sessions",      # Session management module
     "Session",       # Session class
     "SessionManager",# Session manager
-    
+
     # =========================================================================
     # NEW: Evaluation (like Google ADK eval)
     # =========================================================================
@@ -610,14 +610,14 @@ __all__ = [
     "evaluate_agent",# Evaluate agent on test cases
     "EvalSet",       # Evaluation test set
     "TestCase",      # Single test case
-    
+
     # =========================================================================
     # NEW: CLI and code execution
     # =========================================================================
     "cli",           # CLI module (pyagent run, eval, serve)
     "code_executor", # Safe code execution
     "execute_python",# Execute Python code safely
-    
+
     # =========================================================================
     # NEW: Runner pattern (like OpenAI Agents SDK)
     # =========================================================================
@@ -625,7 +625,7 @@ __all__ = [
     "Runner",        # Main runner class
     "RunConfig",     # Run configuration
     "RunResult",     # Run result
-    
+
     # =========================================================================
     # NEW: Agent config (like Google ADK agent.yaml)
     # =========================================================================
@@ -633,14 +633,14 @@ __all__ = [
     "load_agent",    # Load agent from YAML/JSON
     "AgentConfig",   # Agent configuration
     "AgentBuilder",  # Build agents from config
-    
+
     # =========================================================================
     # NEW: Plugins (like MS Semantic Kernel)
     # =========================================================================
     "plugins",       # Plugins module
     "Plugin",        # Base plugin class
     "PluginRegistry",# Plugin registry
-    
+
     # =========================================================================
     # NEW: Kernel (like MS Semantic Kernel)
     # =========================================================================
@@ -648,14 +648,14 @@ __all__ = [
     "Kernel",        # Central kernel class
     "KernelBuilder", # Kernel builder
     "ServiceRegistry",# Service registry
-    
+
     # =========================================================================
     # NEW: OpenAPI tools (like Google ADK)
     # =========================================================================
     "openapi",       # OpenAPI module
     "OpenAPITools",  # OpenAPI tools class
     "create_tools_from_openapi",  # Create tools from spec
-    
+
     # =========================================================================
     # NEW: Token counting (like Anthropic)
     # =========================================================================
@@ -664,13 +664,13 @@ __all__ = [
     "count_tokens",  # Count tokens function
     "calculate_cost",# Calculate cost function
     "CostTracker",   # Cost tracking class
-    
+
     # =========================================================================
     # NEW: Error types
     # =========================================================================
     "errors",        # Error module
     "PyAgentError",  # Base error class
-    
+
     # =========================================================================
     # NEW: Tool Auto-Discovery (like Strands Agents)
     # =========================================================================
@@ -679,13 +679,13 @@ __all__ = [
     "ToolDiscovery", # Auto-discovery
     "discover_tools",# Discover tools from directory
     "ToolWatcher",   # Hot-reload watcher
-    
+
     # =========================================================================
     # NEW: Context Caching (like Google ADK)
     # =========================================================================
     "ContextCache",  # Context cache class
     "cache_context", # Cache decorator
-    
+
     # =========================================================================
     # NEW: Multimodal (images, audio, video)
     # =========================================================================
@@ -694,7 +694,7 @@ __all__ = [
     "Audio",         # Audio class
     "Video",         # Video class
     "MultimodalContent",  # Combined content
-    
+
     # =========================================================================
     # NEW: Vector Database Connectors
     # =========================================================================
@@ -703,7 +703,7 @@ __all__ = [
     "ChromaStore",   # ChromaDB connector
     "PineconeStore", # Pinecone connector
     "MemoryVectorStore",  # In-memory store
-    
+
     # =========================================================================
     # NEW: A2A Protocol (Agent-to-Agent)
     # =========================================================================
@@ -712,7 +712,7 @@ __all__ = [
     "A2AClient",     # Connect to remote agent
     "RemoteAgent",   # Remote agent wrapper
     "AgentCard",     # Agent capability card
-    
+
     # =========================================================================
     # NEW: Development UI
     # =========================================================================
@@ -721,7 +721,7 @@ __all__ = [
     "launch_ui",     # Quick launch function
     "AgentDashboard",# Monitoring dashboard
     "AgentDebugger", # Step-through debugger
-    
+
     # =========================================================================
     # NEW: Voice Streaming
     # =========================================================================
@@ -730,34 +730,34 @@ __all__ = [
     "AudioStream",   # Audio streaming
     "Transcriber",   # Speech-to-text
     "Synthesizer",   # Text-to-speech
-    
+
     # =========================================================================
     # LOW-LEVEL API (For power users)
     # =========================================================================
-    
+
     # Core
     "Agent",
     "Memory",
-    "ConversationMemory", 
+    "ConversationMemory",
     "VectorMemory",
     "LLM",
     "OpenAIProvider",
     "AzureProvider",
     "AnthropicProvider",
-    
+
     # Instructions
     "Instruction",
-    "SystemPrompt", 
+    "SystemPrompt",
     "Context",
     "Persona",
     "Guidelines",
-    
+
     # Skills
     "Skill",
     "ToolSkill",
     "ActionSkill",
     "SkillRegistry",
-    
+
     # Blueprint
     "Blueprint",
     "Workflow",
@@ -778,12 +778,12 @@ def configure(
 ):
     """
     Configure pyagent globally. Optional - pyagent works with env vars.
-    
+
     Args:
         api_key: Your API key (or set OPENAI_API_KEY env var)
         model: Default model to use
         provider: Default provider (openai, azure, anthropic)
-    
+
     Example:
         >>> import pyagent
         >>> pyagent.configure(api_key="sk-...", model="gpt-4o")

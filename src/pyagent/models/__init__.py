@@ -17,30 +17,30 @@ for multiple LLM providers including:
 
 Example:
     from pyagent.models import AzureOpenAIModel, OllamaModel, get_model
-    
+
     # Use Azure OpenAI (default)
     model = AzureOpenAIModel(deployment="gpt-4o")
-    
+
     # Use local Ollama
     model = OllamaModel(model_id="llama3.2")
-    
+
     # Auto-detect from environment
     model = get_model()
 """
 
-from .base import BaseModel, ModelConfig, ModelResponse
-from .azure_openai import AzureOpenAIModel
-from .openai import OpenAIModel
-from .ollama import OllamaModel
 from .anthropic import AnthropicModel
+from .azure_openai import AzureOpenAIModel
+from .base import BaseModel, ModelConfig, ModelResponse
 from .gemini import GeminiModel
 from .litellm import LiteLLMModel
+from .ollama import OllamaModel
+from .openai import OpenAIModel
 from .registry import ModelRegistry, get_model, register_model
 
 __all__ = [
     # Base
     "BaseModel",
-    "ModelConfig", 
+    "ModelConfig",
     "ModelResponse",
     # Providers
     "AzureOpenAIModel",

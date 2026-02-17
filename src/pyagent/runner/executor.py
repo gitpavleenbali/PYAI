@@ -8,12 +8,12 @@ The Runner manages agent execution with structured control flow.
 Similar to OpenAI Agents SDK's Runner pattern.
 """
 
-import time
 import asyncio
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Optional, Union
-from enum import Enum
+import time
 import uuid
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any, Dict, List, Optional, Union
 
 
 class RunStatus(Enum):
@@ -28,7 +28,7 @@ class RunStatus(Enum):
 @dataclass
 class RunConfig:
     """Configuration for agent execution.
-    
+
     Example:
         config = RunConfig(
             max_turns=10,
@@ -49,7 +49,7 @@ class RunConfig:
 @dataclass
 class RunContext:
     """Runtime context passed to agents during execution.
-    
+
     Provides access to run state and utilities.
     """
     run_id: str
@@ -57,15 +57,15 @@ class RunContext:
     start_time: float = field(default_factory=time.time)
     variables: Dict[str, Any] = field(default_factory=dict)
     history: List[Dict[str, Any]] = field(default_factory=list)
-    
+
     def elapsed_time(self) -> float:
         """Get elapsed time in seconds."""
         return time.time() - self.start_time
-    
+
     def set_variable(self, key: str, value: Any) -> None:
         """Set a context variable."""
         self.variables[key] = value
-    
+
     def get_variable(self, key: str, default: Any = None) -> Any:
         """Get a context variable."""
         return self.variables.get(key, default)
@@ -74,7 +74,7 @@ class RunContext:
 @dataclass
 class RunResult:
     """Result of an agent run.
-    
+
     Contains the final output and execution metadata.
     """
     run_id: str
@@ -86,12 +86,12 @@ class RunResult:
     elapsed_time: float = 0.0
     error: Optional[str] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
+
     @property
     def success(self) -> bool:
         """Check if run was successful."""
         return self.status == RunStatus.COMPLETED
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
@@ -109,34 +109,34 @@ class RunResult:
 
 class Runner:
     """Structured runner for AI agent execution.
-    
+
     Provides controlled execution with:
     - Turn limits
     - Time limits
     - Error handling
     - Execution tracing
-    
+
     Example:
         # Simple usage
         result = Runner.run(agent, "What is the weather?")
         print(result.output)
-        
+
         # With configuration
         runner = Runner(config=RunConfig(max_turns=5, verbose=True))
         result = runner.execute(agent, "Complex task")
-        
+
         # Async execution
         result = await Runner.run_async(agent, "Async task")
     """
-    
+
     def __init__(self, config: Optional[RunConfig] = None):
         """Initialize runner with configuration.
-        
+
         Args:
             config: Run configuration
         """
         self.config = config or RunConfig()
-    
+
     def execute(
         self,
         agent: Any,
@@ -145,29 +145,29 @@ class Runner:
         **kwargs
     ) -> RunResult:
         """Execute an agent with structured control.
-        
+
         Args:
             agent: The agent to run (must have run/chat method)
             input: User input to process
             context: Optional execution context
             **kwargs: Additional arguments passed to agent
-            
+
         Returns:
             RunResult with execution details
         """
         run_id = self.config.run_id or f"run-{uuid.uuid4().hex[:12]}"
         context = context or RunContext(run_id=run_id)
         start_time = time.time()
-        
+
         try:
             # Execute agent
             messages = [{"role": "user", "content": input}]
             tool_calls = []
             output = None
-            
+
             for turn in range(self.config.max_turns):
                 context.turn_count = turn + 1
-                
+
                 # Check time limit
                 if context.elapsed_time() > self.config.max_time:
                     return RunResult(
@@ -178,13 +178,13 @@ class Runner:
                         turn_count=context.turn_count,
                         elapsed_time=time.time() - start_time,
                     )
-                
+
                 # Run agent turn
                 response = self._run_agent_turn(agent, messages, context, **kwargs)
-                
+
                 if response is None:
                     break
-                
+
                 # Handle response
                 if isinstance(response, str):
                     output = response
@@ -204,7 +204,7 @@ class Runner:
                     output = str(response)
                     messages.append({"role": "assistant", "content": output})
                     break
-            
+
             return RunResult(
                 run_id=run_id,
                 status=RunStatus.COMPLETED,
@@ -215,7 +215,7 @@ class Runner:
                 elapsed_time=time.time() - start_time,
                 metadata=kwargs.get("metadata", {}),
             )
-            
+
         except Exception as e:
             return RunResult(
                 run_id=run_id,
@@ -225,7 +225,7 @@ class Runner:
                 turn_count=context.turn_count if context else 0,
                 elapsed_time=time.time() - start_time,
             )
-    
+
     def _run_agent_turn(
         self,
         agent: Any,
@@ -234,13 +234,13 @@ class Runner:
         **kwargs
     ) -> Optional[Union[str, Dict]]:
         """Execute a single agent turn.
-        
+
         Args:
             agent: The agent
             messages: Conversation history
             context: Execution context
             **kwargs: Additional arguments
-            
+
         Returns:
             Agent response or None
         """
@@ -255,7 +255,7 @@ class Runner:
             return agent(messages[-1]["content"], **kwargs)
         else:
             raise TypeError(f"Agent must have run/chat method or be callable: {type(agent)}")
-    
+
     async def execute_async(
         self,
         agent: Any,
@@ -264,28 +264,28 @@ class Runner:
         **kwargs
     ) -> RunResult:
         """Execute an agent asynchronously.
-        
+
         Args:
             agent: The agent to run
             input: User input
             context: Optional execution context
             **kwargs: Additional arguments
-            
+
         Returns:
             RunResult with execution details
         """
         run_id = self.config.run_id or f"run-{uuid.uuid4().hex[:12]}"
         context = context or RunContext(run_id=run_id)
         start_time = time.time()
-        
+
         try:
             messages = [{"role": "user", "content": input}]
             tool_calls = []
             output = None
-            
+
             for turn in range(self.config.max_turns):
                 context.turn_count = turn + 1
-                
+
                 if context.elapsed_time() > self.config.max_time:
                     return RunResult(
                         run_id=run_id,
@@ -295,13 +295,13 @@ class Runner:
                         turn_count=context.turn_count,
                         elapsed_time=time.time() - start_time,
                     )
-                
+
                 # Run agent turn asynchronously
                 response = await self._run_agent_turn_async(agent, messages, context, **kwargs)
-                
+
                 if response is None:
                     break
-                
+
                 if isinstance(response, str):
                     output = response
                     messages.append({"role": "assistant", "content": output})
@@ -319,7 +319,7 @@ class Runner:
                     output = str(response)
                     messages.append({"role": "assistant", "content": output})
                     break
-            
+
             return RunResult(
                 run_id=run_id,
                 status=RunStatus.COMPLETED,
@@ -329,7 +329,7 @@ class Runner:
                 turn_count=context.turn_count,
                 elapsed_time=time.time() - start_time,
             )
-            
+
         except Exception as e:
             return RunResult(
                 run_id=run_id,
@@ -339,7 +339,7 @@ class Runner:
                 turn_count=context.turn_count if context else 0,
                 elapsed_time=time.time() - start_time,
             )
-    
+
     async def _run_agent_turn_async(
         self,
         agent: Any,
@@ -363,7 +363,7 @@ class Runner:
                 None,
                 lambda: self._run_agent_turn(agent, messages, context, **kwargs)
             )
-    
+
     @classmethod
     def run(
         cls,
@@ -373,14 +373,14 @@ class Runner:
         **kwargs
     ) -> RunResult:
         """Convenience class method to run an agent.
-        
+
         Example:
             result = Runner.run(agent, "What is 2+2?")
             print(result.output)
         """
         runner = cls(config=config)
         return runner.execute(agent, input, **kwargs)
-    
+
     @classmethod
     async def run_async(
         cls,
@@ -390,7 +390,7 @@ class Runner:
         **kwargs
     ) -> RunResult:
         """Convenience class method for async execution.
-        
+
         Example:
             result = await Runner.run_async(agent, "What is 2+2?")
             print(result.output)
