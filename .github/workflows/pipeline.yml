@@ -1,24 +1,32 @@
 # =============================================================================
-# PYAI - CI/CD Pipeline (Sequential Stages)
+# PYAI - CI/CD Pipeline
 # =============================================================================
 #
-# Stage Flow (each depends on previous):
+# Stage Flow:
 #
-#   ┌─────────┐     ┌───────────┐     ┌──────────┐     ┌────────┐
-#   │ 1. Lint │ ──▶ │ 2. Type   │ ──▶ │ 3. Secu- │ ──▶ │ 4. Test│
-#   │  (ruff) │     │   Check   │     │   rity   │     │(pytest)│
-#   └─────────┘     └───────────┘     └──────────┘     └───┬────┘
-#                                                          │
-#                        ┌─────────────────────────────────┘
-#                        ▼
-#   ┌─────────┐     ┌───────────┐     ┌──────────────────────────┐
-#   │ 5. Build│ ──▶ │ 6. Docs   │ ──▶ │ 7. Deploy (Pages + PyPI) │
-#   │(package)│     │ (mkdocs)  │     │    (on release only)     │
-#   └─────────┘     └───────────┘     └──────────────────────────┘
+#   ┌─────────┐     ┌───────────┐     ┌──────────┐     ┌────────────────────┐
+#   │ 1. Lint │ ──▶ │ 2. Type   │ ──▶ │ 3. Secu- │ ──▶ │ 4. Test            │
+#   │  (ruff) │     │   Check   │     │   rity   │     │ (Py 3.10/3.11/3.12)│
+#   └─────────┘     └───────────┘     └──────────┘     └─────────┬──────────┘
+#                                                                │
+#                        ┌───────────────────────────────────────┤
+#                        │                                       │
+#                        ▼                                       ▼
+#   ┌────────────────────────────────┐         ┌────────────────────────────────┐
+#   │ 5a. Build Docs → Deploy Docs   │         │ 5b. Build Pkg → Publish PyPI   │
+#   │     (parallel track)           │         │     (parallel track)           │
+#   └────────────────────────────────┘         └────────────────────────────────┘
+#                        │                                       │
+#                        └───────────────────┬───────────────────┘
+#                                            │
+#                                            ▼
+#                                   ┌────────────────┐
+#                                   │  📊 Summary    │
+#                                   └────────────────┘
 #
 # Triggers:
-#   - Push to master: Stages 1-6 + Deploy Docs
-#   - Pull Request: Stages 1-5
+#   - Push to master: All stages + Deploy Docs
+#   - Pull Request: Stages 1-5 (no deploy)
 #   - Release tag (v*): All stages including PyPI publish
 #
 # =============================================================================
@@ -71,13 +79,13 @@ jobs:
         run: ruff check src/ --output-format=github
 
   # ============================================================================
-  # STAGE 2: Type Check (mypy)
+  # STAGE 2: Type Check (mypy) - STRICT: Fails on errors
   # ============================================================================
   type-check:
     name: "2️⃣ Type Check"
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [lint]  # Runs after lint passes
+    needs: [lint]
     steps:
       - uses: actions/checkout@v4
 
@@ -92,16 +100,15 @@ jobs:
 
       - name: Run mypy
         run: mypy src/pyai --ignore-missing-imports
-        continue-on-error: true  # Don't block on type errors for now
 
   # ============================================================================
-  # STAGE 3: Security Scan (bandit)
+  # STAGE 3: Security Scan (bandit) - STRICT: Fails on high severity issues
   # ============================================================================
   security:
     name: "3️⃣ Security"
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [type-check]  # Runs after type-check passes
+    needs: [type-check]
     steps:
       - uses: actions/checkout@v4
 
@@ -114,7 +121,6 @@ jobs:
 
       - name: Run security scan
         run: bandit -r src/pyai -ll -ii
-        continue-on-error: true  # Report but don't block
 
   # ============================================================================
   # STAGE 4: Test (pytest on Python 3.10, 3.11, 3.12)
@@ -123,7 +129,7 @@ jobs:
     name: "4️⃣ Test (Py ${{ matrix.python-version }})"
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [security]  # Runs after security passes
+    needs: [security]
     strategy:
       fail-fast: false
       matrix:
@@ -152,13 +158,42 @@ jobs:
             --ignore=tests/test_azure_integration.py
 
   # ============================================================================
-  # STAGE 5: Build Package
+  # STAGE 5a: Build Documentation (runs in parallel with build-package)
   # ============================================================================
-  build:
+  build-docs:
+    name: "5️⃣ Build Docs"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install mkdocs
+        run: pip install mkdocs-material
+
+      - name: Build documentation
+        run: mkdocs build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload docs artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  # ============================================================================
+  # STAGE 5b: Build Package (runs in parallel with build-docs)
+  # ============================================================================
+  build-package:
     name: "5️⃣ Build Package"
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [test]  # Runs after ALL test matrix jobs pass
+    needs: [test]
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -184,49 +219,20 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "📦 Version: $VERSION"
 
-      - name: Upload artifacts
+      - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
 
   # ============================================================================
-  # STAGE 6: Build Documentation
-  # ============================================================================
-  docs:
-    name: "6️⃣ Build Docs"
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    needs: [build]  # Runs after build passes
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Install mkdocs
-        run: pip install mkdocs-material
-
-      - name: Build documentation
-        run: mkdocs build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload docs
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./site
-
-  # ============================================================================
-  # STAGE 7a: Deploy Documentation to GitHub Pages
+  # STAGE 6a: Deploy Documentation to GitHub Pages
   # ============================================================================
   deploy-docs:
-    name: "7️⃣ Deploy Docs"
+    name: "6️⃣ Deploy Docs"
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [docs]  # Runs after docs build passes
+    needs: [build-docs]
     if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
     environment:
       name: "github-pages"
@@ -237,18 +243,16 @@ jobs:
         uses: actions/deploy-pages@v4
 
   # ============================================================================
-  # STAGE 7b: Publish to PyPI (Only on release tags v*)
+  # STAGE 6b: Publish to PyPI (Only on release tags v*)
   # ============================================================================
   publish-pypi:
-    name: "7️⃣ Publish PyPI"
+    name: "6️⃣ Publish PyPI"
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    needs: [docs]  # Runs after docs passes (which depends on all previous)
+    needs: [build-package]
     if: startsWith(github.ref, 'refs/tags/v')
-    permissions:
-      id-token: write  # Required for Trusted Publishing
     steps:
-      - name: Download artifacts
+      - name: Download package artifact
         uses: actions/download-artifact@v4
         with:
           name: dist
@@ -256,8 +260,8 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        # Uses Trusted Publishing (OIDC) - no API token needed
-        # Configure at: https://pypi.org/manage/project/pyai/settings/publishing/
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
 
   # ============================================================================
   # PIPELINE SUMMARY
@@ -265,7 +269,7 @@ jobs:
   summary:
     name: "📊 Summary"
     runs-on: ubuntu-latest
-    needs: [lint, type-check, security, test, build, docs]
+    needs: [lint, type-check, security, test, build-docs, build-package]
     if: always()
     steps:
       - name: Generate Summary
@@ -275,15 +279,19 @@ jobs:
           echo "| Stage | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
           echo "| 1️⃣ Lint | ${{ needs.lint.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 2️⃣ Type Check | ${{ needs.type-check.result == 'success' && '✅ Passed' || '⚠️ Warnings' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 3️⃣ Security | ${{ needs.security.result == 'success' && '✅ Passed' || '⚠️ Warnings' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 2️⃣ Type Check | ${{ needs.type-check.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 3️⃣ Security | ${{ needs.security.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| 4️⃣ Test | ${{ needs.test.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 5️⃣ Build | ${{ needs.build.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 6️⃣ Docs | ${{ needs.docs.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 5️⃣ Build Docs | ${{ needs.build-docs.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 5️⃣ Build Package | ${{ needs.build-package.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
           
-          if [ "${{ needs.test.result }}" != "success" ]; then
+          # Check if any required stage failed
+          if [ "${{ needs.lint.result }}" != "success" ] || \
+             [ "${{ needs.type-check.result }}" != "success" ] || \
+             [ "${{ needs.security.result }}" != "success" ] || \
+             [ "${{ needs.test.result }}" != "success" ]; then
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "❌ **Pipeline failed at Test stage**" >> $GITHUB_STEP_SUMMARY
+            echo "❌ **Pipeline failed - see above for details**" >> $GITHUB_STEP_SUMMARY
             exit 1
           fi
           
