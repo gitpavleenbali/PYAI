@@ -1,3 +1,4 @@
+# pyright: basic, reportGeneralTypeIssues=false, reportArgumentType=false, reportCallIssue=false
 """
 PyAgent PyAgent Comprehensive Examples
 ====================================
@@ -97,13 +98,13 @@ def example_ask():
     print("\n1b. Detailed Response:")
     print("    Code: answer = ask('Explain AI', detailed=True)")
     answer = ask("List 3 benefits of Python", concise=True)
-    print(f"    Answer: {answer[:150]}...")
+    print(f"    Answer: {str(answer)[:150]}...")
     
     # Verify with math
     print("\n1c. Verification Test:")
     answer = ask("What is 25 * 4? Reply with just the number.")
     success = "100" in answer
-    print(f"    Question: 25  4 = ?")
+    print("    Question: 25  4 = ?")
     print(f"    Answer: {answer}")
     print(f"    {'[OK] PASS' if success else '[X] FAIL'}")
     
@@ -134,7 +135,7 @@ def example_agent():
     
     response = tutor("What is the square root of 144? Just the number.")
     success = "12" in response
-    print(f"    Question: Square root of 144?")
+    print("    Question: Square root of 144?")
     print(f"    Answer: {response}")
     print(f"    {'[OK] PASS' if success else '[X] FAIL'}")
     
@@ -182,13 +183,13 @@ def example_chat():
     
     # First message
     r1 = session.say("My favorite color is blue. Remember that.")
-    print(f"    User: My favorite color is blue.")
+    print("    User: My favorite color is blue.")
     print(f"    Assistant: {r1[:80]}...")
     
     # Test memory
     r2 = session.say("What is my favorite color?")
     success = "blue" in r2.lower()
-    print(f"\n    User: What is my favorite color?")
+    print("\n    User: What is my favorite color?")
     print(f"    Assistant: {r2}")
     print(f"    Memory working: {'[OK] YES' if success else '[X] NO'}")
     
@@ -296,7 +297,7 @@ def example_research():
     
     print("\n6a. Quick Research:")
     print("    Code: result = research('quantum computing basics')")
-    result = research("quantum computing basics", depth="quick")
+    result = research("quantum computing basics", depth="shallow")
     print(f"    Result: {str(result)[:150]}...")
     
     print("\n6b. Summarize Text:")
@@ -346,7 +347,7 @@ def example_extract():
     
     print("\n7a. Extract Structured Data:")
     print("    Code: data = extract(text, ['names', 'dates', 'amounts'])")
-    data = extract(text, ["names", "dates", "amounts"])
+    data = extract(text, query="names, dates, amounts")
     print(f"    Extracted: {data}")
     
     success = isinstance(data, dict) or len(str(data)) > 10

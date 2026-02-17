@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false, reportUnusedImport=false
 """
 PyAgent Weather App - Real-Time Weather Assistant
 ==================================================
@@ -46,7 +47,7 @@ if not setup_pyagent():
     sys.exit(1)
 
 # Import pyagent functions
-from pyagent import ask, fetch, agent, chat
+from pyagent import ask, fetch, agent
 
 
 # =============================================================================
@@ -156,7 +157,7 @@ def natural_weather_query(query: str) -> None:
     This shows how PyAgent's ask() function can handle any question,
     including weather-related queries.
     """
-    print(f"\n[Magic] Natural Language Query")
+    print("\n[Magic] Natural Language Query")
     print("-" * 40)
     print(f"Query: {query}")
     

@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false, reportUnusedImport=false, reportGeneralTypeIssues=false
 """
 [Brain] PyAgent Smart Research Assistant
 ====================================
@@ -45,7 +46,7 @@ if not setup_pyagent():
     sys.exit(1)
 
 # Import ALL the amazing PyAgent functions
-from pyagent import (
+from pyagent import (  # noqa: F401 - Imports shown for demonstration
     ask,           # Ask any question
     research,      # Deep research on topics
     summarize,     # Summarize anything

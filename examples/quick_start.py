@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false, reportUndefinedVariable=false, reportUnusedImport=false, reportArgumentType=false, reportCallIssue=false, reportAttributeAccessIssue=false, reportGeneralTypeIssues=false
 """
 PyAgent Quick Start Examples - Revolutionary AI in 3 Lines or Less
 
@@ -150,6 +151,7 @@ summary = summarize("./document.docx")
 summary = summarize("https://news.site/long-article")
 
 # Options
+text = "Your long text here..."  # Example placeholder
 short = summarize(text, length="short")
 bullets = summarize(text, bullet_points=True)
 executive = summarize(text, style="executive")
@@ -168,10 +170,12 @@ data = extract(text, ["name", "age", "company", "location"])
 # {"name": "John Smith", "age": 35, "company": "Google", "location": "San Francisco"}
 
 # Natural language extraction
+email_text = "Contact us at support@example.com or sales@example.com"  # Example placeholder
 emails = extract(email_text, "all email addresses mentioned")
 
 # Entity extraction
-entities = extract_entities(article_text)
+article_text = "Apple CEO Tim Cook announced the new iPhone in Cupertino."  # Example placeholder
+entities = extract(article_text, ["people", "organizations", "locations"])
 # {"people": [...], "organizations": [...], "locations": [...]}
 
 
@@ -229,6 +233,7 @@ sentiment = analyze.sentiment("I absolutely love this product!")
 # {"sentiment": "positive", "confidence": 0.95, "emotions": ["joy", "satisfaction"]}
 
 # Text analysis
+customer_review = "This product exceeded my expectations. Great value for money!"  # Example placeholder
 text_insights = analyze.text(customer_review, analyze_for="sentiment")
 
 
@@ -242,6 +247,7 @@ from pyagent import code
 python_function = code.write("REST API for user management")
 
 # Review code
+my_code = "def add(a, b): return a + b"  # Example placeholder
 review = code.review(my_code)
 print(f"Score: {review.score}/10")
 print(f"Issues: {review.issues}")
@@ -251,12 +257,15 @@ print(f"Suggestions: {review.suggestions}")
 fix = code.debug("TypeError: cannot unpack non-iterable int object")
 
 # Explain code
+complex_algorithm = "def quicksort(arr): return arr if len(arr)<=1 else quicksort([x for x in arr[1:] if x<arr[0]])+[arr[0]]+quicksort([x for x in arr[1:] if x>=arr[0]])"  # Example placeholder
 explanation = code.explain(complex_algorithm, for_beginner=True)
 
 # Refactor
+legacy_code = "for i in range(len(items)): print(items[i])"  # Example placeholder
 improved = code.refactor(legacy_code, goal="readability")
 
 # Convert between languages
+python_code = "print('Hello, World!')"  # Example placeholder
 javascript = code.convert(python_code, from_lang="python", to_lang="javascript")
 
 

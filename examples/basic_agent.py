@@ -1,5 +1,4 @@
-"""
-Example: Basic Agent Usage
+"""# pyright: reportMissingImports=false, reportUnusedImport=falseExample: Basic Agent Usage
 
 This example demonstrates the lower-level Agent API.
 For simpler one-liner usage, see: comprehensive_examples.py
@@ -33,7 +32,7 @@ if not setup_pyagent():
 
 import asyncio
 from pyagent import Agent
-from pyagent.instructions import Instruction, SystemPrompt
+from pyagent.instructions import SystemPrompt
 from pyagent.skills import SearchSkill, CodeSkill
 from pyagent.core.llm import OpenAIProvider, AzureOpenAIProvider, LLMConfig
 

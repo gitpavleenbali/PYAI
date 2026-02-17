@@ -1,5 +1,4 @@
-"""
-Example: Custom Skills
+"""# pyright: reportMissingImports=false, reportUnusedImport=falseExample: Custom Skills
 
 This example demonstrates how to create custom skills for agents.
 
@@ -34,7 +33,7 @@ except Exception:
 
 from typing import Any, Dict, List
 from pyagent.skills import Skill, SkillResult, SkillParameter
-from pyagent.skills.tool_skill import tool, ToolSkill
+from pyagent.skills.tool_skill import tool
 from pyagent.skills.action_skill import ActionSkill, action, ActionType
 
 

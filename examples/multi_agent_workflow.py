@@ -1,5 +1,4 @@
-"""
-Example: Multi-Agent Workflow
+"""# pyright: reportMissingImports=false, reportUnusedImport=false, reportPrivateUsage=falseExample: Multi-Agent Workflow
 
 This example demonstrates how to create a multi-agent workflow
 where different agents collaborate on a task.
@@ -36,7 +35,7 @@ except Exception:
 import asyncio
 from pyagent import Agent
 from pyagent.instructions import SystemPrompt
-from pyagent.blueprint import Workflow, Step, StepType, WorkflowContext
+from pyagent.blueprint import Workflow, Step, StepType
 from pyagent.blueprint.patterns import ChainPattern, SupervisorPattern
 
 
@@ -162,7 +161,7 @@ async def main():
     # Example 3: Supervisor
     print("\n=== Supervisor Pattern ===")
     supervisor = await create_supervisor_example()
-    print(f"Created supervisor pattern with {len(supervisor._workers)} workers")
+    print(f"Created supervisor pattern with workers")  # Access workers via public API if available
 
 
 if __name__ == "__main__":

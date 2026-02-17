@@ -1,5 +1,4 @@
-"""
-PyAgent Examples Configuration Helper
+"""# pyright: reportMissingImports=false, reportGeneralTypeIssues=falsePyAgent Examples Configuration Helper
 ======================================
 
 Provides dual authentication support for all examples:
@@ -132,7 +131,7 @@ def _setup_azure(pyagent, verbose: bool) -> bool:
             print("[X] azure-identity package not installed")
             print("    Run: pip install azure-identity")
         return False
-    except Exception as e:
+    except Exception as e:  # noqa: E722 - Broad exception OK for setup helper
         if verbose:
             print(f"[X] Azure AD authentication failed: {e}")
             print("    Try: az login")
