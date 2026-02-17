@@ -82,16 +82,16 @@
 
 ---
 
+### 🔗 Multi-Agent
+- [[Workflows]]
+
+---
+
 ## 📚 Reference
 - [[API-Reference|API Reference]]
 - [[Architecture]]
 - [[Changelog]]
 - [[Contributing]]
-
----
-
-### 🔗 Multi-Agent
-- [[Workflows]]
 
 ---
 
