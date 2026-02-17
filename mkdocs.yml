@@ -23,32 +23,137 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.expand
+    - navigation.top
+    - navigation.indexes
     - search.suggest
     - search.highlight
     - content.code.copy
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
 
 nav:
   - Home: index.md
+  
   - Getting Started:
     - Quick Start: QUICKSTART.md
+    - Installation: wiki/Installation.md
+    - Configuration: wiki/Configuration.md
     - Azure Setup: AZURE_SETUP.md
+    - Azure AD Auth: wiki/Azure-AD-Auth.md
+    - Design Philosophy: wiki/Design-Philosophy.md
+    - Three Dimensions: wiki/Three-Dimensions.md
+  
+  - Easy API:
+    - Overview: wiki/Home.md
+    - ask: wiki/ask.md
+    - chat: wiki/chat.md
+    - summarize: wiki/summarize.md
+    - analyze: wiki/analyze.md
+    - extract: wiki/extract.md
+    - translate: wiki/translate.md
+    - code: wiki/code.md
+    - generate: wiki/generate.md
+    - fetch: wiki/fetch.md
+    - research: wiki/research.md
+    - rag: wiki/rag.md
+  
+  - Core Concepts:
+    - Agent: wiki/Agent.md
+    - Runner: wiki/Runner.md
+    - Memory: wiki/Memory.md
+    - Sessions: wiki/Sessions.md
+    - LLM Providers: wiki/LLM-Providers.md
+    - Kernel Registry: wiki/Kernel-Registry.md
+  
+  - Tools & Skills:
+    - Creating Tools: wiki/Creating-Tools.md
+    - Built-in Skills: wiki/Built-in-Skills.md
+    - OpenAPI Tools: wiki/OpenAPI-Tools.md
+    - OpenAPI Module: wiki/OpenAPI-Module.md
+    - OpenAPI Parser: wiki/OpenAPIParser.md
+    - OpenAPI Client: wiki/OpenAPIClient.md
+  
+  - Multi-Agent:
+    - Workflows: wiki/Workflows.md
+    - Orchestration Patterns: wiki/Orchestration-Patterns.md
+    - Handoffs: wiki/Handoffs.md
+    - Software Factories: wiki/Software-Factories.md
+    - Synthesis: wiki/Synthesis.md
+  
+  - A2A Protocol:
+    - Overview: wiki/A2A-Protocol.md
+    - A2A Module: wiki/A2A-Module.md
+    - A2A Server: wiki/A2AServer.md
+    - A2A Client: wiki/A2AClient.md
+  
+  - Plugins:
+    - Plugin Module: wiki/Plugins-Module.md
+    - Plugin Base: wiki/PluginBase.md
+    - Plugin Registry: wiki/PluginRegistry.md
+  
+  - Vector Databases:
+    - Overview: wiki/Vector-Database.md
+    - VectorDB Module: wiki/VectorDB-Module.md
+    - ChromaDB: wiki/ChromaDB.md
+    - Pinecone: wiki/Pinecone.md
+    - Qdrant: wiki/Qdrant.md
+    - Weaviate: wiki/Weaviate.md
+  
+  - Multimodal:
+    - Overview: wiki/Multimodal.md
+    - Multimodal Module: wiki/Multimodal-Module.md
+    - Image Content: wiki/ImageContent.md
+    - Audio Content: wiki/AudioContent.md
+    - Video Content: wiki/VideoContent.md
+    - Transcription: wiki/Transcription.md
+  
+  - Voice:
+    - Overview: wiki/Voice.md
+    - Voice Module: wiki/Voice-Module.md
+    - Voice Session: wiki/VoiceSession.md
+  
+  - Evaluation:
+    - Overview: wiki/Evaluation.md
+    - Evaluation Module: wiki/Evaluation-Module.md
+    - Evaluator: wiki/Evaluator.md
+    - EvalSet: wiki/EvalSet.md
+    - TestCase: wiki/TestCase.md
+  
+  - Safety & Observability:
+    - Guardrails: wiki/Guardrails.md
+    - Tracing: wiki/Tracing.md
+  
   - Reference:
     - API Reference: API_REFERENCE.md
     - Architecture: ARCHITECTURE.md
+    - Wiki API Reference: wiki/API-Reference.md
+    - Wiki Architecture: wiki/Architecture.md
+  
   - Development:
     - Contributing: CONTRIBUTING.md
+    - Wiki Contributing: wiki/Contributing.md
     - Changelog: CHANGELOG.md
+    - Wiki Changelog: wiki/Changelog.md
     - Distribution: DISTRIBUTION.md
 
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - admonition
   - pymdownx.details
   - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
 
 plugins:
   - search
@@ -56,4 +161,5 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/gitpavleenbali/pyagent
+      link: https://github.com/gitpavleenbali/PYAI
+  generator: false
