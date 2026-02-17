@@ -1,0 +1,190 @@
+/**
+ * PyAI Documentation - Custom CSS
+ * Modern indigo/purple theme with smooth animations
+ */
+
+/* Light Mode - Indigo Theme */
+:root {
+  --ifm-color-primary: #6366f1;
+  --ifm-color-primary-dark: #4f46e5;
+  --ifm-color-primary-darker: #4338ca;
+  --ifm-color-primary-darkest: #3730a3;
+  --ifm-color-primary-light: #818cf8;
+  --ifm-color-primary-lighter: #a5b4fc;
+  --ifm-color-primary-lightest: #c7d2fe;
+  
+  --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-weight-semibold: 600;
+  
+  --docusaurus-highlighted-code-line-bg: rgba(99, 102, 241, 0.1);
+  
+  /* Custom PyAI colors */
+  --pyai-gradient-start: #6366f1;
+  --pyai-gradient-end: #a855f7;
+  --pyai-code-bg: #f8fafc;
+}
+
+/* Dark Mode - Purple accent */
+[data-theme='dark'] {
+  --ifm-color-primary: #818cf8;
+  --ifm-color-primary-dark: #6366f1;
+  --ifm-color-primary-darker: #4f46e5;
+  --ifm-color-primary-darkest: #4338ca;
+  --ifm-color-primary-light: #a5b4fc;
+  --ifm-color-primary-lighter: #c7d2fe;
+  --ifm-color-primary-lightest: #e0e7ff;
+  
+  --ifm-background-color: #0f172a;
+  --ifm-background-surface-color: #1e293b;
+  --ifm-navbar-background-color: #0f172aee;
+  --ifm-footer-background-color: #020617;
+  
+  --docusaurus-highlighted-code-line-bg: rgba(129, 140, 248, 0.2);
+  
+  --pyai-gradient-start: #818cf8;
+  --pyai-gradient-end: #c084fc;
+  --pyai-code-bg: #1e293b;
+}
+
+/* Modern smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Navbar styling */
+.navbar {
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.navbar__title {
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--pyai-gradient-start), var(--pyai-gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero section enhancements */
+.hero {
+  background: linear-gradient(135deg, var(--pyai-gradient-start) 0%, var(--pyai-gradient-end) 100%);
+}
+
+.hero__title {
+  font-size: 3.5rem;
+  font-weight: 800;
+}
+
+.hero__subtitle {
+  font-size: 1.5rem;
+  opacity: 0.9;
+}
+
+/* Code blocks */
+.prism-code {
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+code {
+  border-radius: 6px;
+  padding: 0.2em 0.4em;
+  background-color: var(--pyai-code-bg);
+}
+
+/* Sidebar styling */
+.menu__link {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.menu__link:hover {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.menu__link--active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15));
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+/* Cards for feature sections */
+.card {
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+}
+
+/* Table enhancements */
+table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th {
+  background: linear-gradient(135deg, var(--pyai-gradient-start), var(--pyai-gradient-end));
+  color: white;
+}
+
+/* Mermaid diagram styling */
+.mermaid {
+  background: var(--pyai-code-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Announcement bar */
+.announcementBar_node_modules-\@docusaurus-theme-classic-lib-theme-AnnouncementBar-styles-module {
+  background: linear-gradient(90deg, var(--pyai-gradient-start), var(--pyai-gradient-end));
+  font-weight: 500;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(180deg, var(--ifm-footer-background-color), #000);
+}
+
+/* Buttons */
+.button--primary {
+  background: linear-gradient(135deg, var(--pyai-gradient-start), var(--pyai-gradient-end));
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+}
+
+/* Smooth page transitions */
+.main-wrapper {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 996px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+}

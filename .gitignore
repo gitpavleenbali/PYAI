@@ -65,3 +65,9 @@ body.json
 .internal/site/
 site/
 PyPI-Recovery-Codes*.txt
+
+# Docusaurus (website/)
+website/node_modules/
+website/build/
+website/.docusaurus/
+website/.cache-loader/
