@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-PyAgent - The Pandas of AI Agents
+PyAI - The Pandas of AI Agents
 =================================
 
 Backwards-compatible setup.py for pip install.
@@ -20,7 +20,7 @@ if __name__ == "__main__":
     setup(
         packages=find_packages(exclude=["tests*", "examples*", "docs*"]),
         package_data={
-            "pyagent": ["py.typed", "*.pyi", "README.md", "**/README.md"],
+            "pyai": ["py.typed", "*.pyi", "README.md", "**/README.md"],
         },
         include_package_data=True,
         zip_safe=False,

@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest a new feature for PyAgent
+about: Suggest a new feature for PyAI
 title: "[FEATURE] "
 labels: enhancement
 assignees: ""
@@ -18,7 +18,7 @@ How you think this could be implemented.
 ## Example Code
 ```python
 # How you'd like the feature to work
-from pyagent import ...
+from pyai import ...
 
 # Example usage
 ```

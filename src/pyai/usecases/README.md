@@ -1,4 +1,4 @@
-# PyAgent Use Cases
+# pyai Use Cases
 
 **Production-Ready Agent Templates for Every Industry**
 
@@ -36,7 +36,7 @@ The `usecases` module provides pre-configured agent templates for common busines
 ## Quick Start
 
 ```python
-from pyagent.usecases import customer_service, sales
+from pyai.usecases import customer_service, sales
 
 # Create a support agent
 support = customer_service.support_agent(
@@ -63,7 +63,7 @@ lead_score = qualifier("Enterprise company, contacted VP of Sales...")
 ### Support Agent
 
 ```python
-from pyagent.usecases import customer_service
+from pyai.usecases import customer_service
 
 support = customer_service.support_agent(
     company_name="Your Company",
@@ -110,7 +110,7 @@ print(result["tier"])  # Which tier resolved it
 ### Lead Qualifier
 
 ```python
-from pyagent.usecases import sales
+from pyai.usecases import sales
 
 qualifier = sales.lead_qualifier(
     qualification_criteria={
@@ -147,7 +147,7 @@ blog_post = writer("Write a blog post about AI in customer service")
 ### Order Processing
 
 ```python
-from pyagent.usecases import operations
+from pyai.usecases import operations
 
 order_agent = operations.order_agent(
     order_rules={
@@ -175,7 +175,7 @@ scheduler("Book a meeting with John next Tuesday at 2pm EST")
 ### Code Reviewer
 
 ```python
-from pyagent.usecases import development
+from pyai.usecases import development
 
 reviewer = development.code_reviewer(
     languages=["Python", "JavaScript"],
@@ -212,7 +212,7 @@ for i in range(len(items) + 1):
 ### Telecom
 
 ```python
-from pyagent.usecases.industry import telecom
+from pyai.usecases.industry import telecom
 
 # Help customers choose plans
 advisor = telecom.plan_advisor(
@@ -236,7 +236,7 @@ retention = telecom.retention_agent(
 ### Healthcare
 
 ```python
-from pyagent.usecases.industry import healthcare
+from pyai.usecases.industry import healthcare
 
 # Appointment scheduling
 scheduler = healthcare.appointment_scheduler(
@@ -254,7 +254,7 @@ info = healthcare.symptom_info()
 ### Finance
 
 ```python
-from pyagent.usecases.industry import finance
+from pyai.usecases.industry import finance
 
 # General banking questions
 banking = finance.banking_assistant(bank_name="First Bank")
@@ -269,7 +269,7 @@ loans = finance.loan_advisor()
 ### E-commerce
 
 ```python
-from pyagent.usecases.industry import ecommerce
+from pyai.usecases.industry import ecommerce
 
 # Product discovery
 shopping = ecommerce.shopping_assistant(
@@ -290,7 +290,7 @@ returns = ecommerce.returns_agent(
 ### Education
 
 ```python
-from pyagent.usecases.industry import education
+from pyai.usecases.industry import education
 
 # Subject tutoring
 math_tutor = education.tutor(
@@ -311,7 +311,7 @@ advisor = education.course_advisor(
 ### NPC Agent
 
 ```python
-from pyagent.usecases import gaming
+from pyai.usecases import gaming
 
 elder = gaming.npc_agent(
     character_name="Elder Thorne",
@@ -368,7 +368,7 @@ support_with_memory = customer_service.support_agent(
 )  # memory=True is default for some agents
 
 # Combine with custom skills
-from pyagent.skills import web_search
+from pyai.skills import web_search
 
 custom_support = agent(
     customer_service.support_agent().__instructions__ + 
@@ -380,8 +380,8 @@ custom_support = agent(
 ## Listing Available Templates
 
 ```python
-from pyagent.usecases import list_usecases
-from pyagent.usecases.industry import list_industries
+from pyai.usecases import list_usecases
+from pyai.usecases.industry import list_industries
 
 # See all general use cases
 print(list_usecases())

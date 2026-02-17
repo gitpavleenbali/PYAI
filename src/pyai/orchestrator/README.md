@@ -1,4 +1,4 @@
-# PyAgent Orchestrator
+# pyai Orchestrator
 
 **Enterprise Workflow Automation & Multi-Agent Coordination**
 
@@ -16,8 +16,8 @@ The `orchestrator` module provides powerful workflow management, task scheduling
 ## Quick Start
 
 ```python
-from pyagent.orchestrator import Orchestrator, Task, AgentPatterns
-from pyagent import agent
+from pyai.orchestrator import Orchestrator, Task, AgentPatterns
+from pyai import agent
 
 # Create orchestrator
 orch = Orchestrator()
@@ -41,7 +41,7 @@ print(task.output)  # Research results
 Tasks are units of work assigned to agents:
 
 ```python
-from pyagent.orchestrator import Task, TaskStatus
+from pyai.orchestrator import Task, TaskStatus
 
 task = Task(
     id="task-001",
@@ -70,7 +70,7 @@ task = Task(
 Workflows chain multiple tasks with dependencies:
 
 ```python
-from pyagent.orchestrator import Workflow
+from pyai.orchestrator import Workflow
 
 workflow = Workflow(
     id="workflow-001",
@@ -91,7 +91,7 @@ orch.submit_workflow(workflow)
 Schedule tasks to run automatically:
 
 ```python
-from pyagent.orchestrator import ScheduledJob
+from pyai.orchestrator import ScheduledJob
 
 # Run once at specific time
 job = ScheduledJob(
@@ -122,7 +122,7 @@ orch.schedule(job)
 ### Creating an Orchestrator
 
 ```python
-from pyagent.orchestrator import Orchestrator
+from pyai.orchestrator import Orchestrator
 
 # Basic orchestrator
 orch = Orchestrator()
@@ -193,7 +193,7 @@ orch.emit("custom.event", data={"key": "value"})
 The orchestrator supports various execution patterns:
 
 ```python
-from pyagent.orchestrator import ExecutionPattern
+from pyai.orchestrator import ExecutionPattern
 
 # Sequential: One task at a time
 orch.submit_workflow(workflow, pattern=ExecutionPattern.SEQUENTIAL)
@@ -217,8 +217,8 @@ Pre-built multi-agent coordination strategies:
 One agent coordinates and delegates to specialized agents:
 
 ```python
-from pyagent.orchestrator import AgentPatterns
-from pyagent import agent
+from pyai.orchestrator import AgentPatterns
+from pyai import agent
 
 # Create specialized agents
 researcher = agent("You are a research specialist")
@@ -299,8 +299,8 @@ print(result.reasoning_chain)  # Step-by-step reasoning
 ### Customer Support Workflow
 
 ```python
-from pyagent.orchestrator import Orchestrator, AgentPatterns
-from pyagent import agent
+from pyai.orchestrator import Orchestrator, AgentPatterns
+from pyai import agent
 
 orch = Orchestrator()
 
@@ -334,7 +334,7 @@ for ticket in incoming_tickets:
 ### Research Pipeline
 
 ```python
-from pyagent.orchestrator import Workflow, Task
+from pyai.orchestrator import Workflow, Task
 
 # Create tasks
 gather_task = Task(
@@ -372,8 +372,8 @@ orch.submit_workflow(workflow)
 ### Scheduled Monitoring
 
 ```python
-from pyagent.orchestrator import Orchestrator, ScheduledJob
-from pyagent import agent
+from pyai.orchestrator import Orchestrator, ScheduledJob
+from pyai import agent
 
 orch = Orchestrator()
 monitor = agent("Analyze system metrics and alert on anomalies")

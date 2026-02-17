@@ -1,5 +1,5 @@
 """
-PyAgent Type Stubs - For static type checking support
+PyAI Type Stubs - For static type checking support
 
 This file provides type hints for IDE/Pylance support with lazy imports.
 """
@@ -15,8 +15,8 @@ __version__: str
 # =============================================================================
 
 @dataclass
-class PyAgentConfig:
-    """Global configuration for PyAgent"""
+class PyAIConfig:
+    """Global configuration for PyAI"""
 
     api_key: Optional[str] = None
     provider: Literal["openai", "anthropic", "azure"] = "openai"
@@ -35,8 +35,8 @@ def configure(
     azure_endpoint: Optional[str] = None,
     azure_deployment: Optional[str] = None,
     **kwargs: Any,
-) -> PyAgentConfig: ...
-def get_config() -> PyAgentConfig: ...
+) -> PyAIConfig: ...
+def get_config() -> PyAIConfig: ...
 
 # =============================================================================
 # One-Liner Functions

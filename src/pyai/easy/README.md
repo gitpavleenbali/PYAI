@@ -1,8 +1,8 @@
-# PyAgent Easy Module
+# pyai Easy Module
 
 **One-Liner Intelligence for Python Developers**
 
-The `easy` module is the heart of PyAgent - providing simple, single-function interfaces to powerful AI capabilities. If you can write `print()`, you can use PyAgent.
+The `easy` module is the heart of PyAI - providing simple, single-function interfaces to powerful AI capabilities. If you can write `print()`, you can use pyai.
 
 ## Philosophy
 
@@ -16,7 +16,7 @@ response = client.chat.completions.create(
 answer = response.choices[0].message.content
 
 # Just do this:
-from pyagent import ask
+from pyai import ask
 answer = ask("What is AI?")
 ```
 
@@ -63,7 +63,7 @@ answer = ask("What is AI?")
 ### ask() - The Simplest AI Call
 
 ```python
-from pyagent import ask
+from pyai import ask
 
 # Basic usage
 answer = ask("What is the capital of France?")
@@ -81,7 +81,7 @@ answer = ask(
 ### agent() - Create Intelligent Agents
 
 ```python
-from pyagent import agent
+from pyai import agent
 
 # Simple agent
 assistant = agent("You are a helpful assistant")
@@ -97,7 +97,7 @@ chatbot("My name is Alice")
 chatbot("What's my name?")  # Remembers: "Alice"
 
 # Agent with skills
-from pyagent.skills import web_search
+from pyai.skills import web_search
 
 researcher = agent(
     "You are a researcher with web access",
@@ -108,7 +108,7 @@ researcher = agent(
 ### chat() - Conversational AI
 
 ```python
-from pyagent import chat
+from pyai import chat
 
 # Single turn
 response, history = chat("Hello!")
@@ -127,7 +127,7 @@ response, _ = chat(
 ### research() - Deep Investigation
 
 ```python
-from pyagent import research
+from pyai import research
 
 # Basic research
 report = research("impacts of climate change")
@@ -149,7 +149,7 @@ report = research(
 ### extract() - Structured Data Extraction
 
 ```python
-from pyagent import extract
+from pyai import extract
 
 text = "John Smith, CEO of TechCorp, announced $10M funding"
 
@@ -170,7 +170,7 @@ dates = extract(document, extract_type="dates")
 ### rag() - Knowledge-Grounded Responses
 
 ```python
-from pyagent import rag
+from pyai import rag
 
 # With documents
 response = rag(
@@ -182,7 +182,7 @@ response = rag(
 )
 
 # With vector store
-from pyagent.integrations import vector_db
+from pyai.integrations import vector_db
 store = vector_db.connect("chroma", path="./my_docs")
 
 response = rag(
@@ -194,7 +194,7 @@ response = rag(
 ### code() - Code Generation & Explanation
 
 ```python
-from pyagent import code
+from pyai import code
 
 # Generate code
 result = code("quicksort in Python", task="generate")
@@ -212,7 +212,7 @@ fixed = code(buggy_code, task="fix", error=error_message)
 ### guardrails() - Safety & Validation
 
 ```python
-from pyagent import guardrails
+from pyai import guardrails
 
 # Create guardrails
 rails = guardrails()
@@ -231,7 +231,7 @@ safe_agent = rails.wrap(my_agent)
 ### handoff() - Agent Coordination
 
 ```python
-from pyagent import agent, handoff
+from pyai import agent, handoff
 
 # Create specialized agents
 sales = agent("You are a sales expert")
@@ -251,7 +251,7 @@ result = handoff(
 ### Global Settings
 
 ```python
-from pyagent.easy import config
+from pyai.easy import config
 
 # Set default model
 config.set_model("gpt-4o")
@@ -304,6 +304,6 @@ easy/
 
 ## See Also
 
-- [PyAgent Quickstart](../../docs/QUICKSTART.md)
+- [PyAI Quickstart](../../docs/QUICKSTART.md)
 - [API Reference](../../docs/API_REFERENCE.md)
 - [Examples](../../examples/)

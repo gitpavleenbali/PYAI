@@ -23,7 +23,7 @@ Fixes #(issue number)
 
 - [ ] Tests pass locally (`pytest tests/`)
 - [ ] New tests added for new functionality
-- [ ] Type checking passes (`mypy src/pyagent`)
+- [ ] Type checking passes (`mypy src/PyAI`)
 
 ## Checklist
 

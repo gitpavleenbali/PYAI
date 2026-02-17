@@ -4,11 +4,11 @@ include README.md
 include pyproject.toml
 
 # Include type stubs
-include pyagent/py.typed
-include pyagent/__init__.pyi
+include pyai/py.typed
+include pyai/__init__.pyi
 
 # Include all Python files
-recursive-include pyagent *.py
+recursive-include PyAI *.py
 
 # Include documentation
 recursive-include docs *.md
@@ -17,7 +17,7 @@ recursive-include docs *.md
 recursive-include examples *.py *.yaml *.yml
 
 # Include README files in all modules
-recursive-include pyagent README.md
+recursive-include PyAI README.md
 
 # Exclude cache and temporary files
 global-exclude __pycache__

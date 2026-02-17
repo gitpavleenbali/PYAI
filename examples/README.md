@@ -1,6 +1,6 @@
-# PyAgent Examples
+# pyai Examples
 
-This directory contains working examples demonstrating PyAgent's capabilities.
+This directory contains working examples demonstrating PyAI's capabilities.
 
 ## Prerequisites
 
@@ -87,7 +87,7 @@ python examples/custom_skills.py
 
 ### Comprehensive Examples (`comprehensive_examples.py`)
 
-Full showcase of all PyAgent capabilities:
+Full showcase of all PyAI capabilities:
 - Simple Q&A
 - Custom agents
 - Chat with memory
@@ -112,7 +112,7 @@ python examples/quick_start.py
 
 All examples use `config_helper.py` which automatically:
 1. Detects your authentication method
-2. Configures PyAgent appropriately
+2. Configures PyAI appropriately
 3. Falls back to Azure AD if no API key is set
 
 ## Running Examples
@@ -140,7 +140,7 @@ Some corporate networks may block external requests. Try:
 - Using Azure endpoints within your network
 
 ### Import Errors
-Ensure PyAgent is installed:
+Ensure PyAI is installed:
 ```bash
 pip install -e .
 ```

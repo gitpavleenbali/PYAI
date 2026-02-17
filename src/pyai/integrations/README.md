@@ -1,6 +1,6 @@
-# PyAgent Integrations
+# pyai Integrations
 
-**Connect PyAgent to the AI Ecosystem**
+**Connect PyAI to the AI Ecosystem**
 
 The `integrations` module provides seamless connections to popular AI frameworks, vector databases, and external services. Build on top of existing infrastructure without starting from scratch.
 
@@ -8,7 +8,7 @@ The `integrations` module provides seamless connections to popular AI frameworks
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         PyAgent                                  │
+│                         PyAI                                  │
 │                                                                  │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
 │  │  LangChain   │  │   Semantic   │  │   Vector     │          │
@@ -35,14 +35,14 @@ Import tools, chains, and retrievers from LangChain:
 ### Import LangChain Tools
 
 ```python
-from pyagent.integrations import langchain
+from pyai.integrations import langchain
 
 # Import search tools
 search_tool = langchain.import_tool("serpapi")
 wiki_tool = langchain.import_tool("wikipedia")
 
-# Use with PyAgent
-from pyagent import agent
+# Use with PyAI
+from pyai import agent
 researcher = agent("Research assistant", skills=[search_tool, wiki_tool])
 ```
 
@@ -52,14 +52,14 @@ researcher = agent("Research assistant", skills=[search_tool, wiki_tool])
 # Import an existing chain
 summarizer = langchain.import_chain(my_langchain_chain)
 
-# Use like a PyAgent skill
+# Use like a PyAI skill
 result = summarizer("Long document text...")
 ```
 
-### Export PyAgent to LangChain
+### Export PyAI to LangChain
 
 ```python
-# Create a PyAgent agent
+# Create a PyAI agent
 my_agent = agent("You are a helpful assistant")
 
 # Export as LangChain tool
@@ -76,8 +76,8 @@ langchain_agent = AgentExecutor(tools=[lc_tool], ...)
 # Import LangChain retriever
 retriever = langchain.import_retriever(my_langchain_retriever)
 
-# Use with PyAgent RAG
-from pyagent import rag
+# Use with PyAI RAG
+from pyai import rag
 response = rag("question", retriever=retriever)
 ```
 
@@ -88,7 +88,7 @@ Integrate with Microsoft's Semantic Kernel:
 ### Create Kernel
 
 ```python
-from pyagent.integrations import semantic_kernel
+from pyai.integrations import semantic_kernel
 
 # Create with Azure OpenAI
 kernel = semantic_kernel.create_kernel(
@@ -135,11 +135,11 @@ result = semantic_kernel.execute_plan(kernel, plan)
 ### Export to SK
 
 ```python
-# Export PyAgent agent as SK function
+# Export PyAI agent as SK function
 sk_function = semantic_kernel.export_to_kernel(
     kernel,
     my_agent,
-    name="PyAgentHelper"
+    name="PyAIHelper"
 )
 ```
 
@@ -167,7 +167,7 @@ Unified interface for vector storage:
 ### Connection Factory
 
 ```python
-from pyagent.integrations import vector_db
+from pyai.integrations import vector_db
 
 # Azure AI Search
 store = vector_db.connect(
@@ -232,7 +232,7 @@ store.delete("1")
 
 ```python
 # Use custom embedding model
-from pyagent.core import embeddings
+from pyai.core import embeddings
 
 store = vector_db.connect(
     "chroma",
@@ -244,8 +244,8 @@ store = vector_db.connect(
 ### Use with RAG
 
 ```python
-from pyagent import rag
-from pyagent.integrations import vector_db
+from pyai import rag
+from pyai.integrations import vector_db
 
 # Connect to your vector store
 store = vector_db.connect("azure_ai_search", ...)

@@ -1,39 +1,39 @@
-# 🐼🤖 PyAgent - The Pandas of AI Agents
+# 🐼🤖 PyAI - The Pandas of AI Agents
 
 **Build AI-powered applications in 3 lines or less.**
 
-PyAgent is a revolutionary Python library that brings pandas-like simplicity to AI agent development. No boilerplate. No configuration hell. Just results.
+PyAI is a revolutionary Python library that brings pandas-like simplicity to AI agent development. No boilerplate. No configuration hell. Just results.
 
-[![PyPI version](https://badge.fury.io/py/pyagent.svg)](https://badge.fury.io/py/pyagent)
+[![PyPI version](https://badge.fury.io/py/pyai.svg)](https://badge.fury.io/py/PyAI)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✨ Why PyAgent?
+## ✨ Why PyAI?
 
 | Framework | Lines for RAG | Lines for Weather Agent | Lines for Research |
 |-----------|--------------|------------------------|-------------------|
 | LangChain | 15+ | 20+ | 25+ |
 | LlamaIndex | 10+ | 15+ | 20+ |
 | CrewAI | 30+ | 25+ | 35+ |
-| **PyAgent** | **2** | **1** | **1** |
+| **PyAI** | **2** | **1** | **1** |
 
 ### What makes it legendary:
 
 - **🚀 One-liner operations** for common AI tasks
 - **📦 Batteries included** - prebuilt agents ready to use
-- **🐼 Pandas-like API** - if you know pandas, you know pyagent
+- **🐼 Pandas-like API** - if you know pandas, you know PyAI
 - **⚙️ Zero configuration** - sensible defaults that just work
 - **🔧 Power when needed** - full access to low-level components
 
 ## 📦 Installation
 
 ```bash
-pip install pyagent
+pip install pyai
 
 # With optional dependencies
-pip install pyagent[openai]      # For OpenAI models
-pip install pyagent[anthropic]   # For Anthropic models
-pip install pyagent[all]         # Everything
+pip install pyai[openai]      # For OpenAI models
+pip install pyai[anthropic]   # For Anthropic models
+pip install pyai[all]         # Everything
 ```
 
 ## 🚀 Quick Start
@@ -41,7 +41,7 @@ pip install pyagent[all]         # Everything
 ### Ask anything in one line
 
 ```python
-from pyagent import ask
+from pyai import ask
 
 answer = ask("What is the capital of France?")
 # 'Paris'
@@ -56,7 +56,7 @@ answer = ask("List 5 Python tips", format="bullet")
 ### RAG in 2 lines
 
 ```python
-from pyagent import rag
+from pyai import rag
 
 # Index and query
 docs = rag.index("./documents")
@@ -69,7 +69,7 @@ answer = rag.ask("./research_paper.pdf", "What methodology was used?")
 ### Research any topic
 
 ```python
-from pyagent import research
+from pyai import research
 
 result = research("AI trends 2024")
 print(result.summary)
@@ -80,7 +80,7 @@ print(result.insights)
 ### Fetch real-time data
 
 ```python
-from pyagent import fetch
+from pyai import fetch
 
 # Weather
 weather = fetch.weather("New York")
@@ -99,7 +99,7 @@ print(f"${stock.price} ({stock.change_percent}%)")
 ### Generate content
 
 ```python
-from pyagent import generate
+from pyai import generate
 
 # Code
 code = generate("fibonacci function", type="code")
@@ -114,7 +114,7 @@ article = generate("blog post about AI", type="article")
 ### Create custom agents
 
 ```python
-from pyagent import agent
+from pyai import agent
 
 # Custom agent
 coder = agent("You are an expert Python developer")
@@ -133,7 +133,7 @@ assistant("What are the top trends?")  # Remembers context
 ### Chat sessions
 
 ```python
-from pyagent import chat
+from pyai import chat
 
 session = chat(persona="teacher")
 session("Explain machine learning")
@@ -144,7 +144,7 @@ session("Give me an example")          # Still has context
 ### Summarize anything
 
 ```python
-from pyagent import summarize
+from pyai import summarize
 
 # From text
 summary = summarize("Long article text here...")
@@ -164,7 +164,7 @@ summary = summarize(text, style="executive")
 ### Extract structured data
 
 ```python
-from pyagent import extract
+from pyai import extract
 
 text = "John is 30 years old and lives in New York"
 
@@ -180,7 +180,7 @@ emails = extract(document, "all email addresses")
 ### Translate
 
 ```python
-from pyagent import translate
+from pyai import translate
 
 spanish = translate("Hello, how are you?", to="spanish")
 # "¡Hola, ¿cómo estás?"
@@ -192,7 +192,7 @@ japanese = translate("Welcome", to="japanese", formal=True)
 ### Analyze data
 
 ```python
-from pyagent import analyze
+from pyai import analyze
 
 # Analyze any data
 insights = analyze.data(sales_data)
@@ -207,7 +207,7 @@ sentiment = analyze.sentiment("I love this product!")
 ### Code operations
 
 ```python
-from pyagent import code
+from pyai import code
 
 # Write code
 python_code = code.write("function to parse JSON files")
@@ -230,7 +230,7 @@ improved = code.refactor(old_code, goal="readability")
 
 ## ⚙️ Configuration
 
-PyAgent works out of the box with environment variables:
+PyAI works out of the box with environment variables:
 
 ```bash
 export OPENAI_API_KEY=sk-...
@@ -244,9 +244,9 @@ export AZURE_OPENAI_ENDPOINT=https://...
 Or configure programmatically:
 
 ```python
-import pyagent
+import pyai
 
-pyagent.configure(
+pyai.configure(
     api_key="sk-...",
     model="gpt-4o",
     temperature=0.7
@@ -258,7 +258,7 @@ pyagent.configure(
 When you need full control, access the complete low-level API:
 
 ```python
-from pyagent import Agent, Blueprint, Workflow, Memory
+from pyai import Agent, Blueprint, Workflow, Memory
 
 # Full control over agent
 agent = Agent(
@@ -299,8 +299,8 @@ result = qa.run("What is the conclusion?")
 ```
 
 ```python
-# PyAgent: 2 lines
-from pyagent import rag
+# pyai: 2 lines
+from pyai import rag
 answer = rag.ask("./docs", "What is the conclusion?")
 ```
 
@@ -330,8 +330,8 @@ result = crew.kickoff()
 ```
 
 ```python
-# PyAgent: 1 line
-from pyagent import research
+# pyai: 1 line
+from pyai import research
 result = research("AI trends")
 ```
 
@@ -345,4 +345,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-**PyAgent** - *Because AI development should be as simple as `import pandas as pd`*
+**PyAI** - *Because AI development should be as simple as `import pandas as pd`*

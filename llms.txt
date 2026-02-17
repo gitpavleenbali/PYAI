@@ -1,10 +1,10 @@
-# PyAgent - LLM Context File
+# pyai - LLM Context File
 
-> This file provides context for LLMs working with PyAgent code.
+> This file provides context for LLMs working with PyAI code.
 
-## What is PyAgent?
+## What is PyAI?
 
-PyAgent is a Python SDK for building AI agents. It provides:
+PyAI is a Python SDK for building AI agents. It provides:
 - Simple one-liner APIs: `ask()`, `summarize()`, `research()`
 - Full agent framework: `Agent`, `Runner`, `Workflow`
 - Multi-provider support: OpenAI, Azure OpenAI, Anthropic, Ollama
@@ -14,14 +14,14 @@ PyAgent is a Python SDK for building AI agents. It provides:
 
 ### Simple Q&A
 ```python
-from pyagent import ask
+from pyai import ask
 answer = ask("What is Python?")
 ```
 
 ### Agent with Tools
 ```python
-from pyagent import Agent, Runner
-from pyagent.skills import tool
+from pyai import Agent, Runner
+from pyai.skills import tool
 
 @tool(description="Get weather")
 async def get_weather(city: str) -> str:
@@ -33,8 +33,8 @@ result = Runner.run_sync(agent, "Weather in NYC?")
 
 ### Multi-Agent
 ```python
-from pyagent import Agent
-from pyagent.blueprint import Workflow, Step
+from pyai import Agent
+from pyai.blueprint import Workflow, Step
 
 researcher = Agent(name="Researcher")
 writer = Agent(name="Writer")
@@ -46,16 +46,16 @@ workflow.add_step(Step("write", writer))
 
 ## Package Structure
 
-- `pyagent.easy` - Simple APIs (ask, summarize, research)
-- `pyagent.core` - Agent, LLM providers, memory
-- `pyagent.runner` - Execution (Runner.run, Runner.run_sync)
-- `pyagent.blueprint` - Workflows, patterns
-- `pyagent.skills` - Tools (@tool decorator)
-- `pyagent.plugins` - Plugin system
-- `pyagent.kernel` - Service registry
-- `pyagent.config` - YAML/JSON configuration
-- `pyagent.sessions` - SQLite/Redis sessions
-- `pyagent.tokens` - Token counting
+- `pyai.easy` - Simple APIs (ask, summarize, research)
+- `pyai.core` - Agent, LLM providers, memory
+- `pyai.runner` - Execution (Runner.run, Runner.run_sync)
+- `pyai.blueprint` - Workflows, patterns
+- `pyai.skills` - Tools (@tool decorator)
+- `pyai.plugins` - Plugin system
+- `pyai.kernel` - Service registry
+- `pyai.config` - YAML/JSON configuration
+- `pyai.sessions` - SQLite/Redis sessions
+- `pyai.tokens` - Token counting
 
 ## Key Classes
 

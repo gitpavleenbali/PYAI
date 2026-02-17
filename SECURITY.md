@@ -10,7 +10,7 @@
 
 ## Reporting a Vulnerability
 
-We take security seriously. If you discover a security vulnerability in PyAgent, please report it responsibly.
+We take security seriously. If you discover a security vulnerability in PyAI, please report it responsibly.
 
 ### How to Report
 
@@ -34,7 +34,7 @@ We take security seriously. If you discover a security vulnerability in PyAgent,
 
 ### Security Best Practices
 
-When using PyAgent:
+When using PyAI:
 
 1. **Never commit API keys** - Use environment variables
 2. **Use Azure AD authentication** - Preferred for enterprise
@@ -47,9 +47,9 @@ When using PyAgent:
 We regularly update dependencies to patch known vulnerabilities. Run:
 
 ```bash
-pip install --upgrade pyagent
+pip install --upgrade PyAI
 ```
 
 ## Responsible Disclosure
 
-We appreciate the security research community's efforts in keeping PyAgent secure. We will acknowledge researchers who report valid vulnerabilities (with permission).
+We appreciate the security research community's efforts in keeping PyAI secure. We will acknowledge researchers who report valid vulnerabilities (with permission).

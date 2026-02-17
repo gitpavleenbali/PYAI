@@ -1,6 +1,6 @@
-# PyAgent Build Script
+# pyai Build Script
 # ====================
-# PowerShell script for building and packaging PyAgent
+# PowerShell script for building and packaging PyAI
 # For Windows / Microsoft environments
 
 param(
@@ -41,7 +41,7 @@ function Clean-Build {
 }
 
 function Build-Package {
-    Write-Header "Building PyAgent Package"
+    Write-Header "Building PyAI Package"
     
     # Ensure build tools are available
     Write-Host "Installing build tools..."
@@ -57,7 +57,7 @@ function Build-Package {
 }
 
 function Install-Package {
-    Write-Header "Installing PyAgent Locally"
+    Write-Header "Installing PyAI Locally"
     
     # Install in development mode with all dependencies
     python -m pip install -e ".[all,dev]"
@@ -69,7 +69,7 @@ function Run-Tests {
     Write-Header "Running Tests"
     
     # Run pytest
-    python -m pytest tests/ -v --cov=pyagent --cov-report=term-missing
+    python -m pytest tests/ -v --cov=PyAI --cov-report=term-missing
     
     Write-Host "Tests complete!" -ForegroundColor Green
 }
@@ -88,7 +88,7 @@ function Build-Docs {
     }
     
     # Copy README files from modules
-    $ModuleReadmes = Get-ChildItem -Path (Join-Path $ProjectRoot "pyagent") -Recurse -Filter "README.md"
+    $ModuleReadmes = Get-ChildItem -Path (Join-Path $ProjectRoot "pyai") -Recurse -Filter "README.md"
     foreach ($file in $ModuleReadmes) {
         $relativePath = $file.Directory.Name
         Copy-Item -Path $file.FullName -Destination (Join-Path $DocsOutput "$relativePath-README.md")
@@ -100,12 +100,12 @@ function Build-Docs {
 function Create-ZipDistribution {
     Write-Header "Creating ZIP Distribution"
     
-    $ZipDir = Join-Path $DistDir "pyagent-release"
+    $ZipDir = Join-Path $DistDir "PyAI-release"
     New-Item -ItemType Directory -Path $ZipDir -Force | Out-Null
     
     # Copy source files
     $ItemsToCopy = @(
-        "pyagent",
+        "pyai",
         "examples",
         "docs",
         "README.md",
@@ -131,8 +131,8 @@ function Create-ZipDistribution {
     Get-ChildItem -Path $ZipDir -Recurse -Directory -Filter "__pycache__" | Remove-Item -Recurse -Force
     
     # Create the zip file
-    $version = (python -c "import pyagent; print(pyagent.__version__)" 2>$null) -or "0.2.0"
-    $ZipFile = Join-Path $DistDir "pyagent-$version-release.zip"
+    $version = (python -c "import pyai; print(pyai.__version__)" 2>$null) -or "0.2.0"
+    $ZipFile = Join-Path $DistDir "PyAI-$version-release.zip"
     
     Compress-Archive -Path "$ZipDir\*" -DestinationPath $ZipFile -Force
     

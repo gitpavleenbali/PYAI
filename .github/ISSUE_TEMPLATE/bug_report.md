@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug to help us improve PyAgent
+about: Report a bug to help us improve PyAI
 title: "[BUG] "
 labels: bug
 assignees: ""
@@ -10,7 +10,7 @@ assignees: ""
 A clear and concise description of what the bug is.
 
 ## Steps to Reproduce
-1. Install PyAgent: `pip install pyagent`
+1. Install PyAI: `pip install pyai`
 2. Run the following code:
 ```python
 # Your code here
@@ -24,7 +24,7 @@ What you expected to happen.
 What actually happened.
 
 ## Environment
-- PyAgent version: 
+- PyAI version: 
 - Python version: 
 - OS: 
 - Model provider (OpenAI/Azure/etc): 
