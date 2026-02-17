@@ -1,8 +1,8 @@
 site_name: PyAgent
 site_description: Build AI agents in Python with elegant simplicity
-site_url: https://gitpavleenbali.github.io/pyagent/
-repo_url: https://github.com/gitpavleenbali/pyagent
-repo_name: gitpavleenbali/pyagent
+site_url: https://gitpavleenbali.github.io/PYAI/
+repo_url: https://github.com/gitpavleenbali/PYAI
+repo_name: gitpavleenbali/PYAI
 
 theme:
   name: material
