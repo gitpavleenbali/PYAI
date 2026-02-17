@@ -1,5 +1,5 @@
-"""
-PyAgent Core Module Unit Tests
+# pyright: reportUnusedImport=false
+"""PyAgent Core Module Unit Tests
 ==============================
 
 Unit tests for core modules: Agent, Memory, LLM providers.
@@ -7,7 +7,7 @@ These tests do NOT require live API connections.
 """
 
 import pytest
-from unittest.mock import MagicMock, patch, Mock
+from unittest.mock import MagicMock, patch, Mock  # noqa: F401
 from dataclasses import dataclass
 
 

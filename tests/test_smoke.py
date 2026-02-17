@@ -1,5 +1,4 @@
-"""
-PyAgent Smoke Tests
+"""# pyright: reportMissingImports=falsePyAgent Smoke Tests
 ===================
 
 Quick sanity checks to verify basic functionality.

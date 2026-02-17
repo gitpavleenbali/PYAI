@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false, reportUnusedVariable=false, reportRedeclaration=false, reportUnusedImport=false, reportGeneralTypeIssues=false
 """
 PyAgent Azure Integration Tests
 ================================

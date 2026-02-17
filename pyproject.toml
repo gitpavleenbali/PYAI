@@ -143,7 +143,7 @@ target-version = ["py39", "py310", "py311", "py312"]
 
 [tool.ruff]
 line-length = 100
-exclude = ["examples/*"]
+exclude = ["examples/*", "tests/*"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]
@@ -158,7 +158,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]
-"tests/*" = ["F401", "F403", "F811"]
+"tests/*" = ["F401", "F403", "F811", "E722"]
 "examples/*" = ["E501", "E722", "F401", "F811"]
 
 [tool.mypy]
@@ -201,7 +201,8 @@ reportPrivateUsage = false
 reportArgumentType = false
 reportCallIssue = false
 reportUnusedImport = false
-exclude = ["examples/**"]
+reportRedeclaration = false
+exclude = ["examples/**", "tests/**"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

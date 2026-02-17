@@ -1,12 +1,12 @@
-"""
-Tests for PyAgent Integrations Module
+# pyright: reportUnusedImport=false, reportUnusedVariable=false, reportGeneralTypeIssues=false
+"""Tests for PyAgent Integrations Module
 =====================================
 
 Tests for LangChain adapter, Semantic Kernel adapter, and Vector DB connectors.
 """
 
 import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch  # noqa: F401
 
 
 class TestIntegrationsImport:

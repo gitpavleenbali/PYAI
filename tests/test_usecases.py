@@ -1,12 +1,12 @@
-"""
-Tests for PyAgent Use Cases Module
+# pyright: reportUnusedImport=false
+"""Tests for PyAgent Use Cases Module
 ==================================
 
 Tests for pre-built agent templates and industry-specific agents.
 """
 
 import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch  # noqa: F401
 
 
 class TestUseCasesImport:

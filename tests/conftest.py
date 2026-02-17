@@ -1,5 +1,5 @@
-"""
-PyAgent Test Configuration
+# pyright: reportPrivateUsage=false
+"""PyAgent Test Configuration
 ===========================
 
 Pytest configuration and fixtures.
