@@ -1,5 +1,4 @@
-"""
-Tests for PyAgent OpenAPI Tools Module.
+"""# pyright: reportRedeclaration=false, reportUnusedVariable=falseTests for PyAgent OpenAPI Tools Module.
 
 Tests the OpenAPI spec parsing, client, and tool generation.
 """

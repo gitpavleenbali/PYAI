@@ -38,6 +38,23 @@ Example:
     )
 """
 
+from typing import TYPE_CHECKING
+
+# Type stubs for static analysis (pyright/pylance)
+if TYPE_CHECKING:
+    from .base import TestCase, EvalSet, EvalResult, EvalMetrics, EvalStatus
+    from .evaluator import (
+        Evaluator, EvalConfig, evaluate_agent, compare_agents,
+        load_eval_set, create_eval_set
+    )
+    from .criteria import (
+        EvalCriteria, CriteriaResult, ExactMatch, ContainsMatch,
+        NotContainsMatch, RegexMatch, JSONSchema, LengthCheck,
+        SemanticSimilarity, LLMJudge, CustomCriteria, CompositeCriteria,
+        exact_match, contains, not_contains, regex, json_schema,
+        length, semantic, llm_judge, custom, composite
+    )
+
 # Lazy imports to avoid circular dependencies
 def __getattr__(name):
     """Lazy load evaluation components."""

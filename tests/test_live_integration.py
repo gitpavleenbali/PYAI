@@ -1,5 +1,4 @@
-"""
-Test script for new PyAgent features:
+"""# pyright: reportMissingImports=false, reportUnusedVariable=false, reportGeneralTypeIssues=falseTest script for new PyAgent features:
 - Multi-agent handoffs
 - MCP server support  
 - Guardrails

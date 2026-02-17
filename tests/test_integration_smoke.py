@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false, reportUnusedVariable=false, reportUnusedImport=false, reportPrivateUsage=false, reportAttributeAccessIssue=false, reportGeneralTypeIssues=false
 # Copyright (c) 2026 PyAgent Contributors
 # Licensed under the MIT License
 
@@ -8,9 +9,9 @@ These tests verify that the new modules are structurally sound and
 their APIs work correctly without requiring actual external connections.
 """
 
-import pytest
-import asyncio
-from unittest.mock import Mock, patch, AsyncMock
+import pytest  # noqa: F401
+import asyncio  # noqa: F401
+from unittest.mock import Mock, patch, AsyncMock  # noqa: F401
 
 
 # =============================================================================

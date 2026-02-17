@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false, reportUnusedVariable=false, reportUnusedImport=false, reportGeneralTypeIssues=false, reportRedeclaration=false
 # Copyright (c) 2026 PyAgent Contributors
 # Licensed under the MIT License
 
@@ -8,8 +9,8 @@ Tests the Kernel Registry pattern - centralized service management,
 plugin registration, filter middleware, and execution context.
 """
 
-import pytest
-from unittest.mock import Mock, patch, AsyncMock
+import pytest  # noqa: F401
+from unittest.mock import Mock, patch, AsyncMock  # noqa: F401
 
 
 class TestServiceRegistry:

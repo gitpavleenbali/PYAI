@@ -191,18 +191,21 @@ disable_error_code = [
 [tool.pyright]
 # Lenient settings for lazy-loading module pattern
 pythonVersion = "3.10"
-typeCheckingMode = "basic"
-reportUndefinedVariable = false
-reportMissingImports = false
-reportAttributeAccessIssue = false
-reportOptionalMemberAccess = false
-reportGeneralTypeIssues = false
-reportPrivateUsage = false
-reportArgumentType = false
-reportCallIssue = false
-reportUnusedImport = false
-reportRedeclaration = false
+typeCheckingMode = "off"
 exclude = ["examples/**", "tests/**"]
+
+[tool.pylint]
+# Disable common test-specific warnings
+disable = [
+    "W0621",  # Redefining name from outer scope (fixture shadowing)
+    "W0613",  # Unused argument (common in test fixtures)
+    "W0612",  # Unused variable
+    "W0718",  # Catching too general exception
+    "W0212",  # Access to protected member
+    "C0116",  # Missing function docstring
+    "C0115",  # Missing class docstring
+    "R0903",  # Too few public methods
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

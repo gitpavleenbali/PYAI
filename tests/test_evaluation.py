@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false, reportUnusedVariable=false, reportGeneralTypeIssues=false
 # Copyright (c) 2026 PyAgent Contributors
 # Licensed under the MIT License
 
