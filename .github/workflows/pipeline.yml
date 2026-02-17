@@ -99,7 +99,7 @@ jobs:
           pip install mypy
 
       - name: Run mypy
-        run: mypy src/pyai --ignore-missing-imports
+        run: mypy src/pyai
 
   # ============================================================================
   # STAGE 3: Security Scan (bandit) - STRICT: Fails on high severity issues

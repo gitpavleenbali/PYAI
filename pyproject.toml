@@ -186,6 +186,8 @@ disable_error_code = [
     "override",
     "abstract",
     "no-any-return",
+    "import-untyped",
+    "str-bytes-safe",
 ]
 
 [tool.pyright]

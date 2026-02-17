@@ -268,4 +268,6 @@ class A2AServer(HTTPServer):
     def url(self) -> str:
         """Get server URL."""
         host, port = self.server_address
-        return f"http://{host}:{port}"
+        # Ensure host is a string (may be bytes in some cases)
+        host_str = host.decode() if isinstance(host, bytes) else host
+        return f"http://{host_str}:{port}"
