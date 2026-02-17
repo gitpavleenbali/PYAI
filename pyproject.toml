@@ -119,11 +119,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/gitpavleenbali/pyagent"
-Documentation = "https://github.com/gitpavleenbali/pyagent#readme"
-Repository = "https://github.com/gitpavleenbali/pyagent"
-Issues = "https://github.com/gitpavleenbali/pyagent/issues"
-Changelog = "https://github.com/gitpavleenbali/pyagent/blob/main/docs/CHANGELOG.md"
+Homepage = "https://github.com/gitpavleenbali/PYAI"
+Documentation = "https://github.com/gitpavleenbali/PYAI#readme"
+Repository = "https://github.com/gitpavleenbali/PYAI"
+Issues = "https://github.com/gitpavleenbali/PYAI/issues"
+Changelog = "https://github.com/gitpavleenbali/PYAI/blob/master/docs/CHANGELOG.md"
 
 [tool.hatch.build.targets.sdist]
 include = [
@@ -135,7 +135,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pyagent"]
+packages = ["src/pyai"]
 
 [tool.black]
 line-length = 100
@@ -218,7 +218,7 @@ exclude_dirs = ["tests", "examples"]
 skips = ["B101", "B601", "B602", "B307"]  # assert, shell, subprocess, eval
 
 [tool.coverage.run]
-source = ["src/pyagent"]
+source = ["src/pyai"]
 omit = ["tests/*", "examples/*"]
 
 [tool.coverage.report]
