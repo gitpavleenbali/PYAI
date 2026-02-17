@@ -1,4 +1,4 @@
-# PyAgent Use Cases Architecture
+# PyAI Use Cases Architecture
 
 > **Industry Solutions, Enterprise Templates, and Real-World Applications**  
 > **Author:** Senior Cloud Architect & GenAI Expert  
@@ -8,7 +8,7 @@
 
 ## 1. Use Case Taxonomy
 
-### The PyAgent Use Case Pyramid
+### The PyAI Use Case Pyramid
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -55,7 +55,7 @@
 ### 2.1 Customer Service
 
 ```python
-from pyagent.usecases import customer_service
+from PyAI.usecases import customer_service
 
 # Pre-built agents
 support = customer_service.support_agent()
@@ -107,7 +107,7 @@ response = team.handle("My internet is slow and I have billing questions")
 ### 2.2 Sales & Marketing
 
 ```python
-from pyagent.usecases import sales
+from PyAI.usecases import sales
 
 # Lead qualification
 qualifier = sales.lead_qualifier()
@@ -125,7 +125,7 @@ response = assistant("Draft a proposal for a $100K deal")
 ### 2.3 Operations & Administration
 
 ```python
-from pyagent.usecases import operations
+from PyAI.usecases import operations
 
 # Document processing
 doc_processor = operations.document_processor()
@@ -144,7 +144,7 @@ weekly = reporter.generate_weekly_summary(metrics)
 ### 2.4 Development & Engineering
 
 ```python
-from pyagent.usecases import development
+from PyAI.usecases import development
 
 # Code generation
 coder = development.code_assistant()
@@ -162,7 +162,7 @@ docs = doc_generator.from_code(source_files)
 ### 2.5 Gaming & Entertainment
 
 ```python
-from pyagent.usecases import gaming
+from PyAI.usecases import gaming
 
 # NPC dialogue
 npc = gaming.npc_agent(
@@ -187,7 +187,7 @@ chapter = narrator.continue_story(previous_events)
 ### 3.1 Telecommunications
 
 ```python
-from pyagent.usecases.industry import telecom
+from PyAI.usecases.industry import telecom
 
 # Plan advisor
 advisor = telecom.plan_advisor()
@@ -248,7 +248,7 @@ offer = retention.create_retention_offer(customer_profile)
 ### 3.2 Healthcare
 
 ```python
-from pyagent.usecases.industry import healthcare
+from PyAI.usecases.industry import healthcare
 
 # Appointment scheduling
 scheduler = healthcare.appointment_scheduler()
@@ -268,7 +268,7 @@ info = symptom_info.explain("headache", disclaimer=True)
 ### 3.3 Finance & Banking
 
 ```python
-from pyagent.usecases.industry import finance
+from PyAI.usecases.industry import finance
 
 # Banking assistant
 banker = finance.banking_assistant()
@@ -292,7 +292,7 @@ options = loan.compare_options(amount=50000, term=5, credit_score=750)
 ### 3.4 E-Commerce
 
 ```python
-from pyagent.usecases.industry import ecommerce
+from PyAI.usecases.industry import ecommerce
 
 # Shopping assistant
 shopper = ecommerce.shopping_assistant()
@@ -314,7 +314,7 @@ label = returns.process_return(order_id="ORD-12345", reason="wrong size")
 ### 3.5 Education
 
 ```python
-from pyagent.usecases.industry import education
+from PyAI.usecases.industry import education
 
 # AI tutor
 tutor = education.tutor(subject="mathematics", level="high school")
@@ -364,7 +364,7 @@ feedback = reviewer.review(essay_text, rubric=rubric)
 │   ┌─────────────────────────────────────────────────────────────────┐   │
 │   │                    SHARED INFRASTRUCTURE                         │   │
 │   │                                                                   │   │
-│   │   PyAgent Core │ LLM Router │ Observability │ Security          │   │
+│   │   PyAI Core │ LLM Router │ Observability │ Security          │   │
 │   └─────────────────────────────────────────────────────────────────┘   │
 │                                                                          │
 └─────────────────────────────────────────────────────────────────────────┘
@@ -373,7 +373,7 @@ feedback = reviewer.review(essay_text, rubric=rubric)
 ### 4.2 Compliance & Governance
 
 ```python
-from pyagent.usecases import enterprise
+from PyAI.usecases import enterprise
 
 # Compliance wrapper
 compliant_agent = enterprise.make_compliant(
@@ -400,7 +400,7 @@ protected_agent = enterprise.with_access_control(
 ### 4.3 Integration Hub
 
 ```python
-from pyagent.usecases import integrations
+from PyAI.usecases import integrations
 
 # CRM Integration
 crm_agent = integrations.salesforce_agent(
@@ -431,16 +431,16 @@ Start simple, add complexity as needed:
 
 ```python
 # Level 1: Simple API
-from pyagent import ask
+from PyAI import ask
 answer = ask("How do I reset my password?")
 
 # Level 2: Custom Agent
-from pyagent import agent
+from PyAI import agent
 support = agent("You are a support agent for TechCorp")
 answer = support("How do I reset my password?")
 
 # Level 3: With Guardrails
-from pyagent import agent, guardrails
+from PyAI import agent, guardrails
 support = agent(
     "You are a support agent",
     input_guard=guardrails.no_pii,
@@ -448,12 +448,12 @@ support = agent(
 )
 
 # Level 4: Multi-Agent Team
-from pyagent.usecases import customer_service
+from PyAI.usecases import customer_service
 team = customer_service.create_team([support, technical, billing])
 answer = team.handle(query)
 
 # Level 5: Full Enterprise
-from pyagent.usecases import enterprise
+from PyAI.usecases import enterprise
 production_team = enterprise.make_compliant(
     team,
     regulations=["GDPR"],
@@ -465,7 +465,7 @@ production_team = enterprise.make_compliant(
 ### 5.2 Testing Use Cases
 
 ```python
-from pyagent.testing import UseCaseTester
+from PyAI.testing import UseCaseTester
 
 tester = UseCaseTester(customer_service.support_agent())
 
@@ -504,7 +504,7 @@ report = tester.generate_report()
 ### 6.2 Monitoring Dashboard
 
 ```python
-from pyagent.monitoring import UseCaseMonitor
+from PyAI.monitoring import UseCaseMonitor
 
 monitor = UseCaseMonitor(use_case="customer_service")
 
@@ -552,4 +552,4 @@ monitor.set_alert(
 
 ---
 
-*This document is maintained by the PyAgent Solutions Team.*
+*This document is maintained by the PyAI Solutions Team.*

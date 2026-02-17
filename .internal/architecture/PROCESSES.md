@@ -1,4 +1,4 @@
-# PyAgent Processes & Orchestration Architecture
+# PyAI Processes & Orchestration Architecture
 
 > **Multi-Agent Workflows, Orchestration Patterns, and Process Design**  
 > **Author:** Senior Cloud Architect  
@@ -60,7 +60,7 @@
 The atomic unit of work - a single agent operation.
 
 ```python
-from pyagent.orchestrator import Task, TaskStatus
+from PyAI.orchestrator import Task, TaskStatus
 
 task = Task(
     name="Research AI trends",
@@ -79,7 +79,7 @@ task = Task(
 A collection of tasks with execution patterns.
 
 ```python
-from pyagent.orchestrator import Workflow, ExecutionPattern
+from PyAI.orchestrator import Workflow, ExecutionPattern
 
 workflow = Workflow(
     name="Research Report",
@@ -100,7 +100,7 @@ result = await workflow.run()
 The controller that manages workflow execution.
 
 ```python
-from pyagent.orchestrator import Orchestrator
+from PyAI.orchestrator import Orchestrator
 
 orchestrator = Orchestrator()
 
@@ -233,7 +233,7 @@ A supervisor agent delegates to and coordinates workers.
 ```
 
 ```python
-from pyagent.orchestrator import AgentPatterns
+from PyAI.orchestrator import AgentPatterns
 
 team = AgentPatterns.supervisor(
     supervisor=manager_agent,
@@ -398,7 +398,7 @@ result = AgentPatterns.chain_of_thought(
 Direct transfer from one agent to another.
 
 ```python
-from pyagent import handoff, agent
+from PyAI import handoff, agent
 
 sales_agent = agent("You handle sales inquiries")
 support_agent = agent("You handle technical support")
@@ -489,7 +489,7 @@ workflow = Workflow(
 ### 6.1 Workflow State
 
 ```python
-from pyagent.orchestrator import WorkflowState
+from PyAI.orchestrator import WorkflowState
 
 # Check state
 state = workflow.get_state()
@@ -636,4 +636,4 @@ for execution in history:
 
 ---
 
-*This document is maintained by the PyAgent Architecture Team.*
+*This document is maintained by the PyAI Architecture Team.*

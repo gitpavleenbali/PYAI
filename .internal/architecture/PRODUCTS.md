@@ -1,4 +1,4 @@
-# PyAgent Products & Tooling Architecture
+# PyAI Products & Tooling Architecture
 
 > **Product Integrations, SDKs, and Tooling Ecosystem**  
 > **Author:** Senior Cloud Architect  
@@ -8,7 +8,7 @@
 
 ## 1. Product Landscape
 
-### PyAgent in the Ecosystem
+### PyAI in the Ecosystem
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -29,7 +29,7 @@
 │                                   │                                      │
 │                           ┌───────┴───────┐                             │
 │                           │               │                             │
-│                           │   PYAGENT     │                             │
+│                           │   PyAI     │                             │
 │                           │               │                             │
 │                           │  Simple API   │                             │
 │                           │  Enterprise   │                             │
@@ -46,17 +46,17 @@
 
 ### 2.1 LangChain Adapter
 
-**Purpose:** Bridge PyAgent with LangChain ecosystem for tool sharing and chain integration.
+**Purpose:** Bridge PyAI with LangChain ecosystem for tool sharing and chain integration.
 
 ```python
-from pyagent.integrations import langchain_adapter
+from PyAI.integrations import langchain_adapter
 
-# Import LangChain tool into PyAgent
+# Import LangChain tool into PyAI
 from langchain.tools import WikipediaQueryRun
 wiki_tool = langchain_adapter.import_tool(WikipediaQueryRun())
 
-# Export PyAgent agent for LangChain use
-lc_agent = langchain_adapter.export_agent(my_pyagent)
+# Export PyAI agent for LangChain use
+lc_agent = langchain_adapter.export_agent(my_PyAI)
 
 # Import LangChain chain
 my_chain = langchain_adapter.import_chain(lc_chain)
@@ -66,7 +66,7 @@ my_chain = langchain_adapter.import_chain(lc_chain)
 
 ```
 ┌─────────────────┐         ┌─────────────────┐
-│   LangChain     │         │    PyAgent      │
+│   LangChain     │         │    PyAI      │
 │                 │         │                 │
 │  ┌───────────┐  │ import  │  ┌───────────┐  │
 │  │   Tool    │──┼────────►│  │  Skill    │  │
@@ -87,12 +87,12 @@ my_chain = langchain_adapter.import_chain(lc_chain)
 **Purpose:** Integration with Microsoft Semantic Kernel for enterprise AI orchestration.
 
 ```python
-from pyagent.integrations import semantic_kernel_adapter
+from PyAI.integrations import semantic_kernel_adapter
 
-# Create SK kernel from PyAgent
+# Create SK kernel from PyAI
 kernel = semantic_kernel_adapter.create_kernel()
 
-# PyAgent function as SK function
+# PyAI function as SK function
 sk_func = semantic_kernel_adapter.create_kernel_function(my_agent)
 
 # Import SK plugin
@@ -110,7 +110,7 @@ result = await semantic_kernel_adapter.execute_plan(plan)
 │                    SEMANTIC KERNEL INTEGRATION                           │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
-│    Semantic Kernel                         PyAgent                       │
+│    Semantic Kernel                         PyAI                       │
 │   ┌─────────────────┐                 ┌─────────────────┐               │
 │   │                 │                 │                 │               │
 │   │  ┌───────────┐  │  ◄──────────►   │  ┌───────────┐  │               │
@@ -135,7 +135,7 @@ result = await semantic_kernel_adapter.execute_plan(plan)
 **Purpose:** Unified interface for vector stores to power RAG operations.
 
 ```python
-from pyagent.integrations import vector_db
+from PyAI.integrations import vector_db
 
 # Azure AI Search
 store = vector_db.connect("azure_ai_search",
@@ -153,7 +153,7 @@ store = vector_db.connect("pinecone",
 )
 
 # Use with RAG
-from pyagent import rag
+from PyAI import rag
 indexed = rag.index(documents, store=store)
 answer = indexed.ask("What is the main conclusion?")
 ```
@@ -214,7 +214,7 @@ answer = indexed.ask("What is the main conclusion?")
 ### 3.2 Creating MCP Tools
 
 ```python
-from pyagent import mcp
+from PyAI import mcp
 
 @mcp.tool("calculate")
 def calculate(expression: str) -> float:
@@ -235,7 +235,7 @@ server.start()
 ### 3.3 Connecting to MCP Servers
 
 ```python
-from pyagent import mcp, agent
+from PyAI import mcp, agent
 
 # Connect to external MCP servers
 github_tools = mcp.connect("npx @modelcontextprotocol/server-github")
@@ -299,26 +299,26 @@ my_agent = agent(
 ### 5.1 CLI Tools
 
 ```bash
-# Initialize new PyAgent project
-pyagent init my-project
+# Initialize new PyAI project
+PyAI init my-project
 
 # Run tests
-pyagent test
+PyAI test
 
 # Start MCP server
-pyagent mcp serve ./tools
+PyAI mcp serve ./tools
 
 # Deploy to Azure
-pyagent deploy azure --config deployment.yaml
+PyAI deploy azure --config deployment.yaml
 
 # Generate documentation
-pyagent docs generate
+PyAI docs generate
 ```
 
 ### 5.2 VS Code Extension (Planned)
 
 Features:
-- IntelliSense for PyAgent APIs
+- IntelliSense for PyAI APIs
 - Agent preview panel
 - Trace visualization
 - MCP server management
@@ -327,7 +327,7 @@ Features:
 ### 5.3 Testing Utilities
 
 ```python
-from pyagent.testing import MockLLM, TestAgent
+from PyAI.testing import MockLLM, TestAgent
 
 # Mock LLM for testing
 mock = MockLLM(responses={
@@ -355,7 +355,7 @@ with TestAgent(my_agent, llm=mock) as test:
 │                                                                          │
 │   Application                                                            │
 │   ┌─────────────────────────────────────────────────────────────────┐   │
-│   │  from pyagent import trace                                       │   │
+│   │  from PyAI import trace                                       │   │
 │   │  trace.enable()                                                  │   │
 │   │  with trace.span("agent_run"):                                   │   │
 │   │      result = agent("Hello")                                     │   │
@@ -378,12 +378,12 @@ with TestAgent(my_agent, llm=mock) as test:
 
 | Metric | Description | Type |
 |--------|-------------|------|
-| `pyagent_requests_total` | Total LLM requests | Counter |
-| `pyagent_request_duration_seconds` | Request latency | Histogram |
-| `pyagent_tokens_used` | Token consumption | Counter |
-| `pyagent_guardrails_blocked` | Blocked requests | Counter |
-| `pyagent_handoffs_total` | Agent handoffs | Counter |
-| `pyagent_errors_total` | Error count | Counter |
+| `PyAI_requests_total` | Total LLM requests | Counter |
+| `PyAI_request_duration_seconds` | Request latency | Histogram |
+| `PyAI_tokens_used` | Token consumption | Counter |
+| `PyAI_guardrails_blocked` | Blocked requests | Counter |
+| `PyAI_handoffs_total` | Agent handoffs | Counter |
+| `PyAI_errors_total` | Error count | Counter |
 
 ---
 
@@ -416,4 +416,4 @@ with TestAgent(my_agent, llm=mock) as test:
 
 ---
 
-*This document is maintained by the PyAgent Product Team.*
+*This document is maintained by the PyAI Product Team.*

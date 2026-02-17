@@ -1,8 +1,8 @@
-# PyAgent v0.4.0 Release Plan
+# PyAI v0.4.0 Release Plan
 
 > **Sprint Duration:** February 2026  
 > **Goal:** Close all critical gaps identified in competitor analysis  
-> **Target:** Feature parity with ALL competitors + unique PyAgent advantages  
+> **Target:** Feature parity with ALL competitors + unique PyAI advantages  
 > **Status:** ✅ COMPLETED - All Phase 1, 2, 3, and 4 features implemented
 
 ---
@@ -71,7 +71,7 @@ The following modules were created to address initial gaps:
 | `models/` | Multi-provider support (7 providers) | ✅ Done | ✅ 33 tests |
 | `sessions/` | SQLite/Redis sessions | ✅ Done | ✅ 33 tests |
 | `evaluation/` | Agent evaluation (like `adk eval`) | ✅ Done | ✅ 36 tests |
-| `cli/` | CLI commands (`pyagent run/eval/serve`) | ✅ Done | ✅ Has tests |
+| `cli/` | CLI commands (`PyAI run/eval/serve`) | ✅ Done | ✅ Has tests |
 | `code_executor/` | Safe code execution sandbox | ✅ Done | ✅ Has tests |
 | `errors/` | Structured error hierarchy | ✅ Done | ✅ Has tests |
 
@@ -83,19 +83,19 @@ The following modules were created to address initial gaps:
 
 ### 1.1 Structured Runner Pattern ✅
 **Gap Source:** OpenAI Agents SDK  
-**Status:** ✅ Implemented in `src/pyagent/runner/`
+**Status:** ✅ Implemented in `src/PyAI/runner/`
 
 ```python
 # Implemented API
-from pyagent import Runner, RunConfig, RunResult
+from PyAI import Runner, RunConfig, RunResult
 
 config = RunConfig(max_turns=5, timeout=30)
 result = Runner.run(agent, "Hello", config=config)
 ```
 
 **Files Created:**
-- [x] `src/pyagent/runner/executor.py` - Runner, RunConfig, RunResult
-- [x] `src/pyagent/runner/streaming.py` - StreamingRunner
+- [x] `src/PyAI/runner/executor.py` - Runner, RunConfig, RunResult
+- [x] `src/PyAI/runner/streaming.py` - StreamingRunner
 - [x] `tests/test_runner.py` - 29 tests
 
 **Tests:** 29/29 passing
@@ -104,11 +104,11 @@ result = Runner.run(agent, "Hello", config=config)
 
 ### 1.2 OpenAPI Tool Auto-Generation ✅
 **Gap Source:** Google ADK  
-**Status:** ✅ Implemented in `src/pyagent/openapi/`
+**Status:** ✅ Implemented in `src/PyAI/openapi/`
 
 ```python
 # Implemented API
-from pyagent import OpenAPITools, create_tools_from_openapi
+from PyAI import OpenAPITools, create_tools_from_openapi
 
 api = OpenAPITools("petstore.yaml", base_url="https://api.example.com")
 tools = api.tools
@@ -116,9 +116,9 @@ result = api.call("listPets", limit=5)
 ```
 
 **Files Created:**
-- [x] `src/pyagent/openapi/parser.py` - OpenAPI spec parser
-- [x] `src/pyagent/openapi/client.py` - HTTP client
-- [x] `src/pyagent/openapi/tools.py` - Tool generation
+- [x] `src/PyAI/openapi/parser.py` - OpenAPI spec parser
+- [x] `src/PyAI/openapi/client.py` - HTTP client
+- [x] `src/PyAI/openapi/tools.py` - Tool generation
 - [x] `tests/test_openapi.py` - 40 tests
 
 **Tests:** 40/40 passing
@@ -127,11 +127,11 @@ result = api.call("listPets", limit=5)
 
 ### 1.3 Agent Config (No-Code Agents) ✅
 **Gap Source:** Google ADK  
-**Status:** ✅ Implemented in `src/pyagent/config/`
+**Status:** ✅ Implemented in `src/PyAI/config/`
 
 ```python
 # Implemented API
-from pyagent import load_agent, AgentBuilder, AgentConfig
+from PyAI import load_agent, AgentBuilder, AgentConfig
 
 # Load from YAML/JSON
 agent = load_agent("agent.yaml")
@@ -146,9 +146,9 @@ agent = AgentBuilder.build(config)
 ```
 
 **Files Created:**
-- [x] `src/pyagent/config/schema.py` - Config schema validation
-- [x] `src/pyagent/config/loader.py` - YAML/JSON loader
-- [x] `src/pyagent/config/builder.py` - Agent builder
+- [x] `src/PyAI/config/schema.py` - Config schema validation
+- [x] `src/PyAI/config/loader.py` - YAML/JSON loader
+- [x] `src/PyAI/config/builder.py` - Agent builder
 - [x] `tests/test_config.py` - 24 tests
 
 **Tests:** 24/24 passing
@@ -157,11 +157,11 @@ agent = AgentBuilder.build(config)
 
 ### 1.4 Agents as Plugins Pattern ✅
 **Gap Source:** Microsoft Semantic Kernel  
-**Status:** ✅ Implemented in `src/pyagent/plugins/`
+**Status:** ✅ Implemented in `src/PyAI/plugins/`
 
 ```python
 # Implemented API
-from pyagent import Plugin, PluginRegistry
+from PyAI import Plugin, PluginRegistry
 
 # Create plugins
 @plugin
@@ -179,10 +179,10 @@ tools = registry.get_all_tools()
 ```
 
 **Files Created:**
-- [x] `src/pyagent/plugins/base.py` - Plugin base classes
-- [x] `src/pyagent/plugins/registry.py` - Plugin registry
-- [x] `src/pyagent/plugins/decorators.py` - @plugin, @function decorators
-- [x] `src/pyagent/plugins/loader.py` - Plugin loading
+- [x] `src/PyAI/plugins/base.py` - Plugin base classes
+- [x] `src/PyAI/plugins/registry.py` - Plugin registry
+- [x] `src/PyAI/plugins/decorators.py` - @plugin, @function decorators
+- [x] `src/PyAI/plugins/loader.py` - Plugin loading
 - [x] `tests/test_plugins.py` - 22 tests
 
 **Tests:** 22/22 passing
@@ -191,11 +191,11 @@ tools = registry.get_all_tools()
 
 ### 1.5 Token Counting Utility ✅
 **Gap Source:** Anthropic SDK  
-**Status:** ✅ Implemented in `src/pyagent/tokens/`
+**Status:** ✅ Implemented in `src/PyAI/tokens/`
 
 ```python
 # Implemented API
-from pyagent import TokenCounter, count_tokens, calculate_cost, CostTracker
+from PyAI import TokenCounter, count_tokens, calculate_cost, CostTracker
 
 # Count tokens
 counter = TokenCounter("gpt-4")
@@ -212,8 +212,8 @@ print(tracker.summary())
 ```
 
 **Files Created:**
-- [x] `src/pyagent/tokens/counter.py` - Token counting with tiktoken
-- [x] `src/pyagent/tokens/cost.py` - Cost calculation
+- [x] `src/PyAI/tokens/counter.py` - Token counting with tiktoken
+- [x] `src/PyAI/tokens/cost.py` - Cost calculation
 - [x] `tests/test_tokens.py` - 40 tests
 
 **Tests:** 40/40 passing
@@ -224,11 +224,11 @@ print(tracker.summary())
 
 ### 2.1 Tool Auto-Discovery from Directory ✅
 **Gap Source:** Strands Agents  
-**Status:** ✅ Implemented in `src/pyagent/tools/`
+**Status:** ✅ Implemented in `src/PyAI/tools/`
 
 ```python
 # Implemented API
-from pyagent import Agent, ToolDiscovery, ToolWatcher, tool, discover_tools
+from PyAI import Agent, ToolDiscovery, ToolWatcher, tool, discover_tools
 
 # Auto-discover tools from directory
 tools = discover_tools("./my_tools/")
@@ -250,10 +250,10 @@ def my_func(x: int) -> str:
 ```
 
 **Files Created:**
-- [x] `src/pyagent/tools/base.py` - Tool class, @tool decorator, ToolResult
-- [x] `src/pyagent/tools/discovery.py` - ToolDiscovery class
-- [x] `src/pyagent/tools/watcher.py` - ToolWatcher with hot-reload
-- [x] `src/pyagent/tools/__init__.py` - Module exports
+- [x] `src/PyAI/tools/base.py` - Tool class, @tool decorator, ToolResult
+- [x] `src/PyAI/tools/discovery.py` - ToolDiscovery class
+- [x] `src/PyAI/tools/watcher.py` - ToolWatcher with hot-reload
+- [x] `src/PyAI/tools/__init__.py` - Module exports
 - [x] `tests/test_phase2_phase3.py` - 12 tool tests
 
 **Tests:** 12/12 passing
@@ -262,11 +262,11 @@ def my_func(x: int) -> str:
 
 ### 2.2 Context Caching ✅
 **Gap Source:** Google ADK  
-**Status:** ✅ Implemented in `src/pyagent/core/cache.py`
+**Status:** ✅ Implemented in `src/PyAI/core/cache.py`
 
 ```python
 # Implemented API
-from pyagent import ContextCache, cache_context
+from PyAI import ContextCache, cache_context
 
 # Create cache with TTL
 cache = ContextCache(ttl=3600, max_entries=1000)
@@ -285,7 +285,7 @@ stats = cache.stats  # {"hits": 10, "misses": 2, "size": 5}
 ```
 
 **Files Created:**
-- [x] `src/pyagent/core/cache.py` - ContextCache, CacheEntry, @cached decorator
+- [x] `src/PyAI/core/cache.py` - ContextCache, CacheEntry, @cached decorator
 - [x] `tests/test_phase2_phase3.py` - 7 cache tests
 
 **Tests:** 7/7 passing
@@ -294,11 +294,11 @@ stats = cache.stats  # {"hits": 10, "misses": 2, "size": 5}
 
 ### 2.3 Session Rewind ✅
 **Gap Source:** Google ADK  
-**Status:** ✅ Implemented in `src/pyagent/sessions/base.py`
+**Status:** ✅ Implemented in `src/PyAI/sessions/base.py`
 
 ```python
 # Implemented API
-from pyagent.sessions import Session, SessionCheckpoint
+from PyAI.sessions import Session, SessionCheckpoint
 
 session = Session()
 session.add_user_message("Hello")
@@ -321,8 +321,8 @@ checkpoints = session.get_checkpoints()
 ```
 
 **Files Modified:**
-- [x] `src/pyagent/sessions/base.py` - Added SessionCheckpoint, checkpoint(), rewind methods
-- [x] `src/pyagent/sessions/__init__.py` - Export SessionCheckpoint
+- [x] `src/PyAI/sessions/base.py` - Added SessionCheckpoint, checkpoint(), rewind methods
+- [x] `src/PyAI/sessions/__init__.py` - Export SessionCheckpoint
 - [x] `tests/test_phase2_phase3.py` - 6 session checkpoint tests
 
 **Tests:** 6/6 passing
@@ -331,11 +331,11 @@ checkpoints = session.get_checkpoints()
 
 ### 2.4 Multimodal Support (Vision) ✅
 **Gap Source:** Google ADK, MS Semantic Kernel  
-**Status:** ✅ Implemented in `src/pyagent/multimodal/`
+**Status:** ✅ Implemented in `src/PyAI/multimodal/`
 
 ```python
 # Implemented API
-from pyagent import Image, Audio, Video, MultimodalContent
+from PyAI import Image, Audio, Video, MultimodalContent
 
 # Create images
 img = Image.from_file("photo.jpg")
@@ -359,11 +359,11 @@ content = (
 ```
 
 **Files Created:**
-- [x] `src/pyagent/multimodal/image.py` - Image class with from_url, from_file, from_base64
-- [x] `src/pyagent/multimodal/audio.py` - Audio class with format support
-- [x] `src/pyagent/multimodal/video.py` - Video class with frame extraction
-- [x] `src/pyagent/multimodal/content.py` - MultimodalContent builder
-- [x] `src/pyagent/multimodal/__init__.py` - Module exports
+- [x] `src/PyAI/multimodal/image.py` - Image class with from_url, from_file, from_base64
+- [x] `src/PyAI/multimodal/audio.py` - Audio class with format support
+- [x] `src/PyAI/multimodal/video.py` - Video class with frame extraction
+- [x] `src/PyAI/multimodal/content.py` - MultimodalContent builder
+- [x] `src/PyAI/multimodal/__init__.py` - Module exports
 - [x] `tests/test_phase2_phase3.py` - 12 multimodal tests
 
 **Tests:** 12/12 passing
@@ -372,11 +372,11 @@ content = (
 
 ### 2.5 More Vector DB Connectors ✅
 **Gap Source:** MS Semantic Kernel  
-**Status:** ✅ Implemented in `src/pyagent/vectordb/`
+**Status:** ✅ Implemented in `src/PyAI/vectordb/`
 
 ```python
 # Implemented API
-from pyagent import (
+from PyAI import (
     VectorStore, Document, SearchResult,
     MemoryVectorStore, ChromaStore, PineconeStore,
     WeaviateStore, QdrantStore
@@ -406,13 +406,13 @@ results = store.search("query", k=5)
 ```
 
 **Files Created:**
-- [x] `src/pyagent/vectordb/base.py` - VectorStore ABC, Document, SearchResult, embeddings
-- [x] `src/pyagent/vectordb/memory.py` - MemoryVectorStore for testing
-- [x] `src/pyagent/vectordb/chroma.py` - ChromaDB connector
-- [x] `src/pyagent/vectordb/pinecone.py` - Pinecone connector
-- [x] `src/pyagent/vectordb/weaviate.py` - Weaviate connector
-- [x] `src/pyagent/vectordb/qdrant.py` - Qdrant connector
-- [x] `src/pyagent/vectordb/__init__.py` - Module exports
+- [x] `src/PyAI/vectordb/base.py` - VectorStore ABC, Document, SearchResult, embeddings
+- [x] `src/PyAI/vectordb/memory.py` - MemoryVectorStore for testing
+- [x] `src/PyAI/vectordb/chroma.py` - ChromaDB connector
+- [x] `src/PyAI/vectordb/pinecone.py` - Pinecone connector
+- [x] `src/PyAI/vectordb/weaviate.py` - Weaviate connector
+- [x] `src/PyAI/vectordb/qdrant.py` - Qdrant connector
+- [x] `src/PyAI/vectordb/__init__.py` - Module exports
 - [x] `tests/test_phase2_phase3.py` - 7 vectordb tests
 
 **Tests:** 7/7 passing
@@ -423,11 +423,11 @@ results = store.search("query", k=5)
 
 ### 3.1 A2A Protocol Support ✅
 **Gap Source:** Google ADK  
-**Status:** ✅ Implemented in `src/pyagent/a2a/`
+**Status:** ✅ Implemented in `src/PyAI/a2a/`
 
 ```python
 # Implemented API
-from pyagent import (
+from PyAI import (
     A2AServer, A2AClient, RemoteAgent, AgentCard,
     A2ATask, A2AResponse, AgentRegistry
 )
@@ -459,11 +459,11 @@ agents = registry.discover_from_env()
 ```
 
 **Files Created:**
-- [x] `src/pyagent/a2a/protocol.py` - AgentCard, A2AMessage, A2ATask, A2AResponse
-- [x] `src/pyagent/a2a/server.py` - A2AServer, A2AEndpoint
-- [x] `src/pyagent/a2a/client.py` - A2AClient, RemoteAgent
-- [x] `src/pyagent/a2a/registry.py` - AgentRegistry for discovery
-- [x] `src/pyagent/a2a/__init__.py` - Module exports
+- [x] `src/PyAI/a2a/protocol.py` - AgentCard, A2AMessage, A2ATask, A2AResponse
+- [x] `src/PyAI/a2a/server.py` - A2AServer, A2AEndpoint
+- [x] `src/PyAI/a2a/client.py` - A2AClient, RemoteAgent
+- [x] `src/PyAI/a2a/registry.py` - AgentRegistry for discovery
+- [x] `src/PyAI/a2a/__init__.py` - Module exports
 - [x] `tests/test_phase2_phase3.py` - 12 A2A tests
 
 **Tests:** 12/12 passing
@@ -472,11 +472,11 @@ agents = registry.discover_from_env()
 
 ### 3.2 Development UI ✅
 **Gap Source:** Google ADK, Anthropic Workbench  
-**Status:** ✅ Implemented in `src/pyagent/devui/`
+**Status:** ✅ Implemented in `src/PyAI/devui/`
 
 ```python
 # Implemented API
-from pyagent import DevUI, launch_ui, AgentDashboard, AgentDebugger
+from PyAI import DevUI, launch_ui, AgentDashboard, AgentDebugger
 
 # Quick launch UI for agent
 launch_ui(agent, port=8080)
@@ -505,10 +505,10 @@ history = debugger.get_history()
 ```
 
 **Files Created:**
-- [x] `src/pyagent/devui/ui.py` - DevUI class, launch_ui() function
-- [x] `src/pyagent/devui/dashboard.py` - AgentDashboard, AgentMetrics, RunRecord
-- [x] `src/pyagent/devui/debugger.py` - AgentDebugger with breakpoints
-- [x] `src/pyagent/devui/__init__.py` - Module exports
+- [x] `src/PyAI/devui/ui.py` - DevUI class, launch_ui() function
+- [x] `src/PyAI/devui/dashboard.py` - AgentDashboard, AgentMetrics, RunRecord
+- [x] `src/PyAI/devui/debugger.py` - AgentDebugger with breakpoints
+- [x] `src/PyAI/devui/__init__.py` - Module exports
 - [x] `tests/test_phase2_phase3.py` - 9 devui tests
 
 **Tests:** 9/9 passing
@@ -517,11 +517,11 @@ history = debugger.get_history()
 
 ### 3.3 Voice/Bidirectional Streaming ✅
 **Gap Source:** OpenAI Realtime API, Strands, Google ADK  
-**Status:** ✅ Implemented in `src/pyagent/voice/`
+**Status:** ✅ Implemented in `src/PyAI/voice/`
 
 ```python
 # Implemented API
-from pyagent import (
+from PyAI import (
     VoiceSession, AudioStream, Transcriber, Synthesizer,
     AudioChunk, DuplexAudioStream
 )
@@ -557,11 +557,11 @@ audio = await synthesizer.synthesize("Hello world")
 ```
 
 **Files Created:**
-- [x] `src/pyagent/voice/stream.py` - AudioChunk, AudioStream, DuplexAudioStream
-- [x] `src/pyagent/voice/session.py` - VoiceSession for real-time audio
-- [x] `src/pyagent/voice/transcription.py` - Transcriber (Whisper)
-- [x] `src/pyagent/voice/synthesis.py` - Synthesizer (OpenAI TTS)
-- [x] `src/pyagent/voice/__init__.py` - Module exports
+- [x] `src/PyAI/voice/stream.py` - AudioChunk, AudioStream, DuplexAudioStream
+- [x] `src/PyAI/voice/session.py` - VoiceSession for real-time audio
+- [x] `src/PyAI/voice/transcription.py` - Transcriber (Whisper)
+- [x] `src/PyAI/voice/synthesis.py` - Synthesizer (OpenAI TTS)
+- [x] `src/PyAI/voice/__init__.py` - Module exports
 - [x] `tests/test_phase2_phase3.py` - 10 voice tests
 
 **Tests:** 10/10 passing
@@ -620,7 +620,7 @@ audio = await synthesizer.synthesize("Hello world")
 ```
 pyai/
 ├── src/
-│   └── pyagent/
+│   └── PyAI/
 │       ├── __init__.py
 │       ├── core/
 │       ├── easy/
@@ -643,7 +643,7 @@ pyai/
 
 **Migration Steps:**
 1. Create `src/` directory
-2. Move `pyagent/` into `src/`
+2. Move `PyAI/` into `src/`
 3. Update `pyproject.toml` for src layout
 4. Update all imports in tests
 5. Verify tests pass

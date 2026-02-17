@@ -1,4 +1,4 @@
-# PyAgent Architecture Knowledge Base
+# PyAI Architecture Knowledge Base
 
 > **The Complete Engineering Blueprint for AI Agent Systems**  
 > **Author:** Senior Cloud Architect & Tech Lead  
@@ -6,16 +6,16 @@
 
 ---
 
-## 1. What is PyAgent?
+## 1. What is PyAI?
 
 ### Vision
-PyAgent is a **pandas-for-AI-agents** library - making AI agent development as simple as data manipulation. Just as pandas revolutionized data science with simple one-liners, PyAgent aims to democratize AI agent development.
+PyAI is a **pandas-for-AI-agents** library - making AI agent development as simple as data manipulation. Just as pandas revolutionized data science with simple one-liners, PyAI aims to democratize AI agent development.
 
 ### Core Philosophy
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                        PYAGENT PHILOSOPHY                              │
+│                        PyAI PHILOSOPHY                              │
 ├────────────────────────────────────────────────────────────────────────┤
 │                                                                        │
 │   "Make the simple things simple, and the complex things possible"     │
@@ -53,7 +53,7 @@ PyAgent is a **pandas-for-AI-agents** library - making AI agent development as s
         ▼                    ▼                    ▼
 ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
 │   PROCESSES   │   │     CORE      │   │  DISTRIBUTION │
-│ (Orchestrator)│   │   PYAGENT     │   │   (PyPI)      │
+│ (Orchestrator)│   │   PyAI     │   │   (PyPI)      │
 │ ┌───────────┐ │   │ ┌───────────┐ │   │ ┌───────────┐ │
 │ │ Task      │ │   │ │  easy/*   │ │   │ │ pip       │ │
 │ │ Workflow  │ │   │ │  core/*   │ │   │ │ docs      │ │
@@ -73,14 +73,14 @@ PyAgent is a **pandas-for-AI-agents** library - making AI agent development as s
 │                           USER APPLICATION                               │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
-│   from pyagent import ask, agent, summarize, extract                     │
+│   from PyAI import ask, agent, summarize, extract                     │
 │   result = ask("What is the meaning of life?")                           │
 │                                                                          │
 └─────────────────────────────────────────────────────────────────────────┘
                                     │
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         PYAGENT EASY MODULE                              │
+│                         PyAI EASY MODULE                              │
 │                                                                          │
 │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐       │
 │  │   ask    │ │summarize │ │ extract  │ │translate │ │ generate │       │
@@ -122,7 +122,7 @@ PyAgent is a **pandas-for-AI-agents** library - making AI agent development as s
 ### Module Structure
 
 ```
-pyagent/
+PyAI/
 ├── __init__.py              # Public API exports
 ├── py.typed                 # Type hints marker
 │
@@ -316,7 +316,7 @@ User Request
 ### Custom Model Providers
 
 ```python
-from pyagent.core.llm import LLMProvider
+from PyAI.core.llm import LLMProvider
 
 class CustomProvider(LLMProvider):
     def complete(self, prompt: str, **kwargs) -> LLMResponse:
@@ -331,7 +331,7 @@ class CustomProvider(LLMProvider):
 ### Custom Guardrails
 
 ```python
-from pyagent import guardrails
+from PyAI import guardrails
 
 @guardrails.validator("no_secrets")
 def check_no_secrets(text: str) -> GuardrailResult:
@@ -345,7 +345,7 @@ def check_no_secrets(text: str) -> GuardrailResult:
 ### Custom Skills
 
 ```python
-from pyagent.skills import Skill, skill
+from PyAI.skills import Skill, skill
 
 @skill("web_search")
 class WebSearchSkill(Skill):
@@ -367,7 +367,7 @@ class WebSearchSkill(Skill):
 
 ┌─────────────────┐                          ┌─────────────────┐
 │                 │  1. Request Token        │                 │
-│   PyAgent App   │ ─────────────────────►   │   Azure AD      │
+│   PyAI App   │ ─────────────────────►   │   Azure AD      │
 │                 │                          │                 │
 │                 │  2. Access Token         │                 │
 │                 │ ◄─────────────────────   │                 │
@@ -421,8 +421,8 @@ INPUT                     PROCESSING                    OUTPUT
 
 ```bash
 # Clone and setup
-git clone https://github.com/gitpavleenbali/pyagent.git
-cd pyagent
+git clone https://github.com/gitpavleenbali/PyAI.git
+cd PyAI
 pip install -e ".[dev]"
 
 # Configure Azure
@@ -441,14 +441,14 @@ pytest tests/ -v
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pyagent-service
+  name: PyAI-service
 spec:
   replicas: 3
   template:
     spec:
       containers:
-      - name: pyagent
-        image: your-registry/pyagent:latest
+      - name: PyAI
+        image: your-registry/PyAI:latest
         env:
         - name: AZURE_OPENAI_ENDPOINT
           valueFrom:
@@ -523,4 +523,4 @@ agent_run (span)
 
 ---
 
-*This document is maintained by the PyAgent Architecture Team and updated with each major release.*
+*This document is maintained by the PyAI Architecture Team and updated with each major release.*
