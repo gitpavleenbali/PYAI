@@ -217,7 +217,14 @@ timeout_method = "thread"
 
 [tool.bandit]
 exclude_dirs = ["tests", "examples"]
-skips = ["B101", "B601", "B602", "B307"]  # assert, shell, subprocess, eval
+skips = ["B101", "B102", "B104", "B303", "B307", "B310", "B324", "B601", "B602", "B605"]
+# B101: assert used
+# B102: exec used (code executor)
+# B104: hardcoded bind all interfaces (server)
+# B303, B324: md5 hash (cache keys, not for security)
+# B307: eval used (math operations)
+# B310: urlopen (A2A client)
+# B601, B602, B605: subprocess/shell (code executor)
 
 [tool.coverage.run]
 source = ["src/pyai"]
