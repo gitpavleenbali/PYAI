@@ -258,6 +258,9 @@ class LLMInterface:
 
             return LLMResponse(content=content, model=response.model, usage=usage, raw=response)
 
+        else:
+            raise ValueError(f"Unsupported provider for chat: {self.provider}")
+
     def json(
         self, prompt: str, schema: Dict[str, Any] = None, system: str = None, **kwargs
     ) -> Dict[str, Any]:

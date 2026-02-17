@@ -161,7 +161,7 @@ class FilterRegistry:
 
     def __init__(self):
         """Initialize empty registry."""
-        self._filters: List[Filter] = []
+        self._filters: List[tuple[int, Filter]] = []
 
     def add(self, filter: Filter, priority: int = 100) -> "FilterRegistry":
         """Add a filter.
