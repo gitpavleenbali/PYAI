@@ -255,6 +255,11 @@ jobs:
     timeout-minutes: 10
     needs: [build-package]
     if: startsWith(github.ref, 'refs/tags/v')
+    environment:
+      name: pypi
+      url: https://pypi.org/project/pyai/
+    permissions:
+      id-token: write  # Required for Trusted Publishing
     steps:
       - name: Download package artifact
         uses: actions/download-artifact@v4
@@ -264,8 +269,7 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
+        # No password needed - uses Trusted Publishing via OIDC
 
   # ============================================================================
   # PIPELINE SUMMARY (runs after all publish stages)
