@@ -76,7 +76,7 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          to: '/docs/api-reference',
+          to: '/docs/API-Reference',
           label: 'API',
           position: 'left',
         },
@@ -104,16 +104,16 @@ const config: Config = {
           title: 'Learn',
           items: [
             { label: 'Quick Start', to: '/docs/quickstart' },
-            { label: 'Installation', to: '/docs/installation' },
-            { label: 'Configuration', to: '/docs/configuration' },
+            { label: 'Installation', to: '/docs/Installation' },
+            { label: 'Configuration', to: '/docs/Configuration' },
           ],
         },
         {
           title: 'API',
           items: [
-            { label: 'Easy API', to: '/docs/easy-api' },
-            { label: 'Agent API', to: '/docs/agent' },
-            { label: 'Runner', to: '/docs/runner' },
+            { label: 'Easy API', to: '/docs/Easy-Module' },
+            { label: 'Agent API', to: '/docs/Agent' },
+            { label: 'Runner', to: '/docs/Runner' },
           ],
         },
         {
@@ -127,8 +127,8 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            { label: 'Changelog', to: '/docs/changelog' },
-            { label: 'Contributing', to: '/docs/contributing' },
+            { label: 'Changelog', to: '/docs/Changelog' },
+            { label: 'Contributing', to: '/docs/Contributing' },
             { label: 'License', href: 'https://github.com/gitpavleenbali/PYAI/blob/master/LICENSE' },
           ],
         },

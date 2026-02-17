@@ -26,12 +26,6 @@ function HomepageHeader() {
             to="/docs/quickstart">
             Get Started →
           </Link>
-          <Link
-            className="button button--outline button--lg"
-            style={{marginLeft: '1rem', color: 'white', borderColor: 'white'}}
-            to="/docs/index">
-            Documentation
-          </Link>
         </div>
         <div className={styles.installCommand}>
           <code>pip install pyai</code>
