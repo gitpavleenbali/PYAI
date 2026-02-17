@@ -8,12 +8,17 @@ Central orchestration layer for AI applications.
 Manages services, plugins, filters, and provides unified execution.
 """
 
+from __future__ import annotations
+
 import asyncio
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, TYPE_CHECKING
 
 from .context import KernelContext
 from .filters import Filter, FilterContext, FilterRegistry
 from .services import Service, ServiceRegistry, ServiceType
+
+if TYPE_CHECKING:
+    from ..plugins import PluginRegistry
 
 
 class Kernel:
@@ -108,10 +113,9 @@ class Kernel:
         if isinstance(service, Service):
             self._services.add(service)
         else:
-            if not name:
-                name = service.__class__.__name__
+            service_name: str = name if name else service.__class__.__name__
             self._services.add_instance(
-                name=name,
+                name=service_name,
                 instance=service,
                 service_type=service_type,
                 is_default=is_default
@@ -211,19 +215,19 @@ class Kernel:
 
     def add_filter(
         self,
-        filter: Filter,
+        filter_instance: Filter,
         priority: int = 100
     ) -> "Kernel":
         """Add a filter to the kernel.
 
         Args:
-            filter: Filter instance
+            filter_instance: Filter instance
             priority: Execution priority (lower = earlier)
 
         Returns:
             Self for chaining
         """
-        self._filters.add(filter, priority=priority)
+        self._filters.add(filter_instance, priority=priority)
         return self
 
     # ========== Context Management ==========
@@ -468,8 +472,8 @@ class Kernel:
         llm = self.get_llm(model)
         if llm is None:
             # Use easy.ask as fallback
-            from ..easy import ask
-            result = ask(modified_prompt)
+            from ..easy.ask import ask as ask_func
+            result = ask_func(modified_prompt)
         else:
             # Use LLM service
             if hasattr(llm, "complete"):
@@ -484,13 +488,14 @@ class Kernel:
                 raise ValueError(f"LLM service {llm} not callable")
 
         # Apply post-prompt filters
-        result = self._filters.apply_prompt_rendered(
-            filter_ctx, prompt, result
+        result_str: str = str(result) if not isinstance(result, str) else result
+        result_str = self._filters.apply_prompt_rendered(
+            filter_ctx, prompt, result_str
         )
 
-        return result
+        return result_str
 
-    def invoke_prompt(self, prompt: str, **kwargs) -> str:
+    def invoke_prompt(self, prompt: str, **kwargs) -> Union[str, "asyncio.Task[str]"]:
         """Invoke a prompt (sync wrapper).
 
         Args:
@@ -498,7 +503,7 @@ class Kernel:
             **kwargs: Additional parameters
 
         Returns:
-            LLM response
+            LLM response (str if sync, Task if called from async context)
         """
         try:
             asyncio.get_running_loop()
@@ -588,19 +593,19 @@ class KernelBuilder:
 
     def add_filter(
         self,
-        filter: Filter,
+        filter_instance: Filter,
         priority: int = 100
     ) -> "KernelBuilder":
         """Add a filter to the kernel.
 
         Args:
-            filter: Filter instance
+            filter_instance: Filter instance
             priority: Execution priority
 
         Returns:
             Self for chaining
         """
-        self._filters.add(filter, priority=priority)
+        self._filters.add(filter_instance, priority=priority)
         return self
 
     def build(self) -> Kernel:
