@@ -132,12 +132,120 @@ th {
   color: white;
 }
 
-/* Mermaid diagram styling */
+/* ========================================
+   MERMAID DIAGRAM STYLING
+   ======================================== */
+
 .mermaid {
   background: var(--pyai-code-bg);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 2rem;
   margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Node/box text styling - ensure text fits and is centered */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .node path {
+  stroke-width: 2px;
+}
+
+/* Center text in all node types */
+.mermaid .nodeLabel,
+.mermaid .label,
+.mermaid .node .label,
+.mermaid .cluster-label,
+.mermaid .edgeLabel {
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-family: var(--ifm-font-family-base);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Node text container - ensure proper padding */
+.mermaid .node foreignObject {
+  overflow: visible;
+}
+
+.mermaid .node foreignObject div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px 12px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+/* Flowchart specific fixes */
+.mermaid .flowchart-link {
+  stroke-width: 2px;
+}
+
+/* Sequence diagram text */
+.mermaid .messageText,
+.mermaid .actor {
+  font-size: 14px;
+}
+
+/* Class diagram labels */
+.mermaid .classLabel .label {
+  text-align: center;
+}
+
+/* Subgraph labels */
+.mermaid .cluster .cluster-label {
+  text-align: center;
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .mermaid {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+[data-theme='dark'] .mermaid .node rect,
+[data-theme='dark'] .mermaid .node circle,
+[data-theme='dark'] .mermaid .node polygon {
+  fill: rgba(99, 102, 241, 0.2);
+  stroke: rgba(99, 102, 241, 0.6);
+}
+
+[data-theme='dark'] .mermaid .nodeLabel,
+[data-theme='dark'] .mermaid .label,
+[data-theme='dark'] .mermaid .edgeLabel {
+  color: #e2e8f0;
+  fill: #e2e8f0;
+}
+
+[data-theme='dark'] .mermaid .edgePath path {
+  stroke: #94a3b8;
+}
+
+/* Light mode adjustments */
+[data-theme='light'] .mermaid .node rect,
+[data-theme='light'] .mermaid .node circle,
+[data-theme='light'] .mermaid .node polygon {
+  fill: rgba(99, 102, 241, 0.1);
+  stroke: rgba(99, 102, 241, 0.5);
+}
+
+[data-theme='light'] .mermaid .nodeLabel,
+[data-theme='light'] .mermaid .label {
+  color: #1e293b;
+  fill: #1e293b;
 }
 
 /* Announcement bar */

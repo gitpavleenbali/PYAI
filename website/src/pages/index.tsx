@@ -11,24 +11,30 @@ import styles from './index.module.css';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={clsx('hero', styles.heroBanner)}>
+      <div className={styles.heroBackground}></div>
       <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <p className={styles.heroDescription}>
-          The Pandas of AI Agents - Build powerful AI applications in 3 lines or less
-        </p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/quickstart">
-            Get Started →
-          </Link>
-        </div>
-        <div className={styles.installCommand}>
-          <code>pip install openstackai</code>
+        <div className={styles.heroContent}>
+          <span className={styles.heroLabel}>🐍 Python SDK for AI Agents</span>
+          <Heading as="h1" className={styles.heroTitle}>
+            Build AI Agents<br />
+            <span className={styles.heroGradient}>That Actually Work</span>
+          </Heading>
+          <p className={styles.heroSubtitle}>
+            Three lines of code. Any LLM provider. Production-ready multi-agent workflows.
+          </p>
+          <div className={styles.heroButtons}>
+            <Link className={clsx('button button--lg', styles.primaryButton)} to="/docs/quickstart">
+              Get Started
+            </Link>
+            <Link className={clsx('button button--lg', styles.secondaryButton)} href="https://github.com/gitpavleenbali/PYAI">
+              <span className={styles.githubIcon}>⭐</span> Star on GitHub
+            </Link>
+          </div>
+          <div className={styles.installBox}>
+            <code className={styles.installCode}>pip install openstackai</code>
+            <button className={styles.copyButton} title="Copy to clipboard">📋</button>
+          </div>
         </div>
       </div>
     </header>
@@ -51,7 +57,7 @@ agent = Agent(
     instructions="You are a helpful AI assistant."
 )
 
-# Run synchronously
+# Run synchronously  
 result = Runner.run_sync(agent, "Hello!")
 print(result.final_output)`,
 
@@ -70,20 +76,32 @@ function CodeShowcase() {
   return (
     <section className={styles.codeShowcase}>
       <div className="container">
-        <Heading as="h2" className={styles.sectionTitle}>
-          Write Less, Build More
-        </Heading>
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionLabel}>Write Less, Build More</span>
+          <Heading as="h2" className={styles.sectionTitle}>
+            From Zero to AI Agent in <span className={styles.highlight}>3 Lines</span>
+          </Heading>
+        </div>
         <div className={styles.codeGrid}>
           <div className={styles.codeCard}>
-            <h3>⚡ Simple API</h3>
+            <div className={styles.codeCardHeader}>
+              <span className={styles.codeCardIcon}>⚡</span>
+              <h3>Simple API</h3>
+            </div>
             <CodeBlock language="python">{codeExamples.simple}</CodeBlock>
           </div>
           <div className={styles.codeCard}>
-            <h3>🤖 Agent API</h3>
+            <div className={styles.codeCardHeader}>
+              <span className={styles.codeCardIcon}>🤖</span>
+              <h3>Agent API</h3>
+            </div>
             <CodeBlock language="python">{codeExamples.agent}</CodeBlock>
           </div>
           <div className={styles.codeCard}>
-            <h3>👥 Multi-Agent</h3>
+            <div className={styles.codeCardHeader}>
+              <span className={styles.codeCardIcon}>👥</span>
+              <h3>Multi-Agent</h3>
+            </div>
             <CodeBlock language="python">{codeExamples.multiagent}</CodeBlock>
           </div>
         </div>
@@ -94,49 +112,56 @@ function CodeShowcase() {
 
 type FeatureItem = {
   title: string;
-  emoji: string;
+  icon: string;
   description: string;
+  color: string;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Simple by Design',
-    emoji: '🎯',
+    icon: '🎯',
     description: 'One-liner APIs like ask(), summarize(), research(). No boilerplate, just results.',
+    color: '#6366f1',
   },
   {
     title: 'Multi-Provider',
-    emoji: '🔌',
-    description: 'OpenAI, Azure OpenAI, Anthropic, Ollama - switch providers with one line.',
+    icon: '🔌',
+    description: 'OpenAI, Azure OpenAI, Anthropic, Ollama, Gemini - switch with one line.',
+    color: '#8b5cf6',
   },
   {
-    title: 'Multi-Agent Ready',
-    emoji: '👥',
+    title: 'Multi-Agent',
+    icon: '👥',
     description: 'Chain, supervisor, and custom orchestration patterns out of the box.',
+    color: '#a855f7',
   },
   {
-    title: 'Enterprise Grade',
-    emoji: '🏢',
+    title: 'Enterprise Ready',
+    icon: '🏢',
     description: 'Azure AD auth, sessions, guardrails, tracing, and evaluation built-in.',
+    color: '#ec4899',
   },
   {
     title: 'Extensible',
-    emoji: '🧩',
-    description: 'Plugins, custom skills, OpenAPI tools, and A2A protocol support.',
+    icon: '🧩',
+    description: 'Custom skills, OpenAPI tools, A2A protocol, and plugin architecture.',
+    color: '#f43f5e',
   },
   {
     title: 'RAG & Vector DBs',
-    emoji: '📊',
+    icon: '📊',
     description: 'ChromaDB, Pinecone, Qdrant, Weaviate - connect your knowledge base.',
+    color: '#f97316',
   },
 ];
 
-function Feature({title, emoji, description}: FeatureItem) {
+function Feature({title, icon, description, color}: FeatureItem) {
   return (
-    <div className={clsx('col col--4', styles.featureCard)}>
-      <div className={styles.featureEmoji}>{emoji}</div>
-      <Heading as="h3">{title}</Heading>
-      <p>{description}</p>
+    <div className={styles.featureCard}>
+      <div className={styles.featureIcon} style={{background: `${color}20`, color}}>{icon}</div>
+      <h3 className={styles.featureTitle}>{title}</h3>
+      <p className={styles.featureDescription}>{description}</p>
     </div>
   );
 }
@@ -145,12 +170,49 @@ function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
-        <Heading as="h2" className={styles.sectionTitle}>
-          Why openstackai?
-        </Heading>
-        <div className="row">
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionLabel}>What It Does</span>
+          <Heading as="h2" className={styles.sectionTitle}>
+            Everything You Need to Build <span className={styles.highlight}>AI Agents</span>
+          </Heading>
+        </div>
+        <div className={styles.featureGrid}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const integrations = [
+  { name: 'OpenAI', emoji: '🤖' },
+  { name: 'Azure', emoji: '☁️' },
+  { name: 'Anthropic', emoji: '🧠' },
+  { name: 'Ollama', emoji: '🦙' },
+  { name: 'ChromaDB', emoji: '🔮' },
+  { name: 'Pinecone', emoji: '🌲' },
+  { name: 'Qdrant', emoji: '🎯' },
+  { name: 'Weaviate', emoji: '🕸️' },
+];
+
+function IntegrationsSection() {
+  return (
+    <section className={styles.integrations}>
+      <div className="container">
+        <div className={styles.sectionHeader}>
+          <span className={styles.sectionLabel}>Works With Everything</span>
+          <Heading as="h2" className={styles.sectionTitle}>
+            <span className={styles.highlight}>Any Provider.</span> Your Choice.
+          </Heading>
+        </div>
+        <div className={styles.integrationsGrid}>
+          {integrations.map((item, idx) => (
+            <div key={idx} className={styles.integrationItem}>
+              <span className={styles.integrationEmoji}>{item.emoji}</span>
+              <span className={styles.integrationName}>{item.name}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -162,18 +224,21 @@ function CTASection() {
   return (
     <section className={styles.ctaSection}>
       <div className="container">
-        <Heading as="h2">Ready to Build?</Heading>
-        <p>Join developers building the next generation of AI applications.</p>
-        <div className={styles.buttons}>
-          <Link className="button button--primary button--lg" to="/docs/quickstart">
-            Start Building →
-          </Link>
-          <Link
-            className="button button--outline button--lg"
-            style={{marginLeft: '1rem'}}
-            href="https://github.com/gitpavleenbali/openstackai">
-            ⭐ Star on GitHub
-          </Link>
+        <div className={styles.ctaContent}>
+          <Heading as="h2" className={styles.ctaTitle}>
+            Ready to Build <span className={styles.highlight}>AI Agents</span>?
+          </Heading>
+          <p className={styles.ctaDescription}>
+            Join developers building the next generation of AI applications.
+          </p>
+          <div className={styles.ctaButtons}>
+            <Link className={clsx('button button--lg', styles.primaryButton)} to="/docs/quickstart">
+              Start Building →
+            </Link>
+            <Link className={clsx('button button--lg', styles.secondaryButton)} to="/docs/API-Reference">
+              View API Docs
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -181,15 +246,15 @@ function CTASection() {
 }
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
       title="Build AI Agents in Python"
-      description="openstackai - The Pandas of AI Agents. Build powerful AI applications in 3 lines or less.">
+      description="openstackai - The SDK for building AI agents in Python. Build powerful multi-agent AI applications in 3 lines or less.">
       <HomepageHeader />
       <main>
         <CodeShowcase />
         <HomepageFeatures />
+        <IntegrationsSection />
         <CTASection />
       </main>
     </Layout>
