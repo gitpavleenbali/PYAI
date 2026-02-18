@@ -30,6 +30,9 @@ function HomepageHeader() {
             <Link className={clsx('button button--lg', styles.secondaryButton)} href="https://github.com/gitpavleenbali/PYAI">
               <span className={styles.githubIcon}>⭐</span> Star on GitHub
             </Link>
+            <Link className={clsx('button button--lg', styles.pypiButton)} href="https://pypi.org/project/openstackai/">
+              📦 View on PyPI
+            </Link>
           </div>
           <div className={styles.installBox}>
             <code className={styles.installCode}>pip install openstackai</code>

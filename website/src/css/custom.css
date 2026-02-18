@@ -319,6 +319,17 @@ th {
     width: 85vw;
     max-width: 350px;
     background: var(--ifm-background-color);
+    z-index: 9999 !important;
+  }
+  
+  /* Ensure sidebar backdrop covers everything */
+  .navbar-sidebar__backdrop {
+    z-index: 9998 !important;
+  }
+  
+  /* Navbar itself needs high z-index */
+  .navbar {
+    z-index: 9997 !important;
   }
   
   .navbar-sidebar__brand {
