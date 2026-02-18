@@ -35,6 +35,11 @@ const config: Config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
 
+  // Client modules for mobile enhancements
+  clientModules: [
+    require.resolve('./src/theme/MobileDocsMenu.js'),
+  ],
+
   presets: [
     [
       'classic',

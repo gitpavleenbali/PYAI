@@ -410,6 +410,66 @@ th {
     max-height: calc(100vh - 120px) !important;
     padding-bottom: 2rem !important;
   }
+  
+  /* ========================================
+     MOBILE DOCS SIDEBAR TOGGLE BUTTON
+     ======================================== */
+  
+  /* Style the mobile docs sidebar toggle (breadcrumbs area) */
+  .theme-doc-breadcrumbs {
+    position: relative;
+  }
+  
+  /* Make the sidebar breadcrumb clickable area bigger on mobile */
+  .breadcrumbs__link {
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem !important;
+  }
+  
+  /* Show docs navbar items in mobile sidebar - Docusaurus uses the navbar-sidebar for this */
+  .navbar-sidebar .menu__list {
+    padding: 0 !important;
+  }
+  
+  /* Docs sidebar items when shown in navbar-sidebar (hamburger menu) */
+  .navbar-sidebar .menu__list-item {
+    margin: 0 !important;
+  }
+  
+  .navbar-sidebar .menu__link {
+    padding: 0.875rem 1.25rem !important;
+    font-size: 1rem !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+  }
+  
+  .navbar-sidebar .menu__link:hover {
+    background: rgba(99, 102, 241, 0.1) !important;
+  }
+  
+  .navbar-sidebar .menu__link--active {
+    background: rgba(99, 102, 241, 0.15) !important;
+    color: var(--ifm-color-primary) !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Nested menu items in navbar-sidebar */
+  .navbar-sidebar .menu__list .menu__list {
+    padding-left: 1rem !important;
+    border-left: 2px solid rgba(99, 102, 241, 0.2);
+    margin-left: 1rem;
+  }
+  
+  /* Category labels */
+  .navbar-sidebar .menu__list-item-collapsible > .menu__link {
+    font-weight: 600;
+    color: var(--ifm-heading-color);
+  }
+  
+  /* Expand/collapse icons */
+  .navbar-sidebar .menu__caret {
+    padding: 0.5rem !important;
+  }
 
   /* Mobile TOC button */
   .tocMobile_wQxH {
