@@ -200,7 +200,9 @@ class AzureAISearchStore(VectorStore):
 class PineconeStore(VectorStore):
     """Pinecone vector store."""
 
-    def __init__(self, api_key: str = None, environment: str = None, index_name: str = "openstackai-docs"):
+    def __init__(
+        self, api_key: str = None, environment: str = None, index_name: str = "openstackai-docs"
+    ):
         self.api_key = api_key or os.environ.get("PINECONE_API_KEY")
         self.environment = environment or os.environ.get("PINECONE_ENVIRONMENT")
         self.index_name = index_name

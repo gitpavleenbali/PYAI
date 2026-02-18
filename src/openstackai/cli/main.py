@@ -212,7 +212,9 @@ def cmd_serve(args: argparse.Namespace) -> int:
             from pydantic import BaseModel
 
             app = FastAPI(
-                title="openstackai API", version=__version__, description="AI Agent API powered by openstackai"
+                title="openstackai API",
+                version=__version__,
+                description="AI Agent API powered by openstackai",
             )
 
             class ChatRequest(BaseModel):
