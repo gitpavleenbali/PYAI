@@ -499,7 +499,7 @@ from openstackai.skills import Skill, ToolSkill, ActionSkill, SkillRegistry
 from openstackai.blueprint import Blueprint, Workflow, Pipeline
 ```
 
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for advanced usage patterns.
+See [ARCHITECTURE.md](./Architecture.md) for advanced usage patterns.
 
 ---
 
@@ -542,4 +542,4 @@ from openstackai import ask, agent, rag, fetch, code, chat
 
 ---
 
-*For architectural details, see [ARCHITECTURE.md](./ARCHITECTURE.md)*
+*For architectural details, see [ARCHITECTURE.md](./Architecture.md)*

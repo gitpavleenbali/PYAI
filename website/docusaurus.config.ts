@@ -19,7 +19,6 @@ const config: Config = {
   trailingSlash: false,
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
 
   i18n: {
     defaultLocale: 'en',
@@ -29,6 +28,10 @@ const config: Config = {
   // Enable Mermaid diagrams
   markdown: {
     mermaid: true,
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      return result;
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
 

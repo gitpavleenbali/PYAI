@@ -135,7 +135,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/pyai"]
+packages = ["src/openstackai"]
 
 [tool.black]
 line-length = 100
@@ -227,7 +227,7 @@ skips = ["B101", "B102", "B104", "B303", "B307", "B310", "B324", "B601", "B602",
 # B601, B602, B605: subprocess/shell (code executor)
 
 [tool.coverage.run]
-source = ["src/pyai"]
+source = ["src/openstackai"]
 omit = ["tests/*", "examples/*"]
 
 [tool.coverage.report]

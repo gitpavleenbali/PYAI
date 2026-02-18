@@ -24,6 +24,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'Easy-Module',
+        'easy-api',
         'ask',
         'chat',
         'summarize',
@@ -212,6 +213,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'Contributing',
         'Changelog',
+        'distribution',
       ],
     },
   ],

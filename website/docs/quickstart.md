@@ -255,10 +255,10 @@ formal_german = translate("Please help me", to="de", formal=True)
 
 ## What's Next?
 
-- 📖 [Full API Reference](./API_REFERENCE.md)
-- 🏗️ [Architecture Guide](./ARCHITECTURE.md)
-- 🤝 [Contributing Guide](./CONTRIBUTING.md)
-- 📝 [Changelog](./CHANGELOG.md)
+- 📖 [Full API Reference](./API-Reference.md)
+- 🏗️ [Architecture Guide](./Architecture.md)
+- 🤝 [Contributing Guide](./Contributing.md)
+- 📝 [Changelog](./Changelog.md)
 
 ---
 

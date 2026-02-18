@@ -351,4 +351,4 @@ class RedisMemory(Memory):
 
 ---
 
-*This document is the architectural blueprint for openstackai. For API reference, see [API_REFERENCE.md](./API_REFERENCE.md).*
+*This document is the architectural blueprint for openstackai. For API reference, see [API_REFERENCE.md](./API-Reference.md).*

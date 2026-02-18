@@ -82,8 +82,6 @@ def test_handoff():
     print(f"   Chain: {result.agents_used}")
     print(f"   Result: {str(result)[:100]}...")
     print("   ✅ PASS")
-    
-    return True
 
 
 def test_mcp():
@@ -128,7 +126,7 @@ def test_mcp():
     success = result1 == 8 and "Hello" in result2
     print(f"   {'✅ PASS' if success else '❌ FAIL'}")
     
-    return success
+    assert success, "MCP tools did not return expected results"
 
 
 def test_guardrails():
@@ -183,7 +181,7 @@ def test_guardrails():
     print(f"   Created: safe_ask = guardrails.wrap(ask, ...)")
     print("   ✅ PASS")
     
-    return pii_works and clean_works and injection_works and redact_works
+    assert pii_works and clean_works and injection_works and redact_works, "Guardrails tests failed"
 
 
 def test_trace():
@@ -235,7 +233,7 @@ def test_trace():
     trace.clear()
     trace.disable()
     
-    return span_works
+    assert span_works, "Trace span tests failed"
 
 
 def run_all_tests():

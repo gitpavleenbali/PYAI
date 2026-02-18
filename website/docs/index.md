@@ -1358,7 +1358,7 @@ flowchart LR
 - 📖 **[Wiki Documentation](https://github.com/gitpavleenbali/openstackai/wiki)** — Comprehensive guides
 - 🐛 **[Report Issues](https://github.com/gitpavleenbali/openstackai/issues)** — Bug reports
 - 💡 **[Feature Requests](https://github.com/gitpavleenbali/openstackai/discussions)** — Ideas
-- 🤝 **[Contributing Guide](./docs/CONTRIBUTING.md)** — Get involved
+- 🤝 **[Contributing Guide](./Contributing.md)** — Get involved
 
 ---
 
