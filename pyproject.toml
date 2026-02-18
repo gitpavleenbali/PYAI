@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "openstackai"
-version = "0.6.0"
+version = "0.6.1"
 description = "The Pandas of AI Agents - Build AI applications in 3 lines or less"
 readme = "README_PYPI.md"
 license = "MIT"

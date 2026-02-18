@@ -291,6 +291,27 @@ th {
    MOBILE RESPONSIVENESS
    ======================================== */
 
+/* CRITICAL: Mobile navigation must be above ALL content */
+.navbar-sidebar {
+  z-index: 10000 !important;
+  position: fixed !important;
+}
+
+.navbar-sidebar__backdrop {
+  z-index: 9999 !important;
+  position: fixed !important;
+}
+
+.navbar {
+  z-index: 9998 !important;
+  position: sticky !important;
+}
+
+/* Mobile docs sidebar - ensure visibility */
+.theme-doc-sidebar-container {
+  z-index: 9990 !important;
+}
+
 /* Tablet and below (996px) */
 @media (max-width: 996px) {
   .hero__title {
@@ -314,22 +335,34 @@ th {
     flex-direction: row;
   }
   
-  /* Mobile sidebar styles */
+  /* Mobile sidebar styles - MUST be above hero and all content */
   .navbar-sidebar {
     width: 85vw;
     max-width: 350px;
     background: var(--ifm-background-color);
-    z-index: 9999 !important;
+    z-index: 10000 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
   }
   
-  /* Ensure sidebar backdrop covers everything */
+  /* Ensure sidebar backdrop covers everything including hero */
   .navbar-sidebar__backdrop {
-    z-index: 9998 !important;
+    z-index: 9999 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.6) !important;
   }
   
   /* Navbar itself needs high z-index */
   .navbar {
-    z-index: 9997 !important;
+    z-index: 9998 !important;
+    position: sticky !important;
+    top: 0 !important;
   }
   
   .navbar-sidebar__brand {
@@ -339,6 +372,8 @@ th {
   
   .navbar-sidebar__items {
     padding: 1rem 0;
+    overflow-y: auto !important;
+    max-height: calc(100vh - 60px) !important;
   }
   
   .menu__link {
@@ -349,25 +384,33 @@ th {
     align-items: center;
   }
   
-  /* Docs sidebar on mobile */
+  /* ========================================
+     MOBILE DOCS SIDEBAR
+     ======================================== */
+  
+  /* Show the docs sidebar toggle button prominently */
   .theme-doc-sidebar-container {
-    display: none;
+    z-index: 9990 !important;
   }
   
-  .theme-doc-sidebar-container[class*="sidebarViewport"] {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 85vw;
-    max-width: 350px;
-    height: 100vh;
-    z-index: 100;
-    background: var(--ifm-background-color);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
+  /* Ensure the mobile sidebar button is visible */
+  button[class*="collapseSidebarButton"],
+  .theme-doc-sidebar-container button {
+    display: flex !important;
   }
   
+  /* When docs sidebar is open on mobile */
+  [class*="docSidebarContainer"] {
+    z-index: 9990 !important;
+  }
+  
+  /* Mobile docs sidebar menu - make sure it's scrollable */
+  .theme-doc-sidebar-menu {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 120px) !important;
+    padding-bottom: 2rem !important;
+  }
+
   /* Mobile TOC button */
   .tocMobile_wQxH {
     position: fixed;

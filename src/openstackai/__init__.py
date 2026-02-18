@@ -36,7 +36,7 @@ ADVANCED USAGE (when you need more control):
 
 from __future__ import annotations
 
-__version__ = "0.3.0"
+__version__ = "0.6.1"
 __author__ = "openstackai Contributors"
 
 import importlib
