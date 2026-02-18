@@ -3,17 +3,17 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pyai"
-version = "0.5.1"
+name = "openstackai"
+version = "0.6.0"
 description = "The Pandas of AI Agents - Build AI applications in 3 lines or less"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [
-    { name = "PyAI Contributors" }
+    { name = "OpenStackAI Contributors" }
 ]
 maintainers = [
-    { name = "PyAI Team", email = "pyai@example.com" }
+    { name = "OpenStackAI Team", email = "openstackai@example.com" }
 ]
 keywords = [
     "ai",

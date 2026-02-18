@@ -1,4 +1,4 @@
-# Copyright (c) 2026 pyai Contributors
+# Copyright (c) 2026 openstackai Contributors
 # Licensed under the MIT License
 
 """
@@ -28,15 +28,15 @@ class TestToolBase:
     """Test Tool class and @tool decorator."""
     
     def test_import_tool_class(self):
-        from pyai.tools import Tool
+        from openstackai.tools import Tool
         assert Tool is not None
     
     def test_import_tool_decorator(self):
-        from pyai.tools import tool
+        from openstackai.tools import tool
         assert callable(tool)
     
     def test_tool_from_function(self):
-        from pyai.tools import Tool
+        from openstackai.tools import Tool
         
         def my_func(x: int, y: str = "default") -> str:
             """A test function."""
@@ -48,7 +48,7 @@ class TestToolBase:
         assert callable(t.func)
     
     def test_tool_decorator(self):
-        from pyai.tools import tool
+        from openstackai.tools import tool
         
         @tool(name="custom_name", description="Custom desc")
         def my_tool(a: int) -> int:
@@ -58,7 +58,7 @@ class TestToolBase:
         assert my_tool.description == "Custom desc"
     
     def test_tool_execution(self):
-        from pyai.tools import tool
+        from openstackai.tools import tool
         
         @tool
         def add(a: int, b: int) -> int:
@@ -70,7 +70,7 @@ class TestToolBase:
         assert result.data == 5
     
     def test_tool_openai_schema(self):
-        from pyai.tools import tool
+        from openstackai.tools import tool
         
         @tool
         def get_weather(city: str) -> str:
@@ -86,11 +86,11 @@ class TestToolDiscovery:
     """Test tool discovery from directories."""
     
     def test_import_discovery(self):
-        from pyai.tools import ToolDiscovery
+        from openstackai.tools import ToolDiscovery
         assert ToolDiscovery is not None
     
     def test_discovery_instance(self):
-        from pyai.tools import ToolDiscovery
+        from openstackai.tools import ToolDiscovery
         
         discovery = ToolDiscovery()
         assert discovery is not None
@@ -98,11 +98,11 @@ class TestToolDiscovery:
         assert hasattr(discovery, 'get_all_tools')
     
     def test_discover_tools_function(self):
-        from pyai.tools import discover_tools
+        from openstackai.tools import discover_tools
         assert callable(discover_tools)
     
     def test_load_tools_from_directory(self):
-        from pyai.tools import load_tools_from_directory
+        from openstackai.tools import load_tools_from_directory
         assert callable(load_tools_from_directory)
 
 
@@ -110,11 +110,11 @@ class TestToolWatcher:
     """Test hot-reload tool watcher."""
     
     def test_import_watcher(self):
-        from pyai.tools import ToolWatcher
+        from openstackai.tools import ToolWatcher
         assert ToolWatcher is not None
     
     def test_watcher_instance(self):
-        from pyai.tools import ToolWatcher
+        from openstackai.tools import ToolWatcher
         
         watcher = ToolWatcher(".")
         assert watcher is not None
@@ -130,25 +130,25 @@ class TestContextCache:
     """Test context caching."""
     
     def test_import_context_cache(self):
-        from pyai.core.cache import ContextCache
+        from openstackai.core.cache import ContextCache
         assert ContextCache is not None
     
     def test_cache_basic(self):
-        from pyai.core.cache import ContextCache
+        from openstackai.core.cache import ContextCache
         
         cache = ContextCache(ttl=10)
         cache.set("key1", "value1")
         assert cache.get("key1") == "value1"
     
     def test_cache_miss(self):
-        from pyai.core.cache import ContextCache
+        from openstackai.core.cache import ContextCache
         
         cache = ContextCache()
         assert cache.get("nonexistent") is None
         assert cache.get("nonexistent", "default") == "default"
     
     def test_cache_delete(self):
-        from pyai.core.cache import ContextCache
+        from openstackai.core.cache import ContextCache
         
         cache = ContextCache()
         cache.set("key", "value")
@@ -156,7 +156,7 @@ class TestContextCache:
         assert cache.get("key") is None
     
     def test_cache_clear(self):
-        from pyai.core.cache import ContextCache
+        from openstackai.core.cache import ContextCache
         
         cache = ContextCache()
         cache.set("a", 1)
@@ -166,7 +166,7 @@ class TestContextCache:
         assert cache.get("b") is None
     
     def test_cache_decorator(self):
-        from pyai.core.cache import ContextCache
+        from openstackai.core.cache import ContextCache
         
         cache = ContextCache()
         call_count = 0
@@ -182,7 +182,7 @@ class TestContextCache:
         assert call_count == 1  # Should only call once
     
     def test_cache_stats(self):
-        from pyai.core.cache import ContextCache
+        from openstackai.core.cache import ContextCache
         
         cache = ContextCache()
         cache.set("key", "value")
@@ -202,11 +202,11 @@ class TestSessionCheckpoint:
     """Test session checkpoint and rewind."""
     
     def test_import_checkpoint(self):
-        from pyai.sessions import SessionCheckpoint
+        from openstackai.sessions import SessionCheckpoint
         assert SessionCheckpoint is not None
     
     def test_session_checkpoint(self):
-        from pyai.sessions import Session
+        from openstackai.sessions import Session
         
         session = Session()
         session.add_user_message("Message 1")
@@ -216,7 +216,7 @@ class TestSessionCheckpoint:
         assert cp.message_index == 1
     
     def test_session_rewind_to_checkpoint(self):
-        from pyai.sessions import Session
+        from openstackai.sessions import Session
         
         session = Session()
         session.add_user_message("Message 1")
@@ -231,7 +231,7 @@ class TestSessionCheckpoint:
         assert len(session.messages) == 1
     
     def test_session_rewind_by_name(self):
-        from pyai.sessions import Session
+        from openstackai.sessions import Session
         
         session = Session()
         session.add_user_message("Start")
@@ -243,7 +243,7 @@ class TestSessionCheckpoint:
         assert len(session.messages) == 1
     
     def test_session_rewind_n_messages(self):
-        from pyai.sessions import Session
+        from openstackai.sessions import Session
         
         session = Session()
         session.add_user_message("1")
@@ -255,7 +255,7 @@ class TestSessionCheckpoint:
         assert len(session.messages) == 1
     
     def test_checkpoint_context_restore(self):
-        from pyai.sessions import Session
+        from openstackai.sessions import Session
         
         session = Session()
         session.context["key"] = "original"
@@ -274,25 +274,25 @@ class TestImage:
     """Test Image class."""
     
     def test_import_image(self):
-        from pyai.multimodal import Image
+        from openstackai.multimodal import Image
         assert Image is not None
     
     def test_image_from_url(self):
-        from pyai.multimodal import Image
+        from openstackai.multimodal import Image
         
         img = Image.from_url("https://example.com/image.png")
         assert img.data == "https://example.com/image.png"
         assert img.media_type == "image/png"
     
     def test_image_from_base64(self):
-        from pyai.multimodal import Image
+        from openstackai.multimodal import Image
         
         img = Image.from_base64("SGVsbG8=", media_type="image/jpeg")
         assert img.data == "SGVsbG8="
         assert img.media_type == "image/jpeg"
     
     def test_image_openai_format(self):
-        from pyai.multimodal import Image
+        from openstackai.multimodal import Image
         
         img = Image.from_url("https://example.com/img.jpg")
         fmt = img.to_openai_format()
@@ -301,7 +301,7 @@ class TestImage:
         assert "url" in fmt["image_url"]
     
     def test_image_anthropic_format(self):
-        from pyai.multimodal import Image
+        from openstackai.multimodal import Image
         
         img = Image.from_base64("data", media_type="image/png")
         fmt = img.to_anthropic_format()
@@ -314,18 +314,18 @@ class TestAudio:
     """Test Audio class."""
     
     def test_import_audio(self):
-        from pyai.multimodal import Audio
+        from openstackai.multimodal import Audio
         assert Audio is not None
     
     def test_audio_from_base64(self):
-        from pyai.multimodal import Audio, AudioFormat
+        from openstackai.multimodal import Audio, AudioFormat
         
         audio = Audio.from_base64("SGVsbG8=", format=AudioFormat.WAV)
         assert audio.data == "SGVsbG8="
         assert audio.format == AudioFormat.WAV
     
     def test_audio_media_type(self):
-        from pyai.multimodal import Audio, AudioFormat
+        from openstackai.multimodal import Audio, AudioFormat
         
         audio = Audio.from_base64("data", format=AudioFormat.MP3)
         assert audio.media_type == "audio/mpeg"
@@ -335,11 +335,11 @@ class TestMultimodalContent:
     """Test multimodal content composition."""
     
     def test_import_content(self):
-        from pyai.multimodal import MultimodalContent
+        from openstackai.multimodal import MultimodalContent
         assert MultimodalContent is not None
     
     def test_content_add_text(self):
-        from pyai.multimodal import MultimodalContent
+        from openstackai.multimodal import MultimodalContent
         
         content = MultimodalContent()
         content.add_text("Hello world")
@@ -348,7 +348,7 @@ class TestMultimodalContent:
         assert content.get_text() == "Hello world"
     
     def test_content_chaining(self):
-        from pyai.multimodal import MultimodalContent, Image
+        from openstackai.multimodal import MultimodalContent, Image
         
         content = (
             MultimodalContent()
@@ -359,7 +359,7 @@ class TestMultimodalContent:
         assert len(content) == 2
     
     def test_content_to_openai(self):
-        from pyai.multimodal import MultimodalContent
+        from openstackai.multimodal import MultimodalContent
         
         content = MultimodalContent()
         content.add_text("Hello")
@@ -377,11 +377,11 @@ class TestMemoryVectorStore:
     """Test in-memory vector store."""
     
     def test_import_memory_store(self):
-        from pyai.vectordb import MemoryVectorStore
+        from openstackai.vectordb import MemoryVectorStore
         assert MemoryVectorStore is not None
     
     def test_store_add_get(self):
-        from pyai.vectordb import MemoryVectorStore
+        from openstackai.vectordb import MemoryVectorStore
         
         store = MemoryVectorStore()
         store.add("doc1", "Hello world", {"source": "test"})
@@ -392,7 +392,7 @@ class TestMemoryVectorStore:
         assert doc.metadata["source"] == "test"
     
     def test_store_search(self):
-        from pyai.vectordb import MemoryVectorStore
+        from openstackai.vectordb import MemoryVectorStore
         
         store = MemoryVectorStore()
         store.add("doc1", "Python is a programming language")
@@ -403,7 +403,7 @@ class TestMemoryVectorStore:
         assert len(results) == 2
     
     def test_store_delete(self):
-        from pyai.vectordb import MemoryVectorStore
+        from openstackai.vectordb import MemoryVectorStore
         
         store = MemoryVectorStore()
         store.add("doc1", "Content")
@@ -412,7 +412,7 @@ class TestMemoryVectorStore:
         assert store.get("doc1") is None
     
     def test_store_count(self):
-        from pyai.vectordb import MemoryVectorStore
+        from openstackai.vectordb import MemoryVectorStore
         
         store = MemoryVectorStore()
         store.add("doc1", "A")
@@ -426,11 +426,11 @@ class TestDocument:
     """Test Document class."""
     
     def test_import_document(self):
-        from pyai.vectordb import Document
+        from openstackai.vectordb import Document
         assert Document is not None
     
     def test_document_create(self):
-        from pyai.vectordb import Document
+        from openstackai.vectordb import Document
         
         doc = Document.create("Hello world", source="test")
         assert doc.content == "Hello world"
@@ -446,11 +446,11 @@ class TestA2AProtocol:
     """Test A2A protocol types."""
     
     def test_import_agent_card(self):
-        from pyai.a2a import AgentCard
+        from openstackai.a2a import AgentCard
         assert AgentCard is not None
     
     def test_agent_card_creation(self):
-        from pyai.a2a import AgentCard
+        from openstackai.a2a import AgentCard
         
         card = AgentCard(
             name="research-agent",
@@ -462,7 +462,7 @@ class TestA2AProtocol:
         assert "research" in card.skills
     
     def test_agent_card_to_dict(self):
-        from pyai.a2a import AgentCard
+        from openstackai.a2a import AgentCard
         
         card = AgentCard(name="test")
         data = card.to_dict()
@@ -471,14 +471,14 @@ class TestA2AProtocol:
         assert "protocols" in data
     
     def test_a2a_task_creation(self):
-        from pyai.a2a import A2ATask
+        from openstackai.a2a import A2ATask
         
         task = A2ATask.from_text("Hello, what can you do?")
         assert len(task.messages) == 1
         assert task.messages[0].content == "Hello, what can you do?"
     
     def test_a2a_response(self):
-        from pyai.a2a import A2AResponse, TaskStatus
+        from openstackai.a2a import A2AResponse, TaskStatus
         
         response = A2AResponse.success("task-123", "Here is the result")
         assert response.is_success is True
@@ -489,11 +489,11 @@ class TestA2AServer:
     """Test A2A server."""
     
     def test_import_server(self):
-        from pyai.a2a import A2AServer
+        from openstackai.a2a import A2AServer
         assert A2AServer is not None
     
     def test_endpoint_creation(self):
-        from pyai.a2a import A2AEndpoint, A2ATask, A2AResponse
+        from openstackai.a2a import A2AEndpoint, A2ATask, A2AResponse
         
         def handler(task):
             return A2AResponse.success(task.id, "Done")
@@ -506,11 +506,11 @@ class TestA2AClient:
     """Test A2A client."""
     
     def test_import_client(self):
-        from pyai.a2a import A2AClient
+        from openstackai.a2a import A2AClient
         assert A2AClient is not None
     
     def test_import_remote_agent(self):
-        from pyai.a2a import RemoteAgent
+        from openstackai.a2a import RemoteAgent
         assert RemoteAgent is not None
 
 
@@ -518,11 +518,11 @@ class TestAgentRegistry:
     """Test agent registry."""
     
     def test_import_registry(self):
-        from pyai.a2a import AgentRegistry
+        from openstackai.a2a import AgentRegistry
         assert AgentRegistry is not None
     
     def test_registry_default(self):
-        from pyai.a2a import AgentRegistry
+        from openstackai.a2a import AgentRegistry
         
         registry = AgentRegistry.get_default()
         assert registry is not None
@@ -536,21 +536,21 @@ class TestDevUI:
     """Test development UI."""
     
     def test_import_devui(self):
-        from pyai.devui import DevUI
+        from openstackai.devui import DevUI
         assert DevUI is not None
     
     def test_import_launch_ui(self):
-        from pyai.devui import launch_ui
+        from openstackai.devui import launch_ui
         assert callable(launch_ui)
     
     def test_devui_creation(self):
-        from pyai.devui import DevUI
+        from openstackai.devui import DevUI
         
         ui = DevUI(title="Test UI")
         assert ui.title == "Test UI"
     
     def test_devui_with_handler(self):
-        from pyai.devui import DevUI
+        from openstackai.devui import DevUI
         
         def my_handler(msg):
             return f"Echo: {msg}"
@@ -564,11 +564,11 @@ class TestAgentDashboard:
     """Test agent dashboard."""
     
     def test_import_dashboard(self):
-        from pyai.devui import AgentDashboard
+        from openstackai.devui import AgentDashboard
         assert AgentDashboard is not None
     
     def test_dashboard_metrics(self):
-        from pyai.devui import AgentDashboard
+        from openstackai.devui import AgentDashboard
         from datetime import datetime
         
         dashboard = AgentDashboard()
@@ -587,11 +587,11 @@ class TestAgentDebugger:
     """Test agent debugger."""
     
     def test_import_debugger(self):
-        from pyai.devui import AgentDebugger
+        from openstackai.devui import AgentDebugger
         assert AgentDebugger is not None
     
     def test_debugger_log(self):
-        from pyai.devui.debugger import AgentDebugger, DebugEvent
+        from openstackai.devui.debugger import AgentDebugger, DebugEvent
         
         debugger = AgentDebugger()
         entry = debugger.log(DebugEvent.RUN_START, {"input": "test"})
@@ -600,7 +600,7 @@ class TestAgentDebugger:
         assert entry.data["input"] == "test"
     
     def test_debugger_breakpoint(self):
-        from pyai.devui import AgentDebugger
+        from openstackai.devui import AgentDebugger
         
         debugger = AgentDebugger()
         bp_id = debugger.add_breakpoint("tool_call")
@@ -617,11 +617,11 @@ class TestAudioStream:
     """Test audio streaming."""
     
     def test_import_audio_stream(self):
-        from pyai.voice import AudioStream
+        from openstackai.voice import AudioStream
         assert AudioStream is not None
     
     def test_audio_chunk(self):
-        from pyai.voice.stream import AudioChunk, AudioFormat
+        from openstackai.voice.stream import AudioChunk, AudioFormat
         
         chunk = AudioChunk(
             data=b"\x00" * 100,
@@ -633,7 +633,7 @@ class TestAudioStream:
         assert chunk.duration_ms > 0
     
     def test_stream_add_chunks(self):
-        from pyai.voice.stream import AudioStream, AudioChunk
+        from openstackai.voice.stream import AudioStream, AudioChunk
         
         stream = AudioStream()
         stream.add(AudioChunk(data=b"\x00\x00"))
@@ -646,11 +646,11 @@ class TestVoiceSession:
     """Test voice session."""
     
     def test_import_session(self):
-        from pyai.voice import VoiceSession
+        from openstackai.voice import VoiceSession
         assert VoiceSession is not None
     
     def test_session_state(self):
-        from pyai.voice.session import VoiceSession, SessionState
+        from openstackai.voice.session import VoiceSession, SessionState
         
         session = VoiceSession()
         assert session.state == SessionState.IDLE
@@ -660,11 +660,11 @@ class TestTranscriber:
     """Test speech-to-text."""
     
     def test_import_transcriber(self):
-        from pyai.voice import Transcriber
+        from openstackai.voice import Transcriber
         assert Transcriber is not None
     
     def test_transcription_result(self):
-        from pyai.voice.transcription import TranscriptionResult
+        from openstackai.voice.transcription import TranscriptionResult
         
         result = TranscriptionResult(
             text="Hello world",
@@ -678,11 +678,11 @@ class TestSynthesizer:
     """Test text-to-speech."""
     
     def test_import_synthesizer(self):
-        from pyai.voice import Synthesizer
+        from openstackai.voice import Synthesizer
         assert Synthesizer is not None
     
     def test_synthesis_result(self):
-        from pyai.voice.synthesis import SynthesisResult
+        from openstackai.voice.synthesis import SynthesisResult
         
         result = SynthesisResult(audio=b"\x00\x00")
         assert len(result.audio) == 2
@@ -696,43 +696,43 @@ class TestMainExports:
     """Test main __init__.py exports for new features."""
     
     def test_export_tools(self):
-        import pyai
-        assert hasattr(pyai, 'tools')
-        assert hasattr(pyai, 'Tool')
-        assert hasattr(pyai, 'ToolDiscovery')
+        import openstackai
+        assert hasattr(openstackai, 'tools')
+        assert hasattr(openstackai, 'Tool')
+        assert hasattr(openstackai, 'ToolDiscovery')
     
     def test_export_context_cache(self):
-        import pyai
-        assert hasattr(pyai, 'ContextCache')
-        assert hasattr(pyai, 'cache_context')
+        import openstackai
+        assert hasattr(openstackai, 'ContextCache')
+        assert hasattr(openstackai, 'cache_context')
     
     def test_export_multimodal(self):
-        import pyai
-        assert hasattr(pyai, 'multimodal')
-        assert hasattr(pyai, 'Image')
-        assert hasattr(pyai, 'Audio')
-        assert hasattr(pyai, 'Video')
+        import openstackai
+        assert hasattr(openstackai, 'multimodal')
+        assert hasattr(openstackai, 'Image')
+        assert hasattr(openstackai, 'Audio')
+        assert hasattr(openstackai, 'Video')
     
     def test_export_vectordb(self):
-        import pyai
-        assert hasattr(pyai, 'vectordb')
-        assert hasattr(pyai, 'VectorStore')
-        assert hasattr(pyai, 'MemoryVectorStore')
+        import openstackai
+        assert hasattr(openstackai, 'vectordb')
+        assert hasattr(openstackai, 'VectorStore')
+        assert hasattr(openstackai, 'MemoryVectorStore')
     
     def test_export_a2a(self):
-        import pyai
-        assert hasattr(pyai, 'a2a')
-        assert hasattr(pyai, 'A2AServer')
-        assert hasattr(pyai, 'A2AClient')
+        import openstackai
+        assert hasattr(openstackai, 'a2a')
+        assert hasattr(openstackai, 'A2AServer')
+        assert hasattr(openstackai, 'A2AClient')
     
     def test_export_devui(self):
-        import pyai
-        assert hasattr(pyai, 'devui')
-        assert hasattr(pyai, 'DevUI')
-        assert hasattr(pyai, 'launch_ui')
+        import openstackai
+        assert hasattr(openstackai, 'devui')
+        assert hasattr(openstackai, 'DevUI')
+        assert hasattr(openstackai, 'launch_ui')
     
     def test_export_voice(self):
-        import pyai
-        assert hasattr(pyai, 'voice')
-        assert hasattr(pyai, 'VoiceSession')
-        assert hasattr(pyai, 'AudioStream')
+        import openstackai
+        assert hasattr(openstackai, 'voice')
+        assert hasattr(openstackai, 'VoiceSession')
+        assert hasattr(openstackai, 'AudioStream')

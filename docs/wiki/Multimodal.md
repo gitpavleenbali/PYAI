@@ -7,7 +7,7 @@ Process images, audio, and video with AI agents.
 ## Quick Start
 
 ```python
-from pyai.multimodal import ImageContent, AudioContent
+from openstackai.multimodal import ImageContent, AudioContent
 
 # Image analysis
 image = ImageContent.from_file("photo.jpg")

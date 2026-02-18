@@ -1,10 +1,10 @@
-# AGENTS.md - pyai Project Context
+# AGENTS.md - openstackai Project Context
 
 This file provides context for AI coding assistants (GitHub Copilot, Cursor, Claude, etc.) working on this codebase.
 
 ## Project Overview
 
-**pyai** is a Python SDK for building AI agents and multi-agent systems. It provides:
+**openstackai** is a Python SDK for building AI agents and multi-agent systems. It provides:
 - Simple one-liner APIs (`ask`, `summarize`, `research`)
 - Full agent framework (`Agent`, `Runner`, `Workflow`)
 - Multi-provider support (OpenAI, Azure OpenAI, Anthropic, Ollama)
@@ -13,8 +13,8 @@ This file provides context for AI coding assistants (GitHub Copilot, Cursor, Cla
 ## Repository Structure
 
 ```
-pyai/
-├── src/pyai/          # Main package
+openstackai/
+├── src/openstackai/          # Main package
 │   ├── core/             # Core agent, LLM providers, memory
 │   ├── easy/             # Simple one-liner APIs
 │   ├── runner/           # Agent execution (Runner pattern)
@@ -41,20 +41,20 @@ pyai/
 
 ### 1. Simple API (easy module)
 ```python
-from pyai import ask, summarize, research
+from openstackai import ask, summarize, research
 answer = ask("What is Python?")
 ```
 
 ### 2. Agent API
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 agent = Agent(name="Assistant", instructions="You are helpful.")
 result = Runner.run_sync(agent, "Hello")
 ```
 
 ### 3. Kernel Pattern (service registry)
 ```python
-from pyai.kernel import Kernel
+from openstackai.kernel import Kernel
 kernel = Kernel()
 kernel.add_service(provider, service_id="default")
 ```
@@ -69,7 +69,7 @@ pytest tests/ -v
 pytest tests/test_kernel.py -v
 
 # Type checking
-mypy src/pyai
+mypy src/openstackai
 
 # Linting
 ruff check src/

@@ -5,7 +5,7 @@ The `Plugin` base class provides the foundation for creating custom agent plugin
 ## Import
 
 ```python
-from pyai.plugins import Plugin, plugin_function
+from openstackai.plugins import Plugin, plugin_function
 ```
 
 ## Creating a Plugin
@@ -13,7 +13,7 @@ from pyai.plugins import Plugin, plugin_function
 ### Basic Structure
 
 ```python
-from pyai.plugins import Plugin, plugin_function
+from openstackai.plugins import Plugin, plugin_function
 
 class MyPlugin(Plugin):
     name = "my_plugin"
@@ -41,7 +41,7 @@ class MyPlugin(Plugin):
 ### The @plugin_function Decorator
 
 ```python
-from pyai.plugins import plugin_function
+from openstackai.plugins import plugin_function
 
 @plugin_function
 def search(query: str, limit: int = 10) -> list[str]:
@@ -158,7 +158,7 @@ class AsyncPlugin(Plugin):
 ## Using with Agents
 
 ```python
-from pyai import Agent
+from openstackai import Agent
 
 # Create plugin instance
 plugin = MyPlugin()

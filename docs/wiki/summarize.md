@@ -5,7 +5,7 @@ The `summarize` function condenses text, files, or URLs into concise summaries.
 ## Import
 
 ```python
-from pyai import summarize
+from openstackai import summarize
 ```
 
 ## Basic Usage
@@ -39,10 +39,10 @@ Returns a string containing the summarized content.
 ### Summarize Text
 
 ```python
-from pyai import summarize
+from openstackai import summarize
 
 article = """
-PYAI is a comprehensive Python SDK for building AI agents...
+openstackai is a comprehensive Python SDK for building AI agents...
 [long article text]
 """
 
@@ -86,7 +86,7 @@ summary = summarize(
 
 ```python
 import asyncio
-from pyai import summarize
+from openstackai import summarize
 
 async def main():
     summary = await summarize.async_("https://example.com/article")

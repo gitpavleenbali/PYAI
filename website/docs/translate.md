@@ -5,7 +5,7 @@ The `translate` function provides AI-powered language translation.
 ## Import
 
 ```python
-from pyai import translate
+from openstackai import translate
 ```
 
 ## Basic Usage
@@ -49,7 +49,7 @@ result = translate("Bonjour", from_lang="fr", to="en")
 ### Basic Translation
 
 ```python
-from pyai import translate
+from openstackai import translate
 
 # English to Spanish
 spanish = translate("The quick brown fox", to="es")
@@ -90,7 +90,7 @@ translated = translate(markdown, to="fr", preserve_format=True)
 
 ```python
 import asyncio
-from pyai import translate
+from openstackai import translate
 
 async def main():
     result = await translate.async_("Hello world", to="ja")

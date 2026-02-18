@@ -5,13 +5,13 @@ The `fetch` module retrieves real-time data from various sources.
 ## Import
 
 ```python
-from pyai.easy import fetch
+from openstackai.easy import fetch
 ```
 
 ## Quick Start
 
 ```python
-from pyai.easy import fetch
+from openstackai.easy import fetch
 
 # Get weather
 weather = fetch.weather("New York")
@@ -98,7 +98,7 @@ print(content.title)
 ### Weather Dashboard
 
 ```python
-from pyai.easy import fetch
+from openstackai.easy import fetch
 
 cities = ["New York", "London", "Tokyo"]
 for city in cities:
@@ -109,7 +109,7 @@ for city in cities:
 ### News Aggregator
 
 ```python
-from pyai.easy import fetch
+from openstackai.easy import fetch
 
 topics = ["AI", "climate", "space"]
 for topic in topics:
@@ -122,7 +122,7 @@ for topic in topics:
 ### Stock Tracker
 
 ```python
-from pyai.easy import fetch
+from openstackai.easy import fetch
 
 portfolio = ["AAPL", "GOOGL", "MSFT", "AMZN"]
 stocks = fetch.stocks(portfolio)
@@ -136,7 +136,7 @@ for stock in stocks:
 
 ```python
 import asyncio
-from pyai.easy import fetch
+from openstackai.easy import fetch
 
 async def main():
     weather = await fetch.weather_async("New York")

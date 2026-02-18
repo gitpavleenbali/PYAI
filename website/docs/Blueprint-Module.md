@@ -31,7 +31,7 @@ flowchart TB
 ## File Structure
 
 ```
-src/pyai/blueprint/
+src/openstackai/blueprint/
 ├── __init__.py
 ├── workflow.py      # Workflow and Step classes
 ├── patterns.py      # Orchestration patterns
@@ -49,8 +49,8 @@ Multi-step agent processes with context sharing.
 ### Basic Workflow
 
 ```python
-from pyai import Agent
-from pyai.blueprint import Workflow, Step
+from openstackai import Agent
+from openstackai.blueprint import Workflow, Step
 
 # Create agents
 researcher = Agent(name="Researcher", instructions="Find information")
@@ -109,7 +109,7 @@ flowchart TB
 ### Step Configuration
 
 ```python
-from pyai.blueprint import Step, StepType
+from openstackai.blueprint import Step, StepType
 
 # Agent step
 agent_step = Step(
@@ -145,7 +145,7 @@ condition_step = Step(
 Context passed through workflow steps.
 
 ```python
-from pyai.blueprint import WorkflowContext
+from openstackai.blueprint import WorkflowContext
 
 context = WorkflowContext()
 
@@ -180,7 +180,7 @@ flowchart LR
 ```
 
 ```python
-from pyai.blueprint import ChainPattern
+from openstackai.blueprint import ChainPattern
 
 chain = ChainPattern([
     researcher,
@@ -209,7 +209,7 @@ flowchart TB
 ```
 
 ```python
-from pyai.blueprint import RouterPattern
+from openstackai.blueprint import RouterPattern
 
 router = RouterPattern()
 
@@ -249,7 +249,7 @@ flowchart TB
 ```
 
 ```python
-from pyai.blueprint import MapReducePattern
+from openstackai.blueprint import MapReducePattern
 
 # Create mappers (parallel workers)
 mappers = [
@@ -290,7 +290,7 @@ flowchart TB
 ```
 
 ```python
-from pyai.blueprint import SupervisorPattern
+from openstackai.blueprint import SupervisorPattern
 
 pattern = SupervisorPattern(
     manager=Agent(name="Manager", instructions="Coordinate and delegate"),
@@ -311,7 +311,7 @@ result = await pattern.run("Build a REST API")
 Processing pipeline for data transformation.
 
 ```python
-from pyai.blueprint import Pipeline, PipelineStage
+from openstackai.blueprint import Pipeline, PipelineStage
 
 pipeline = Pipeline("DataPipeline")
 
@@ -338,8 +338,8 @@ result = await pipeline.run(input_data)
 ## Complex Workflow Example
 
 ```python
-from pyai import Agent
-from pyai.blueprint import Workflow, Step, StepType
+from openstackai import Agent
+from openstackai.blueprint import Workflow, Step, StepType
 
 # Define agents
 planner = Agent(name="Planner", instructions="Create project plans")

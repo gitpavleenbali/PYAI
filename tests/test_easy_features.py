@@ -1,5 +1,5 @@
 """
-Tests for pyai Easy Module Features
+Tests for openstackai Easy Module Features
 ======================================
 
 Tests for handoff, mcp, guardrails, and trace modules.
@@ -13,18 +13,18 @@ class TestHandoffImport:
     """Test handoff module imports."""
     
     def test_import_handoff_from_pyai(self):
-        """Test importing handoff from pyai."""
-        from pyai import handoff
+        """Test importing handoff from openstackai."""
+        from openstackai import handoff
         assert handoff is not None
     
     def test_import_handoff_from_easy(self):
-        """Test importing handoff from pyai.easy."""
-        from pyai.easy.handoff import handoff
+        """Test importing handoff from openstackai.easy."""
+        from openstackai.easy.handoff import handoff
         assert handoff is not None
     
     def test_handoff_is_callable(self):
         """Test that handoff is callable."""
-        from pyai import handoff
+        from openstackai import handoff
         assert callable(handoff)
 
 
@@ -33,20 +33,20 @@ class TestHandoffFunction:
     
     def test_handoff_has_team_method(self):
         """Test that handoff has team method."""
-        from pyai import handoff
+        from openstackai import handoff
         assert hasattr(handoff, 'team')
         assert callable(handoff.team)
     
     def test_handoff_has_chain_method(self):
         """Test that handoff has chain method."""
-        from pyai import handoff
+        from openstackai import handoff
         assert hasattr(handoff, 'chain')
         assert callable(handoff.chain)
     
     def test_handoff_team_creates_team(self):
         """Test that handoff.team creates an AgentTeam."""
-        from pyai import handoff
-        from pyai.easy.agent_factory import agent
+        from openstackai import handoff
+        from openstackai.easy.agent_factory import agent
         
         a1 = agent("Agent 1")
         a2 = agent("Agent 2")
@@ -60,13 +60,13 @@ class TestMCPImport:
     """Test MCP module imports."""
     
     def test_import_mcp_from_pyai(self):
-        """Test importing mcp from pyai."""
-        from pyai import mcp
+        """Test importing mcp from openstackai."""
+        from openstackai import mcp
         assert mcp is not None
     
     def test_import_mcp_from_easy(self):
-        """Test importing mcp from pyai.easy."""
-        from pyai.easy.mcp import mcp
+        """Test importing mcp from openstackai.easy."""
+        from openstackai.easy.mcp import mcp
         assert mcp is not None
 
 
@@ -75,25 +75,25 @@ class TestMCPFunction:
     
     def test_mcp_has_tool_decorator(self):
         """Test that mcp has tool decorator."""
-        from pyai import mcp
+        from openstackai import mcp
         assert hasattr(mcp, 'tool')
         assert callable(mcp.tool)
     
     def test_mcp_has_server_method(self):
         """Test that mcp has server method."""
-        from pyai import mcp
+        from openstackai import mcp
         assert hasattr(mcp, 'server')
         assert callable(mcp.server)
     
     def test_mcp_has_connect_method(self):
         """Test that mcp has connect method."""
-        from pyai import mcp
+        from openstackai import mcp
         assert hasattr(mcp, 'connect')
         assert callable(mcp.connect)
     
     def test_mcp_tool_decorator(self):
         """Test that @mcp.tool decorator works."""
-        from pyai import mcp
+        from openstackai import mcp
         
         @mcp.tool("test_tool")
         def my_tool(x: int) -> int:
@@ -107,7 +107,7 @@ class TestMCPFunction:
     
     def test_mcp_server_creation(self):
         """Test creating an MCP server."""
-        from pyai import mcp
+        from openstackai import mcp
         
         @mcp.tool("adder")
         def add(a: int, b: int) -> int:
@@ -123,13 +123,13 @@ class TestGuardrailsImport:
     """Test guardrails module imports."""
     
     def test_import_guardrails_from_pyai(self):
-        """Test importing guardrails from pyai."""
-        from pyai import guardrails
+        """Test importing guardrails from openstackai."""
+        from openstackai import guardrails
         assert guardrails is not None
     
     def test_import_guardrails_from_easy(self):
-        """Test importing guardrails from pyai.easy."""
-        from pyai.easy.guardrails import guardrails
+        """Test importing guardrails from openstackai.easy."""
+        from openstackai.easy.guardrails import guardrails
         assert guardrails is not None
 
 
@@ -138,43 +138,43 @@ class TestGuardrailsFunction:
     
     def test_guardrails_has_validate_method(self):
         """Test that guardrails has validate method."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert hasattr(guardrails, 'validate')
         assert callable(guardrails.validate)
     
     def test_guardrails_has_filter_output_method(self):
         """Test that guardrails has filter_output method."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert hasattr(guardrails, 'filter_output')
         assert callable(guardrails.filter_output)
     
     def test_guardrails_has_wrap_method(self):
         """Test that guardrails has wrap method."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert hasattr(guardrails, 'wrap')
         assert callable(guardrails.wrap)
     
     def test_guardrails_has_no_pii_validator(self):
         """Test that guardrails has no_pii validator."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert hasattr(guardrails, 'no_pii')
         assert callable(guardrails.no_pii)
     
     def test_guardrails_has_no_injection_validator(self):
         """Test that guardrails has no_injection validator."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert hasattr(guardrails, 'no_injection')
         assert callable(guardrails.no_injection)
     
     def test_guardrails_has_redact_pii_filter(self):
         """Test that guardrails has redact_pii filter."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert hasattr(guardrails, 'redact_pii')
         assert callable(guardrails.redact_pii)
     
     def test_guardrails_has_protect_method(self):
         """Test that guardrails has protect method."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert hasattr(guardrails, 'protect')
         assert callable(guardrails.protect)
 
@@ -183,13 +183,13 @@ class TestTraceImport:
     """Test trace module imports."""
     
     def test_import_trace_from_pyai(self):
-        """Test importing trace from pyai."""
-        from pyai import trace
+        """Test importing trace from openstackai."""
+        from openstackai import trace
         assert trace is not None
     
     def test_import_trace_from_easy(self):
-        """Test importing trace from pyai.easy."""
-        from pyai.easy.trace import trace
+        """Test importing trace from openstackai.easy."""
+        from openstackai.easy.trace import trace
         assert trace is not None
 
 
@@ -198,31 +198,31 @@ class TestTraceFunction:
     
     def test_trace_has_enable_method(self):
         """Test that trace has enable method."""
-        from pyai import trace
+        from openstackai import trace
         assert hasattr(trace, 'enable')
         assert callable(trace.enable)
     
     def test_trace_has_disable_method(self):
         """Test that trace has disable method."""
-        from pyai import trace
+        from openstackai import trace
         assert hasattr(trace, 'disable')
         assert callable(trace.disable)
     
     def test_trace_has_span_method(self):
         """Test that trace has span method."""
-        from pyai import trace
+        from openstackai import trace
         assert hasattr(trace, 'span')
         assert callable(trace.span)
     
     def test_trace_has_show_method(self):
         """Test that trace has show method."""
-        from pyai import trace
+        from openstackai import trace
         assert hasattr(trace, 'show')
         assert callable(trace.show)
     
     def test_trace_enable_disable(self):
         """Test enabling and disabling tracing."""
-        from pyai import trace
+        from openstackai import trace
         
         trace.enable()
         assert trace.enabled == True
@@ -232,7 +232,7 @@ class TestTraceFunction:
     
     def test_trace_span_context_manager(self):
         """Test trace span as context manager."""
-        from pyai import trace
+        from openstackai import trace
         
         trace.enable()
         

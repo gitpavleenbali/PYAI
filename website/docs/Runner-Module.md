@@ -27,7 +27,7 @@ flowchart TB
 ## File Structure
 
 ```
-src/pyai/runner/
+src/openstackai/runner/
 ├── __init__.py
 ├── executor.py     # Main Runner class
 └── streaming.py    # Streaming support
@@ -42,7 +42,7 @@ The primary execution engine for agents.
 ### Basic Usage
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agent = Agent(
     name="Assistant",
@@ -93,7 +93,7 @@ sequenceDiagram
 Configuration options for execution.
 
 ```python
-from pyai.runner import RunConfig
+from openstackai.runner import RunConfig
 
 config = RunConfig(
     max_turns=10,           # Maximum iterations
@@ -132,7 +132,7 @@ result = Runner.run_sync(agent, "Hello", config=config)
 Runtime context passed to agents during execution.
 
 ```python
-from pyai.runner import RunContext
+from openstackai.runner import RunContext
 
 context = RunContext(
     run_id="run-123",
@@ -190,7 +190,7 @@ flowchart TB
 Execution status enumeration.
 
 ```python
-from pyai.runner import RunStatus
+from openstackai.runner import RunStatus
 
 # Possible statuses
 RunStatus.QUEUED      # Not yet started
@@ -207,7 +207,7 @@ RunStatus.CANCELLED   # User cancelled
 Stream responses in real-time.
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agent = Agent(name="Assistant", instructions="Be helpful")
 
@@ -219,7 +219,7 @@ async for chunk in Runner.run_stream(agent, "Tell me a story"):
 ### StreamingRunner
 
 ```python
-from pyai.runner import StreamingRunner
+from openstackai.runner import StreamingRunner
 
 runner = StreamingRunner(agent)
 
@@ -239,8 +239,8 @@ async for event in runner.run("Write a poem"):
 ### Multi-Turn Conversation
 
 ```python
-from pyai import Agent, Runner
-from pyai.runner import RunConfig
+from openstackai import Agent, Runner
+from openstackai.runner import RunConfig
 
 agent = Agent(name="Assistant", instructions="Be helpful")
 
@@ -264,7 +264,7 @@ while True:
 
 ```python
 import asyncio
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agents = [
     Agent(name="Agent1", instructions="..."),
@@ -288,9 +288,9 @@ results = asyncio.run(run_parallel())
 ## Error Handling
 
 ```python
-from pyai import Agent, Runner
-from pyai.runner import RunStatus
-from pyai.errors import AgentError, TimeoutError
+from openstackai import Agent, Runner
+from openstackai.runner import RunStatus
+from openstackai.errors import AgentError, TimeoutError
 
 try:
     result = Runner.run_sync(agent, "Hello")

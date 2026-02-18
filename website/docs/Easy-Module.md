@@ -46,7 +46,7 @@ flowchart TB
 ## File Structure
 
 ```
-src/pyai/easy/
+src/openstackai/easy/
 ├── __init__.py
 ├── ask.py              # Universal Q&A
 ├── research.py         # Deep research
@@ -75,7 +75,7 @@ src/pyai/easy/
 ### ask() — Universal Question Answering
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 # Simple question
 answer = ask("What is Python?")
@@ -102,7 +102,7 @@ answer = ask(
 ### research() — Deep Topic Research
 
 ```python
-from pyai import research
+from openstackai import research
 
 result = research("AI trends in enterprise software")
 
@@ -125,7 +125,7 @@ print(result.sources)      # Referenced sources
 ### summarize() — Summarization
 
 ```python
-from pyai import summarize
+from openstackai import summarize
 
 # Summarize text
 summary = summarize(long_text)
@@ -147,7 +147,7 @@ summary = summarize(text, length="detailed")   # ~300 words
 ### extract() — Structured Data Extraction
 
 ```python
-from pyai import extract
+from openstackai import extract
 
 # Extract specific fields
 data = extract(
@@ -176,7 +176,7 @@ person = extract(text, schema=Person)
 ### generate() — Content Generation
 
 ```python
-from pyai import generate
+from openstackai import generate
 
 # Generate different content types
 blog = generate("Python async programming", type="article")
@@ -198,7 +198,7 @@ content = generate(
 ### translate() — Translation
 
 ```python
-from pyai import translate
+from openstackai import translate
 
 # Simple translation
 spanish = translate("Hello, how are you?", to="spanish")
@@ -215,7 +215,7 @@ result = translate("Bonjour le monde", to="english")
 ### fetch — Real-time Data
 
 ```python
-from pyai import fetch
+from openstackai import fetch
 
 # Weather
 weather = fetch.weather("New York")
@@ -242,7 +242,7 @@ content = fetch.url("https://api.example.com/data")
 ### analyze — Data Analysis
 
 ```python
-from pyai import analyze
+from openstackai import analyze
 
 # Sentiment analysis
 sentiment = analyze.sentiment("I love this product!")
@@ -263,7 +263,7 @@ topics = analyze.topics(document)
 ### rag — RAG System
 
 ```python
-from pyai import rag
+from openstackai import rag
 
 # Index documents
 docs = rag.index("./documents/")
@@ -308,7 +308,7 @@ flowchart LR
 ### code — Code Operations
 
 ```python
-from pyai import code
+from openstackai import code
 
 # Write new code
 api = code.write("REST API with CRUD operations")
@@ -345,7 +345,7 @@ tests = code.test(my_function)
 ### handoff — Agent Handoffs
 
 ```python
-from pyai import handoff, Agent
+from openstackai import handoff, Agent
 
 agent_a = Agent(name="Researcher")
 agent_b = Agent(name="Writer")
@@ -363,7 +363,7 @@ result = handoff(
 ### guardrails — Safety Guards
 
 ```python
-from pyai import guardrails
+from openstackai import guardrails
 
 # Create guarded function
 safe_ask = guardrails.wrap(
@@ -382,7 +382,7 @@ answer = safe_ask("Tell me about Python")
 ### trace — Tracing
 
 ```python
-from pyai import trace
+from openstackai import trace
 
 # Enable tracing
 trace.enable()
@@ -402,7 +402,7 @@ trace.export("traces.json")
 ### chat — Interactive Sessions
 
 ```python
-from pyai import chat
+from openstackai import chat
 
 # Start a chat session
 session = chat.start()

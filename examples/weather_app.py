@@ -46,8 +46,8 @@ if not setup_pyai():
     print("Please configure credentials - see instructions above")
     sys.exit(1)
 
-# import pyai functions
-from pyai import ask, fetch, agent
+# import openstackai functions
+from openstackai import ask, fetch, agent
 
 
 # =============================================================================

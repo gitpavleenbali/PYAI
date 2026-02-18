@@ -28,7 +28,7 @@ function HomepageHeader() {
           </Link>
         </div>
         <div className={styles.installCommand}>
-          <code>pip install pyai</code>
+          <code>pip install openstackai</code>
         </div>
       </div>
     </header>
@@ -36,14 +36,14 @@ function HomepageHeader() {
 }
 
 const codeExamples = {
-  simple: `from pyai import ask, summarize, research
+  simple: `from openstackai import ask, summarize, research
 
 # One-liner AI calls
 answer = ask("What is machine learning?")
 summary = summarize("Long document text...")
 report = research("Latest AI trends 2026")`,
 
-  agent: `from pyai import Agent, Runner
+  agent: `from openstackai import Agent, Runner
 
 # Create an AI agent
 agent = Agent(
@@ -55,8 +55,8 @@ agent = Agent(
 result = Runner.run_sync(agent, "Hello!")
 print(result.final_output)`,
 
-  multiagent: `from pyai import Agent, Runner
-from pyai.blueprint import ChainWorkflow
+  multiagent: `from openstackai import Agent, Runner
+from openstackai.blueprint import ChainWorkflow
 
 # Multi-agent workflow
 researcher = Agent(name="Researcher", instructions="Research topics")
@@ -146,7 +146,7 @@ function HomepageFeatures(): ReactNode {
     <section className={styles.features}>
       <div className="container">
         <Heading as="h2" className={styles.sectionTitle}>
-          Why PyAI?
+          Why openstackai?
         </Heading>
         <div className="row">
           {FeatureList.map((props, idx) => (
@@ -171,7 +171,7 @@ function CTASection() {
           <Link
             className="button button--outline button--lg"
             style={{marginLeft: '1rem'}}
-            href="https://github.com/gitpavleenbali/PYAI">
+            href="https://github.com/gitpavleenbali/openstackai">
             ⭐ Star on GitHub
           </Link>
         </div>
@@ -185,7 +185,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="Build AI Agents in Python"
-      description="PyAI - The Pandas of AI Agents. Build powerful AI applications in 3 lines or less.">
+      description="openstackai - The Pandas of AI Agents. Build powerful AI applications in 3 lines or less.">
       <HomepageHeader />
       <main>
         <CodeShowcase />

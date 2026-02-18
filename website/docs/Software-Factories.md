@@ -1,6 +1,6 @@
 # Software Factories
 
-A **Software Factory** is a system that generates software, not just code snippets. PYAI provides the intelligence engine to build them.
+A **Software Factory** is a system that generates software, not just code snippets. openstackai provides the intelligence engine to build them.
 
 ---
 
@@ -8,7 +8,7 @@ A **Software Factory** is a system that generates software, not just code snippe
 
 > *"The best code is the code you never had to write. The best software is the software that writes itself."*
 
-Software Factories represent the future of development — where AI doesn't just assist programmers, it becomes the programmer. PYAI is building the foundation for this future.
+Software Factories represent the future of development — where AI doesn't just assist programmers, it becomes the programmer. openstackai is building the foundation for this future.
 
 ---
 
@@ -33,7 +33,7 @@ Software Factories represent the future of development — where AI doesn't just
 Natural language descriptions become working software:
 
 ```python
-from pyai import code
+from openstackai import code
 
 # Describe what you want
 result = code.write("""
@@ -88,19 +88,19 @@ print(fixed.solution)     # Get the fix
 
 ## The Intelligence Stack
 
-Software Factories are built on the PYAI Intelligence Stack:
+Software Factories are built on the openstackai Intelligence Stack:
 
 ```
 ┌──────────────────────────────────────────────────────────┐
 │                    YOUR APPLICATION                       │
 ├──────────────────────────────────────────────────────────┤
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐     │
-│  │ pyai │  │ PyFlow  │  │PyVision │  │ PyVoice │     │
+│  │ openstackai │  │ PyFlow  │  │PyVision │  │ PyVoice │     │
 │  │ Agents  │  │Workflow │  │ Vision  │  │  Audio  │     │
 │  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘     │
 │       │            │            │            │           │
 │  ┌────▼────────────▼────────────▼────────────▼────┐     │
-│  │              PYAI INTELLIGENCE ENGINE           │     │
+│  │              openstackai INTELLIGENCE ENGINE           │     │
 │  │  • Unified Memory  • Context Management         │     │
 │  │  • Model Routing   • Intelligent Caching        │     │
 │  └────────────────────────────────────────────────┘     │
@@ -113,13 +113,13 @@ Software Factories are built on the PYAI Intelligence Stack:
 
 ## Code Operations
 
-The `code` module in PYAI provides the building blocks for Software Factories:
+The `code` module in openstackai provides the building blocks for Software Factories:
 
 ### code.write()
 Generate new code from descriptions.
 
 ```python
-from pyai import code
+from openstackai import code
 
 result = code.write("fibonacci function with memoization")
 print(result)  # Complete, working implementation
@@ -171,8 +171,8 @@ improved = code.refactor(old_code, goal="testability")
 Building a complete microservice in seconds:
 
 ```python
-from pyai import code, Agent
-from pyai.blueprint import Workflow, Step
+from openstackai import code, Agent
+from openstackai.blueprint import Workflow, Step
 
 # Agent specialized in different aspects
 architect = Agent(name="Architect", instructions="Design system architecture")
@@ -205,11 +205,11 @@ result = await factory.run("""
 
 ## The Future
 
-The PYAI roadmap leads to fully autonomous software development:
+The openstackai roadmap leads to fully autonomous software development:
 
 | Milestone | Description |
 |-----------|-------------|
-| **pyai** | Core intelligence SDK *(Available now)* |
+| **openstackai** | Core intelligence SDK *(Available now)* |
 | **PyFlow** | Visual workflow orchestration *(Coming soon)* |
 | **PyFactory** | Full software generation engine *(In development)* |
 | **PyMind** | Autonomous reasoning systems *(Future)* |

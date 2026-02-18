@@ -31,10 +31,10 @@ if not setup_pyai():
     sys.exit(1)
 
 import asyncio
-from pyai import Agent
-from pyai.instructions import SystemPrompt
-from pyai.skills import SearchSkill, CodeSkill
-from pyai.core.llm import OpenAIProvider, AzureOpenAIProvider, LLMConfig
+from openstackai import Agent
+from openstackai.instructions import SystemPrompt
+from openstackai.skills import SearchSkill, CodeSkill
+from openstackai.core.llm import OpenAIProvider, AzureOpenAIProvider, LLMConfig
 
 
 def get_llm_provider():

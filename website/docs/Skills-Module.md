@@ -31,7 +31,7 @@ flowchart TB
 ## File Structure
 
 ```
-src/pyai/skills/
+src/openstackai/skills/
 ├── __init__.py
 ├── skill.py          # Base Skill class
 ├── tool_skill.py     # Tool decorator
@@ -49,7 +49,7 @@ The simplest way to create agent tools.
 ### Basic Usage
 
 ```python
-from pyai.skills import tool
+from openstackai.skills import tool
 
 @tool(description="Get the current weather for a city")
 async def get_weather(city: str) -> str:
@@ -66,7 +66,7 @@ async def add(a: int, b: int) -> int:
 ### With Schema
 
 ```python
-from pyai.skills import tool
+from openstackai.skills import tool
 from pydantic import BaseModel, Field
 
 class SearchParams(BaseModel):
@@ -86,7 +86,7 @@ async def web_search(query: str, max_results: int = 10) -> list:
 ### Tool Registration
 
 ```python
-from pyai import Agent
+from openstackai import Agent
 
 # Create agent with tools
 agent = Agent(
@@ -122,7 +122,7 @@ sequenceDiagram
 For more complex, stateful tools.
 
 ```python
-from pyai.skills import Skill
+from openstackai.skills import Skill
 
 class DatabaseSkill(Skill):
     """Skill for database operations."""
@@ -155,7 +155,7 @@ class DatabaseSkill(Skill):
 Manage and discover skills.
 
 ```python
-from pyai.skills import SkillRegistry
+from openstackai.skills import SkillRegistry
 
 registry = SkillRegistry()
 
@@ -180,7 +180,7 @@ all_tools = registry.get_all_tools()
 ### SearchSkill
 
 ```python
-from pyai.skills.builtin import SearchSkill
+from openstackai.skills.builtin import SearchSkill
 
 search = SearchSkill(
     api_key="...",
@@ -193,7 +193,7 @@ results = await search.search("Python tutorials")
 ### CodeSkill
 
 ```python
-from pyai.skills.builtin import CodeSkill
+from openstackai.skills.builtin import CodeSkill
 
 code = CodeSkill()
 
@@ -210,7 +210,7 @@ print(fibonacci(10))
 ### FileSkill
 
 ```python
-from pyai.skills.builtin import FileSkill
+from openstackai.skills.builtin import FileSkill
 
 file = FileSkill(base_path="./workspace")
 
@@ -227,7 +227,7 @@ files = await file.list("./")
 ### WebSkill
 
 ```python
-from pyai.skills.builtin import WebSkill
+from openstackai.skills.builtin import WebSkill
 
 web = WebSkill()
 
@@ -241,7 +241,7 @@ text = await web.extract_text("https://example.com")
 ### MathSkill
 
 ```python
-from pyai.skills.builtin import MathSkill
+from openstackai.skills.builtin import MathSkill
 
 math = MathSkill()
 
@@ -259,7 +259,7 @@ solution = await math.solve("x^2 + 2x + 1 = 0")
 ### Simple Tool
 
 ```python
-from pyai.skills import tool
+from openstackai.skills import tool
 
 @tool(description="Get stock price")
 async def get_stock_price(symbol: str) -> dict:
@@ -271,7 +271,7 @@ async def get_stock_price(symbol: str) -> dict:
 ### Complex Skill Class
 
 ```python
-from pyai.skills import Skill, tool
+from openstackai.skills import Skill, tool
 from typing import List, Dict, Any
 
 class CRMSkill(Skill):

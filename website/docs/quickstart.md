@@ -1,11 +1,11 @@
-# 🚀 pyai Quick Start Guide
+# 🚀 openstackai Quick Start Guide
 
-Get up and running with pyai in under 5 minutes.
+Get up and running with openstackai in under 5 minutes.
 
 ## Installation
 
 ```bash
-pip install pyai
+pip install openstackai
 ```
 
 ## Setup
@@ -26,17 +26,17 @@ set OPENAI_API_KEY=sk-your-key-here
 ### Option 2: Programmatic Configuration
 
 ```python
-import pyai
+import openstackai
 
-pyai.configure(api_key="sk-your-key-here")
+openstackai.configure(api_key="sk-your-key-here")
 ```
 
 ### Option 3: Azure OpenAI
 
 ```python
-import pyai
+import openstackai
 
-pyai.configure(
+openstackai.configure(
     provider="azure",
     azure_endpoint="https://YOUR-RESOURCE.openai.azure.com/",
     azure_deployment="gpt-4o-mini",
@@ -49,7 +49,7 @@ pyai.configure(
 ## Your First 5 Lines
 
 ```python
-from pyai import ask, agent, rag
+from openstackai import ask, agent, rag
 
 # 1. Ask anything
 answer = ask("What is machine learning?")
@@ -73,7 +73,7 @@ print(answer)  # "Seattle"
 ### 1. Simple Q&A
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 # Basic question
 answer = ask("What is the capital of Japan?")
@@ -96,7 +96,7 @@ profile = ask("Generate a sample user profile", as_json=True)
 ### 2. Custom Agents
 
 ```python
-from pyai import agent
+from openstackai import agent
 
 # Create a Python expert
 python_expert = agent(persona="python_expert")
@@ -115,7 +115,7 @@ assistant("What's my favorite color?")  # "Blue!"
 ### 3. RAG (Retrieval-Augmented Generation)
 
 ```python
-from pyai import rag
+from openstackai import rag
 
 # From files
 answer = rag.ask("./documents/report.pdf", "What is the main conclusion?")
@@ -140,7 +140,7 @@ answer = rag.from_text(long_text, "What are the key points?")
 ### 4. Real-Time Data
 
 ```python
-from pyai import fetch
+from openstackai import fetch
 
 # Weather
 weather = fetch.weather("New York")
@@ -163,7 +163,7 @@ print(f"Bitcoin: ${btc.price}")
 ### 5. Code Operations
 
 ```python
-from pyai import code
+from openstackai import code
 
 # Generate code
 func = code.write("function to calculate fibonacci numbers")
@@ -192,7 +192,7 @@ js_code = code.convert(python_code, from_lang="python", to_lang="javascript")
 ### Research Assistant
 
 ```python
-from pyai import research
+from openstackai import research
 
 result = research("quantum computing applications")
 print("Summary:", result.summary)
@@ -203,7 +203,7 @@ print("Insights:", result.insights)
 ### Document Summarizer
 
 ```python
-from pyai import summarize
+from openstackai import summarize
 
 # Summarize anything
 summary = summarize("./research_paper.pdf")
@@ -214,7 +214,7 @@ summary = summarize("Long text here...", length="short")
 ### Data Extractor
 
 ```python
-from pyai import extract
+from openstackai import extract
 from pydantic import BaseModel
 
 class Invoice(BaseModel):
@@ -230,7 +230,7 @@ print(f"Vendor: {invoice.vendor}, Amount: ${invoice.amount}")
 ### Chat Session
 
 ```python
-from pyai import chat
+from openstackai import chat
 
 session = chat(persona="teacher")
 session.say("What is machine learning?")
@@ -241,7 +241,7 @@ session.say("How can I learn more?")  # Still has full context
 ### Multi-Language Support
 
 ```python
-from pyai import translate
+from openstackai import translate
 
 # English to Spanish
 spanish = translate("Hello, how are you?", to="es")
@@ -264,7 +264,7 @@ formal_german = translate("Please help me", to="de", formal=True)
 
 ## Comparison
 
-Task | Other Frameworks | pyai
+Task | Other Frameworks | openstackai
 -----|-----------------|--------
 Simple Q&A | 10+ lines | 1 line
 RAG | 20+ lines | 2 lines
@@ -272,4 +272,4 @@ Custom Agent | 25+ lines | 1 line
 Weather Fetch | 15+ lines | 1 line
 Code Review | Custom implementation | 1 line
 
-**pyai: The Pandas of AI** 🐼🤖
+**openstackai: The Pandas of AI** 🐼🤖

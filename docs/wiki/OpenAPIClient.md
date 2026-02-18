@@ -5,7 +5,7 @@ The `OpenAPIClient` provides a programmatic interface to call REST APIs defined 
 ## Import
 
 ```python
-from pyai.openapi import OpenAPIClient
+from openstackai.openapi import OpenAPIClient
 ```
 
 ## Constructor
@@ -134,7 +134,7 @@ client = OpenAPIClient(
 ## Error Handling
 
 ```python
-from pyai.openapi import APIError, ValidationError
+from openstackai.openapi import APIError, ValidationError
 
 try:
     result = client.call("getUser", id=999)

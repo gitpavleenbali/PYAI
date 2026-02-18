@@ -1,13 +1,13 @@
 # Agent
 
-The `Agent` class is the heart of PYAI's agent framework.
+The `Agent` class is the heart of openstackai's agent framework.
 
 ---
 
 ## Basic Usage
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agent = Agent(
     name="Assistant",
@@ -38,8 +38,8 @@ print(result.final_output)
 ## With Tools
 
 ```python
-from pyai import Agent, Runner
-from pyai.skills import tool
+from openstackai import Agent, Runner
+from openstackai.skills import tool
 
 @tool(description="Search the web")
 async def search(query: str) -> str:
@@ -63,7 +63,7 @@ result = Runner.run_sync(agent, "What's the weather in NYC?")
 ## With Handoffs
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 # Specialist agents
 billing = Agent(name="Billing", instructions="Handle billing questions")
@@ -88,8 +88,8 @@ result = Runner.run_sync(router, "I have a question about my invoice")
 ### OpenAI
 
 ```python
-from pyai import Agent
-from pyai.core import OpenAIProvider, LLMConfig
+from openstackai import Agent
+from openstackai.core import OpenAIProvider, LLMConfig
 
 provider = OpenAIProvider(LLMConfig(
     api_key="sk-...",
@@ -102,7 +102,7 @@ agent = Agent(name="Bot", instructions="...", llm=provider)
 ### Azure OpenAI
 
 ```python
-from pyai.core import AzureOpenAIProvider, LLMConfig
+from openstackai.core import AzureOpenAIProvider, LLMConfig
 
 # With API Key
 provider = AzureOpenAIProvider(LLMConfig(
@@ -124,7 +124,7 @@ agent = Agent(name="Bot", instructions="...", llm=provider)
 ### Anthropic
 
 ```python
-from pyai.core import AnthropicProvider, LLMConfig
+from openstackai.core import AnthropicProvider, LLMConfig
 
 provider = AnthropicProvider(LLMConfig(
     api_key="sk-ant-...",
@@ -135,7 +135,7 @@ provider = AnthropicProvider(LLMConfig(
 ### Ollama (Local)
 
 ```python
-from pyai.core import OllamaProvider, LLMConfig
+from openstackai.core import OllamaProvider, LLMConfig
 
 provider = OllamaProvider(LLMConfig(
     api_base="http://localhost:11434",
@@ -150,8 +150,8 @@ provider = OllamaProvider(LLMConfig(
 ### Conversation Memory
 
 ```python
-from pyai import Agent
-from pyai.core import ConversationMemory
+from openstackai import Agent
+from openstackai.core import ConversationMemory
 
 memory = ConversationMemory(max_messages=50)
 
@@ -172,7 +172,7 @@ agent = Agent(
 ### Vector Memory
 
 ```python
-from pyai.core import VectorMemory
+from openstackai.core import VectorMemory
 
 memory = VectorMemory(provider="chromadb")
 
@@ -188,8 +188,8 @@ agent = Agent(
 ## Advanced Configuration
 
 ```python
-from pyai import Agent
-from pyai.core import AgentConfig
+from openstackai import Agent
+from openstackai.core import AgentConfig
 
 config = AgentConfig(
     max_iterations=10,
@@ -242,7 +242,7 @@ result = await Runner.run_async(agent, "Hello")
 ### Streaming
 
 ```python
-from pyai.runner import StreamingRunner
+from openstackai.runner import StreamingRunner
 
 async for event in StreamingRunner.stream(agent, "Hello"):
     if event.type == "token":

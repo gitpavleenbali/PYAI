@@ -33,10 +33,10 @@ except Exception:
     pass  # Workflow definitions work without LLM configuration
 
 import asyncio
-from pyai import Agent
-from pyai.instructions import SystemPrompt
-from pyai.blueprint import Workflow, Step, StepType
-from pyai.blueprint.patterns import ChainPattern, SupervisorPattern
+from openstackai import Agent
+from openstackai.instructions import SystemPrompt
+from openstackai.blueprint import Workflow, Step, StepType
+from openstackai.blueprint.patterns import ChainPattern, SupervisorPattern
 
 
 async def create_research_workflow():

@@ -27,7 +27,7 @@ flowchart TB
 ## File Structure
 
 ```
-src/pyai/sessions/
+src/openstackai/sessions/
 ├── __init__.py
 ├── base.py          # Session and Store base classes
 ├── manager.py       # SessionManager
@@ -45,7 +45,7 @@ Central interface for session management.
 ### Basic Usage
 
 ```python
-from pyai.sessions import SessionManager, SQLiteSessionStore
+from openstackai.sessions import SessionManager, SQLiteSessionStore
 
 # Create manager with SQLite storage
 manager = SessionManager(
@@ -73,7 +73,7 @@ session = manager.get_session(session.session_id)
 Represents a conversation session with full state.
 
 ```python
-from pyai.sessions import Session
+from openstackai.sessions import Session
 
 session = Session(
     session_id="sess_abc123",
@@ -82,15 +82,15 @@ session = Session(
 )
 
 # Add messages
-session.add_message("user", "What is PYAI?")
-session.add_message("assistant", "PYAI is an intelligence engine.")
+session.add_message("user", "What is openstackai?")
+session.add_message("assistant", "openstackai is an intelligence engine.")
 
 # Access messages
 for msg in session.messages:
     print(f"{msg.role}: {msg.content}")
 
 # Store custom state
-session.set_state("last_topic", "PYAI")
+session.set_state("last_topic", "openstackai")
 topic = session.get_state("last_topic")
 
 # Session info
@@ -108,7 +108,7 @@ print(session.message_count)
 Local file-based storage. Great for development and single-server deployments.
 
 ```python
-from pyai.sessions import SQLiteSessionStore
+from openstackai.sessions import SQLiteSessionStore
 
 store = SQLiteSessionStore(
     path="sessions.db",
@@ -121,11 +121,11 @@ store = SQLiteSessionStore(
 Distributed storage for multi-server deployments.
 
 ```python
-from pyai.sessions import RedisSessionStore
+from openstackai.sessions import RedisSessionStore
 
 store = RedisSessionStore(
     url="redis://localhost:6379",
-    prefix="pyai:sessions:",
+    prefix="openstackai:sessions:",
     ttl=86400  # 24 hours
 )
 ```
@@ -135,7 +135,7 @@ store = RedisSessionStore(
 In-memory storage for testing and development.
 
 ```python
-from pyai.sessions import MemorySessionStore
+from openstackai.sessions import MemorySessionStore
 
 store = MemorySessionStore()  # Cleared on restart
 ```
@@ -181,8 +181,8 @@ flowchart LR
 ## Using with Agents
 
 ```python
-from pyai import Agent, Runner
-from pyai.sessions import SessionManager, SQLiteSessionStore
+from openstackai import Agent, Runner
+from openstackai.sessions import SessionManager, SQLiteSessionStore
 
 # Setup
 manager = SessionManager(store=SQLiteSessionStore("chat.db"))
@@ -255,7 +255,7 @@ manager.clear_all()
 ## Custom Session Store
 
 ```python
-from pyai.sessions import SessionStore, Session
+from openstackai.sessions import SessionStore, Session
 
 class PostgresSessionStore(SessionStore):
     """PostgreSQL session storage."""

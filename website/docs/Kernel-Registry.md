@@ -13,7 +13,7 @@ The Kernel pattern allows:
 ## Basic Usage
 
 ```python
-from pyai.kernel import Kernel
+from openstackai.kernel import Kernel
 
 # Create kernel
 kernel = Kernel()
@@ -32,8 +32,8 @@ memory = kernel.get_service("memory")
 ### Add LLM Providers
 
 ```python
-from pyai.kernel import Kernel
-from pyai.core import OpenAIProvider, AzureOpenAIProvider
+from openstackai.kernel import Kernel
+from openstackai.core import OpenAIProvider, AzureOpenAIProvider
 
 kernel = Kernel()
 
@@ -56,7 +56,7 @@ kernel.add_service(
 ### Add Memory
 
 ```python
-from pyai.vectordb import ChromaDB
+from openstackai.vectordb import ChromaDB
 
 kernel.add_service(
     ChromaDB(collection="knowledge"),
@@ -67,7 +67,7 @@ kernel.add_service(
 ### Add Plugins
 
 ```python
-from pyai.plugins import WebPlugin, FilePlugin
+from openstackai.plugins import WebPlugin, FilePlugin
 
 kernel.add_plugin(WebPlugin())
 kernel.add_plugin(FilePlugin())
@@ -76,8 +76,8 @@ kernel.add_plugin(FilePlugin())
 ## Using with Agents
 
 ```python
-from pyai import Agent
-from pyai.kernel import Kernel
+from openstackai import Agent
+from openstackai.kernel import Kernel
 
 kernel = Kernel()
 kernel.add_service(provider, "llm")
@@ -115,7 +115,7 @@ default_llm = kernel.get_default_service("llm")
 ## Dependency Injection
 
 ```python
-from pyai.kernel import inject
+from openstackai.kernel import inject
 
 class MyAgent:
     @inject("llm")
@@ -159,10 +159,10 @@ plugins:
 ### Enterprise Setup
 
 ```python
-from pyai.kernel import Kernel
-from pyai.core import AzureOpenAIProvider
-from pyai.vectordb import Qdrant
-from pyai.sessions import RedisSession
+from openstackai.kernel import Kernel
+from openstackai.core import AzureOpenAIProvider
+from openstackai.vectordb import Qdrant
+from openstackai.sessions import RedisSession
 
 kernel = Kernel()
 

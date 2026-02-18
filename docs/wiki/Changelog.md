@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to pyai are documented here.
+All notable changes to openstackai are documented here.
 
 ## [0.4.0] - 2026-02-16
 
@@ -108,11 +108,11 @@ Major release achieving feature parity with industry-leading AI agent SDKs.
 # No breaking changes, new features are additive
 
 # New: Runner pattern
-from pyai import Runner
+from openstackai import Runner
 result = Runner.run_sync(agent, "query")
 
 # New: A2A protocol
-from pyai.a2a import A2AServer
+from openstackai.a2a import A2AServer
 server = A2AServer(agent)
 ```
 
@@ -120,7 +120,7 @@ server = A2AServer(agent)
 
 ```python
 # New: Evaluation
-from pyai.evaluation import Evaluator, EvalSet
+from openstackai.evaluation import Evaluator, EvalSet
 evaluator = Evaluator(agent)
 results = evaluator.evaluate(eval_set)
 ```
@@ -129,11 +129,11 @@ results = evaluator.evaluate(eval_set)
 
 ```python
 # New: Workflows
-from pyai.blueprint import Workflow
+from openstackai.blueprint import Workflow
 workflow = Workflow().add_step(analyze).add_step(summarize)
 
 # New: Sessions
-from pyai.sessions import SQLiteSession
+from openstackai.sessions import SQLiteSession
 session = SQLiteSession("history.db")
 ```
 
@@ -141,6 +141,6 @@ session = SQLiteSession("history.db")
 
 ## See Also
 
-- [Installation](Installation) - Install pyai
+- [Installation](Installation) - Install openstackai
 - [Quick-Start](Quick-Start) - Getting started
 - [Contributing](Contributing) - How to contribute

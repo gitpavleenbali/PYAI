@@ -1,4 +1,4 @@
-# pyai Distribution Guide
+# openstackai Distribution Guide
 
 ## Installation Methods
 
@@ -6,24 +6,24 @@
 
 ```bash
 # Basic installation
-pip install pyai
+pip install openstackai
 
 # With OpenAI support
-pip install pyai[openai]
+pip install openstackai[openai]
 
 # With Azure support (recommended for enterprise)
-pip install pyai[azure]
+pip install openstackai[azure]
 
 # All features
-pip install pyai[all]
+pip install openstackai[all]
 ```
 
 ### 2. Install from Source
 
 ```bash
 # Clone the repository
-git clone https://github.com/gitpavleenbali/pyai.git
-cd pyai
+git clone https://github.com/gitpavleenbali/openstackai.git
+cd openstackai
 
 # Install in development mode
 pip install -e .[all]
@@ -31,11 +31,11 @@ pip install -e .[all]
 
 ### 3. Install from ZIP Distribution
 
-1. Download `pyai-X.X.X-release.zip`
+1. Download `openstackai-X.X.X-release.zip`
 2. Extract to your preferred location
 3. Install:
    ```bash
-   cd pyai-X.X.X-release
+   cd openstackai-X.X.X-release
    pip install .
    ```
 
@@ -58,13 +58,13 @@ pip install -e .[all]
 
 ```bash
 # For Azure enterprise deployment
-pip install pyai[azure,web,docs]
+pip install openstackai[azure,web,docs]
 
 # For RAG applications
-pip install pyai[openai,vector,web]
+pip install openstackai[openai,vector,web]
 
 # For LangChain users
-pip install pyai[openai,langchain]
+pip install openstackai[openai,langchain]
 
 # For development
 pip install -e .[all,dev]
@@ -106,14 +106,14 @@ pip install build wheel
 # Build distribution packages
 python -m build
 
-# Output: dist/pyai-X.X.X.tar.gz and dist/pyai-X.X.X-py3-none-any.whl
+# Output: dist/openstackai-X.X.X.tar.gz and dist/openstackai-X.X.X-py3-none-any.whl
 ```
 
 ## Package Structure
 
 ```
-pyai-X.X.X-release/
-├── pyai/                 # Main package
+openstackai-X.X.X-release/
+├── openstackai/                 # Main package
 │   ├── __init__.py          # Package root
 │   ├── py.typed             # PEP 561 marker
 │   ├── easy/                # One-liner functions
@@ -134,19 +134,19 @@ pyai-X.X.X-release/
 
 ## Verification
 
-After installation, verify pyai is working:
+After installation, verify openstackai is working:
 
 ```python
 # Basic verification
-import pyai
-print(f"pyai version: {pyai.__version__}")
+import openstackai
+print(f"openstackai version: {openstackai.__version__}")
 
 # Check available functions
-from pyai import ask, agent, research
+from openstackai import ask, agent, research
 print("Core functions available!")
 
 # Test with mock (no API key needed)
-from pyai.easy.config import config
+from openstackai.easy.config import config
 config.enable_mock(True)
 
 response = ask("Hello!")
@@ -161,20 +161,20 @@ For Azure OpenAI deployment:
 
 ```powershell
 # Create resource group
-az group create --name rg-pyai --location eastus2
+az group create --name rg-openstackai --location eastus2
 
 # Create Azure OpenAI resource
 az cognitiveservices account create \
-  --name pyai-openai \
-  --resource-group rg-pyai \
+  --name openstackai-openai \
+  --resource-group rg-openstackai \
   --kind OpenAI \
   --sku S0 \
   --location eastus2
 
 # Deploy a model
 az cognitiveservices account deployment create \
-  --name pyai-openai \
-  --resource-group rg-pyai \
+  --name openstackai-openai \
+  --resource-group rg-openstackai \
   --deployment-name gpt-4o-mini \
   --model-name gpt-4o-mini \
   --model-version "2024-07-18" \
@@ -183,30 +183,30 @@ az cognitiveservices account deployment create \
   --sku-name Standard
 ```
 
-### 2. Configure pyai
+### 2. Configure openstackai
 
 ```python
-from pyai.easy.config import config
+from openstackai.easy.config import config
 
 # Option 1: Using Azure AD (recommended)
 config.use_azure(
-    endpoint="https://pyai-openai.openai.azure.com",
+    endpoint="https://openstackai-openai.openai.azure.com",
     deployment="gpt-4o-mini",
     api_version="2024-02-15-preview"
 )
 
 # Option 2: Using API key
 config.use_azure(
-    endpoint="https://pyai-openai.openai.azure.com",
+    endpoint="https://openstackai-openai.openai.azure.com",
     deployment="gpt-4o-mini",
     api_key="your-api-key"
 )
 ```
 
-### 3. Use pyai
+### 3. Use openstackai
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 # Now uses Azure OpenAI
 response = ask("What is Azure?")
@@ -244,7 +244,7 @@ pip install twine
 twine upload --repository testpypi dist/*
 
 # Test installation
-pip install --index-url https://test.pypi.org/simple/ pyai
+pip install --index-url https://test.pypi.org/simple/ openstackai
 
 # If successful, upload to production PyPI
 twine upload dist/*
@@ -290,29 +290,29 @@ steps:
 mkdir /path/to/packages
 
 # Copy wheel file
-cp dist/pyai-*.whl /path/to/packages/
+cp dist/openstackai-*.whl /path/to/packages/
 
 # Install from local
-pip install --find-links=/path/to/packages pyai
+pip install --find-links=/path/to/packages openstackai
 ```
 
 ## Troubleshooting
 
 ### Common Issues
 
-**Import Error: No module named 'pyai'**
+**Import Error: No module named 'openstackai'**
 - Ensure you installed in the correct Python environment
-- Check: `pip show pyai`
+- Check: `pip show openstackai`
 
 **Azure Authentication Error**
 - Run `az login` to authenticate
 - Ensure `azure-identity` is installed: `pip install azure-identity`
 
 **Optional dependency not found**
-- Install the specific extra: `pip install pyai[extra_name]`
+- Install the specific extra: `pip install openstackai[extra_name]`
 
 ### Getting Help
 
-- GitHub Issues: https://github.com/gitpavleenbali/pyai/issues
+- GitHub Issues: https://github.com/gitpavleenbali/openstackai/issues
 - Documentation: See `/docs` folder
 - Examples: See `/examples` folder

@@ -4,7 +4,7 @@ The Evaluation module provides testing and benchmarking for AI agents.
 
 ## Overview
 
-PYAI's evaluation framework enables:
+openstackai's evaluation framework enables:
 - Automated agent testing
 - Quality metrics
 - Regression detection
@@ -13,7 +13,7 @@ PYAI's evaluation framework enables:
 ## Quick Start
 
 ```python
-from pyai.evaluation import Evaluator, TestCase
+from openstackai.evaluation import Evaluator, TestCase
 
 # Create test cases
 tests = [
@@ -40,7 +40,7 @@ print(f"Score: {results.score}%")
 ### Basic Test Case
 
 ```python
-from pyai.evaluation import TestCase
+from openstackai.evaluation import TestCase
 
 test = TestCase(
     input="What is Python?",
@@ -80,7 +80,7 @@ test = TestCase(
 ## Evaluator
 
 ```python
-from pyai.evaluation import Evaluator
+from openstackai.evaluation import Evaluator
 
 evaluator = Evaluator(
     agent,
@@ -103,7 +103,7 @@ results = evaluator.run(test_cases)
 ## EvalSet
 
 ```python
-from pyai.evaluation import EvalSet
+from openstackai.evaluation import EvalSet
 
 # Create evaluation set
 eval_set = EvalSet(
@@ -124,8 +124,8 @@ eval_set = EvalSet.load("math_tests.json")
 ## Full Example
 
 ```python
-from pyai import Agent
-from pyai.evaluation import Evaluator, EvalSet, TestCase
+from openstackai import Agent
+from openstackai.evaluation import Evaluator, EvalSet, TestCase
 
 # Create agent
 agent = Agent(
@@ -172,7 +172,7 @@ print(f"V2 is {comparison.improvement}% better")
 ```python
 # In pytest
 import pytest
-from pyai.evaluation import Evaluator, EvalSet
+from openstackai.evaluation import Evaluator, EvalSet
 
 @pytest.fixture
 def agent():

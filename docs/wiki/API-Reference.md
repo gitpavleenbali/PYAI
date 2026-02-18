@@ -1,6 +1,6 @@
 # API Reference
 
-Complete API reference for pyai.
+Complete API reference for openstackai.
 
 ## Quick Links
 
@@ -17,12 +17,12 @@ Complete API reference for pyai.
 
 ### configure()
 
-Configure pyai globally:
+Configure openstackai globally:
 
 ```python
-import pyai
+import openstackai
 
-pyai.configure(
+openstackai.configure(
     api_key="sk-...",           # API key
     provider="openai",          # "openai", "anthropic", "azure"
     model="gpt-4o-mini",        # Default model
@@ -51,7 +51,7 @@ pyai.configure(
 Ask any question:
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 answer = ask("What is the capital of France?")
 
@@ -79,7 +79,7 @@ answer = ask(
 Deep research on any topic:
 
 ```python
-from pyai import research
+from openstackai import research
 
 result = research("quantum computing")
 print(result.summary)
@@ -101,7 +101,7 @@ print(result.insights)
 Summarize text or documents:
 
 ```python
-from pyai import summarize
+from openstackai import summarize
 
 summary = summarize("./document.pdf")
 summary = summarize(long_text, max_words=100)
@@ -112,7 +112,7 @@ summary = summarize(long_text, max_words=100)
 Extract structured data:
 
 ```python
-from pyai import extract
+from openstackai import extract
 
 data = extract(text, fields=["name", "date", "amount"])
 ```
@@ -122,7 +122,7 @@ data = extract(text, fields=["name", "date", "amount"])
 Translate text:
 
 ```python
-from pyai import translate
+from openstackai import translate
 
 result = translate("Hello world", to="spanish")
 ```
@@ -132,7 +132,7 @@ result = translate("Hello world", to="spanish")
 Generate content:
 
 ```python
-from pyai import generate
+from openstackai import generate
 
 content = generate("blog post about AI", style="professional")
 ```
@@ -142,7 +142,7 @@ content = generate("blog post about AI", style="professional")
 Interactive chat:
 
 ```python
-from pyai import chat
+from openstackai import chat
 
 session = chat(system="You are a helpful assistant.")
 response = session.send("Hello!")
@@ -155,7 +155,7 @@ response = session.send("Hello!")
 Create intelligent agents:
 
 ```python
-from pyai import Agent
+from openstackai import Agent
 
 agent = Agent(
     name="my-agent",
@@ -241,8 +241,8 @@ class ExtractResult:
 ## Error Handling
 
 ```python
-from pyai.errors import (
-    pyaiError,
+from openstackai.errors import (
+    openstackaiError,
     ConfigurationError,
     APIError,
     RateLimitError,

@@ -5,7 +5,7 @@ Pinecone is a managed cloud vector database optimized for production workloads.
 ## Installation
 
 ```bash
-pip install pyai[vectordb]
+pip install openstackai[vectordb]
 # or specifically
 pip install pinecone-client
 ```
@@ -13,7 +13,7 @@ pip install pinecone-client
 ## Connection
 
 ```python
-from pyai.vectordb import connect
+from openstackai.vectordb import connect
 
 db = connect(
     "pinecone",
@@ -26,7 +26,7 @@ db = connect(
 ## Configuration
 
 ```python
-from pyai.vectordb.pinecone import PineconeStore
+from openstackai.vectordb.pinecone import PineconeStore
 
 store = PineconeStore(
     api_key="your-api-key",

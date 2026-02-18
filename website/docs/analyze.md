@@ -5,13 +5,13 @@ The `analyze` module provides AI-powered data analysis capabilities.
 ## Import
 
 ```python
-from pyai.easy import analyze
+from openstackai.easy import analyze
 ```
 
 ## Quick Start
 
 ```python
-from pyai.easy import analyze
+from openstackai.easy import analyze
 
 # Analyze data
 insights = analyze.data(data, question="What are the trends?")
@@ -28,7 +28,7 @@ analysis = analyze.text(document)
 ### Data Analysis
 
 ```python
-from pyai.easy import analyze
+from openstackai.easy import analyze
 
 data = [
     {"month": "Jan", "sales": 1000},
@@ -97,7 +97,7 @@ insights = analyze.csv(
 
 ```python
 import pandas as pd
-from pyai.easy import analyze
+from openstackai.easy import analyze
 
 df = pd.read_csv("data.csv")
 insights = analyze.dataframe(df, "What patterns do you see?")
@@ -108,7 +108,7 @@ insights = analyze.dataframe(df, "What patterns do you see?")
 ### Sales Analysis
 
 ```python
-from pyai.easy import analyze
+from openstackai.easy import analyze
 
 sales_data = [
     {"product": "A", "revenue": 10000, "units": 100},
@@ -126,7 +126,7 @@ print(insights)
 ### Customer Feedback
 
 ```python
-from pyai.easy import analyze
+from openstackai.easy import analyze
 
 reviews = [
     "Love this product!",
@@ -144,7 +144,7 @@ for review, result in zip(reviews, results):
 ### Document Analysis
 
 ```python
-from pyai.easy import analyze
+from openstackai.easy import analyze
 
 with open("report.txt") as f:
     content = f.read()
@@ -158,7 +158,7 @@ print(f"Reading time: {analysis['reading_time']}")
 
 ```python
 import asyncio
-from pyai.easy import analyze
+from openstackai.easy import analyze
 
 async def main():
     insights = await analyze.data_async(data, "What are the trends?")

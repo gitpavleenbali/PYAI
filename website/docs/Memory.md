@@ -5,7 +5,7 @@ The `Memory` system provides conversation history and vector memory for agents.
 ## Import
 
 ```python
-from pyai.core import Memory, VectorMemory
+from openstackai.core import Memory, VectorMemory
 ```
 
 ## Memory Types
@@ -19,8 +19,8 @@ from pyai.core import Memory, VectorMemory
 ## Basic Usage
 
 ```python
-from pyai import Agent
-from pyai.core import Memory
+from openstackai import Agent
+from openstackai.core import Memory
 
 # Agent with memory
 agent = Agent(
@@ -35,7 +35,7 @@ agent = Agent(
 ### Basic Memory
 
 ```python
-from pyai.core import Memory
+from openstackai.core import Memory
 
 memory = Memory(max_messages=50)
 
@@ -65,7 +65,7 @@ result2 = Runner.run_sync(agent, "What's my name?")
 ## Vector Memory
 
 ```python
-from pyai.core import VectorMemory
+from openstackai.core import VectorMemory
 
 # Create vector memory
 vmem = VectorMemory(
@@ -74,12 +74,12 @@ vmem = VectorMemory(
 )
 
 # Store information
-vmem.store("PYAI is a Python SDK for AI agents")
+vmem.store("openstackai is a Python SDK for AI agents")
 vmem.store("It supports multiple LLM providers")
 vmem.store("Enterprise features include Azure AD auth")
 
 # Search
-results = vmem.search("What is PYAI?")
+results = vmem.search("What is openstackai?")
 for result in results:
     print(f"{result.score}: {result.content}")
 ```
@@ -87,7 +87,7 @@ for result in results:
 ### With Agent
 
 ```python
-from pyai.core import VectorMemory
+from openstackai.core import VectorMemory
 
 agent = Agent(
     name="Knowledge Agent",
@@ -103,7 +103,7 @@ agent = Agent(
 ### SQLite
 
 ```python
-from pyai.sessions import SQLiteSession
+from openstackai.sessions import SQLiteSession
 
 session = SQLiteSession("memory.db")
 agent = Agent(
@@ -117,7 +117,7 @@ agent = Agent(
 ### Redis
 
 ```python
-from pyai.sessions import RedisSession
+from openstackai.sessions import RedisSession
 
 session = RedisSession(
     host="localhost",
@@ -147,7 +147,7 @@ agent = Agent(
 ### Summarization Memory
 
 ```python
-from pyai.core import Memory
+from openstackai.core import Memory
 
 class SummarizingMemory(Memory):
     """Memory that summarizes old conversations"""
@@ -161,7 +161,7 @@ class SummarizingMemory(Memory):
 ### Hybrid Memory
 
 ```python
-from pyai.core import Memory, VectorMemory
+from openstackai.core import Memory, VectorMemory
 
 class HybridMemory:
     """Combines recent + semantic memory"""

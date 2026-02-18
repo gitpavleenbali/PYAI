@@ -46,7 +46,7 @@ if not setup_pyai():
     sys.exit(1)
 
 # Import ALL the amazing pyai functions
-from pyai import (  # noqa: F401 - Imports shown for demonstration
+from openstackai import (  # noqa: F401 - Imports shown for demonstration
     ask,           # Ask any question
     research,      # Deep research on topics
     summarize,     # Summarize anything

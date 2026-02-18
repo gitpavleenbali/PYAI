@@ -1,4 +1,4 @@
-## 🧠 PYAI Wiki
+## 🧠 openstackai Wiki
 
 **[[Home]]**
 

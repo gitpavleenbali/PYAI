@@ -1,10 +1,10 @@
-# Welcome to the PYAI Wiki
+# Welcome to the openstackai Wiki
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PYAI-Intelligence%20Engine-blueviolet?style=for-the-badge&logo=python&logoColor=white" alt="PYAI"/>
+  <img src="https://img.shields.io/badge/openstackai-Intelligence%20Engine-blueviolet?style=for-the-badge&logo=python&logoColor=white" alt="openstackai"/>
 </p>
 
-**PYAI** is the Three-Dimensional Intelligence Engine for building Software Factories.
+**openstackai** is the Three-Dimensional Intelligence Engine for building Software Factories.
 
 > *"The best code is the code you never had to write. The best software is the software that writes itself."*
 
@@ -73,12 +73,12 @@
 
 ## 🔗 Quick Links
 
-- [GitHub Repository](https://github.com/gitpavleenbali/PYAI)
-- [PyPI Package](https://pypi.org/project/pyai/)
-- [Issue Tracker](https://github.com/gitpavleenbali/PYAI/issues)
+- [GitHub Repository](https://github.com/gitpavleenbali/openstackai)
+- [PyPI Package](https://pypi.org/project/openstackai/)
+- [Issue Tracker](https://github.com/gitpavleenbali/openstackai/issues)
 
 ---
 
 <p align="center">
-  <strong>PYAI</strong> - Intelligence, Embedded.
+  <strong>openstackai</strong> - Intelligence, Embedded.
 </p>

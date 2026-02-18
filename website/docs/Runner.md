@@ -5,13 +5,13 @@ The `Runner` class executes agents and manages their lifecycle.
 ## Import
 
 ```python
-from pyai import Runner
+from openstackai import Runner
 ```
 
 ## Basic Usage
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agent = Agent(name="Assistant", instructions="You are helpful")
 
@@ -65,7 +65,7 @@ async for event in Runner.run_stream(agent, messages):
 ### Simple Execution
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agent = Agent(
     name="Math Helper",
@@ -91,7 +91,7 @@ result = Runner.run_sync(
 
 ```python
 import asyncio
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 async def main():
     agent = Agent(name="Writer", instructions="You write stories")
@@ -106,7 +106,7 @@ asyncio.run(main())
 ### With Tools
 
 ```python
-from pyai import Agent, Runner, tool
+from openstackai import Agent, Runner, tool
 
 @tool
 def calculate(expression: str) -> str:
@@ -151,7 +151,7 @@ print(result.cost)            # Estimated cost
 ## Error Handling
 
 ```python
-from pyai import Runner, RunnerError
+from openstackai import Runner, RunnerError
 
 try:
     result = Runner.run_sync(agent, "Hello")

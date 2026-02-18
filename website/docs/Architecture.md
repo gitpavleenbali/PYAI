@@ -1,8 +1,8 @@
-# 🏗️ pyai Architecture Blueprint
+# 🏗️ openstackai Architecture Blueprint
 
 ## Vision Statement
 
-**pyai** aims to be the **pandas of AI** - making AI development as simple as data manipulation. Just as pandas revolutionized data analysis by making complex operations one-liners, pyai revolutionizes AI development.
+**openstackai** aims to be the **pandas of AI** - making AI development as simple as data manipulation. Just as pandas revolutionized data analysis by making complex operations one-liners, openstackai revolutionizes AI development.
 
 ---
 
@@ -14,13 +14,13 @@ Traditional libraries are **2-dimensional**:
 - Function → Result
 - Input → Output
 
-pyai is **3-dimensional**:
+openstackai is **3-dimensional**:
 - Function → **Context** → **Intelligence** → Result
 - Single call embeds: configuration, memory, reasoning, output formatting
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    pyai 3D ARCHITECTURE                       │
+│                    openstackai 3D ARCHITECTURE                       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │    USER LAYER (Dimension 1 - Surface)                           │
@@ -65,8 +65,8 @@ template = PromptTemplate(input_variables=["question"], template="{question}")
 chain = LLMChain(llm=llm, prompt=template)
 result = chain.run("What is AI?")
 
-# Good: pyai - one line
-from pyai import ask
+# Good: openstackai - one line
+from openstackai import ask
 answer = ask("What is AI?")
 ```
 
@@ -85,7 +85,7 @@ answer = ask("What is AI?")
 answer = ask("What is AI?", detailed=True, model="gpt-4")
 
 # Level 3: Full control (5% of use cases)
-from pyai import Agent, Memory, SystemPrompt
+from openstackai import Agent, Memory, SystemPrompt
 agent = Agent(
     llm=OpenAIProvider(model="gpt-4"),
     memory=VectorMemory(size=1000),
@@ -98,7 +98,7 @@ agent = Agent(
 ## Module Architecture
 
 ```
-pyai/
+openstackai/
 ├── __init__.py          # Main entry point with lazy imports
 ├── __init__.pyi         # Type stubs for IDE support
 ├── py.typed             # PEP 561 marker
@@ -203,7 +203,7 @@ pyai/
 
 ## Comparison with Competitors
 
-| Feature | LangChain | LlamaIndex | AutoGen | CrewAI | **pyai** |
+| Feature | LangChain | LlamaIndex | AutoGen | CrewAI | **openstackai** |
 |---------|-----------|------------|---------|--------|-------------|
 | Lines for simple Q&A | 10+ | 8+ | 15+ | 12+ | **1** |
 | Lines for RAG | 20+ | 15+ | 25+ | 20+ | **2** |
@@ -221,7 +221,7 @@ pyai/
 # __init__.py uses __getattr__ for lazy imports
 def __getattr__(name):
     if name == "ask":
-        from pyai.easy.ask import ask
+        from openstackai.easy.ask import ask
         return ask
 ```
 
@@ -260,7 +260,7 @@ class AzureProvider(LLMProvider): ...
 
 ### Custom Skills
 ```python
-from pyai import Skill, SkillResult
+from openstackai import Skill, SkillResult
 
 class MyCustomSkill(Skill):
     name = "my_skill"
@@ -273,7 +273,7 @@ class MyCustomSkill(Skill):
 
 ### Custom Personas
 ```python
-from pyai import agent
+from openstackai import agent
 
 # Register custom persona
 agent.register_persona(
@@ -285,7 +285,7 @@ agent.register_persona(
 
 ### Custom Memory
 ```python
-from pyai import Memory
+from openstackai import Memory
 
 class RedisMemory(Memory):
     def __init__(self, redis_url):
@@ -351,4 +351,4 @@ class RedisMemory(Memory):
 
 ---
 
-*This document is the architectural blueprint for pyai. For API reference, see [API_REFERENCE.md](./API_REFERENCE.md).*
+*This document is the architectural blueprint for openstackai. For API reference, see [API_REFERENCE.md](./API_REFERENCE.md).*

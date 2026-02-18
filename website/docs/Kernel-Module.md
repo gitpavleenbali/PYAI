@@ -32,7 +32,7 @@ flowchart TB
 ## File Structure
 
 ```
-src/pyai/kernel/
+src/openstackai/kernel/
 ├── __init__.py
 ├── kernel.py        # Main Kernel class
 ├── services.py      # Service registry
@@ -49,7 +49,7 @@ Central orchestration layer for AI applications.
 ### Basic Usage
 
 ```python
-from pyai.kernel import Kernel
+from openstackai.kernel import Kernel
 
 # Create kernel
 kernel = Kernel()
@@ -98,7 +98,7 @@ flowchart TB
 Fluent API for kernel construction.
 
 ```python
-from pyai.kernel import KernelBuilder
+from openstackai.kernel import KernelBuilder
 
 kernel = (KernelBuilder()
     # Add LLM services
@@ -159,7 +159,7 @@ flowchart TB
 ### Registry Operations
 
 ```python
-from pyai.kernel import ServiceRegistry, Service, ServiceType
+from openstackai.kernel import ServiceRegistry, Service, ServiceType
 
 registry = ServiceRegistry()
 
@@ -202,7 +202,7 @@ flowchart LR
 ### Creating Filters
 
 ```python
-from pyai.kernel import Filter, FilterContext, FilterType
+from openstackai.kernel import Filter, FilterContext, FilterType
 
 class LoggingFilter(Filter):
     """Log all kernel invocations."""
@@ -245,7 +245,7 @@ kernel.add_filter(AuthenticationFilter(api_key="..."))
 Execution context for kernel operations.
 
 ```python
-from pyai.kernel import KernelContext
+from openstackai.kernel import KernelContext
 
 # Create context
 context = KernelContext(
@@ -270,8 +270,8 @@ result = await kernel.invoke(
 ### Creating Plugins
 
 ```python
-from pyai.kernel import KernelPlugin
-from pyai.skills import tool
+from openstackai.kernel import KernelPlugin
+from openstackai.skills import tool
 
 class WeatherPlugin(KernelPlugin):
     """Weather information plugin."""
@@ -304,7 +304,7 @@ forecast = await kernel.invoke("weather", "get_forecast", city="NYC", days=5)
 ## Creating Agents with Kernel
 
 ```python
-from pyai.kernel import Kernel
+from openstackai.kernel import Kernel
 
 # Create kernel with services
 kernel = (KernelBuilder()
@@ -330,9 +330,9 @@ result = await agent.run("What's the weather in NYC?")
 ## Full Example
 
 ```python
-from pyai.kernel import Kernel, KernelBuilder
-from pyai.core.llm import OpenAIProvider
-from pyai.sessions import RedisSessionStore
+from openstackai.kernel import Kernel, KernelBuilder
+from openstackai.core.llm import OpenAIProvider
+from openstackai.sessions import RedisSessionStore
 
 # Initialize services
 openai = OpenAIProvider(api_key="...")

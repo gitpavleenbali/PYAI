@@ -7,7 +7,7 @@ Real-time voice interactions with AI agents.
 ## Quick Start
 
 ```python
-from pyai.voice import VoiceSession
+from openstackai.voice import VoiceSession
 
 # Create voice session
 session = VoiceSession()

@@ -1,18 +1,18 @@
 # Architecture
 
-pyai's architecture is designed around the concept of being the "Pandas of AI" - making complex AI operations simple.
+openstackai's architecture is designed around the concept of being the "Pandas of AI" - making complex AI operations simple.
 
 ## Vision
 
-Just as pandas revolutionized data analysis with one-liners, pyai revolutionizes AI development.
+Just as pandas revolutionized data analysis with one-liners, openstackai revolutionizes AI development.
 
 ## The 3-Dimensional Library
 
-Traditional libraries are 2-dimensional (Input → Output). pyai is 3-dimensional:
+Traditional libraries are 2-dimensional (Input → Output). openstackai is 3-dimensional:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    pyai 3D ARCHITECTURE                       │
+│                    openstackai 3D ARCHITECTURE                       │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │    USER LAYER (Dimension 1 - Surface)                           │
@@ -53,8 +53,8 @@ from langchain.chains import LLMChain
 # ... setup code ...
 result = chain.run("What is AI?")
 
-# pyai: 1 line
-from pyai import ask
+# openstackai: 1 line
+from openstackai import ask
 answer = ask("What is AI?")
 ```
 
@@ -84,7 +84,7 @@ workflow = Workflow().chain(analyze).then(summarize)
 ## Module Structure
 
 ```
-pyai/
+openstackai/
 ├── easy/           # One-liner functions
 │   ├── ask.py
 │   ├── research.py
@@ -218,7 +218,7 @@ Response
 ### Custom Skills
 
 ```python
-from pyai.skills import skill
+from openstackai.skills import skill
 
 @skill
 def my_tool(query: str) -> str:
@@ -229,7 +229,7 @@ def my_tool(query: str) -> str:
 ### Custom Providers
 
 ```python
-from pyai.core import LLMProvider
+from openstackai.core import LLMProvider
 
 class MyProvider(LLMProvider):
     def complete(self, messages):

@@ -1,6 +1,6 @@
 # Design Philosophy
 
-PYAI is built on four fundamental principles that guide every design decision.
+openstackai is built on four fundamental principles that guide every design decision.
 
 ---
 
@@ -8,11 +8,11 @@ PYAI is built on four fundamental principles that guide every design decision.
 
 > *AI shouldn't be bolted on — it should be woven in.*
 
-PYAI treats intelligence as a first-class architectural component, not an afterthought.
+openstackai treats intelligence as a first-class architectural component, not an afterthought.
 
 ### What This Means
 
-| Traditional Approach | PYAI Approach |
+| Traditional Approach | openstackai Approach |
 |---------------------|---------------|
 | AI as a feature | AI as infrastructure |
 | Call AI when needed | AI embedded throughout |
@@ -29,7 +29,7 @@ validated = validate(parsed)
 # ... more manual wiring
 
 # This (AI as infrastructure)
-from pyai import extract
+from openstackai import extract
 data = extract(text, ["name", "email", "phone"])
 # Intelligence is the infrastructure
 ```
@@ -40,7 +40,7 @@ data = extract(text, ["name", "email", "phone"])
 
 > *Start with one line. Scale to software factories. Same API, same patterns, infinite scale.*
 
-PYAI grows with your needs. Simple tasks stay simple. Complex tasks become possible.
+openstackai grows with your needs. Simple tasks stay simple. Complex tasks become possible.
 
 ### The Progression
 
@@ -110,7 +110,7 @@ print(result)
 
 ### Compare to Others
 
-| Task | LangChain | CrewAI | PYAI |
+| Task | LangChain | CrewAI | openstackai |
 |------|-----------|--------|------|
 | Simple question | 10+ lines | N/A | 1 line |
 | RAG setup | 15+ lines | N/A | 2 lines |
@@ -123,7 +123,7 @@ print(result)
 
 > *Type hints. Error handling. Retry logic. Rate limiting. Caching. Built in, not bolted on.*
 
-PYAI is designed for production from day one.
+openstackai is designed for production from day one.
 
 ### Built-In Features
 
@@ -142,9 +142,9 @@ PYAI is designed for production from day one.
 ### Example: Production Agent
 
 ```python
-from pyai import Agent, Runner
-from pyai.runner import RunConfig
-from pyai.sessions import SessionManager, SQLiteSessionStore
+from openstackai import Agent, Runner
+from openstackai.runner import RunConfig
+from openstackai.sessions import SessionManager, SQLiteSessionStore
 
 # Production-grade configuration
 agent = Agent(
@@ -171,7 +171,7 @@ sessions.save(session)
 
 ## Guiding Questions
 
-When designing PYAI features, we ask:
+When designing openstackai features, we ask:
 
 1. **Can a new user do this in under 3 lines?**
 2. **Does this work out of the box with sensible defaults?**
@@ -183,7 +183,7 @@ When designing PYAI features, we ask:
 
 ## The Result
 
-PYAI achieves the rare combination of:
+openstackai achieves the rare combination of:
 
 ```
 ┌─────────────────────────────────────────┐

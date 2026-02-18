@@ -1,6 +1,6 @@
 # Orchestration Patterns
 
-PYAI provides several patterns for orchestrating multiple agents.
+openstackai provides several patterns for orchestrating multiple agents.
 
 ## Available Patterns
 
@@ -16,7 +16,7 @@ PYAI provides several patterns for orchestrating multiple agents.
 Agents execute sequentially, passing output to the next.
 
 ```python
-from pyai.blueprint import Chain
+from openstackai.blueprint import Chain
 
 # Create agents
 researcher = Agent(name="Researcher", instructions="Research topics")
@@ -47,7 +47,7 @@ pipeline = Chain([
 Dynamically routes to appropriate agent based on input.
 
 ```python
-from pyai.blueprint import Router
+from openstackai.blueprint import Router
 
 # Specialized agents
 math_agent = Agent(name="Math", instructions="Solve math problems")
@@ -90,7 +90,7 @@ router = Router(
 Process in parallel, then combine results.
 
 ```python
-from pyai.blueprint import MapReduce
+from openstackai.blueprint import MapReduce
 
 # Worker agent
 researcher = Agent(
@@ -132,7 +132,7 @@ pipeline = MapReduce(
 Manager agent coordinates worker agents.
 
 ```python
-from pyai.blueprint import Supervisor
+from openstackai.blueprint import Supervisor
 
 # Worker agents
 coder = Agent(name="Coder", instructions="Write code")
@@ -175,7 +175,7 @@ manager = Supervisor(
 ### Debate Pattern
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 advocate = Agent(name="Advocate", instructions="Argue FOR the topic")
 critic = Agent(name="Critic", instructions="Argue AGAINST the topic")

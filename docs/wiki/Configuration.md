@@ -1,6 +1,6 @@
 # Configuration
 
-Set up PYAI for your environment.
+Set up openstackai for your environment.
 
 ---
 
@@ -45,9 +45,9 @@ export OLLAMA_HOST=http://localhost:11434
 ## Programmatic Configuration
 
 ```python
-import pyai
+import openstackai
 
-pyai.configure(
+openstackai.configure(
     api_key="sk-...",
     model="gpt-4o",
     temperature=0.7
@@ -61,7 +61,7 @@ pyai.configure(
 ### OpenAI
 
 ```python
-from pyai.core import OpenAIProvider, LLMConfig
+from openstackai.core import OpenAIProvider, LLMConfig
 
 provider = OpenAIProvider(LLMConfig(
     api_key="sk-...",
@@ -74,7 +74,7 @@ provider = OpenAIProvider(LLMConfig(
 ### Azure OpenAI
 
 ```python
-from pyai.core import AzureOpenAIProvider, LLMConfig
+from openstackai.core import AzureOpenAIProvider, LLMConfig
 
 # API Key auth
 provider = AzureOpenAIProvider(LLMConfig(
@@ -95,7 +95,7 @@ provider = AzureOpenAIProvider(LLMConfig(
 ### Anthropic
 
 ```python
-from pyai.core import AnthropicProvider, LLMConfig
+from openstackai.core import AnthropicProvider, LLMConfig
 
 provider = AnthropicProvider(LLMConfig(
     api_key="sk-ant-...",
@@ -108,7 +108,7 @@ provider = AnthropicProvider(LLMConfig(
 
 ## Model Selection
 
-PYAI automatically selects the appropriate model based on environment:
+openstackai automatically selects the appropriate model based on environment:
 
 1. If `AZURE_OPENAI_ENDPOINT` is set → Azure OpenAI
 2. If `OPENAI_API_KEY` is set → OpenAI
@@ -118,8 +118,8 @@ PYAI automatically selects the appropriate model based on environment:
 Override with explicit provider:
 
 ```python
-from pyai import Agent
-from pyai.core import AzureOpenAIProvider, LLMConfig
+from openstackai import Agent
+from openstackai.core import AzureOpenAIProvider, LLMConfig
 
 agent = Agent(
     name="Bot",
@@ -153,7 +153,7 @@ memory:
 Load and use:
 
 ```python
-from pyai.config import load_agent, AgentBuilder
+from openstackai.config import load_agent, AgentBuilder
 
 config = load_agent("agents/research_assistant.yaml")
 agent = AgentBuilder.from_config(config).build()

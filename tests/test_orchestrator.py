@@ -1,5 +1,5 @@
 """
-Tests for pyai Orchestrator Module
+Tests for openstackai Orchestrator Module
 =====================================
 
 Tests for Task, Workflow, Orchestrator, and AgentPatterns.
@@ -15,32 +15,32 @@ class TestOrchestratorImport:
     
     def test_import_orchestrator_module(self):
         """Test importing the orchestrator module."""
-        from pyai import orchestrator
+        from openstackai import orchestrator
         assert orchestrator is not None
     
     def test_import_orchestrator_class(self):
         """Test importing the Orchestrator class."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         assert Orchestrator is not None
     
     def test_import_task_class(self):
         """Test importing the Task class."""
-        from pyai.orchestrator import Task
+        from openstackai.orchestrator import Task
         assert Task is not None
     
     def test_import_workflow_class(self):
         """Test importing the Workflow class."""
-        from pyai.orchestrator import Workflow
+        from openstackai.orchestrator import Workflow
         assert Workflow is not None
     
     def test_import_scheduled_job_class(self):
         """Test importing the ScheduledJob class."""
-        from pyai.orchestrator import ScheduledJob
+        from openstackai.orchestrator import ScheduledJob
         assert ScheduledJob is not None
     
     def test_import_task_status_enum(self):
         """Test importing the TaskStatus enum."""
-        from pyai.orchestrator import TaskStatus
+        from openstackai.orchestrator import TaskStatus
         assert TaskStatus is not None
         assert hasattr(TaskStatus, 'PENDING')
         assert hasattr(TaskStatus, 'RUNNING')
@@ -49,7 +49,7 @@ class TestOrchestratorImport:
     
     def test_import_execution_pattern_enum(self):
         """Test importing the ExecutionPattern enum."""
-        from pyai.orchestrator import ExecutionPattern
+        from openstackai.orchestrator import ExecutionPattern
         assert ExecutionPattern is not None
         assert hasattr(ExecutionPattern, 'SEQUENTIAL')
         assert hasattr(ExecutionPattern, 'PARALLEL')
@@ -57,7 +57,7 @@ class TestOrchestratorImport:
     
     def test_import_agent_patterns_class(self):
         """Test importing the AgentPatterns class."""
-        from pyai.orchestrator import AgentPatterns
+        from openstackai.orchestrator import AgentPatterns
         assert AgentPatterns is not None
 
 
@@ -66,7 +66,7 @@ class TestTaskStatus:
     
     def test_all_status_values(self):
         """Test all TaskStatus values exist."""
-        from pyai.orchestrator import TaskStatus
+        from openstackai.orchestrator import TaskStatus
         
         statuses = ['PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELLED', 'RETRYING']
         for status in statuses:
@@ -78,7 +78,7 @@ class TestExecutionPattern:
     
     def test_all_pattern_values(self):
         """Test all ExecutionPattern values exist."""
-        from pyai.orchestrator import ExecutionPattern
+        from openstackai.orchestrator import ExecutionPattern
         
         patterns = ['SEQUENTIAL', 'PARALLEL', 'SUPERVISOR', 'COLLABORATIVE', 
                    'BROADCAST', 'ROUTER', 'CONSENSUS']
@@ -91,7 +91,7 @@ class TestTask:
     
     def test_create_task(self):
         """Test creating a task."""
-        from pyai.orchestrator import Task, TaskStatus
+        from openstackai.orchestrator import Task, TaskStatus
         
         task = Task(
             id="test-001",
@@ -104,14 +104,14 @@ class TestTask:
     
     def test_task_default_status(self):
         """Test that task has default PENDING status."""
-        from pyai.orchestrator import Task, TaskStatus
+        from openstackai.orchestrator import Task, TaskStatus
         
         task = Task(id="test", name="test")
         assert task.status == TaskStatus.PENDING
     
     def test_task_with_kwargs(self):
         """Test creating a task with kwargs."""
-        from pyai.orchestrator import Task
+        from openstackai.orchestrator import Task
         
         task = Task(
             id="test",
@@ -127,7 +127,7 @@ class TestWorkflow:
     
     def test_create_workflow(self):
         """Test creating a workflow."""
-        from pyai.orchestrator import Workflow, Task
+        from openstackai.orchestrator import Workflow, Task
         
         task1 = Task(id="t1", name="Task 1")
         task2 = Task(id="t2", name="Task 2")
@@ -142,7 +142,7 @@ class TestWorkflow:
     
     def test_workflow_add_step(self):
         """Test adding steps to a workflow."""
-        from pyai.orchestrator import Workflow, Task
+        from openstackai.orchestrator import Workflow, Task
         
         task1 = Task(id="t1", name="Task 1")
         task2 = Task(id="t2", name="Task 2")
@@ -160,14 +160,14 @@ class TestOrchestrator:
     
     def test_create_orchestrator(self):
         """Test creating an orchestrator."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         
         orch = Orchestrator()
         assert orch is not None
     
     def test_orchestrator_has_submit_method(self):
         """Test that orchestrator has submit method."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         
         orch = Orchestrator()
         assert hasattr(orch, 'submit')
@@ -175,7 +175,7 @@ class TestOrchestrator:
     
     def test_orchestrator_has_schedule_method(self):
         """Test that orchestrator has schedule method."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         
         orch = Orchestrator()
         assert hasattr(orch, 'schedule')
@@ -183,7 +183,7 @@ class TestOrchestrator:
     
     def test_orchestrator_has_status_method(self):
         """Test that orchestrator has status method."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         
         orch = Orchestrator()
         assert hasattr(orch, 'status')
@@ -191,7 +191,7 @@ class TestOrchestrator:
     
     def test_orchestrator_has_on_method(self):
         """Test that orchestrator has on (event) method."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         
         orch = Orchestrator()
         assert hasattr(orch, 'on')
@@ -199,7 +199,7 @@ class TestOrchestrator:
     
     def test_orchestrator_has_emit_method(self):
         """Test that orchestrator has emit method."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         
         orch = Orchestrator()
         assert hasattr(orch, 'emit')
@@ -211,28 +211,28 @@ class TestAgentPatterns:
     
     def test_supervisor_pattern_exists(self):
         """Test that supervisor pattern exists."""
-        from pyai.orchestrator import AgentPatterns
+        from openstackai.orchestrator import AgentPatterns
         
         assert hasattr(AgentPatterns, 'supervisor')
         assert callable(AgentPatterns.supervisor)
     
     def test_consensus_pattern_exists(self):
         """Test that consensus pattern exists."""
-        from pyai.orchestrator import AgentPatterns
+        from openstackai.orchestrator import AgentPatterns
         
         assert hasattr(AgentPatterns, 'consensus')
         assert callable(AgentPatterns.consensus)
     
     def test_debate_pattern_exists(self):
         """Test that debate pattern exists."""
-        from pyai.orchestrator import AgentPatterns
+        from openstackai.orchestrator import AgentPatterns
         
         assert hasattr(AgentPatterns, 'debate')
         assert callable(AgentPatterns.debate)
     
     def test_chain_of_thought_pattern_exists(self):
         """Test that chain_of_thought pattern exists."""
-        from pyai.orchestrator import AgentPatterns
+        from openstackai.orchestrator import AgentPatterns
         
         assert hasattr(AgentPatterns, 'chain_of_thought')
         assert callable(AgentPatterns.chain_of_thought)

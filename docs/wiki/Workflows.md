@@ -7,8 +7,8 @@ Multi-step agent processes in the **blueprint/** module.
 ## Basic Workflow
 
 ```python
-from pyai import Agent
-from pyai.blueprint import Workflow, Step
+from openstackai import Agent
+from openstackai.blueprint import Workflow, Step
 
 # Create specialized agents
 researcher = Agent(name="Researcher", instructions="Find information on topics.")
@@ -45,7 +45,7 @@ print(result.final_output)
 ## Conditional Steps
 
 ```python
-from pyai.blueprint import Workflow, Step, Condition
+from openstackai.blueprint import Workflow, Step, Condition
 
 def needs_review(context):
     return context.get("complexity") == "high"
@@ -62,7 +62,7 @@ workflow = (Workflow("ReviewPipeline")
 ## Parallel Execution
 
 ```python
-from pyai.blueprint import Workflow, ParallelStep
+from openstackai.blueprint import Workflow, ParallelStep
 
 # Run multiple agents concurrently
 workflow = (Workflow("ParallelResearch")
@@ -82,7 +82,7 @@ workflow = (Workflow("ParallelResearch")
 Data flows through the workflow via context:
 
 ```python
-from pyai.blueprint import WorkflowContext
+from openstackai.blueprint import WorkflowContext
 
 # Initial context
 context = WorkflowContext(
@@ -116,8 +116,8 @@ workflow = (Workflow("SafePipeline")
 ## Real-World Example: Content Creation
 
 ```python
-from pyai import Agent
-from pyai.blueprint import Workflow, Step, ParallelStep
+from openstackai import Agent
+from openstackai.blueprint import Workflow, Step, ParallelStep
 
 # Specialized team
 topic_researcher = Agent(
@@ -179,7 +179,7 @@ result = await workflow.resume()
 Workflows can use orchestration patterns:
 
 ```python
-from pyai.blueprint import ChainPattern, RouterPattern
+from openstackai.blueprint import ChainPattern, RouterPattern
 
 # Chain pattern within workflow
 chain = ChainPattern()

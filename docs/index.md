@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/PYAI-Intelligence%20Engine-blueviolet?style=for-the-badge&logo=python&logoColor=white" alt="PYAI"/>
+  <img src="https://img.shields.io/badge/openstackai-Intelligence%20Engine-blueviolet?style=for-the-badge&logo=python&logoColor=white" alt="openstackai"/>
 </p>
 
-<h1 align="center">🧠 PYAI</h1>
+<h1 align="center">🧠 openstackai</h1>
 <h3 align="center">Three-Dimensional Intelligence Engine</h3>
 
 <p align="center">
@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/pyai/"><img src="https://img.shields.io/badge/pypi-v0.4.0-blue" alt="PyPI"/></a>
+  <a href="https://pypi.org/project/openstackai/"><img src="https://img.shields.io/badge/pypi-v0.4.0-blue" alt="PyPI"/></a>
   <a href="https://python.org/"><img src="https://img.shields.io/badge/python-3.10+-green" alt="Python"/></a>
   <a href="#"><img src="https://img.shields.io/badge/tests-671%20passing-brightgreen" alt="Tests"/></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-yellow" alt="License"/></a>
@@ -20,21 +20,21 @@
 </p>
 
 <p align="center">
-  <a href="#-what-is-pyai">What is PYAI</a> •
+  <a href="#-what-is-openstackai">What is openstackai</a> •
   <a href="#-the-three-dimensions">Three Dimensions</a> •
-  <a href="#-why-pyai-one-stop-intelligence-solution">Why PYAI</a> •
+  <a href="#-why-openstackai-one-stop-intelligence-solution">Why openstackai</a> •
   <a href="#-software-factories">Software Factories</a> •
   <a href="#-complete-module-reference">Modules</a> •
-  <a href="#-the-pyai-product-suite">Ecosystem</a>
+  <a href="#-the-openstackai-product-suite">Ecosystem</a>
 </p>
 
 ---
 
-## 🎯 What is PYAI?
+## 🎯 What is openstackai?
 
-**PYAI is not just another AI library. It's an Intelligence Engine.**
+**openstackai is not just another AI library. It's an Intelligence Engine.**
 
-While other frameworks help you *call* AI models, PYAI embeds intelligence *into* your software architecture. It's the foundation for building **Software Factories** — systems that don't just use AI, but think, adapt, and create.
+While other frameworks help you *call* AI models, openstackai embeds intelligence *into* your software architecture. It's the foundation for building **Software Factories** — systems that don't just use AI, but think, adapt, and create.
 
 > *"The best code is the code you never had to write. The best software is the software that writes itself."*
 
@@ -46,8 +46,8 @@ flowchart LR
         B -->|returns| A
     end
     
-    subgraph PYAI["PYAI Intelligence Engine"]
-        C["Application"] <-->|embedded| D["🧠 PYAI"]
+    subgraph openstackai["openstackai Intelligence Engine"]
+        C["Application"] <-->|embedded| D["🧠 openstackai"]
         D <-->|orchestrates| E["Agents"]
         D <-->|manages| F["Memory"]
         D <-->|executes| G["Workflows"]
@@ -55,13 +55,13 @@ flowchart LR
     end
 ```
 
-Built on **pyai**, our core SDK, PYAI provides **25+ modules** with **150+ classes** covering every AI use case.
+Built on **openstackai**, our core SDK, openstackai provides **25+ modules** with **150+ classes** covering every AI use case.
 
 ---
 
 ## 🔺 The Three Dimensions
 
-PYAI operates across **three dimensions of intelligence**, each building upon the last:
+openstackai operates across **three dimensions of intelligence**, each building upon the last:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
@@ -101,7 +101,7 @@ flowchart TB
 The foundation. Single-purpose AI operations that **just work**.
 
 ```python
-from pyai import ask, summarize, extract
+from openstackai import ask, summarize, extract
 
 # Instant intelligence
 answer = ask("Explain quantum entanglement")
@@ -113,8 +113,8 @@ entities = extract(text, fields=["names", "dates", "amounts"])
 Coordinated intelligence. Multiple agents working in harmony.
 
 ```python
-from pyai import Agent, Runner
-from pyai.blueprint import Workflow, Step
+from openstackai import Agent, Runner
+from openstackai.blueprint import Workflow, Step
 
 # Create specialized agents
 researcher = Agent(name="Researcher", instructions="Find information.")
@@ -133,7 +133,7 @@ workflow = (Workflow("ResearchPipeline")
 Self-generating systems. **The Software Factory.**
 
 ```python
-from pyai import code
+from openstackai import code
 
 # Generate code from description
 api_code = code.write("REST API for user management with JWT auth")
@@ -148,12 +148,12 @@ tests = code.test(my_function)
 
 ---
 
-## ✨ Why PYAI: One-Stop Intelligence Solution
+## ✨ Why openstackai: One-Stop Intelligence Solution
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
 flowchart TB
-    subgraph PYAI["🧠 PYAI - One-Stop Solution"]
+    subgraph openstackai["🧠 openstackai - One-Stop Solution"]
         subgraph Cognition["Cognition"]
             ASK["ask"]
             RES["research"]
@@ -187,7 +187,7 @@ flowchart TB
 
 ### The Problem with Current Frameworks
 
-| Challenge | LangChain | CrewAI | PYAI Solution |
+| Challenge | LangChain | CrewAI | openstackai Solution |
 |-----------|-----------|--------|---------------|
 | Simple question | 10+ lines of setup | N/A | `ask("question")` |
 | RAG system | 15+ lines, multiple classes | N/A | 2 lines |
@@ -198,7 +198,7 @@ flowchart TB
 
 ### Lines of Code Comparison
 
-| Task | LangChain | LlamaIndex | CrewAI | **PYAI** |
+| Task | LangChain | LlamaIndex | CrewAI | **openstackai** |
 |------|-----------|------------|--------|----------|
 | Question Answering | 15 | 12 | N/A | **1** |
 | RAG System | 25 | 20 | N/A | **2** |
@@ -243,7 +243,7 @@ flowchart TB
         APP["🖥️ App Layer"]
     end
     
-    subgraph SDK["PYAI SDK - src/pyai/"]
+    subgraph SDK["openstackai SDK - src/openstackai/"]
         subgraph Easy["🚀 easy/"]
             E1["ask • research • summarize"]
             E2["rag • generate • translate"]
@@ -296,7 +296,7 @@ flowchart TB
 ### File Structure
 
 ```
-src/pyai/
+src/openstackai/
 ├── easy/           # One-liner APIs (15+ functions)
 ├── core/           # Agent, Memory, LLM providers
 ├── runner/         # Execution engine
@@ -364,10 +364,10 @@ flowchart TB
 
 ### ask() — Universal Question Answering
 
-The foundation of PYAI. Ask any question, get an intelligent answer.
+The foundation of openstackai. Ask any question, get an intelligent answer.
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 # Simple questions
 answer = ask("What is Python?")
@@ -390,7 +390,7 @@ answer = await ask_async("What is AI?")
 Multi-step research with automatic source gathering and synthesis.
 
 ```python
-from pyai import research
+from openstackai import research
 
 # Basic research
 result = research("AI trends in enterprise software")
@@ -414,7 +414,7 @@ result = research(
 Summarize any content: text, files, URLs.
 
 ```python
-from pyai import summarize
+from openstackai import summarize
 
 # Text summarization
 summary = summarize(long_document)
@@ -436,7 +436,7 @@ summary = summarize(text, length="long")     # Detailed
 Production-ready RAG in 2 lines.
 
 ```python
-from pyai import rag
+from openstackai import rag
 
 # Index documents
 knowledge = rag.index("./documents")
@@ -458,7 +458,7 @@ rag.index(["./pdfs", "./markdown", "./code"])
 Generate any type of content.
 
 ```python
-from pyai import generate
+from openstackai import generate
 
 # Code generation
 code = generate("fibonacci function", type="code")
@@ -477,7 +477,7 @@ plan = generate("project plan for mobile app", type="plan")
 ### translate() — Language Translation
 
 ```python
-from pyai import translate
+from openstackai import translate
 
 # Simple translation
 spanish = translate("Hello, how are you?", to="spanish")
@@ -497,7 +497,7 @@ translated_doc = translate(markdown_text, to="german", preserve_format=True)
 Extract structured data from unstructured text.
 
 ```python
-from pyai import extract
+from openstackai import extract
 
 # Extract specific fields
 data = extract(email_text, fields=["sender", "date", "subject", "action_items"])
@@ -519,7 +519,7 @@ entities = extract(article, fields=["people", "organizations", "locations"])
 Access live data feeds.
 
 ```python
-from pyai import fetch
+from openstackai import fetch
 
 # Weather data
 weather = fetch.weather("New York")
@@ -542,7 +542,7 @@ content = fetch.url("https://example.com")
 ### analyze — Data Analysis
 
 ```python
-from pyai import analyze
+from openstackai import analyze
 
 # Sentiment analysis
 result = analyze.sentiment("I love this product!")
@@ -567,7 +567,7 @@ print(comparison.differences)
 AI-powered code assistant.
 
 ```python
-from pyai import code
+from openstackai import code
 
 # Write code
 implementation = code.write("binary search tree in Python")
@@ -600,7 +600,7 @@ explanation = code.explain(complex_function)
 Transfer tasks between agents.
 
 ```python
-from pyai import handoff
+from openstackai import handoff
 
 # Transfer to specialist
 result = handoff(
@@ -623,7 +623,7 @@ result = handoff(
 ### guardrails() — Safety Wrappers
 
 ```python
-from pyai.easy import guardrails
+from openstackai.easy import guardrails
 
 # Wrap any function with safety
 safe_ask = guardrails.wrap(ask, block_pii=True, block_harmful=True)
@@ -639,7 +639,7 @@ limited_ask = guardrails.wrap(ask, rate_limit="10/minute")
 ### trace() — Debugging & Observability
 
 ```python
-from pyai.easy import trace
+from openstackai.easy import trace
 
 # Enable tracing
 trace.enable()
@@ -733,8 +733,8 @@ sequenceDiagram
 ### Creating Agents
 
 ```python
-from pyai import Agent, Runner
-from pyai.skills import tool
+from openstackai import Agent, Runner
+from openstackai.skills import tool
 
 # Define custom tools
 @tool(description="Get current weather for a city")
@@ -769,8 +769,8 @@ print(result.final_output)
 ### Agent Configuration
 
 ```python
-from pyai import Agent
-from pyai.core import AgentConfig
+from openstackai import Agent
+from openstackai.core import AgentConfig
 
 # Detailed configuration
 config = AgentConfig(
@@ -792,8 +792,8 @@ agent = Agent(
 ### Memory Management
 
 ```python
-from pyai import Agent
-from pyai.core import ConversationMemory, SlidingWindowMemory
+from openstackai import Agent
+from openstackai.core import ConversationMemory, SlidingWindowMemory
 
 # Conversation memory (keeps all messages)
 agent = Agent(
@@ -818,7 +818,7 @@ context = agent.memory.get_context()
 ### Streaming Responses
 
 ```python
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agent = Agent(name="Assistant", instructions="Be helpful.")
 
@@ -887,8 +887,8 @@ flowchart TB
 ### Workflow Definition
 
 ```python
-from pyai import Agent
-from pyai.blueprint import Workflow, Step
+from openstackai import Agent
+from openstackai.blueprint import Workflow, Step
 
 # Create specialized agents
 researcher = Agent(
@@ -921,7 +921,7 @@ print(result.outputs["final"])
 ### Chain Pattern
 
 ```python
-from pyai.blueprint import ChainPattern
+from openstackai.blueprint import ChainPattern
 
 # Create a chain of agents
 chain = ChainPattern([
@@ -937,7 +937,7 @@ result = await chain.run("Create a product announcement")
 ### Router Pattern
 
 ```python
-from pyai.blueprint import RouterPattern
+from openstackai.blueprint import RouterPattern
 
 # Create router with specialized agents
 router = RouterPattern()
@@ -957,7 +957,7 @@ result = await router.run("Calculate 234 * 567")
 ### MapReduce Pattern
 
 ```python
-from pyai.blueprint import MapReducePattern
+from openstackai.blueprint import MapReducePattern
 
 # Analyze multiple documents in parallel
 analyzer = Agent(name="Analyzer", instructions="Analyze document content.")
@@ -976,7 +976,7 @@ result = await map_reduce.run(documents)
 ### Supervisor Pattern
 
 ```python
-from pyai.blueprint import SupervisorPattern
+from openstackai.blueprint import SupervisorPattern
 
 # Manager delegates to workers
 manager = Agent(
@@ -1020,7 +1020,7 @@ flowchart TB
 ```
 
 ```python
-from pyai.kernel import Kernel, KernelBuilder
+from openstackai.kernel import Kernel, KernelBuilder
 
 kernel = (KernelBuilder()
     .add_llm(openai_client, name="gpt4", is_default=True)
@@ -1036,7 +1036,7 @@ result = await kernel.invoke("weather", "get_weather", city="NYC")
 
 ## 🏢 Enterprise Features
 
-PYAI is built for production. Every feature you need to deploy AI at scale.
+openstackai is built for production. Every feature you need to deploy AI at scale.
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
@@ -1060,16 +1060,16 @@ Seamless integration with Azure Active Directory. No API keys needed in producti
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
 sequenceDiagram
     participant App
-    participant PYAI
+    participant openstackai
     participant AzureAD["Azure AD"]
     participant AOAI["Azure OpenAI"]
     
-    App->>PYAI: ask("question")
-    PYAI->>AzureAD: Get token (DefaultAzureCredential)
-    AzureAD-->>PYAI: Bearer token
-    PYAI->>AOAI: API call with token
-    AOAI-->>PYAI: Response
-    PYAI-->>App: Answer
+    App->>openstackai: ask("question")
+    openstackai->>AzureAD: Get token (DefaultAzureCredential)
+    AzureAD-->>openstackai: Bearer token
+    openstackai->>AOAI: API call with token
+    AOAI-->>openstackai: Response
+    openstackai-->>App: Answer
 ```
 
 ```python
@@ -1079,7 +1079,7 @@ import os
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://your-resource.openai.azure.com/"
 os.environ["AZURE_OPENAI_DEPLOYMENT"] = "gpt-4o-mini"
 
-from pyai import ask
+from openstackai import ask
 
 # Uses your az login credentials or Managed Identity automatically
 answer = ask("Hello from Azure!")
@@ -1121,7 +1121,7 @@ flowchart LR
 ```
 
 ```python
-from pyai.sessions import SessionManager, SQLiteSessionStore, RedisSessionStore
+from openstackai.sessions import SessionManager, SQLiteSessionStore, RedisSessionStore
 
 # SQLite for development
 manager = SessionManager(store=SQLiteSessionStore("sessions.db"))
@@ -1143,7 +1143,7 @@ session = await manager.get(session_id="abc123")
 history = session.get_messages()
 
 # Session with agent
-from pyai import Agent, Runner
+from openstackai import Agent, Runner
 
 agent = Agent(name="Assistant", instructions="Be helpful.")
 result = await Runner.run(agent, "Hello", session=session)
@@ -1155,7 +1155,7 @@ result = await Runner.run(agent, "Hello", session=session)
 Test your agents systematically.
 
 ```python
-from pyai.evaluation import Evaluator, EvalSet, TestCase, metrics
+from openstackai.evaluation import Evaluator, EvalSet, TestCase, metrics
 
 # Define test cases
 eval_set = EvalSet([
@@ -1195,7 +1195,7 @@ for result in results.failed:
 Full visibility into agent operations.
 
 ```python
-from pyai.easy import trace
+from openstackai.easy import trace
 
 # Enable tracing
 trace.enable()
@@ -1224,7 +1224,7 @@ trace.export_to_opentelemetry()
 Built-in protection for production deployments.
 
 ```python
-from pyai.easy import guardrails
+from openstackai.easy import guardrails
 
 # PII protection
 safe_ask = guardrails.wrap(ask, block_pii=True)
@@ -1258,9 +1258,9 @@ bounded_ask = guardrails.wrap(ask, max_tokens=500)
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
 flowchart TB
-    PYAI["🧠 PYAI"] --> VEC["Vector DBs"]
-    PYAI --> FRAME["Frameworks"]
-    PYAI --> PROTO["Protocols"]
+    openstackai["🧠 openstackai"] --> VEC["Vector DBs"]
+    openstackai --> FRAME["Frameworks"]
+    openstackai --> PROTO["Protocols"]
     
     VEC --> CH["ChromaDB"]
     VEC --> PC["Pinecone"]
@@ -1279,7 +1279,7 @@ flowchart TB
 
 ## 📊 Feature Comparison
 
-| Feature | PYAI | OpenAI Agents | Google ADK | Semantic Kernel | LangChain |
+| Feature | openstackai | OpenAI Agents | Google ADK | Semantic Kernel | LangChain |
 |---------|:----:|:-------------:|:----------:|:---------------:|:---------:|
 | One-liner APIs | ✅ | ❌ | ❌ | ❌ | ❌ |
 | Multi-provider LLM | ✅ | ❌ | ✅ | ✅ | ✅ |
@@ -1301,16 +1301,16 @@ flowchart TB
 ### Installation
 
 ```bash
-pip install pyai                # Basic
-pip install pyai[openai]        # OpenAI
-pip install pyai[azure]         # Azure + Azure AD
-pip install pyai[all]           # Everything
+pip install openstackai                # Basic
+pip install openstackai[openai]        # OpenAI
+pip install openstackai[azure]         # Azure + Azure AD
+pip install openstackai[all]           # Everything
 ```
 
 ### Hello World
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 answer = ask("What is the capital of France?")
 print(answer)  # Paris
@@ -1355,20 +1355,20 @@ flowchart LR
 
 ## 👥 Community & Documentation
 
-- 📖 **[Wiki Documentation](https://github.com/gitpavleenbali/PYAI/wiki)** — Comprehensive guides
-- 🐛 **[Report Issues](https://github.com/gitpavleenbali/PYAI/issues)** — Bug reports
-- 💡 **[Feature Requests](https://github.com/gitpavleenbali/PYAI/discussions)** — Ideas
+- 📖 **[Wiki Documentation](https://github.com/gitpavleenbali/openstackai/wiki)** — Comprehensive guides
+- 🐛 **[Report Issues](https://github.com/gitpavleenbali/openstackai/issues)** — Bug reports
+- 💡 **[Feature Requests](https://github.com/gitpavleenbali/openstackai/discussions)** — Ideas
 - 🤝 **[Contributing Guide](./docs/CONTRIBUTING.md)** — Get involved
 
 ---
 
-## 🔮 The PYAI Product Suite
+## 🔮 The openstackai Product Suite
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': 'transparent', 'primaryTextColor': '#ffffff', 'primaryBorderColor': '#ffffff', 'lineColor': '#ffffff', 'secondaryColor': 'transparent', 'tertiaryColor': 'transparent', 'background': 'transparent', 'mainBkg': 'transparent', 'nodeBorder': '#ffffff', 'clusterBkg': 'transparent', 'clusterBorder': '#ffffff', 'titleColor': '#ffffff', 'edgeLabelBackground': 'transparent', 'nodeTextColor': '#ffffff'}}}%%
 flowchart LR
     subgraph Available["✅ Available Now"]
-        PA["🤖 pyai<br/>Core SDK"]
+        PA["🤖 openstackai<br/>Core SDK"]
     end
     
     subgraph Soon["🔜 Coming Soon"]
@@ -1387,7 +1387,7 @@ flowchart LR
 
 | Product | Purpose | Dimension | Status |
 |---------|---------|-----------|--------|
-| **🤖 pyai** | Core Intelligence SDK | All | ✅ Available |
+| **🤖 openstackai** | Core Intelligence SDK | All | ✅ Available |
 | **🔄 PyFlow** | Visual AI Workflows | Orchestration | 🔜 Coming Soon |
 | **👁️ PyVision** | Computer Vision | Cognition | 🔜 Coming Soon |
 | **🎤 PyVoice** | Speech & Audio | Cognition | 🔜 Coming Soon |
@@ -1403,7 +1403,7 @@ MIT License — Build freely, build boldly.
 ---
 
 <p align="center">
-  <strong>🧠 PYAI</strong><br/>
+  <strong>🧠 openstackai</strong><br/>
   <em>Intelligence, Embedded.</em>
 </p>
 
@@ -1412,5 +1412,5 @@ MIT License — Build freely, build boldly.
 </p>
 
 <p align="center">
-  <sub>Built with 🧠 by the PYAI team</sub>
+  <sub>Built with 🧠 by the openstackai team</sub>
 </p>

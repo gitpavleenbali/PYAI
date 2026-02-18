@@ -1,6 +1,6 @@
-# pyai Azure Setup Guide
+# openstackai Azure Setup Guide
 
-This guide helps you configure pyai with Azure OpenAI.
+This guide helps you configure openstackai with Azure OpenAI.
 
 ## Quick Setup
 
@@ -18,12 +18,12 @@ export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com/"
 export AZURE_OPENAI_DEPLOYMENT="gpt-4o-mini"
 ```
 
-### 2. Configure pyai
+### 2. Configure openstackai
 
 ```python
-import pyai
+import openstackai
 
-pyai.configure(
+openstackai.configure(
     provider="azure",
     api_key="your-api-key",  # Or use env var
     azure_endpoint="https://your-resource.openai.azure.com/",
@@ -31,10 +31,10 @@ pyai.configure(
 )
 ```
 
-### 3. Use pyai
+### 3. Use openstackai
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 # Now it uses Azure OpenAI!
 answer = ask("What is machine learning?")
@@ -66,18 +66,18 @@ Based on your subscription, you have these Azure OpenAI resources:
 ## Full Example
 
 ```python
-import pyai
-from pyai import ask, agent, rag
+import openstackai
+from openstackai import ask, agent, rag
 
 # Configure Azure
-pyai.configure(
+openstackai.configure(
     provider="azure",
     azure_endpoint="https://openai-varcvenlme53e.openai.azure.com/",
     model="gpt-4o-mini",  # Your deployment name
     # api_key set via AZURE_OPENAI_API_KEY env var
 )
 
-# Now use pyai normally!
+# Now use openstackai normally!
 answer = ask("What is Python?")
 print(answer)
 

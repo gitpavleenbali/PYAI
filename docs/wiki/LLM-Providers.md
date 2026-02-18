@@ -1,6 +1,6 @@
 # LLM Providers
 
-PYAI supports multiple LLM providers for maximum flexibility.
+openstackai supports multiple LLM providers for maximum flexibility.
 
 ## Supported Providers
 
@@ -20,7 +20,7 @@ PYAI supports multiple LLM providers for maximum flexibility.
 OPENAI_API_KEY=sk-...
 
 # Or in code
-from pyai import configure
+from openstackai import configure
 configure(provider="openai", api_key="sk-...")
 ```
 
@@ -45,7 +45,7 @@ AZURE_OPENAI_DEPLOYMENT=gpt-4o-mini
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Or in code
-from pyai import configure
+from openstackai import configure
 configure(provider="anthropic", api_key="sk-ant-...")
 ```
 
@@ -60,7 +60,7 @@ OLLAMA_HOST=http://localhost:11434
 OLLAMA_MODEL=llama2
 
 # Or in code
-from pyai import configure
+from openstackai import configure
 configure(provider="ollama", model="llama2")
 ```
 
@@ -69,7 +69,7 @@ configure(provider="ollama", model="llama2")
 ### Switch Providers
 
 ```python
-from pyai import Agent
+from openstackai import Agent
 
 # OpenAI agent
 openai_agent = Agent(
@@ -103,7 +103,7 @@ local_agent = Agent(
 ### Using Easy API
 
 ```python
-from pyai import ask, configure
+from openstackai import ask, configure
 
 # Use OpenAI (default)
 answer = ask("What is Python?")
@@ -120,7 +120,7 @@ answer = ask("What is Python?")
 ### Custom Provider
 
 ```python
-from pyai.core import LLMProvider
+from openstackai.core import LLMProvider
 
 class CustomProvider(LLMProvider):
     """Custom LLM provider implementation"""
@@ -144,7 +144,7 @@ class CustomProvider(LLMProvider):
 ### OpenAI
 
 ```python
-from pyai.core import OpenAIProvider
+from openstackai.core import OpenAIProvider
 
 provider = OpenAIProvider(
     api_key="sk-...",
@@ -173,7 +173,7 @@ result = await provider.generate(
 ### Azure OpenAI
 
 ```python
-from pyai.core import AzureOpenAIProvider
+from openstackai.core import AzureOpenAIProvider
 
 # With API key
 provider = AzureOpenAIProvider(
@@ -193,7 +193,7 @@ provider = AzureOpenAIProvider(
 ### Anthropic
 
 ```python
-from pyai.core import AnthropicProvider
+from openstackai.core import AnthropicProvider
 
 provider = AnthropicProvider(api_key="sk-ant-...")
 
@@ -208,7 +208,7 @@ result = await provider.generate(
 ### Ollama
 
 ```python
-from pyai.core import OllamaProvider
+from openstackai.core import OllamaProvider
 
 provider = OllamaProvider(
     host="http://localhost:11434",
@@ -222,7 +222,7 @@ models = await provider.list_models()
 ## Provider Selection Priority
 
 1. Explicit provider parameter
-2. `pyai_PROVIDER` env var
+2. `openstackai_PROVIDER` env var
 3. Available credentials (in order: OpenAI, Azure, Anthropic, Ollama)
 
 ## See Also

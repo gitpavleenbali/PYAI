@@ -4,10 +4,10 @@ Auto-generate agent tools from OpenAPI/Swagger specifications.
 
 ## Overview
 
-PYAI can automatically create tools from any OpenAPI spec:
+openstackai can automatically create tools from any OpenAPI spec:
 
 ```python
-from pyai.openapi import OpenAPIClient
+from openstackai.openapi import OpenAPIClient
 
 # Load from spec
 client = OpenAPIClient.from_spec("https://api.example.com/openapi.json")
@@ -22,7 +22,7 @@ agent = Agent(
 ## From URL
 
 ```python
-from pyai.openapi import OpenAPIClient
+from openstackai.openapi import OpenAPIClient
 
 # Swagger/OpenAPI URL
 client = OpenAPIClient.from_spec(
@@ -116,8 +116,8 @@ client = OpenAPIClient.from_spec(
 ## Full Example
 
 ```python
-from pyai import Agent, Runner
-from pyai.openapi import OpenAPIClient
+from openstackai import Agent, Runner
+from openstackai.openapi import OpenAPIClient
 
 # Create client from pet store API
 petstore = OpenAPIClient.from_spec(

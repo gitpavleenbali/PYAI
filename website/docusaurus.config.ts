@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'PyAI',
+  title: 'openstackai',
   tagline: 'Build AI Agents in Python with Elegant Simplicity',
   favicon: 'img/favicon.ico',
 
@@ -13,9 +13,9 @@ const config: Config = {
 
   // GitHub Pages deployment
   url: 'https://gitpavleenbali.github.io',
-  baseUrl: '/PYAI/',
+  baseUrl: '/openstackai/',
   organizationName: 'gitpavleenbali',
-  projectName: 'PYAI',
+  projectName: 'openstackai',
   trailingSlash: false,
 
   onBrokenLinks: 'warn',
@@ -38,7 +38,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/gitpavleenbali/PYAI/tree/master/website/',
+          editUrl: 'https://github.com/gitpavleenbali/openstackai/tree/master/website/',
           routeBasePath: 'docs',
         },
         blog: false, // Disable blog for now
@@ -50,22 +50,22 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/pyai-social-card.png',
+    image: 'img/openstackai-social-card.png',
     colorMode: {
       defaultMode: 'dark',
       respectPrefersColorScheme: true,
     },
     announcementBar: {
       id: 'v0.5.1',
-      content: '🚀 PyAI v0.5.1 is out! <a href="/PYAI/docs/changelog">See what\'s new</a>',
+      content: '🚀 openstackai v0.5.1 is out! <a href="/openstackai/docs/changelog">See what\'s new</a>',
       backgroundColor: '#6366f1',
       textColor: '#ffffff',
       isCloseable: true,
     },
     navbar: {
-      title: 'PyAI',
+      title: 'openstackai',
       logo: {
-        alt: 'PyAI Logo',
+        alt: 'openstackai Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -86,12 +86,12 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://pypi.org/project/pyai/',
+          href: 'https://pypi.org/project/openstackai/',
           label: 'PyPI',
           position: 'right',
         },
         {
-          href: 'https://github.com/gitpavleenbali/PYAI',
+          href: 'https://github.com/gitpavleenbali/openstackai',
           label: 'GitHub',
           position: 'right',
         },
@@ -119,9 +119,9 @@ const config: Config = {
         {
           title: 'Community',
           items: [
-            { label: 'GitHub', href: 'https://github.com/gitpavleenbali/PYAI' },
-            { label: 'Issues', href: 'https://github.com/gitpavleenbali/PYAI/issues' },
-            { label: 'Discussions', href: 'https://github.com/gitpavleenbali/PYAI/discussions' },
+            { label: 'GitHub', href: 'https://github.com/gitpavleenbali/openstackai' },
+            { label: 'Issues', href: 'https://github.com/gitpavleenbali/openstackai/issues' },
+            { label: 'Discussions', href: 'https://github.com/gitpavleenbali/openstackai/discussions' },
           ],
         },
         {
@@ -129,11 +129,11 @@ const config: Config = {
           items: [
             { label: 'Changelog', to: '/docs/Changelog' },
             { label: 'Contributing', to: '/docs/Contributing' },
-            { label: 'License', href: 'https://github.com/gitpavleenbali/PYAI/blob/master/LICENSE' },
+            { label: 'License', href: 'https://github.com/gitpavleenbali/openstackai/blob/master/LICENSE' },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} PyAI Contributors. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} openstackai Contributors. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

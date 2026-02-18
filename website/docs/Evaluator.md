@@ -5,7 +5,7 @@ The `Evaluator` class is the main engine for running agent evaluations and bench
 ## Import
 
 ```python
-from pyai.evaluation import Evaluator
+from openstackai.evaluation import Evaluator
 ```
 
 ## Constructor

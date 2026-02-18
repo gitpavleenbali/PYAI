@@ -5,7 +5,7 @@ ChromaDB is an open-source embedding database that runs locally or in-memory.
 ## Installation
 
 ```bash
-pip install pyai[vectordb]
+pip install openstackai[vectordb]
 # or specifically
 pip install chromadb
 ```
@@ -13,7 +13,7 @@ pip install chromadb
 ## Connection
 
 ```python
-from pyai.vectordb import connect
+from openstackai.vectordb import connect
 
 # Persistent storage
 db = connect("chroma", path="./chroma_db")
@@ -32,7 +32,7 @@ db = connect(
 ## Configuration
 
 ```python
-from pyai.vectordb.chroma import ChromaStore
+from openstackai.vectordb.chroma import ChromaStore
 
 store = ChromaStore(
     path="./chroma_db",                    # Storage path

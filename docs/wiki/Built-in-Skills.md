@@ -1,6 +1,6 @@
 # Built-in Skills
 
-PYAI includes pre-built skills for common operations.
+openstackai includes pre-built skills for common operations.
 
 ## Available Skills
 
@@ -16,7 +16,7 @@ PYAI includes pre-built skills for common operations.
 ## SearchSkill
 
 ```python
-from pyai.skills import SearchSkill
+from openstackai.skills import SearchSkill
 
 search = SearchSkill()
 
@@ -38,7 +38,7 @@ agent = Agent(
 ### Example
 
 ```python
-from pyai.skills import SearchSkill
+from openstackai.skills import SearchSkill
 
 search = SearchSkill(api_key="...")
 
@@ -51,7 +51,7 @@ for result in results:
 ## CodeSkill
 
 ```python
-from pyai.skills import CodeSkill
+from openstackai.skills import CodeSkill
 
 code = CodeSkill()
 
@@ -72,7 +72,7 @@ agent = Agent(
 ### Example
 
 ```python
-from pyai.skills import CodeSkill
+from openstackai.skills import CodeSkill
 
 code = CodeSkill(sandbox=True)
 
@@ -87,7 +87,7 @@ print(result.output)  # "12.0"
 ## FileSkill
 
 ```python
-from pyai.skills import FileSkill
+from openstackai.skills import FileSkill
 
 file = FileSkill(base_path="./workspace")
 
@@ -109,7 +109,7 @@ agent = Agent(
 ### Example
 
 ```python
-from pyai.skills import FileSkill
+from openstackai.skills import FileSkill
 
 file = FileSkill()
 
@@ -126,7 +126,7 @@ files = file.list_files("./data/")
 ## WebSkill
 
 ```python
-from pyai.skills import WebSkill
+from openstackai.skills import WebSkill
 
 web = WebSkill()
 
@@ -147,7 +147,7 @@ agent = Agent(
 ### Example
 
 ```python
-from pyai.skills import WebSkill
+from openstackai.skills import WebSkill
 
 web = WebSkill()
 
@@ -164,7 +164,7 @@ response = web.post_data(
 ## MathSkill
 
 ```python
-from pyai.skills import MathSkill
+from openstackai.skills import MathSkill
 
 math = MathSkill()
 
@@ -186,7 +186,7 @@ agent = Agent(
 ### Example
 
 ```python
-from pyai.skills import MathSkill
+from openstackai.skills import MathSkill
 
 math = MathSkill()
 
@@ -198,7 +198,7 @@ converted = math.convert_units(100, "celsius", "fahrenheit")
 ## DateTimeSkill
 
 ```python
-from pyai.skills import DateTimeSkill
+from openstackai.skills import DateTimeSkill
 
 datetime = DateTimeSkill()
 
@@ -220,8 +220,8 @@ agent = Agent(
 ## Combining Skills
 
 ```python
-from pyai import Agent
-from pyai.skills import SearchSkill, CodeSkill, FileSkill
+from openstackai import Agent
+from openstackai.skills import SearchSkill, CodeSkill, FileSkill
 
 agent = Agent(
     name="Power User",

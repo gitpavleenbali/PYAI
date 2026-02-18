@@ -1,6 +1,6 @@
 """
-pyai Test Suite
+openstackai Test Suite
 ===================
 
-Tests for all pyai modules and features.
+Tests for all openstackai modules and features.
 """

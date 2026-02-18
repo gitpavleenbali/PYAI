@@ -37,7 +37,7 @@ if not setup_pyai():
 # 1. ASK - The Simplest AI Function
 # =============================================================================
 
-from pyai import ask
+from openstackai import ask
 
 # Basic question
 answer = ask("What is the capital of France?")
@@ -63,7 +63,7 @@ data = ask("Generate a sample user profile", as_json=True)
 # 2. RAG - Document Q&A in 2 Lines
 # =============================================================================
 
-from pyai import rag
+from openstackai import rag
 
 # One-shot RAG
 answer = rag.ask("./docs/research_paper.pdf", "What is the main finding?")
@@ -86,7 +86,7 @@ answer = rag.from_text(long_text, "What is the main argument?")
 # 3. RESEARCH - Deep Research in 1 Line
 # =============================================================================
 
-from pyai import research
+from openstackai import research
 
 # Full research
 result = research("quantum computing applications")
@@ -108,7 +108,7 @@ result = research("climate change", focus="economic impact")
 # 4. FETCH - Real-time Data in 1 Line
 # =============================================================================
 
-from pyai import fetch
+from openstackai import fetch
 
 # Weather
 weather = fetch.weather("Tokyo")
@@ -138,7 +138,7 @@ for fact in facts:
 # 5. SUMMARIZE - Summarize Anything
 # =============================================================================
 
-from pyai import summarize
+from openstackai import summarize
 
 # Text
 summary = summarize("Your long text here...")
@@ -161,7 +161,7 @@ executive = summarize(text, style="executive")
 # 6. EXTRACT - Get Structured Data from Text
 # =============================================================================
 
-from pyai import extract
+from openstackai import extract
 
 text = "John Smith is 35 years old, works as a software engineer at Google, and lives in San Francisco."
 
@@ -183,7 +183,7 @@ entities = extract(article_text, ["people", "organizations", "locations"])
 # 7. GENERATE - Create Any Content
 # =============================================================================
 
-from pyai import generate
+from openstackai import generate
 
 # Code
 code = generate("function to calculate fibonacci", type="code")
@@ -202,7 +202,7 @@ tweet = generate("announcement for new product launch", type="social")
 # 8. TRANSLATE - Instant Translation
 # =============================================================================
 
-from pyai import translate
+from openstackai import translate
 
 # Basic
 spanish = translate("Hello, how are you?", to="spanish")
@@ -219,7 +219,7 @@ french = translate("Good morning", to="fr")
 # 9. ANALYZE - Data & Text Analysis
 # =============================================================================
 
-from pyai import analyze
+from openstackai import analyze
 
 # Analyze data
 sales_data = [100, 150, 120, 200, 180, 500, 190]
@@ -241,7 +241,7 @@ text_insights = analyze.text(customer_review, analyze_for="sentiment")
 # 10. CODE - AI-Powered Coding
 # =============================================================================
 
-from pyai import code
+from openstackai import code
 
 # Write code
 python_function = code.write("REST API for user management")
@@ -273,7 +273,7 @@ javascript = code.convert(python_code, from_lang="python", to_lang="javascript")
 # 11. AGENT - Create Custom Agents
 # =============================================================================
 
-from pyai import agent
+from openstackai import agent
 
 # Simple agent
 helper = agent("You are a helpful assistant")
@@ -303,7 +303,7 @@ expert = agent(
 # 12. CHAT - Interactive Sessions
 # =============================================================================
 
-from pyai import chat
+from openstackai import chat
 
 # Create session
 session = chat(persona="teacher")

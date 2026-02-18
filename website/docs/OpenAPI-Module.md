@@ -5,8 +5,8 @@ The OpenAPI module enables automatic tool generation from OpenAPI/Swagger specif
 ## Overview
 
 ```python
-from pyai.openapi import OpenAPIClient, OpenAPIParser
-from pyai.openapi.tools import create_tools_from_spec
+from openstackai.openapi import OpenAPIClient, OpenAPIParser
+from openstackai.openapi.tools import create_tools_from_spec
 ```
 
 ## Key Components
@@ -22,7 +22,7 @@ from pyai.openapi.tools import create_tools_from_spec
 ### From OpenAPI Spec
 
 ```python
-from pyai.openapi import create_tools_from_spec
+from openstackai.openapi import create_tools_from_spec
 
 # Load from URL
 tools = create_tools_from_spec("https://api.example.com/openapi.json")
@@ -40,7 +40,7 @@ agent = Agent(
 ### Direct API Client
 
 ```python
-from pyai.openapi import OpenAPIClient
+from openstackai.openapi import OpenAPIClient
 
 client = OpenAPIClient("https://api.example.com/openapi.json")
 
@@ -131,8 +131,8 @@ tools = create_tools_from_spec(
 ## Using with Agents
 
 ```python
-from pyai import Agent
-from pyai.openapi import create_tools_from_spec
+from openstackai import Agent
+from openstackai.openapi import create_tools_from_spec
 
 # Create tools from Petstore API
 tools = create_tools_from_spec(

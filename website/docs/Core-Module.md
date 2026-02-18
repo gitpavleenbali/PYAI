@@ -46,7 +46,7 @@ flowchart TB
 ## File Structure
 
 ```
-src/pyai/core/
+src/openstackai/core/
 ├── __init__.py
 ├── agent.py        # Core Agent class
 ├── memory.py       # Memory implementations
@@ -64,8 +64,8 @@ The central orchestrator for AI agent behavior.
 ### Agent Class
 
 ```python
-from pyai import Agent
-from pyai.core import AgentConfig
+from openstackai import Agent
+from openstackai.core import AgentConfig
 
 # Basic agent
 agent = Agent(
@@ -128,7 +128,7 @@ skill = agent.get_skill("search")
 skills = agent.available_skills
 
 # Run agent (use Runner for full control)
-from pyai import Runner
+from openstackai import Runner
 result = Runner.run_sync(agent, "Find information about AI")
 ```
 
@@ -141,7 +141,7 @@ Memory systems for conversation history and semantic retrieval.
 ### ConversationMemory
 
 ```python
-from pyai import ConversationMemory
+from openstackai import ConversationMemory
 
 memory = ConversationMemory(max_messages=100)
 
@@ -159,7 +159,7 @@ memory.clear()
 ### VectorMemory
 
 ```python
-from pyai import VectorMemory
+from openstackai import VectorMemory
 
 memory = VectorMemory(
     embedding_model="text-embedding-3-small",
@@ -168,10 +168,10 @@ memory = VectorMemory(
 
 # Store information
 memory.store("Python is a programming language")
-memory.store("PYAI is an intelligence engine")
+memory.store("openstackai is an intelligence engine")
 
 # Retrieve relevant
-results = memory.retrieve("What is PYAI?", top_k=5)
+results = memory.retrieve("What is openstackai?", top_k=5)
 ```
 
 ### Memory Architecture
@@ -216,7 +216,7 @@ flowchart TB
 ### OpenAI Provider
 
 ```python
-from pyai.core.llm import OpenAIProvider
+from openstackai.core.llm import OpenAIProvider
 
 provider = OpenAIProvider(
     api_key="sk-...",
@@ -236,7 +236,7 @@ async for chunk in provider.stream("Tell me a story"):
 ### Azure OpenAI Provider
 
 ```python
-from pyai.core.llm import OpenAIProvider
+from openstackai.core.llm import OpenAIProvider
 from azure.identity import DefaultAzureCredential
 
 # Azure AD authentication (recommended)
@@ -257,7 +257,7 @@ provider = OpenAIProvider(
 ### Anthropic Provider
 
 ```python
-from pyai.core.llm import AnthropicProvider
+from openstackai.core.llm import AnthropicProvider
 
 provider = AnthropicProvider(
     api_key="sk-ant-...",
@@ -268,7 +268,7 @@ provider = AnthropicProvider(
 ### Ollama Provider (Local)
 
 ```python
-from pyai.core.llm import OllamaProvider
+from openstackai.core.llm import OllamaProvider
 
 provider = OllamaProvider(
     host="http://localhost:11434",
@@ -283,7 +283,7 @@ provider = OllamaProvider(
 ### BaseComponent
 
 ```python
-from pyai.core.base import BaseComponent
+from openstackai.core.base import BaseComponent
 
 class MyComponent(BaseComponent):
     def __init__(self, name: str):
@@ -297,7 +297,7 @@ class MyComponent(BaseComponent):
 ### Executable Interface
 
 ```python
-from pyai.core.base import Executable
+from openstackai.core.base import Executable
 
 class MyExecutable(Executable):
     async def execute(self, input_data: Any) -> Any:
@@ -312,7 +312,7 @@ class MyExecutable(Executable):
 Response caching for efficiency.
 
 ```python
-from pyai.core.cache import ResponseCache
+from openstackai.core.cache import ResponseCache
 
 cache = ResponseCache(
     backend="redis",  # or "memory", "sqlite"

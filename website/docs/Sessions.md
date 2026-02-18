@@ -4,7 +4,7 @@ Sessions provide persistent conversation storage for agents.
 
 ## Overview
 
-PYAI supports multiple session backends:
+openstackai supports multiple session backends:
 
 | Backend | Description | Use Case |
 |---------|-------------|----------|
@@ -16,7 +16,7 @@ PYAI supports multiple session backends:
 ## SQLite Session
 
 ```python
-from pyai.sessions import SQLiteSession
+from openstackai.sessions import SQLiteSession
 
 session = SQLiteSession("conversations.db")
 
@@ -30,8 +30,8 @@ agent = Agent(
 ### Basic Usage
 
 ```python
-from pyai import Agent, Runner
-from pyai.sessions import SQLiteSession
+from openstackai import Agent, Runner
+from openstackai.sessions import SQLiteSession
 
 # Create session
 session = SQLiteSession(
@@ -59,7 +59,7 @@ result = Runner.run_sync(agent2, "Do you remember me?")
 ## Redis Session
 
 ```python
-from pyai.sessions import RedisSession
+from openstackai.sessions import RedisSession
 
 session = RedisSession(
     host="localhost",
@@ -98,7 +98,7 @@ session = RedisSession(
 ## PostgreSQL Session
 
 ```python
-from pyai.sessions import PostgresSession
+from openstackai.sessions import PostgresSession
 
 session = PostgresSession(
     connection_string="postgresql://user:pass@host:5432/db",
@@ -137,7 +137,7 @@ prefs = session.get("preferences")
 ### Multiple Sessions
 
 ```python
-from pyai.sessions import SQLiteSession
+from openstackai.sessions import SQLiteSession
 
 # Different session per user
 def get_session(user_id: str):
@@ -154,7 +154,7 @@ agent = Agent(name="Assistant", session=session)
 ## Session Context Manager
 
 ```python
-from pyai.sessions import SQLiteSession
+from openstackai.sessions import SQLiteSession
 
 with SQLiteSession("db.sqlite", "user-123") as session:
     agent = Agent(name="Assistant", session=session)
@@ -176,7 +176,7 @@ new_session.import_data(data)
 ## Session Events
 
 ```python
-from pyai.sessions import SessionEvent
+from openstackai.sessions import SessionEvent
 
 session.on(SessionEvent.MESSAGE_ADDED, lambda msg: print(f"New: {msg}"))
 session.on(SessionEvent.SESSION_CLEARED, lambda: print("Cleared"))
@@ -187,8 +187,8 @@ session.on(SessionEvent.SESSION_CLEARED, lambda: print("Cleared"))
 ### Multi-user Chat
 
 ```python
-from pyai import Agent, Runner
-from pyai.sessions import RedisSession
+from openstackai import Agent, Runner
+from openstackai.sessions import RedisSession
 
 def create_agent_for_user(user_id: str) -> Agent:
     session = RedisSession(
@@ -210,7 +210,7 @@ bob_agent = create_agent_for_user("bob")
 ### Session Migration
 
 ```python
-from pyai.sessions import SQLiteSession, RedisSession
+from openstackai.sessions import SQLiteSession, RedisSession
 
 # Migrate from SQLite to Redis
 sqlite = SQLiteSession("old.db", "user-123")

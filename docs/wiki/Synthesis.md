@@ -5,8 +5,8 @@ The synthesis module converts text to speech using AI voice models.
 ## Import
 
 ```python
-from pyai.voice import Synthesizer
-from pyai.voice.synthesis import SynthesisResult
+from openstackai.voice import Synthesizer
+from openstackai.voice.synthesis import SynthesisResult
 ```
 
 ## Synthesizer Class

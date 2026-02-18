@@ -7,7 +7,7 @@ Multiple installation options to fit your needs.
 ## Basic Installation
 
 ```bash
-pip install pyai
+pip install openstackai
 ```
 
 ---
@@ -16,17 +16,17 @@ pip install pyai
 
 ### OpenAI
 ```bash
-pip install pyai[openai]
+pip install openstackai[openai]
 ```
 
 ### Anthropic Claude
 ```bash
-pip install pyai[anthropic]
+pip install openstackai[anthropic]
 ```
 
 ### Azure OpenAI (Recommended for Enterprise)
 ```bash
-pip install pyai[azure]
+pip install openstackai[azure]
 ```
 
 Includes:
@@ -40,25 +40,25 @@ Includes:
 
 ### LangChain
 ```bash
-pip install pyai[langchain]
+pip install openstackai[langchain]
 ```
 
 ### Microsoft Semantic Kernel
 ```bash
-pip install pyai[semantic-kernel]
+pip install openstackai[semantic-kernel]
 ```
 
 ### Vector Databases
 ```bash
-pip install pyai[vector]
+pip install openstackai[vector]
 ```
 
 Includes: ChromaDB, FAISS, Pinecone, Qdrant
 
 ### Web & Documents
 ```bash
-pip install pyai[web]      # aiohttp, requests, beautifulsoup
-pip install pyai[docs]     # PDF, DOCX processing
+pip install openstackai[web]      # aiohttp, requests, beautifulsoup
+pip install openstackai[docs]     # PDF, DOCX processing
 ```
 
 ---
@@ -66,7 +66,7 @@ pip install pyai[docs]     # PDF, DOCX processing
 ## Full Installation
 
 ```bash
-pip install pyai[all]
+pip install openstackai[all]
 ```
 
 Installs everything: all providers, integrations, and utilities.
@@ -76,7 +76,7 @@ Installs everything: all providers, integrations, and utilities.
 ## Development Installation
 
 ```bash
-pip install pyai[dev]
+pip install openstackai[dev]
 ```
 
 Includes: pytest, black, ruff, mypy, pre-commit
@@ -103,8 +103,8 @@ Includes: pytest, black, ruff, mypy, pre-commit
 ## From Source
 
 ```bash
-git clone https://github.com/gitpavleenbali/PYAI.git
-cd PYAI
+git clone https://github.com/gitpavleenbali/openstackai.git
+cd openstackai
 pip install -e ".[dev]"
 ```
 
@@ -113,8 +113,8 @@ pip install -e ".[dev]"
 ## Verify Installation
 
 ```python
-import pyai
-print(pyai.__version__)  # 0.4.0
+import openstackai
+print(openstackai.__version__)  # 0.4.0
 ```
 
 ---
@@ -122,4 +122,4 @@ print(pyai.__version__)  # 0.4.0
 ## Next Steps
 
 - [[Configuration]] - Set up API keys
-- [[Quick Start]] - Your first PYAI program
+- [[Quick Start]] - Your first openstackai program

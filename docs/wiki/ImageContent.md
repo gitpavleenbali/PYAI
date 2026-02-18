@@ -5,7 +5,7 @@ The `Image` class handles image data for multimodal AI interactions.
 ## Import
 
 ```python
-from pyai.multimodal import Image
+from openstackai.multimodal import Image
 ```
 
 ## Creating Images
@@ -124,8 +124,8 @@ image.save("output.jpg", format="jpeg", quality=90)
 ### Single Image
 
 ```python
-from pyai import ask
-from pyai.multimodal import Image
+from openstackai import ask
+from openstackai.multimodal import Image
 
 image = Image.from_file("chart.png")
 response = ask("Explain this chart", images=[image])
@@ -149,8 +149,8 @@ response = ask(
 ### With Agent
 
 ```python
-from pyai import Agent
-from pyai.multimodal import Image
+from openstackai import Agent
+from openstackai.multimodal import Image
 
 agent = Agent(
     name="Analyst",

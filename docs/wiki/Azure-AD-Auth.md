@@ -6,7 +6,7 @@ Enterprise-grade authentication without API keys.
 
 ## Overview
 
-PYAI supports Azure AD authentication for Azure OpenAI, enabling:
+openstackai supports Azure AD authentication for Azure OpenAI, enabling:
 
 - **No hardcoded API keys** in code or environment
 - **Identity-based access** using your Azure credentials
@@ -17,7 +17,7 @@ PYAI supports Azure AD authentication for Azure OpenAI, enabling:
 
 ## How It Works
 
-PYAI uses Azure's `DefaultAzureCredential` which automatically tries:
+openstackai uses Azure's `DefaultAzureCredential` which automatically tries:
 
 1. **Environment credentials** (service principal)
 2. **Managed Identity** (Azure VMs, App Service, AKS)
@@ -64,10 +64,10 @@ export AZURE_CLIENT_SECRET=your-client-secret
 export AZURE_TENANT_ID=your-tenant-id
 ```
 
-### Step 3: Use PYAI
+### Step 3: Use openstackai
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 # Just works! Uses your Azure credentials automatically
 answer = ask("Hello, world!")
@@ -91,8 +91,8 @@ az role assignment create \
 ## Explicit Provider
 
 ```python
-from pyai import Agent
-from pyai.core import AzureOpenAIProvider, LLMConfig
+from openstackai import Agent
+from openstackai.core import AzureOpenAIProvider, LLMConfig
 
 # Azure AD authentication (no api_key)
 provider = AzureOpenAIProvider(LLMConfig(
@@ -120,7 +120,7 @@ import os
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://myorg.openai.azure.com/"
 os.environ["AZURE_OPENAI_DEPLOYMENT"] = "gpt-4o-mini"
 
-from pyai import ask
+from openstackai import ask
 
 # Uses the app's Managed Identity
 answer = ask("Process this request...")

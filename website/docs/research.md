@@ -5,7 +5,7 @@ The `research` function performs deep topic research with source citations.
 ## Import
 
 ```python
-from pyai import research
+from openstackai import research
 ```
 
 ## Basic Usage
@@ -43,7 +43,7 @@ Returns a structured research report with:
 ### Basic Research
 
 ```python
-from pyai import research
+from openstackai import research
 
 # Quick research
 report = research("Python async programming")
@@ -65,7 +65,7 @@ report = research(
 
 ```python
 import asyncio
-from pyai import research
+from openstackai import research
 
 async def main():
     report = await research.async_("blockchain technology")

@@ -16,49 +16,49 @@ class TestImports:
     """Smoke tests for all module imports."""
     
     def test_import_pyai(self):
-        """Test importing main pyai package."""
-        import pyai
-        assert pyai is not None
-        assert hasattr(pyai, '__version__')
+        """Test importing main openstackai package."""
+        import openstackai
+        assert openstackai is not None
+        assert hasattr(openstackai, '__version__')
     
     def test_import_easy_module(self):
         """Test importing easy module."""
-        from pyai import easy
+        from openstackai import easy
         assert easy is not None
     
     def test_import_core_module(self):
         """Test importing core module."""
-        from pyai import core
+        from openstackai import core
         assert core is not None
     
     def test_import_skills_module(self):
         """Test importing skills module."""
-        from pyai import skills
+        from openstackai import skills
         assert skills is not None
     
     def test_import_blueprint_module(self):
         """Test importing blueprint module."""
-        from pyai import blueprint
+        from openstackai import blueprint
         assert blueprint is not None
     
     def test_import_instructions_module(self):
         """Test importing instructions module."""
-        from pyai import instructions
+        from openstackai import instructions
         assert instructions is not None
     
     def test_import_integrations_module(self):
         """Test importing integrations module."""
-        from pyai import integrations
+        from openstackai import integrations
         assert integrations is not None
     
     def test_import_orchestrator_module(self):
         """Test importing orchestrator module."""
-        from pyai import orchestrator
+        from openstackai import orchestrator
         assert orchestrator is not None
     
     def test_import_usecases_module(self):
         """Test importing usecases module."""
-        from pyai import usecases
+        from openstackai import usecases
         assert usecases is not None
 
 
@@ -67,91 +67,91 @@ class TestLazyImports:
     
     def test_lazy_import_ask(self):
         """Test lazy importing ask function."""
-        from pyai import ask
+        from openstackai import ask
         assert ask is not None
         assert callable(ask)
     
     def test_lazy_import_agent(self):
         """Test lazy importing agent function."""
-        from pyai import agent
+        from openstackai import agent
         assert agent is not None
         assert callable(agent)
     
     def test_lazy_import_research(self):
         """Test lazy importing research function."""
-        from pyai import research
+        from openstackai import research
         assert research is not None
         assert callable(research)
     
     def test_lazy_import_summarize(self):
         """Test lazy importing summarize function."""
-        from pyai import summarize
+        from openstackai import summarize
         assert summarize is not None
         assert callable(summarize)
     
     def test_lazy_import_extract(self):
         """Test lazy importing extract function."""
-        from pyai import extract
+        from openstackai import extract
         assert extract is not None
         assert callable(extract)
     
     def test_lazy_import_generate(self):
         """Test lazy importing generate function."""
-        from pyai import generate
+        from openstackai import generate
         assert generate is not None
         assert callable(generate)
     
     def test_lazy_import_translate(self):
         """Test lazy importing translate function."""
-        from pyai import translate
+        from openstackai import translate
         assert translate is not None
         assert callable(translate)
     
     def test_lazy_import_chat(self):
         """Test lazy importing chat function."""
-        from pyai import chat
+        from openstackai import chat
         assert chat is not None
         assert callable(chat)
     
     def test_lazy_import_code(self):
         """Test lazy importing code module."""
-        from pyai import code
+        from openstackai import code
         assert code is not None
     
     def test_lazy_import_rag(self):
         """Test lazy importing rag module."""
-        from pyai import rag
+        from openstackai import rag
         assert rag is not None
     
     def test_lazy_import_fetch(self):
         """Test lazy importing fetch module."""
-        from pyai import fetch
+        from openstackai import fetch
         assert fetch is not None
     
     def test_lazy_import_analyze(self):
         """Test lazy importing analyze module."""
-        from pyai import analyze
+        from openstackai import analyze
         assert analyze is not None
     
     def test_lazy_import_handoff(self):
         """Test lazy importing handoff."""
-        from pyai import handoff
+        from openstackai import handoff
         assert handoff is not None
         assert callable(handoff)
     
     def test_lazy_import_mcp(self):
         """Test lazy importing mcp."""
-        from pyai import mcp
+        from openstackai import mcp
         assert mcp is not None
     
     def test_lazy_import_guardrails(self):
         """Test lazy importing guardrails."""
-        from pyai import guardrails
+        from openstackai import guardrails
         assert guardrails is not None
     
     def test_lazy_import_trace(self):
         """Test lazy importing trace."""
-        from pyai import trace
+        from openstackai import trace
         assert trace is not None
 
 
@@ -160,7 +160,7 @@ class TestBasicFunctionality:
     
     def test_create_agent_no_call(self):
         """Test creating an agent without calling it."""
-        from pyai import agent
+        from openstackai import agent
         
         my_agent = agent("You are a test agent")
         assert my_agent is not None
@@ -169,7 +169,7 @@ class TestBasicFunctionality:
     
     def test_create_multiple_agents(self):
         """Test creating multiple agents."""
-        from pyai import agent
+        from openstackai import agent
         
         agent1 = agent("First agent")
         agent2 = agent("Second agent")
@@ -180,7 +180,7 @@ class TestBasicFunctionality:
     
     def test_mcp_tool_decorator(self):
         """Test MCP tool decorator."""
-        from pyai import mcp
+        from openstackai import mcp
         
         @mcp.tool("test_tool")
         def my_tool(x: int) -> int:
@@ -192,7 +192,7 @@ class TestBasicFunctionality:
     
     def test_mcp_server_creation(self):
         """Test MCP server creation."""
-        from pyai import mcp
+        from openstackai import mcp
         
         @mcp.tool("adder")
         def add(a: int, b: int) -> int:
@@ -205,7 +205,7 @@ class TestBasicFunctionality:
     
     def test_guardrails_validators_exist(self):
         """Test guardrails validators exist."""
-        from pyai import guardrails
+        from openstackai import guardrails
         
         assert hasattr(guardrails, 'no_pii')
         assert hasattr(guardrails, 'no_injection')
@@ -213,7 +213,7 @@ class TestBasicFunctionality:
     
     def test_trace_enable_disable(self):
         """Test trace enable/disable."""
-        from pyai import trace
+        from openstackai import trace
         
         trace.enable()
         assert trace.enabled == True
@@ -223,7 +223,7 @@ class TestBasicFunctionality:
     
     def test_trace_span_creation(self):
         """Test trace span creation."""
-        from pyai import trace
+        from openstackai import trace
         
         trace.enable()
         
@@ -238,7 +238,7 @@ class TestBasicFunctionality:
     
     def test_handoff_team_creation(self):
         """Test handoff team creation."""
-        from pyai import handoff, agent
+        from openstackai import handoff, agent
         
         a1 = agent("Agent 1")
         a2 = agent("Agent 2")
@@ -255,7 +255,7 @@ class TestIntegrationsSmoke:
     
     def test_langchain_adapter_functions(self):
         """Test LangChain adapter has expected functions."""
-        from pyai.integrations import langchain
+        from openstackai.integrations import langchain
         
         assert hasattr(langchain, 'import_tool')
         assert hasattr(langchain, 'import_chain')
@@ -264,7 +264,7 @@ class TestIntegrationsSmoke:
     
     def test_semantic_kernel_adapter_functions(self):
         """Test Semantic Kernel adapter has expected functions."""
-        from pyai.integrations import semantic_kernel
+        from openstackai.integrations import semantic_kernel
         
         assert hasattr(semantic_kernel, 'create_kernel')
         assert hasattr(semantic_kernel, 'import_plugin')
@@ -274,14 +274,14 @@ class TestIntegrationsSmoke:
     
     def test_vector_db_connect_function(self):
         """Test vector_db has connect function."""
-        from pyai.integrations import vector_db
+        from openstackai.integrations import vector_db
         
         assert hasattr(vector_db, 'connect')
         assert callable(vector_db.connect)
     
     def test_vector_db_store_classes(self):
         """Test vector_db has store classes."""
-        from pyai.integrations import vector_db
+        from openstackai.integrations import vector_db
         
         assert hasattr(vector_db, 'VectorStore')
         assert hasattr(vector_db, 'AzureAISearchStore')
@@ -296,7 +296,7 @@ class TestOrchestratorSmoke:
     
     def test_orchestrator_classes(self):
         """Test orchestrator has expected classes."""
-        from pyai.orchestrator import (
+        from openstackai.orchestrator import (
             Orchestrator, Task, Workflow, ScheduledJob,
             TaskStatus, ExecutionPattern, AgentPatterns
         )
@@ -311,7 +311,7 @@ class TestOrchestratorSmoke:
     
     def test_create_task(self):
         """Test creating a task."""
-        from pyai.orchestrator import Task, TaskStatus
+        from openstackai.orchestrator import Task, TaskStatus
         
         task = Task(name="Test Task")
         assert task.name == "Test Task"
@@ -319,7 +319,7 @@ class TestOrchestratorSmoke:
     
     def test_create_workflow(self):
         """Test creating a workflow."""
-        from pyai.orchestrator import Workflow, Task
+        from openstackai.orchestrator import Workflow, Task
         
         task = Task(name="Step 1")
         workflow = Workflow(name="Test Workflow", steps=[task])
@@ -329,7 +329,7 @@ class TestOrchestratorSmoke:
     
     def test_create_orchestrator(self):
         """Test creating an orchestrator."""
-        from pyai.orchestrator import Orchestrator
+        from openstackai.orchestrator import Orchestrator
         
         orch = Orchestrator()
         assert orch is not None
@@ -339,7 +339,7 @@ class TestOrchestratorSmoke:
     
     def test_agent_patterns_methods(self):
         """Test AgentPatterns has expected methods."""
-        from pyai.orchestrator import AgentPatterns
+        from openstackai.orchestrator import AgentPatterns
         
         assert hasattr(AgentPatterns, 'supervisor')
         assert hasattr(AgentPatterns, 'consensus')
@@ -352,7 +352,7 @@ class TestUseCasesSmoke:
     
     def test_general_usecases_exist(self):
         """Test general use cases exist."""
-        from pyai.usecases import (
+        from openstackai.usecases import (
             customer_service, sales, operations,
             development, gaming, list_usecases
         )
@@ -366,7 +366,7 @@ class TestUseCasesSmoke:
     
     def test_industry_usecases_exist(self):
         """Test industry use cases exist."""
-        from pyai.usecases.industry import (
+        from openstackai.usecases.industry import (
             telecom, healthcare, finance,
             ecommerce, education, list_industries
         )
@@ -380,7 +380,7 @@ class TestUseCasesSmoke:
     
     def test_list_usecases_returns_dict(self):
         """Test list_usecases returns dictionary."""
-        from pyai.usecases import list_usecases
+        from openstackai.usecases import list_usecases
         
         result = list_usecases()
         assert isinstance(result, dict)
@@ -389,7 +389,7 @@ class TestUseCasesSmoke:
     
     def test_list_industries_returns_dict(self):
         """Test list_industries returns dictionary."""
-        from pyai.usecases.industry import list_industries
+        from openstackai.usecases.industry import list_industries
         
         result = list_industries()
         assert isinstance(result, dict)

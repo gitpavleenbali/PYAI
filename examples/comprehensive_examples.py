@@ -84,7 +84,7 @@ def example_ask():
     print("[Note] EXAMPLE 1: ask() - Simple Q&A")
     print("=" * 60)
     
-    from pyai import ask
+    from openstackai import ask
     
     # Basic question
     print("\n1a. Basic Question:")
@@ -126,7 +126,7 @@ def example_agent():
     print("[Bot] EXAMPLE 2: agent() - Custom Agents")
     print("=" * 60)
     
-    from pyai import agent
+    from openstackai import agent
     
     # Custom agent with system prompt
     print("\n2a. Custom Agent:")
@@ -171,7 +171,7 @@ def example_chat():
     print("[Chat] EXAMPLE 3: chat() - Conversations with Memory")
     print("=" * 60)
     
-    from pyai import chat
+    from openstackai import chat
     
     print("\n3a. Creating Chat Session:")
     print("    Code: session = chat('You are a helpful assistant')")
@@ -211,7 +211,7 @@ def example_rag():
     print("[Book] EXAMPLE 4: rag - RAG in 2 Lines")
     print("=" * 60)
     
-    from pyai import rag
+    from openstackai import rag
     
     # Sample documents
     documents = [
@@ -259,7 +259,7 @@ def example_code():
     print("[Code] EXAMPLE 5: code - Code Operations")
     print("=" * 60)
     
-    from pyai import code
+    from openstackai import code
     
     print("\n5a. Write Code:")
     print("    Code: result = code.write('fibonacci function')")
@@ -293,7 +293,7 @@ def example_research():
     print("[Search] EXAMPLE 6: research() & summarize()")
     print("=" * 60)
     
-    from pyai import research, summarize
+    from openstackai import research, summarize
     
     print("\n6a. Quick Research:")
     print("    Code: result = research('quantum computing basics')")
@@ -331,7 +331,7 @@ def example_extract():
     print("[Chart] EXAMPLE 7: extract() - Data Extraction")
     print("=" * 60)
     
-    from pyai import extract
+    from openstackai import extract
     
     text = """
     Meeting Notes - January 15, 2026
@@ -419,8 +419,8 @@ def run_all_examples(provider: str = "auto"):
     print("[RAG] QUICK REFERENCE - pyai One-Liners")
     print("=" * 60)
     print("""
-    from pyai import ask, agent, chat, rag, code
-    from pyai import research, summarize, extract, translate
+    from openstackai import ask, agent, chat, rag, code
+    from openstackai import research, summarize, extract, translate
 
     # Ask anything
     answer = ask("What is quantum computing?")

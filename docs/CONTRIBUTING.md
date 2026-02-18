@@ -1,6 +1,6 @@
-# 🤝 Contributing to pyai
+# 🤝 Contributing to openstackai
 
-First off, thank you for considering contributing to pyai! We're building the **pandas of AI**, and every contribution helps make AI development simpler for everyone.
+First off, thank you for considering contributing to openstackai! We're building the **pandas of AI**, and every contribution helps make AI development simpler for everyone.
 
 ## Code of Conduct
 
@@ -12,13 +12,13 @@ Be respectful, inclusive, and constructive. We're all here to build something am
 
 ### 🐛 Reporting Bugs
 
-1. Check if the bug is already reported in [Issues](https://github.com/pyai/pyai/issues)
+1. Check if the bug is already reported in [Issues](https://github.com/openstackai/openstackai/issues)
 2. If not, create a new issue with:
    - Clear title and description
    - Steps to reproduce
    - Expected vs actual behavior
    - Python version and OS
-   - pyai version (`import pyai; print(pyai.__version__)`)
+   - openstackai version (`import openstackai; print(openstackai.__version__)`)
 
 ### 💡 Suggesting Features
 
@@ -52,8 +52,8 @@ Be respectful, inclusive, and constructive. We're all here to build something am
 
 ```bash
 # Clone the repository
-git clone https://github.com/pyai/pyai.git
-cd pyai
+git clone https://github.com/openstackai/openstackai.git
+cd openstackai
 
 # Create virtual environment
 python -m venv venv
@@ -72,7 +72,7 @@ pip install -e ".[dev]"
 pytest tests/
 
 # With coverage
-pytest tests/ --cov=pyai --cov-report=html
+pytest tests/ --cov=openstackai --cov-report=html
 
 # Integration tests (requires API key)
 export OPENAI_API_KEY=sk-...
@@ -89,14 +89,14 @@ We use:
 
 ```bash
 # Format code
-black pyai/
-isort pyai/
+black openstackai/
+isort openstackai/
 
 # Check linting
-ruff check pyai/
+ruff check openstackai/
 
 # Type checking
-mypy pyai/
+mypy openstackai/
 ```
 
 ---
@@ -104,8 +104,8 @@ mypy pyai/
 ## Project Structure
 
 ```
-pyai/
-├── pyai/
+openstackai/
+├── openstackai/
 │   ├── easy/           # Simple API (contributions welcome!)
 │   ├── core/           # Core components
 │   ├── instructions/   # Prompt engineering
@@ -122,7 +122,7 @@ pyai/
 
 ## Contribution Guidelines
 
-### For Easy API (`pyai/easy/`)
+### For Easy API (`openstackai/easy/`)
 
 This is where the magic happens! When adding new one-liner functions:
 
@@ -155,7 +155,7 @@ def new_function(
         What the function returns
         
     Example:
-        >>> from pyai import new_function
+        >>> from openstackai import new_function
         >>> result = new_function("example input")
         >>> print(result)
         "Expected output"
@@ -192,7 +192,7 @@ When adding new skills:
 
 To add support for a new LLM provider:
 
-1. Create provider class in `pyai/core/llm.py`:
+1. Create provider class in `openstackai/core/llm.py`:
 
 ```python
 class NewProvider(LLMProvider):
@@ -242,10 +242,10 @@ Contributors will be:
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/pyai/pyai/discussions)
+- Open a [Discussion](https://github.com/openstackai/openstackai/discussions)
 - Join our Discord (coming soon)
-- Email: contributors@pyai.dev
+- Email: contributors@openstackai.dev
 
 ---
 
-**Thank you for being part of the pyai revolution!** 🐼🤖
+**Thank you for being part of the openstackai revolution!** 🐼🤖

@@ -5,7 +5,7 @@ The `ask` function is the simplest way to get answers from an AI model.
 ## Import
 
 ```python
-from pyai import ask
+from openstackai import ask
 ```
 
 ## Basic Usage
@@ -40,7 +40,7 @@ Returns a string containing the AI's response.
 ### Simple Questions
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 # Factual questions
 answer = ask("What is machine learning?")
@@ -56,22 +56,22 @@ answer = ask("Write a creative story", temperature=0.9)
 
 ```python
 document = """
-PYAI is a Python SDK for building AI agents.
+openstackai is a Python SDK for building AI agents.
 It supports multiple providers and enterprise features.
 """
 
-answer = ask("What does PYAI support?", context=document)
-# "PYAI supports multiple providers and enterprise features."
+answer = ask("What does openstackai support?", context=document)
+# "openstackai supports multiple providers and enterprise features."
 ```
 
 ### Async Usage
 
 ```python
 import asyncio
-from pyai import ask
+from openstackai import ask
 
 async def main():
-    answer = await ask.async_("What is PYAI?")
+    answer = await ask.async_("What is openstackai?")
     print(answer)
 
 asyncio.run(main())

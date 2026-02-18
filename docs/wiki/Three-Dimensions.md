@@ -1,6 +1,6 @@
 # The Three Dimensions
 
-PYAI operates across **three dimensions of intelligence**, each building upon the last.
+openstackai operates across **three dimensions of intelligence**, each building upon the last.
 
 ```
                     ┌─────────────────────────────────┐
@@ -56,7 +56,7 @@ The foundation. Single-purpose AI operations that **just work**.
 ### Example
 
 ```python
-from pyai import ask, summarize, extract
+from openstackai import ask, summarize, extract
 
 # Instant intelligence
 answer = ask("Explain quantum entanglement")
@@ -84,8 +84,8 @@ Coordinated intelligence. Multiple agents working in harmony.
 ### Example
 
 ```python
-from pyai import Agent
-from pyai.blueprint import Workflow, Step
+from openstackai import Agent
+from openstackai.blueprint import Workflow, Step
 
 researcher = Agent(name="Researcher", instructions="Find information.")
 analyst = Agent(name="Analyst", instructions="Analyze data.")
@@ -124,7 +124,7 @@ Software Factories don't just *use* AI — they *are* AI. They generate code, te
 ### Example
 
 ```python
-from pyai import code
+from openstackai import code
 
 # Generate code
 api_code = code.write("REST API for user management with JWT auth")
@@ -149,12 +149,12 @@ improved = code.refactor(old_code, goal="async architecture")
 │                    YOUR APPLICATION                       │
 ├──────────────────────────────────────────────────────────┤
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐     │
-│  │ pyai │  │ PyFlow  │  │PyVision │  │ PyVoice │     │
+│  │ openstackai │  │ PyFlow  │  │PyVision │  │ PyVoice │     │
 │  │ Agents  │  │Workflow │  │ Vision  │  │  Audio  │     │
 │  └────┬────┘  └────┬────┘  └────┬────┘  └────┬────┘     │
 │       │            │            │            │           │
 │  ┌────▼────────────▼────────────▼────────────▼────┐     │
-│  │              PYAI INTELLIGENCE ENGINE           │     │
+│  │              openstackai INTELLIGENCE ENGINE           │     │
 │  │  • Unified Memory  • Context Management         │     │
 │  │  • Model Routing   • Intelligent Caching        │     │
 │  └────────────────────────────────────────────────┘     │

@@ -1,10 +1,10 @@
-# pyai - LLM Context File
+# openstackai - LLM Context File
 
-> This file provides context for LLMs working with PyAI code.
+> This file provides context for LLMs working with openstackai code.
 
-## What is PyAI?
+## What is openstackai?
 
-PyAI is a Python SDK for building AI agents. It provides:
+openstackai is a Python SDK for building AI agents. It provides:
 - Simple one-liner APIs: `ask()`, `summarize()`, `research()`
 - Full agent framework: `Agent`, `Runner`, `Workflow`
 - Multi-provider support: OpenAI, Azure OpenAI, Anthropic, Ollama
@@ -14,14 +14,14 @@ PyAI is a Python SDK for building AI agents. It provides:
 
 ### Simple Q&A
 ```python
-from pyai import ask
+from openstackai import ask
 answer = ask("What is Python?")
 ```
 
 ### Agent with Tools
 ```python
-from pyai import Agent, Runner
-from pyai.skills import tool
+from openstackai import Agent, Runner
+from openstackai.skills import tool
 
 @tool(description="Get weather")
 async def get_weather(city: str) -> str:
@@ -33,8 +33,8 @@ result = Runner.run_sync(agent, "Weather in NYC?")
 
 ### Multi-Agent
 ```python
-from pyai import Agent
-from pyai.blueprint import Workflow, Step
+from openstackai import Agent
+from openstackai.blueprint import Workflow, Step
 
 researcher = Agent(name="Researcher")
 writer = Agent(name="Writer")
@@ -46,16 +46,16 @@ workflow.add_step(Step("write", writer))
 
 ## Package Structure
 
-- `pyai.easy` - Simple APIs (ask, summarize, research)
-- `pyai.core` - Agent, LLM providers, memory
-- `pyai.runner` - Execution (Runner.run, Runner.run_sync)
-- `pyai.blueprint` - Workflows, patterns
-- `pyai.skills` - Tools (@tool decorator)
-- `pyai.plugins` - Plugin system
-- `pyai.kernel` - Service registry
-- `pyai.config` - YAML/JSON configuration
-- `pyai.sessions` - SQLite/Redis sessions
-- `pyai.tokens` - Token counting
+- `openstackai.easy` - Simple APIs (ask, summarize, research)
+- `openstackai.core` - Agent, LLM providers, memory
+- `openstackai.runner` - Execution (Runner.run, Runner.run_sync)
+- `openstackai.blueprint` - Workflows, patterns
+- `openstackai.skills` - Tools (@tool decorator)
+- `openstackai.plugins` - Plugin system
+- `openstackai.kernel` - Service registry
+- `openstackai.config` - YAML/JSON configuration
+- `openstackai.sessions` - SQLite/Redis sessions
+- `openstackai.tokens` - Token counting
 
 ## Key Classes
 

@@ -1,16 +1,16 @@
 # Quick Start
 
-Get up and running with PYAI in 5 minutes.
+Get up and running with openstackai in 5 minutes.
 
 ## Installation
 
 ```bash
-pip install pyai
+pip install openstackai
 ```
 
 For Azure OpenAI with Azure AD authentication:
 ```bash
-pip install pyai[azure]
+pip install openstackai[azure]
 ```
 
 ## Configuration
@@ -31,7 +31,7 @@ export AZURE_OPENAI_DEPLOYMENT=gpt-4o-mini
 ### One-Liner API
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 answer = ask("What is the capital of France?")
 print(answer)  # Paris
@@ -40,8 +40,8 @@ print(answer)  # Paris
 ### Agent with Tools
 
 ```python
-from pyai import Agent, Runner
-from pyai.skills import tool
+from openstackai import Agent, Runner
+from openstackai.skills import tool
 
 @tool(description="Get weather for a city")
 async def get_weather(city: str) -> str:
@@ -60,7 +60,7 @@ print(result.final_output)
 ### RAG in 2 Lines
 
 ```python
-from pyai import rag
+from openstackai import rag
 
 docs = rag.index("./documents")
 answer = docs.ask("What is the main conclusion?")
@@ -68,7 +68,7 @@ answer = docs.ask("What is the main conclusion?")
 
 ## Next Steps
 
-- [[Three Dimensions]] - Understand the PYAI architecture
+- [[Three Dimensions]] - Understand the openstackai architecture
 - [[One-Liner APIs]] - Explore all easy/ module functions
 - [[Agent Framework]] - Build sophisticated agents
 - [[Multi-Agent Systems]] - Orchestrate teams of agents

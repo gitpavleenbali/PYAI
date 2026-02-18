@@ -5,7 +5,7 @@ The `rag` module provides a 2-line RAG (Retrieval-Augmented Generation) system.
 ## Import
 
 ```python
-from pyai.easy import rag
+from openstackai.easy import rag
 ```
 
 ## Basic Usage
@@ -21,7 +21,7 @@ answer = docs.query("What is the main topic?")
 ## Quick Start
 
 ```python
-from pyai.easy import rag
+from openstackai.easy import rag
 
 # Load documents from directory
 knowledge = rag.load("./knowledge_base/")
@@ -79,7 +79,7 @@ docs = rag.load([
 ### Full Example
 
 ```python
-from pyai.easy import rag
+from openstackai.easy import rag
 
 # Create knowledge base
 kb = rag.load("./company_docs/")
@@ -102,11 +102,11 @@ for source in result.sources:
 
 ```python
 import asyncio
-from pyai.easy import rag
+from openstackai.easy import rag
 
 async def main():
     kb = await rag.load_async("./docs/")
-    answer = await kb.query_async("What is PYAI?")
+    answer = await kb.query_async("What is openstackai?")
     print(answer)
 
 asyncio.run(main())

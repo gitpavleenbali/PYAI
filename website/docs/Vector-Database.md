@@ -7,17 +7,17 @@ Semantic search and RAG with vector databases.
 ## Quick Start
 
 ```python
-from pyai.vectordb import ChromaDB
+from openstackai.vectordb import ChromaDB
 
 # Create store
 db = ChromaDB(collection="knowledge")
 
 # Add documents
-db.add("PYAI is a Python SDK for AI agents")
+db.add("openstackai is a Python SDK for AI agents")
 db.add_documents(["doc1.txt", "doc2.pdf"])
 
 # Search
-results = db.search("What is PYAI?", top_k=5)
+results = db.search("What is openstackai?", top_k=5)
 ```
 
 ## Supported Databases

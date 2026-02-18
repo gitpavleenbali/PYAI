@@ -7,7 +7,7 @@ The Easy API provides one-liner functions for common AI tasks.
 ### ask
 
 ```python
-from pyai import ask
+from openstackai import ask
 
 answer = ask("What is machine learning?")
 ```
@@ -15,7 +15,7 @@ answer = ask("What is machine learning?")
 ### chat
 
 ```python
-from pyai import chat
+from openstackai import chat
 
 # Single turn
 response = chat("Hello!")
@@ -27,7 +27,7 @@ response = chat("What's 2+2?", context="You are a math tutor.")
 ### summarize
 
 ```python
-from pyai import summarize
+from openstackai import summarize
 
 summary = summarize("Long document text...")
 ```
@@ -35,7 +35,7 @@ summary = summarize("Long document text...")
 ### analyze
 
 ```python
-from pyai import analyze
+from openstackai import analyze
 
 analysis = analyze("Product review text...", analysis_type="sentiment")
 ```
@@ -43,7 +43,7 @@ analysis = analyze("Product review text...", analysis_type="sentiment")
 ### extract
 
 ```python
-from pyai import extract
+from openstackai import extract
 
 data = extract("Invoice #123, Amount: $500", schema={"invoice": str, "amount": str})
 ```
@@ -51,7 +51,7 @@ data = extract("Invoice #123, Amount: $500", schema={"invoice": str, "amount": s
 ### translate
 
 ```python
-from pyai import translate
+from openstackai import translate
 
 french = translate("Hello world", target_language="French")
 ```
@@ -59,7 +59,7 @@ french = translate("Hello world", target_language="French")
 ### code
 
 ```python
-from pyai import code
+from openstackai import code
 
 python_code = code("function to calculate factorial", language="python")
 ```
@@ -67,7 +67,7 @@ python_code = code("function to calculate factorial", language="python")
 ### generate
 
 ```python
-from pyai import generate
+from openstackai import generate
 
 content = generate("blog post about AI", format="markdown")
 ```
@@ -75,7 +75,7 @@ content = generate("blog post about AI", format="markdown")
 ### fetch
 
 ```python
-from pyai import fetch
+from openstackai import fetch
 
 data = fetch("weather in Seattle")
 ```
@@ -83,7 +83,7 @@ data = fetch("weather in Seattle")
 ### research
 
 ```python
-from pyai import research
+from openstackai import research
 
 report = research("Latest AI trends 2026")
 ```
@@ -91,10 +91,10 @@ report = research("Latest AI trends 2026")
 ### rag
 
 ```python
-from pyai import rag
+from openstackai import rag
 
 # Query with document context
-answer = rag("What is PyAI?", documents=["PyAI is a Python SDK..."])
+answer = rag("What is openstackai?", documents=["openstackai is a Python SDK..."])
 ```
 
 See individual function docs for detailed usage.

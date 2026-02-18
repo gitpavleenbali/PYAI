@@ -14,7 +14,7 @@ Usage in examples:
         exit(1)
     
     # Now use pyai normally
-    from pyai import ask
+    from openstackai import ask
     print(ask("Hello!"))
 
 Environment Variables:
@@ -62,7 +62,7 @@ def setup_pyai(provider: str = "auto", verbose: bool = True) -> bool:
         # Force OpenAI
         setup_pyai(provider="openai")
     """
-    import pyai
+    import openstackai
     
     # Auto-detect provider
     if provider == "auto":
@@ -194,8 +194,8 @@ if __name__ == "__main__":
     
     if setup_pyai():
         print("\n[OK] Configuration successful! Running quick test...\n")
-        from pyai import ask
-        response = ask("Say 'Hello from pyai!' in exactly those words")
+        from openstackai import ask
+        response = ask("Say 'Hello from openstackai!' in exactly those words")
         print(f"Response: {response}")
     else:
         print("\n[X] Configuration failed. Please set up credentials.")

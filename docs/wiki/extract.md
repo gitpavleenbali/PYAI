@@ -5,7 +5,7 @@ The `extract` function extracts structured data from unstructured text.
 ## Import
 
 ```python
-from pyai import extract
+from openstackai import extract
 ```
 
 ## Basic Usage
@@ -31,7 +31,7 @@ entities = extract.entities("John works at Microsoft")
 ### Extract Contact Info
 
 ```python
-from pyai import extract
+from openstackai import extract
 
 text = """
 Contact John Smith at john@example.com
@@ -95,7 +95,7 @@ product = extract(
 
 ```python
 import asyncio
-from pyai import extract
+from openstackai import extract
 
 async def main():
     data = await extract.async_(

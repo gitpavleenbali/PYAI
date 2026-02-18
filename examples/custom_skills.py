@@ -32,9 +32,9 @@ except Exception:
     pass  # Skills work without LLM configuration
 
 from typing import Any, Dict, List
-from pyai.skills import Skill, SkillResult, SkillParameter
-from pyai.skills.tool_skill import tool
-from pyai.skills.action_skill import ActionSkill, action, ActionType
+from openstackai.skills import Skill, SkillResult, SkillParameter
+from openstackai.skills.tool_skill import tool
+from openstackai.skills.action_skill import ActionSkill, action, ActionType
 
 
 # =============================================================================

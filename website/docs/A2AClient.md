@@ -13,13 +13,13 @@ A2AClient enables:
 ## Installation
 
 ```python
-from pyai.a2a import A2AClient
+from openstackai.a2a import A2AClient
 ```
 
 ## Basic Usage
 
 ```python
-from pyai.a2a import A2AClient
+from openstackai.a2a import A2AClient
 
 # Create client
 client = A2AClient("http://remote-agent:8080")
@@ -162,7 +162,7 @@ print(f"Progress: {status.progress}%")
 For agent-like interface to remote agents:
 
 ```python
-from pyai.a2a import RemoteAgent
+from openstackai.a2a import RemoteAgent
 
 # Wrap remote agent
 agent = RemoteAgent("http://remote-agent:8080")
@@ -175,7 +175,7 @@ print(result)
 ## Error Handling
 
 ```python
-from pyai.a2a import A2AClient, A2AClientError
+from openstackai.a2a import A2AClient, A2AClientError
 
 client = A2AClient("http://agent:8080")
 
@@ -191,7 +191,7 @@ except A2AClientError as e:
 For high-throughput scenarios:
 
 ```python
-from pyai.a2a import A2AClient
+from openstackai.a2a import A2AClient
 
 client = A2AClient(
     url="http://agent:8080",
