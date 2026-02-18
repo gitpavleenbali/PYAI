@@ -330,24 +330,20 @@ th {
     justify-content: center;
   }
   
-  /* Hide desktop nav items on mobile */
-  .navbar__items--right {
-    flex-direction: row;
-  }
-  
-  /* Mobile sidebar styles - MUST be above hero and all content */
+  /* Mobile hamburger menu sidebar */
   .navbar-sidebar {
-    width: 85vw;
-    max-width: 350px;
-    background: var(--ifm-background-color);
+    width: 85vw !important;
+    max-width: 350px !important;
+    background: var(--ifm-background-color) !important;
     z-index: 10000 !important;
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     height: 100vh !important;
+    overflow-y: auto !important;
   }
   
-  /* Ensure sidebar backdrop covers everything including hero */
+  /* Backdrop */
   .navbar-sidebar__backdrop {
     z-index: 9999 !important;
     position: fixed !important;
@@ -358,7 +354,7 @@ th {
     background: rgba(0, 0, 0, 0.6) !important;
   }
   
-  /* Navbar itself needs high z-index */
+  /* Navbar */
   .navbar {
     z-index: 9998 !important;
     position: sticky !important;
@@ -385,116 +381,39 @@ th {
   }
   
   /* ========================================
-     MOBILE DOCS SIDEBAR - CRITICAL FOR NAVIGATION
+     HAMBURGER MENU - DOCS SIDEBAR ITEMS
+     When user clicks "Documentation" in hamburger menu,
+     show all the sidebar items (TOC)
      ======================================== */
   
-  /* Make the docs sidebar visible and properly positioned on mobile */
-  .theme-doc-sidebar-container {
-    z-index: 9990 !important;
+  /* The secondary items panel (shown after clicking Documentation) */
+  .navbar-sidebar__items--show-secondary {
+    display: block !important;
   }
   
-  /* The sidebar toggle button that appears on doc pages */
-  .theme-doc-sidebar-toggle-button {
-    position: fixed !important;
-    bottom: 20px !important;
-    left: 20px !important;
-    z-index: 9000 !important;
-    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
-    color: white !important;
-    border-radius: 50% !important;
-    width: 56px !important;
-    height: 56px !important;
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.5) !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-  
-  /* When docs sidebar is expanded on mobile - show as overlay */
-  .docSidebarContainer_MOBILE_OVERRIDE,
-  [class*="docSidebarContainerMobile"],
-  aside[class*="docSidebar"] {
-    position: fixed !important;
-    top: var(--ifm-navbar-height) !important;
-    left: 0 !important;
-    width: 85vw !important;
-    max-width: 350px !important;
-    height: calc(100vh - var(--ifm-navbar-height)) !important;
-    z-index: 9995 !important;
-    background: var(--ifm-background-color) !important;
-    border-right: 1px solid rgba(99, 102, 241, 0.2) !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  
-  /* Mobile docs sidebar menu - make sure it's scrollable */
-  .theme-doc-sidebar-menu {
-    overflow-y: auto !important;
-    max-height: calc(100vh - 120px) !important;
-    padding: 1rem 0 2rem 0 !important;
-  }
-  
-  /* Each menu item should be tap-friendly */
-  .theme-doc-sidebar-menu .menu__link {
-    padding: 0.875rem 1rem !important;
-    font-size: 1rem !important;
-    min-height: 44px !important;
-    display: flex !important;
-    align-items: center !important;
-  }
-  
-  /* Category headers in docs sidebar */
-  .theme-doc-sidebar-menu .menu__list-item-collapsible > .menu__link,
-  .theme-doc-sidebar-menu .menu__list-item-collapsible .menu__link--sublist {
-    font-weight: 600 !important;
-    color: var(--ifm-heading-color) !important;
-  }
-  
-  /* Nested items indentation */
-  .theme-doc-sidebar-menu .menu__list .menu__list {
-    padding-left: 0.75rem !important;
-    border-left: 2px solid rgba(99, 102, 241, 0.2) !important;
-    margin-left: 0.75rem !important;
-  }
-  
-  /* Active link styling */
-  .theme-doc-sidebar-menu .menu__link--active {
-    background: rgba(99, 102, 241, 0.15) !important;
-    color: var(--ifm-color-primary) !important;
-    font-weight: 600 !important;
-    border-radius: 6px !important;
-  }
-  
-  /* Collapse/expand button for categories */
-  .theme-doc-sidebar-menu .menu__caret {
-    min-width: 44px !important;
-    min-height: 44px !important;
-  }
-  
-  /* ========================================
-     HAMBURGER MENU DOCS ITEMS
-     ======================================== */
-  
-  /* Style the navbar-sidebar secondary items (docs menu) */
   .navbar-sidebar__items--show-secondary .menu {
+    display: block !important;
     padding: 0 !important;
   }
   
   .navbar-sidebar__items--show-secondary .menu__list {
+    display: block !important;
     padding: 0 !important;
+    list-style: none !important;
   }
   
   .navbar-sidebar__items--show-secondary .menu__list-item {
+    display: block !important;
     margin: 0 !important;
   }
   
   .navbar-sidebar__items--show-secondary .menu__link {
+    display: flex !important;
     padding: 0.875rem 1.25rem !important;
     font-size: 1rem !important;
     border-radius: 0 !important;
-    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1) !important;
     min-height: 44px !important;
-    display: flex !important;
     align-items: center !important;
   }
   
@@ -508,19 +427,45 @@ th {
     font-weight: 600 !important;
   }
   
-  /* Nested menu items in hamburger sidebar */
+  /* Nested menu items */
   .navbar-sidebar__items--show-secondary .menu__list .menu__list {
+    display: block !important;
     padding-left: 1rem !important;
-    border-left: 2px solid rgba(99, 102, 241, 0.2);
+    border-left: 2px solid rgba(99, 102, 241, 0.2) !important;
     margin-left: 1rem !important;
   }
   
-  /* Back button styling */
+  /* Category labels / collapsible items */
+  .navbar-sidebar__items--show-secondary .menu__list-item-collapsible {
+    display: block !important;
+  }
+  
+  .navbar-sidebar__items--show-secondary .menu__list-item-collapsible > .menu__link {
+    font-weight: 600 !important;
+    color: var(--ifm-heading-color) !important;
+  }
+  
+  /* Expand/collapse caret */
+  .navbar-sidebar__items--show-secondary .menu__caret {
+    display: flex !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  
+  /* Back button */
   .navbar-sidebar__back {
+    display: flex !important;
     padding: 1rem !important;
     font-size: 1rem !important;
     font-weight: 600 !important;
     border-bottom: 1px solid rgba(99, 102, 241, 0.2) !important;
+    min-height: 44px !important;
+    align-items: center !important;
+  }
+
+  /* Collapse/expand button for categories */
+  .menu__caret {
+    min-width: 44px !important;
     min-height: 44px !important;
   }
 
