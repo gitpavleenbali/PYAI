@@ -127,7 +127,11 @@
   opacity: 0.8;
 }
 
-/* Mobile responsiveness */
+/* ========================================
+   MOBILE RESPONSIVENESS
+   ======================================== */
+
+/* Tablet (max-width: 996px) */
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 3rem 1rem;
@@ -135,6 +139,7 @@
   
   .heroDescription {
     font-size: 1rem;
+    padding: 0 1rem;
   }
   
   .sectionTitle {
@@ -143,5 +148,102 @@
   
   .codeGrid {
     grid-template-columns: 1fr;
+  }
+  
+  .codeShowcase {
+    padding: 2rem 0;
+  }
+  
+  .features {
+    padding: 2rem 0;
+  }
+  
+  .featureCard {
+    padding: 1.5rem;
+  }
+  
+  .ctaSection {
+    padding: 2rem 0;
+  }
+  
+  .ctaSection h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Phone (max-width: 576px) */
+@media screen and (max-width: 576px) {
+  .heroBanner {
+    padding: 2rem 0.75rem;
+  }
+  
+  .heroDescription {
+    font-size: 0.95rem;
+  }
+  
+  .installCommand {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 25px;
+  }
+  
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .buttons .button {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .codeGrid {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .codeCard {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .codeCard h3 {
+    font-size: 1.1rem;
+  }
+  
+  .featureCard {
+    padding: 1rem;
+  }
+  
+  .featureEmoji {
+    font-size: 2.5rem;
+  }
+  
+  .featureCard h3 {
+    font-size: 1.1rem;
+  }
+  
+  .featureCard p {
+    font-size: 0.9rem;
+  }
+  
+  .ctaSection h2 {
+    font-size: 1.5rem;
+  }
+  
+  .ctaSection p {
+    font-size: 1rem;
+  }
+}
+
+/* Small phone (max-width: 375px) */
+@media screen and (max-width: 375px) {
+  .installCommand code {
+    font-size: 0.8rem;
   }
 }

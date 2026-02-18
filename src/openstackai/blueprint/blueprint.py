@@ -149,7 +149,13 @@ class AgentBlueprint(BaseComponent):
 
     def _instantiate_skill(self, config: SkillConfig):
         """Instantiate a skill from its configuration"""
-        from openstackai.skills.builtin import CodeSkill, FileSkill, MathSkill, SearchSkill, WebSkill
+        from openstackai.skills.builtin import (
+            CodeSkill,
+            FileSkill,
+            MathSkill,
+            SearchSkill,
+            WebSkill,
+        )
 
         skill_types = {
             "SearchSkill": SearchSkill,

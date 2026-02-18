@@ -55,6 +55,12 @@ const config: Config = {
       defaultMode: 'dark',
       respectPrefersColorScheme: true,
     },
+    docs: {
+      sidebar: {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
+    },
     announcementBar: {
       id: 'v0.5.1',
       content: '🚀 openstackai v0.5.1 is out! <a href="/openstackai/docs/changelog">See what\'s new</a>',
@@ -64,6 +70,7 @@ const config: Config = {
     },
     navbar: {
       title: 'openstackai',
+      hideOnScroll: true,
       logo: {
         alt: 'openstackai Logo',
         src: 'img/logo.svg',

@@ -182,7 +182,7 @@ class TestConfig:
     
     def test_config_properties(self):
         """Test pyaiConfig has expected properties."""
-        from openstackai.easy.config import openstackaiConfig
+        from openstackai.easy.config import pyaiConfig
         
         cfg = pyaiConfig()
         assert hasattr(cfg, 'api_key')
