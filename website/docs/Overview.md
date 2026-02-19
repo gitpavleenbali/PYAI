@@ -1,3 +1,11 @@
+---
+id: Overview
+title: openstackai Overview
+sidebar_label: Overview
+sidebar_position: 1
+slug: /
+---
+
 <p align="center">
   <img src="https://img.shields.io/badge/openstackai-Intelligence%20Engine-blueviolet?style=for-the-badge&logo=python&logoColor=white" alt="openstackai"/>
 </p>
@@ -1355,9 +1363,9 @@ flowchart LR
 
 ## 👥 Community & Documentation
 
-- 📖 **[Wiki Documentation](https://github.com/gitpavleenbali/openstackai/wiki)** — Comprehensive guides
-- 🐛 **[Report Issues](https://github.com/gitpavleenbali/openstackai/issues)** — Bug reports
-- 💡 **[Feature Requests](https://github.com/gitpavleenbali/openstackai/discussions)** — Ideas
+- 📖 **[Wiki Documentation](https://github.com/gitpavleenbali/PYAI/wiki)** — Comprehensive guides
+- 🐛 **[Report Issues](https://github.com/gitpavleenbali/PYAI/issues)** — Bug reports
+- 💡 **[Feature Requests](https://github.com/gitpavleenbali/PYAI/discussions)** — Ideas
 - 🤝 **[Contributing Guide](./Contributing.md)** — Get involved
 
 ---

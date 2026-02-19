@@ -22,8 +22,8 @@ pip install openstackai[all]
 
 ```bash
 # Clone the repository
-git clone https://github.com/gitpavleenbali/openstackai.git
-cd openstackai
+git clone https://github.com/gitpavleenbali/PYAI.git
+cd PYAI
 
 # Install in development mode
 pip install -e .[all]
@@ -313,6 +313,6 @@ pip install --find-links=/path/to/packages openstackai
 
 ### Getting Help
 
-- GitHub Issues: https://github.com/gitpavleenbali/openstackai/issues
+- GitHub Issues: https://github.com/gitpavleenbali/PYAI/issues
 - Documentation: See `/docs` folder
 - Examples: See `/examples` folder

@@ -185,4 +185,4 @@ response = rag.ask("./docs", "What is the summary?")
 
 ---
 
-*For feature requests or bug reports, please visit our [GitHub Issues](https://github.com/openstackai/openstackai/issues).*
+*For feature requests or bug reports, please visit our [GitHub Issues](https://github.com/gitpavleenbali/PYAI/issues).*

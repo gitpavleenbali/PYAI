@@ -73,9 +73,9 @@
 
 ## 🔗 Quick Links
 
-- [GitHub Repository](https://github.com/gitpavleenbali/openstackai)
+- [GitHub Repository](https://github.com/gitpavleenbali/PYAI)
 - [PyPI Package](https://pypi.org/project/openstackai/)
-- [Issue Tracker](https://github.com/gitpavleenbali/openstackai/issues)
+- [Issue Tracker](https://github.com/gitpavleenbali/PYAI/issues)
 
 ---
 

@@ -340,7 +340,13 @@ th {
     top: 0 !important;
     left: 0 !important;
     height: 100vh !important;
+    /* DO NOT set overflow here - it breaks the panel transform animation */
+  }
+  
+  /* Each panel should scroll independently */
+  .navbar-sidebar__item {
     overflow-y: auto !important;
+    max-height: calc(100vh - 60px) !important;
   }
   
   /* Backdrop */
@@ -366,11 +372,10 @@ th {
     border-bottom: 1px solid rgba(99, 102, 241, 0.2);
   }
   
-  .navbar-sidebar__items {
-    padding: 1rem 0;
-    overflow-y: auto !important;
-    max-height: calc(100vh - 60px) !important;
-  }
+  /* 
+   * IMPORTANT: Do NOT override .navbar-sidebar__items display/height/transform!
+   * The infima framework uses display:flex + transform to slide between panels.
+   */
   
   .menu__link {
     padding: 0.75rem 1rem;
@@ -386,10 +391,11 @@ th {
      show all the sidebar items (TOC)
      ======================================== */
   
-  /* The secondary items panel (shown after clicking Documentation) */
-  .navbar-sidebar__items--show-secondary {
-    display: block !important;
-  }
+  /* 
+   * IMPORTANT: Do NOT change display property here!
+   * The default infima uses display:flex + transform to slide between panels.
+   * Only style the content inside, not the container layout.
+   */
   
   .navbar-sidebar__items--show-secondary .menu {
     display: block !important;

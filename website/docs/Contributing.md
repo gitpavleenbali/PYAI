@@ -12,7 +12,7 @@ Be respectful, inclusive, and constructive. We're all here to build something am
 
 ### 🐛 Reporting Bugs
 
-1. Check if the bug is already reported in [Issues](https://github.com/openstackai/openstackai/issues)
+1. Check if the bug is already reported in [Issues](https://github.com/gitpavleenbali/PYAI/issues)
 2. If not, create a new issue with:
    - Clear title and description
    - Steps to reproduce
@@ -52,8 +52,8 @@ Be respectful, inclusive, and constructive. We're all here to build something am
 
 ```bash
 # Clone the repository
-git clone https://github.com/openstackai/openstackai.git
-cd openstackai
+git clone https://github.com/gitpavleenbali/PYAI.git
+cd PYAI
 
 # Create virtual environment
 python -m venv venv
@@ -242,7 +242,7 @@ Contributors will be:
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/openstackai/openstackai/discussions)
+- Open a [Discussion](https://github.com/gitpavleenbali/PYAI/discussions)
 - Join our Discord (coming soon)
 - Email: contributors@openstackai.dev
 

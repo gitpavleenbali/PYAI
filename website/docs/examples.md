@@ -60,7 +60,7 @@ result = Runner.run_sync(workflow, "AI in healthcare")
 
 ## More Examples
 
-- [Basic Agent](https://github.com/gitpavleenbali/openstackai/blob/master/examples/basic_agent.py)
-- [Custom Skills](https://github.com/gitpavleenbali/openstackai/blob/master/examples/custom_skills.py)
-- [Multi-Agent Workflow](https://github.com/gitpavleenbali/openstackai/blob/master/examples/multi_agent_workflow.py)
-- [Research Assistant](https://github.com/gitpavleenbali/openstackai/blob/master/examples/smart_research_assistant.py)
+- [Basic Agent](https://github.com/gitpavleenbali/PYAI/blob/master/examples/basic_agent.py)
+- [Custom Skills](https://github.com/gitpavleenbali/PYAI/blob/master/examples/custom_skills.py)
+- [Multi-Agent Workflow](https://github.com/gitpavleenbali/PYAI/blob/master/examples/multi_agent_workflow.py)
+- [Research Assistant](https://github.com/gitpavleenbali/PYAI/blob/master/examples/smart_research_assistant.py)

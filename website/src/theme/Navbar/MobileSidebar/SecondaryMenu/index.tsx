@@ -1,45 +1,33 @@
-/**
- * Swizzled NavbarMobileSidebarSecondaryMenu component
- * Ensures the docs sidebar items are properly rendered in mobile hamburger menu
- */
-import React from 'react';
+import React, {type ComponentProps, type ReactNode} from 'react';
+import {useThemeConfig} from '@docusaurus/theme-common';
 import {useNavbarSecondaryMenu} from '@docusaurus/theme-common/internal';
-import type {Props} from '@theme/Navbar/MobileSidebar/SecondaryMenu';
+import Translate from '@docusaurus/Translate';
 
-// This renders the secondary menu content (docs sidebar when on a docs page)
-function SecondaryMenuContent(): JSX.Element | null {
-  const secondaryMenu = useNavbarSecondaryMenu();
-  return secondaryMenu.content;
+function SecondaryMenuBackButton(props: ComponentProps<'button'>) {
+  return (
+    <button {...props} type="button" className="clean-btn navbar-sidebar__back">
+      <Translate
+        id="theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel"
+        description="The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)">
+        ← Back to main menu
+      </Translate>
+    </button>
+  );
 }
 
-export default function NavbarMobileSidebarSecondaryMenu({
-  toggleSidebar,
-}: Props): JSX.Element | null {
+// The secondary menu slides from the right and shows contextual information
+// such as the docs sidebar
+export default function NavbarMobileSidebarSecondaryMenu(): ReactNode {
+  const isPrimaryMenuEmpty = useThemeConfig().navbar.items.length === 0;
   const secondaryMenu = useNavbarSecondaryMenu();
-
-  if (!secondaryMenu.shown) {
-    return null;
-  }
-
+  
   return (
-    <div 
-      className="navbar-sidebar__item navbar-sidebar__items--show-secondary"
-      style={{
-        display: 'block',
-        visibility: 'visible',
-        opacity: 1,
-      }}
-    >
-      <button 
-        type="button" 
-        className="clean-btn navbar-sidebar__back"
-        onClick={() => secondaryMenu.hide()}
-      >
-        ← Back to main menu
-      </button>
-      <div className="menu" style={{display: 'block'}}>
-        <SecondaryMenuContent />
-      </div>
-    </div>
+    <>
+      {/* edge-case: prevent returning to the primaryMenu when it's empty */}
+      {!isPrimaryMenuEmpty && (
+        <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
+      )}
+      {secondaryMenu.content}
+    </>
   );
 }

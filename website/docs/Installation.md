@@ -103,8 +103,8 @@ Includes: pytest, black, ruff, mypy, pre-commit
 ## From Source
 
 ```bash
-git clone https://github.com/gitpavleenbali/openstackai.git
-cd openstackai
+git clone https://github.com/gitpavleenbali/PYAI.git
+cd PYAI
 pip install -e ".[dev]"
 ```
 
